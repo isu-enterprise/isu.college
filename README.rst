@@ -1,4 +1,21 @@
-This file requires editing
+Application for generating Russian study courses specifications
+===============================================================
+
+It is not very useful now, but we working on it.
+
+Generating documents
+--------------------
+
+See http://appyframework.org/pod.html and https://github.com/collective/collective.documentgenerator
+
+Need to be read about
+---------------------
+
+http://docs.plone.org/external/plone.app.dexterity/docs/index.html
+
+https://github.com/plone/plone.dexterity
+
+This file requires further editing
 ==========================
 
 Note to the author: Please add something informative to this README *before*

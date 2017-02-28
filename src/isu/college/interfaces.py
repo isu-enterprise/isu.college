@@ -10,6 +10,9 @@ import isu.college.enums as enums
 # FIXME: Enums must be wrapped with SimpleVocabulary
 # or some kind of enum exposer....
 # http://docs.plone.org/external/plone.app.dexterity/docs/advanced/vocabularies.html
+# See more interesting at
+# https://pypi.python.org/pypi/z3c.relationfield
+#
 
 _ = MessageFactory("isu.college")
 
