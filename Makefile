@@ -38,7 +38,7 @@ install: env comp-cat
 	$(PYTHON) setup.py install
 
 edit:
-	cd src && emacs
+	cd src && emacs &
 
 setup-requs: requirements.txt
 	pip install -r requirements.txt
