@@ -1,7 +1,7 @@
 from zope.interface import Interface
 import zope.schema
-from isu.onece.interfaces import ICatalogItem, ICatalogItemBase
-from isu.onece.interfaces import IHierarchyItemBase
+from isu.onece.interfaces import IVocabularyItem, IVocabularyItemBase
+from isu.onece.interfaces import IHierarchyBase
 from isu.onece.org.interfaces import IEmployee
 from isu.onece.org.interfaces import IOrganization, ISpecification
 from isu.onece.org.interfaces import IEmployee
@@ -30,7 +30,7 @@ class IProfessor(IEmployee):
     """
 
 
-class ICatalogItemSID(ICatalogItem):
+class IVocabularyItemSID(IVocabularyItem):
     id = zope.schema.TextLine(
         title=_("Code"),
         description=_(
@@ -41,17 +41,17 @@ class ICatalogItemSID(ICatalogItem):
     )
 
 
-class IProfession(ICatalogItemSID, IHierarchyItemBase):
+class IProfession(IVocabularyItemSID, IHierarchyBase):
     """Teaching profession
     """
 
 
-class IActivityType(ICatalogItem):
+class IActivityType(IVocabularyItem):
     """Type of activity catalog.
     """
 
 
-class IEducationalStandard(ICatalogItemBase):
+class IEducationalStandard(IVocabularyItemBase):
     """Reference to a educational standard.
     """
     # We suppose, that the view will seek the parents of
@@ -72,7 +72,7 @@ class IEducationalStandard(ICatalogItemBase):
     )
 
 
-class ICurriculum(ICatalogItemBase):
+class ICurriculum(IVocabularyItemBase):
     """The curriculum supposed to be referenced from
     an IOrganization subdivision.
     """
