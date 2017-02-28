@@ -1,6 +1,7 @@
 from zope.interface import Interface
 import zope.schema
 from isu.onece.interfaces import ICatalogItem, ICatalogItemBase
+from isu.onece.interfaces import IHierarchyItemBase
 from isu.onece.org.interfaces import IEmployee
 from isu.onece.org.interfaces import IOrganization, ISpecification
 from isu.onece.org.interfaces import IEmployee
@@ -37,23 +38,33 @@ class ICatalogItemSID(ICatalogItem):
     )
 
 
-class IProfession(ICatalogItemSID):
+class IProfession(ICatalogItemSID, IHierarchyItemBase):
     """Teaching profession
     """
 
 
-class IDirection(IProfession):
-    """The direction of Training.
+class IActivityType(ICatalogItem):
+    """Type of activity catalog.
     """
 
 
 class IEducationalStandard(ICatalogItemBase):
     """Reference to a educational standard.
     """
+    # We suppose, that the view will seek the parents of
+    # the profession hierarchy until a condition met.
     profession = zope.schema.Object(
         title=_("Teaching profession"),
-        description=_("Reference to a teaching profession."),
+        description=_("Reference to a teaching profession hierarchy."),
         schema=IProfession,
+        # vocabulary="interface:IProfession",
+        required=True
+    )
+
+    degree = zope.schema.Choice(
+        title=_("Degree"),
+        description=_("The degree to be obtained after education."),
+        vocabulary=enums.Degree,
         required=True
     )
 
@@ -68,6 +79,44 @@ class ICurriculum(ICatalogItemBase):
         schema=IEducationalStandard,
         required=True
     )
+
+    academicity = zope.schema.Choice(
+        title=_("Academic relevance"),
+        description=_(
+            "The relevance of the degree to education or scholarship.."),
+        vocabulary=enums.AcademicRelevance,
+        required=True
+    )
+
+    mural = zope.schema.Choice(
+        title=_("Mural type"),
+        description=_("The mural form of the study process organization."),
+        vocabulary=enums.Mural,
+        required=True
+    )
+
+    training_period = zope.schema.Float(
+        title=_("Training period"),
+        description=_("The period of training in years"),
+        required=True
+    )
+
+    start_year = zope.schema.Int(
+        title=_("Start year"),
+        description=_("The year the curriculum starts at"),
+        required=True
+    )
+
+    activity_type = zope.schema.List(
+        title=_("Type of activity"),
+        description=_("List of various activity types"
+                      "the curriculum educating to."),
+        # FIXME: Constrain the possible object types.
+        value_type=zope.schema.Object(
+            schema=IActivityType
+        )
+    )
+    # FIXME: Organization data and
 
 
 class IEducationalSpecification(ISpecification):
