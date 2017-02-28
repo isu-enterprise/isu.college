@@ -10,6 +10,8 @@ import isu.college.enums as enums
 _ = MessageFactory("isu.college")
 
 
+# FIXME: Add default values for the fields.
+
 class ICollege(IOrganization):
     pass
 
@@ -45,10 +47,27 @@ class IDirection(IProfession):
     """
 
 
+class IEducationalStandard(ICatalogItemBase):
+    """Reference to a educational standard.
+    """
+    profession = zope.schema.Object(
+        title=_("Teaching profession"),
+        description=_("Reference to a teaching profession."),
+        schema=IProfession,
+        required=True
+    )
+
+
 class ICurriculum(ICatalogItemBase):
     """The curriculum supposed to be referenced from
     an IOrganization subdivision.
     """
+    standard = zope.schema.Object(
+        title=_("Educational standard"),
+        description=_("Reference to an educational standard."),
+        schema=IEducationalStandard,
+        required=True
+    )
 
 
 class IEducationalSpecification(ISpecification):
