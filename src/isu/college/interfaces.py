@@ -7,6 +7,9 @@ from isu.onece.org.interfaces import IOrganization, ISpecification
 from isu.onece.org.interfaces import IEmployee
 from zope.i18nmessageid import MessageFactory
 import isu.college.enums as enums
+# FIXME: Enums must be wrapped with SimpleVocabulary
+# or some kind of enum exposer....
+# http://docs.plone.org/external/plone.app.dexterity/docs/advanced/vocabularies.html
 
 _ = MessageFactory("isu.college")
 
@@ -112,8 +115,10 @@ class ICurriculum(ICatalogItemBase):
         description=_("List of various activity types"
                       "the curriculum educating to."),
         # FIXME: Constrain the possible object types.
-        value_type=zope.schema.Object(
-            schema=IActivityType
+        value_type=zope.schema.Choice(
+            # FIXME: Understand the choice inside lists.
+            vocabulary="utility"
+            # http://docs.plone.org/external/plone.app.dexterity/docs/advanced/vocabularies.html
         )
     )
     # FIXME: Organization data and

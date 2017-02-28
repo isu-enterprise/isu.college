@@ -54,3 +54,7 @@ http://profstandart-kadry.ru/2014/05/19/inzhener-proektirovschik-v-oblasti-svyaz
 http://profstandart-kadry.ru/2014/04/11/specialist-po-testirovaniyu-v-oblasti-informacionnyh-tehnologij/
 
 Программист (приказ №679н от 18.11.2013 г.) - http://profstandart-kadry.ru/2013/11/18/programmist/
+
+# Schema fields
+
+A table of zope schema field usage. http://docs.plone.org/external/plone.app.dexterity/docs/reference/fields.html
