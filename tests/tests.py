@@ -35,10 +35,10 @@ class TestEnums:
         assert 0 in e
         assert -1 not in e
         assert e.getTermByToken("Master").value == 6
-        assert e.getTermByToken("Master").value == e.context.Master
-        assert e.getTerm(e.context.Master).value == e.context.Master
-        assert e[e.context.Master].value == e.context.Master
-        assert e[6].value == e.context.Master
+        assert e.getTermByToken("Master").value == e.enum.Master
+        assert e.getTerm(e.enum.Master).value == e.enum.Master
+        assert e[e.enum.Master].value == e.enum.Master
+        assert e[6].value == e.enum.Master
 
     def test_enum_len(self):
         assert len(self.e) == 7
