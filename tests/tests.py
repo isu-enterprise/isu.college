@@ -42,3 +42,7 @@ class TestEnums:
 
     def test_enum_len(self):
         assert len(self.e) == 7
+
+    def test_iterator(self):
+        for term in self.e:
+            assert term
