@@ -103,3 +103,4 @@ ENV/
 .ropeproject
 /modules
 /tests/output/*
+.~lock*
