@@ -48,3 +48,11 @@ class TestEnums:
     def test_iterator(self):
         for term in self.e:
             assert term
+
+# Do the same checking vocabulary availability.
+
+
+class TestEnums2(TestEnums):
+
+    def setUp(self):
+        self.e = enums.Degree.vocabulary
