@@ -68,7 +68,7 @@ class IEducationalStandard(IVocabularyItemBase):
     degree = zope.schema.Choice(
         title=_("Degree"),
         description=_("The degree to be obtained after education."),
-        vocabulary=enums.Degree,
+        vocabulary='degree',
         required=True
     )
 
@@ -88,14 +88,14 @@ class ICurriculum(IVocabularyItemBase):
         title=_("Academic relevance"),
         description=_(
             "The relevance of the degree to education or scholarship.."),
-        vocabulary=enums.AcademicRelevance,
+        vocabulary='academicity',
         required=True
     )
 
     mural = zope.schema.Choice(
         title=_("Mural type"),
         description=_("The mural form of the study process organization."),
-        vocabulary=enums.Mural,
+        vocabulary='mural',
         required=True
     )
 
@@ -118,7 +118,7 @@ class ICurriculum(IVocabularyItemBase):
         # FIXME: Constrain the possible object types.
         value_type=zope.schema.Choice(
             # FIXME: Understand the choice inside lists.
-            vocabulary="utility"
+            vocabulary='activity_type'
             # http://docs.plone.org/external/plone.app.dexterity/docs/advanced/vocabularies.html
         )
     )

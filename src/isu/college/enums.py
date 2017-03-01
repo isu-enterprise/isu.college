@@ -4,14 +4,14 @@ from zope.interface import directlyProvides
 from isu.enterprise.enums import vocabulary
 
 
-@vocabulary
+@vocabulary('mural')
 @enum.unique
 class Mural(enum.IntEnum):
     Extramural = 0
     Intramural = 1
 
 
-@vocabulary
+@vocabulary('degree')
 @enum.unique
 class Degree(enum.IntEnum):
     NoDegree = 0
@@ -23,7 +23,7 @@ class Degree(enum.IntEnum):
     Professor = 10
 
 
-@vocabulary
+@vocabulary('academicity')
 @enum.unique
 class AcademicRelevance(enum.IntEnum):
     """

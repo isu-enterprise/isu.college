@@ -4,6 +4,7 @@ from isu.college.interfaces import IProfessor
 from isu.college import enums
 from zope.schema.interfaces import IBaseVocabulary
 from zope.schema.interfaces import ITokenizedTerm
+from zope.schema.vocabulary import getVocabularyRegistry
 
 
 class TestBasic:
@@ -21,7 +22,8 @@ class TestBasic:
 class TestEnums:
 
     def setUp(self):
-        self.e = enums.Degree
+        registry = getVocabularyRegistry()
+        self.e = registry.get(None, 'degree')
 
     def test_degree(self):
         e = self.e
