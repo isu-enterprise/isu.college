@@ -16,8 +16,10 @@ class FOSSpecificationView(object):
             id="09.02.22", name="Информатика и вычислительная техника")
 
     @property
+    #    def profession(self):
+    #        return self.standard.profession
     def profession(self):
-        return self.standard.profession
+        return self._profession
 
     @property
     def standard(self):
@@ -33,6 +35,11 @@ class FOSSpecificationView(object):
 
 def study_work_program(view, filename):
     infilename = resource_filename(
-        'isu.college.app', 'templates/StudyWorkProgram.odt')
+        'isu.college.app',
+        'fos/templates/StudyWorkProgram.odt')
 
-    Renderer(infilename, view(), filename)
+    renderer = Renderer(infilename,
+                        view(),
+                        filename,
+                        overwriteExisting=True)
+    renderer.run()
