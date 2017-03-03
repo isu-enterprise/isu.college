@@ -15,9 +15,9 @@ class Mural(enum.IntEnum):
 @enum.unique
 class Degree(enum.IntEnum):
     NoDegree = 0
-    Bacheloir = 5
-    Master = 6
-    Magister = 7
+    Bacheloir = 5   # Бакалавр
+    Specialist = 6  # Специалист
+    Master = 7      # Магистр
     PhD = 8
     MD = 9
     Professor = 10
