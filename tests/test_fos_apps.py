@@ -6,7 +6,10 @@ import os.path
 
 OUTDIR = pkg_resources.resource_filename(
     "isu.college", "../../../tests/output")
+INDIR = pkg_resources.resource_filename(
+    "isu.college", "../../../tests/input")
 OUTDIR = os.path.abspath(OUTDIR)
+INDIR = os.path.abspath(INDIR)
 
 
 class TestImport:
