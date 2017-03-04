@@ -12,7 +12,7 @@ But the best one is `secretary` module.
 Data directory
 --------------
 
-Data directory's (README.md|https://github.com/isu-enterprise/isu.college/tree/master/data) contains URIs to documents.
+Data directory's README.md, near to <https://github.com/isu-enterprise/isu.college/tree/master/data>, contains URIs to documents.
 
 Need to be read about
 ---------------------
