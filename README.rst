@@ -7,6 +7,12 @@ Generating documents
 --------------------
 
 See http://appyframework.org/pod.html and https://github.com/collective/collective.documentgenerator
+But the best one is `secretary` module.
+
+Data directory
+--------------
+
+Data directory's (README.md|https://github.com/isu-enterprise/isu.college/tree/master/data) contains URIs to documents.
 
 Need to be read about
 ---------------------
