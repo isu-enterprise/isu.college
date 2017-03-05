@@ -11,7 +11,7 @@
  Профиль "Вычислительные машины, комплексы, системы и сети" - http://www.istu.edu/structure/57/4308/4449/?parent=95703
 
  * Основная образовательная программа высшего профессионального образовательная (ООП) - **Найти на сайте политеха**
- * Федеральный государственный образовательный стандарт (ФГОС) - http://минобрнауки.рф/%D0%B4%D0%BE%D0%BA%D1%83%D0%BC%D0%B5%D0%BD%D1%82%D1%8B/7980/%D1%84%D0%B0%D0%B9%D0%BB/7211/Prikaz_%C2%A6_5_ot_12.01.2016.pdf (Локальная - http://www.istu.edu/pages/sys_work/sbor_u_plan/files/055/055609.pdf)
+ * Федеральный государственный образовательный стандарт (ФГОС) - http://www.edu.ru/file/docs/2016/01/62780.pdf (ровный скан) (Локальная - http://www.istu.edu/pages/sys_work/sbor_u_plan/files/055/055609.pdf) Взято из Консультант-плюса http://www.nieup.ru/doc/&doc_id=52 .
  * Учебный план (XLS) - http://www.istu.edu/pages/sys_work/sbor_u_plan/files/064/064348.xls
 
  См. также раздел бакалавриата http://www.istu.edu/structure/57/4308/4449/?parent=1

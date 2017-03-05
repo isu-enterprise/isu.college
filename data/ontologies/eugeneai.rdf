@@ -1,0 +1,40 @@
+<rdf:RDF
+ xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+ xmlns:foaf="http://xmlns.com/foaf/0.1/"
+ xmlns:s="http://www.w3.org/2000/01/rdf-schema#"
+ xmlns:cert="http://www.w3.org/ns/auth/cert#"
+ xmlns:ws="http://www.w3.org/ns/pim/space#"
+ xmlns:terms="http://www.w3.org/ns/solid/terms#">
+    <foaf:PersonalProfileDocument rdf:about="">
+       <foaf:maker rdf:resource="#me"/><foaf:primaryTopic rdf:resource="#me"/>
+    </foaf:PersonalProfileDocument>
+    <cert:RSAPublicKey rdf:about="#key26eb">
+        <s:label>Created 04 Sep 16 11:28 UTC on eugeneai.databox.me</s:label>
+        <cert:exponent rdf:datatype="http://www.w3.org/2001/XMLSchema#int">65537</cert:exponent>
+        <cert:modulus rdf:datatype="http://www.w3.org/2001/XMLSchema#hexBinary">ec09a0fb78653b2fdf373dba0003f484caa4fc954aac087e923ccf58abbb5d419e1b0d71e822b1e17a8ebdf73bb5f176a06a239181b078018306781b7dc0aab71d649c55a03cd388ee4f67e6bb27f0d0dc689d79569e1b98447db8bb2fde13f4253c9ed0dbd8f7991ab8450c5de8ef56aeeb6837e8334badb52773b0b098420cd845f3fd34c332ab841bc072bb8ee93f99eb4f17976847d2118e888a95d2587220d6225d53f562a2621cce2ed3924f8f9baff16e04372cdcb766dabd3c423a852a3ac6a4156da8b5a84d29d4c4884a0b0b04629f4c1e2305358cb458a906f8eb0bf0c6da4d68cdad50491d51e3d5a0b5e8fbcba2e77957b6606f072d086b24f3</cert:modulus>
+    </cert:RSAPublicKey>
+    <cert:RSAPublicKey rdf:about="#key6f06">
+        <s:label>Created 05 Sep 16 10:26 UTC on eugeneai.databox.me</s:label>
+        <cert:exponent rdf:datatype="http://www.w3.org/2001/XMLSchema#int">65537</cert:exponent>
+        <cert:modulus rdf:datatype="http://www.w3.org/2001/XMLSchema#hexBinary">c64b94c1649f3ee4ab95f1e2aae6caaffdef707aa9da9ddd1968c61b33656f4221a2ba24d2a6bca029ac2e10b763dabe3d99eb95264dd05427c6fe29d5d3ee649b005f0c865e8998c5c1dd106a278c17168af4ae1e9db317e626e852f93cedf9ea5f709c9722559d51f654a829b6f008f730fb06e8a9c7ff5e73493b753fe2c86c808edd3c8f17f1191e07f50c4f5727426bc01b8fc2e11c39b93727787eec3040d461d07f1e8a79bbc474dbc5fb34c17a0ae3715a98b3fe9c3776657dcf2f71cf69838118473b83f14ace280e543a9e8662072c076ab35c6050668ab7a0d65ae9e12a47105fd2d3f62777fffb59d18af370853f31ff2371f4b2095e49c5fdd1</cert:modulus>
+    </cert:RSAPublicKey>
+    <cert:RSAPublicKey rdf:about="#key8e7f">
+        <s:label>Created 27 Nov 16 03:29 UTC on eugeneai.databox.me</s:label>
+        <cert:exponent rdf:datatype="http://www.w3.org/2001/XMLSchema#int">65537</cert:exponent>
+        <cert:modulus rdf:datatype="http://www.w3.org/2001/XMLSchema#hexBinary">cfa3c878412ffcb0db2dfe31df90b1e29068bd073477dc1e8fe8c6148f6f97337f333b51d810b76ffce7bc51853b8e61d79b95c2ad48b9336139dce720ce45fc41eef0eb5588a9fa1fa33816fb18e399b9afa8433beac5bd504e2ff960a11ef9e2ae231ba5125d908b1d8397af1abf3e89bc01b9c313da2e2dcf8faf0a93cff09a50eb7f45a585e7a86ac7f01a60f923304b5d2b145373321cacfa35dacb7cc7298cef8747fbbaee7d3cb88fd3ef9498ef5bd7d727932aa829f236819df73a4309c2955cb1466789dfe0cba5e3fe4ce608ffd2bd1c2a6b0914323985a2c264723e7f3fee95064ccc870923fff222e39878df14bf8c375fb4dfe0f6d7a55b912d</cert:modulus>
+    </cert:RSAPublicKey>
+    <foaf:Person rdf:about="#me">
+        <cert:key rdf:resource="#key26eb"/>
+        <cert:key rdf:resource="#key6f06"/>
+        <cert:key rdf:resource="#key8e7f"/>
+        <ws:preferencesFile rdf:resource="/Preferences/prefs.ttl"/>
+        <ws:storage rdf:resource="/"/>
+        <terms:inbox rdf:resource="/Inbox/"/>
+        <terms:timeline rdf:resource="/Timeline/"/>
+        <foaf:img rdf:resource="https://www.gravatar.com/avatar/5bbc4b05e3aaf70c46f484b0872ba61d?d=404&amp;s=300"/>
+        <foaf:mbox rdf:resource="mailto:eugeneai@icc.ru"/>
+        <foaf:mbox rdf:resource="mailto:eugeneai@irnok.net"/>
+        <foaf:name>Evgeny Cherkashin</foaf:name>
+        <foaf:phone rdf:resource="tel:+79148706754"/>
+    </foaf:Person>
+</rdf:RDF>
