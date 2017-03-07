@@ -88,7 +88,7 @@
         <script src="https://dokie.li/scripts/medium-editor-tables.min.js"></script>
         <script src="https://dokie.li/scripts/do.js"></script>
     </head>
-    <body prefix="rdf: http://www.w3.org/1999/02/22-rdf-syntax-ns# rdfs: http://www.w3.org/2000/01/rdf-schema# owl: http://www.w3.org/2002/07/owl# xsd: http://www.w3.org/2001/XMLSchema# dcterms: http://purl.org/dc/terms/ dctypes: http://purl.org/dc/dcmitype/ foaf: http://xmlns.com/foaf/0.1/ vcard: http://www.w3.org/2006/vcard/ns# pimspace: http://www.w3.org/ns/pim/space# ccns: https://creativecommons.org/ns# skos: http://www.w3.org/2004/02/skos/core# prov: http://www.w3.org/ns/prov# qb: http://purl.org/linked-data/cube# schema: http://schema.org/ void: http://rdfs.org/ns/void# rsa: http://www.w3.org/ns/auth/rsa# cert: http://www.w3.org/ns/auth/cert# cal: http://www.w3.org/2002/12/cal/ical# wgs: http://www.w3.org/2003/01/geo/wgs84_pos# org: http://www.w3.org/ns/org# biblio: http://purl.org/net/biblio# bibo: http://purl.org/ontology/bibo/ book: http://purl.org/NET/book/vocab# ov: http://open.vocab.org/terms/ sioc: http://rdfs.org/sioc/ns# doap: http://usefulinc.com/ns/doap# dbr: http://dbpedia.org/resource/ dbp: http://dbpedia.org/property/ sio: http://semanticscience.org/resource/ opmw: http://www.opmw.org/ontology/ deo: http://purl.org/spar/deo/ doco: http://purl.org/spar/doco/ cito: http://purl.org/spar/cito/ fabio: http://purl.org/spar/fabio/ oa: http://www.w3.org/ns/oa# as: https://www.w3.org/ns/activitystreams# ldp: http://www.w3.org/ns/ldp# solid: http://www.w3.org/ns/solid/terms# acl: http://www.w3.org/ns/auth/acl# dio: https://w3id.org/dio# cnt: http://www.w3.org/2011/content# curr: http://irnok.net/ontologies/curriculum/ns/ minobr: http://edu.gov.ru/ontology/standards/"
+    <body prefix="rdf: http://www.w3.org/1999/02/22-rdf-syntax-ns# rdfs: http://www.w3.org/2000/01/rdf-schema# owl: http://www.w3.org/2002/07/owl# xsd: http://www.w3.org/2001/XMLSchema# dcterms: http://purl.org/dc/terms/ dctypes: http://purl.org/dc/dcmitype/ foaf: http://xmlns.com/foaf/0.1/ vcard: http://www.w3.org/2006/vcard/ns# pimspace: http://www.w3.org/ns/pim/space# ccns: https://creativecommons.org/ns# skos: http://www.w3.org/2004/02/skos/core# prov: http://www.w3.org/ns/prov# qb: http://purl.org/linked-data/cube# schema: http://schema.org/ void: http://rdfs.org/ns/void# rsa: http://www.w3.org/ns/auth/rsa# cert: http://www.w3.org/ns/auth/cert# cal: http://www.w3.org/2002/12/cal/ical# wgs: http://www.w3.org/2003/01/geo/wgs84_pos# org: http://www.w3.org/ns/org# biblio: http://purl.org/net/biblio# bibo: http://purl.org/ontology/bibo/ book: http://purl.org/NET/book/vocab# ov: http://open.vocab.org/terms/ sioc: http://rdfs.org/sioc/ns# doap: http://usefulinc.com/ns/doap# dbr: http://dbpedia.org/resource/ dbp: http://dbpedia.org/property/ sio: http://semanticscience.org/resource/ opmw: http://www.opmw.org/ontology/ deo: http://purl.org/spar/deo/ doco: http://purl.org/spar/doco/ cito: http://purl.org/spar/cito/ fabio: http://purl.org/spar/fabio/ oa: http://www.w3.org/ns/oa# as: https://www.w3.org/ns/activitystreams# ldp: http://www.w3.org/ns/ldp# solid: http://www.w3.org/ns/solid/terms# acl: http://www.w3.org/ns/auth/acl# dio: https://w3id.org/dio# cnt: http://www.w3.org/2011/content# curr: http://irnok.net/ontologies/curriculum/ns/ std: http://edu.gov.ru/ontology/standards/09.03.01#"
           about=""
           typeof="schema:CreativeWork sioc:Post prov:Entity"
     >
@@ -171,8 +171,8 @@
                         ОБРАЗОВАНИЯ</h1>
                     <h1> УРОВЕНЬ ВЫСШЕГО ОБРАЗОВАНИЯ БАКАЛАВРИАТ </h1>
                     <h1> НАПРАВЛЕНИЕ ПОДГОТОВКИ<br />
-                        <div property="curr:profession" resource="minobr:profession-CS">
-                            <div resource="minobr:profession-CS" typeof="curr:Profession">
+                        <div property="curr:profession" resource="std:profession-CS">
+                            <div resource="std:profession-CS" typeof="curr:Profession">
                                 <div property="oa:id" datatype="xsd:NMTOKEN">09.03.01</div> <div property="dc:title">ИНФОРМАТИКА И ВЫЧИСЛИТЕЛЬНАЯ ТЕХНИКА</div>
                             </div>
                         </div>
@@ -310,12 +310,36 @@
                                 <span property="oa:id" datatype="XSD:NMTOKEN">4.3</span>. Виды профессиональной деятельности, к которым готовятся
                                 выпускники, освоившие программу бакалавриата:</p>
                             <ul>
-                                <li>научно-исследовательская;</li>
-                                <li>научно-педагогическая;</li>
-                                <li>проектно-конструкторская;</li>
-                                <li>проектно-технологическая;</li>
-                                <li>монтажно-наладочная;</li>
-                                <li>сервисно-эксплуатационная.</li>
+                                <li property="curr:activity" resource="std:scientific-investigation-activity">
+                                    <div resource="std:scientific-investigation-activity" typeof="curr:ProfessionalActivity">
+                                        <span property="rdfs:label">научно-исследовательская</span>
+                                    </div>;
+                                </li>
+                                <li property="curr:activity" resource="std:scientific-pedagogical-activity">
+                                    <div resource="std:scientific-pedagogical-activity" typeof="curr:ProfessionalActivity">
+                                        <span property="rdfs:label">научно-педагогическая
+                                        </span></div>;
+                                </li>
+                                <li property="curr:activity" resource="std:engineering-development-activity">
+                                    <div resource="std:egineering-development-activity" typeof="curr:ProfessionalActivity">
+                                        <span property="rdfs:label">проектно-конструкторская
+                                        </span></div>;
+                                </li>
+                                <li property="curr:activity" resource="std:engineering-technological-activity">
+                                    <div resource="std:engineering-technological-activity" typeof="curr:ProfessionalActivity">
+                                        <span property="rdfs:label">проектно-технологическая
+                                        </span></div>;
+                                </li>
+                                <li property="curr:activity" resource="std:assembling-tuning-activity">
+                                    <div resource="std:assembling-tuning-activity" typeof="curr:ProfessionalActivity">
+                                        <span property="rdfs:label">монтажно-наладочная
+                                        </span></div>;
+                                </li>
+                                <li property="curr:activity" resource="std:service-exploitation-activity">
+                                    <div resource="std:service-exploitation-activity" typeof="curr:ProfessionalActivity">
+                                        <span property="rdfs:label">сервисно-эксплуатационная
+                                        </span></div>.
+                                </li>
                             </ul>
                             <p> При разработке и реализации программы бакалавриата организация
                                 ориентируется на конкретный вид (виды) профессиональной
@@ -430,27 +454,70 @@
                                 <span property="oa:id" datatype="XSD:NMTOKEN">5.2</span>. Выпускник, освоивший программу бакалавриата, должен обладать
                                 следующими общекультурными компетенциями: </p>
                             <ul>
-                                <li>способностью использовать основы философских знаний для
-                                    формирования мировоззренческой позиции (ОК-1); </li>
-                                <li> способностью анализировать основные этапы и закономерности
-                                    исторического развития общества для формирования гражданской
-                                    позиции (ОК-2); </li>
-                                <li>способностью использовать основы экономических знаний в
-                                    различных сферах деятельности (ОК-3); </li>
-                                <li>способностью использовать основы правовых знаний в различных
-                                    сферах деятельности (ОК-4); </li>
-                                <li>способностью к коммуникации в устной и письменной формах на
-                                    русском и иностранном языках для решения задач межличностного и
-                                    межкультурного взаимодействия (ОК-5); </li>
-                                <li> способностью работать в коллективе, толерантно воспринимая
-                                    социальные, этнические, конфессиональные и культурные различия
-                                    (ОК-6); </li>
-                                <li> способностью к самоорганизации и самообразованию (ОК-7); </li>
-                                <li>способностью использовать методы и средства физической культуры
-                                    для обеспечения полноценной социальной и профессиональной
-                                    деятельности (ОК-8); </li>
-                                <li> способностью использовать приемы оказания первой помощи, методы
-                                    защиты в условиях чрезвычайных ситуаций (ОК-9). </li>
+                                <li property="curr:competence" resource="std:competence-CC-1">
+                                    <span resource="std:competence-CC-1" typeof="curr:CulturalCompetence">
+                                        <span property="dc:title">
+                                            способностью использовать основы философских знаний для
+                                            формирования мировоззренческой позиции</span>(<span property="dc:title">ОК-1</span>)
+                                    </span>;
+                                </li>
+                                <li property="curr:competence" resource="std:competence-CC-2">
+                                    <span resource="std:competence-CC-2" typeof="curr:CulturalCompetence">
+                                        <span property="dc:title"> способностью анализировать основные этапы и закономерности
+                                            исторического развития общества для формирования гражданской
+                                            позиции (<span property="dc:title">ОК-2</span>)
+                                        </span>
+                                    </span>;
+                                </li>
+                                <li property="curr:competence" resource="std:competence-CC-3">
+                                    <span resource="std:competence-CC-3" typeof="curr:CulturalCompetence"><span property="dc:title">способностью использовать основы экономических знаний в
+                                        различных сферах деятельности (<span property="dc:title">ОК-3</span>)</span>
+                                    </span>;
+                                </li>
+                                <li property="curr:competence" resource="std:competence-CC-4">
+                                    <span resource="std:competence-CC-4" typeof="curr:CulturalCompetence">
+                                        <span property="dc:title">способностью использовать основы правовых знаний в различных
+                                            сферах деятельности (<span property="dc:title">ОК-4</span>)
+                                        </span>
+                                    </span>;
+                                </li>
+                                <li property="curr:competence" resource="std:competence-CC-5">
+                                    <span resource="std:competence-CC-4" typeof="curr:CulturalCompetence">
+                                        <span property="dc:title">способностью к коммуникации в устной и письменной формах на
+                                            русском и иностранном языках для решения задач межличностного и
+                                            межкультурного взаимодействия (<span property="dc:title">ОК-5</span>)
+                                        </span>
+                                    </span>;
+                                </li>
+                                <li property="curr:competence" resource="std:competence-CC-6">
+                                    <span resource="std:competence-CC-4" typeof="curr:CulturalCompetence">
+                                        <span property="dc:title"> способностью работать в коллективе, толерантно воспринимая
+                                            социальные, этнические, конфессиональные и культурные различия
+                                            (<span property="dc:title">ОК-6</span>)
+                                        </span>
+                                    </span>;
+                                </li>
+                                <li property="curr:competence" resource="std:competence-CC-7">
+                                    <span resource="std:competence-CC-7" typeof="curr:CulturalCompetence">
+                                        <span property="dc:title">способностью к самоорганизации и самообразованию (<span property="dc:title">ОК-7</span>);
+                                        </span>
+                                    </span>
+                                </li>
+                                <li property="curr:competence" resource="std:competence-CC-8">
+                                    <span resource="std:competence-CC-8" typeof="curr:CulturalCompetence">
+                                        <span property="dc:title">способностью использовать методы и средства физической культуры
+                                            для обеспечения полноценной социальной и профессиональной
+                                            деятельности (<span property="dc:title">ОК-8</span>);
+                                        </span>
+                                    </span>
+                                </li>
+                                <li property="curr:competence" resource="std:competence-CC-9">
+                                    <span resource="std:competence-CC-9" typeof="curr:CulturalCompetence">
+                                        <span property="dc:title"> способностью использовать приемы оказания первой помощи, методы
+                                            защиты в условиях чрезвычайных ситуаций (<span property="dc:title">ОК-9</span>)
+                                        </span>
+                                    </span>.
+                                </li>
                             </ul>
                         </div>
                         <div  property="schema:hasPart" typeof="dc:Text cnt:ContentAsText">
@@ -458,19 +525,44 @@
                                 <span property="oa:id" datatype="XSD:NMTOKEN">5.3</span>. Выпускник, освоивший программу бакалавриата, должен обладать
                                 следующими общепрофессиональными компетенциями: </p>
                             <ul>
-                                <li>способностью инсталлировать программное и аппаратное обеспечение
-                                    для информационных и автоматизированных систем (ОПК-1); </li>
-                                <li>способностью осваивать методики использования программных
-                                    средств для решения практических задач (ОПК-2); </li>
-                                <li>способностью разрабатывать бизнес-планы и технические задания на
-                                    оснащение отделов, лабораторий, офисов компьютерным и сетевым
-                                    оборудованием (ОПК-3); </li>
-                                <li>способностью участвовать в настройке и наладке
-                                    программно-аппаратных комплексов (ОПК-4); </li>
-                                <li>способностью решать стандартные задачи профессиональной
-                                    деятельности на основе информационной и библиографической культуры
-                                    с применением информационно-коммуникационных технологий и с учетом
-                                    основных требований информационной безопасности (ОПК-5). </li>
+                                <li property="curr:competence" resource="std:competence-GPC-1">
+                                    <span resource="std:competence-GPC-1" typeof="curr:GeneralProfessionalCompetence">
+                                        <span property="dc:title">способностью инсталлировать программное и аппаратное обеспечение
+                                            для информационных и автоматизированных систем (<span property="dc:title">ОПК-1</span>)
+                                        </span>
+                                    </span>;
+                                </li>
+                                <li property="curr:competence" resource="std:competence-GPC-2">
+                                    <span resource="std:competence-GPC-2" typeof="curr:GeneralProfessionalCompetence">
+                                        <span property="dc:title">способностью осваивать методики использования программных
+                                            средств для решения практических задач (<span property="dc:title">ОПК-2</span>)
+                                        </span>
+                                    </span>;
+                                </li>
+                                <li property="curr:competence" resource="std:competence-GPC-3">
+                                    <span resource="std:competence-GPC-3" typeof="curr:GeneralProfessionalCompetence">
+                                        <span property="dc:title">способностью разрабатывать бизнес-планы и технические задания на
+                                            оснащение отделов, лабораторий, офисов компьютерным и сетевым
+                                            оборудованием (<span property="dc:title">ОПК-3</span>)
+                                        </span>
+                                    </span>;
+                                </li>
+                                <li property="curr:competence" resource="std:competence-GPC-4">
+                                    <span resource="std:competence-GPC-4" typeof="curr:GeneralProfessionalCompetence">
+                                        <span property="dc:title">способностью участвовать в настройке и наладке
+                                            программно-аппаратных комплексов (<span property="dc:title">ОПК-4</span>)
+                                        </span>
+                                    </span>;
+                                </li>
+                                <li property="curr:competence" resource="std:competence-GPC-5">
+                                    <span resource="std:competence-GPC-5" typeof="curr:GeneralProfessionalCompetence">
+                                        <span property="dc:title">способностью решать стандартные задачи профессиональной
+                                            деятельности на основе информационной и библиографической культуры
+                                            с применением информационно-коммуникационных технологий и с учетом
+                                            основных требований информационной безопасности (<span property="dc:title">ОПК-5</span>)
+                                        </span>
+                                    </span>.
+                                </li>
                             </ul>
                         </div>
                         <div  property="schema:hasPart" typeof="dc:Text cnt:ContentAsText">
@@ -482,52 +574,105 @@
                             <ul>
                                 <li> проектно-конструкторская деятельность:
                                     <ul>
-                                        <li>способностью разрабатывать модели компонентов информационных
-                                            систем, включая модели баз данных и модели интерфейсов
-                                            "человек - электронно-вычислительная машина" (ПК-1);</li>
+                                        <li property="curr:competence" resource="std:competence-PC-1">
+                                            <span resource="std:competence-PC-1" typeof="curr:ProfessionalCompetence">
+                                                <span property="dc:title">способностью разрабатывать модели компонентов информационных
+                                                    систем, включая модели баз данных и модели интерфейсов
+                                                    "человек - электронно-вычислительная машина" (<span property="dc:title">ПК-1</span>)
+                                                    <div property="std:competence" resource="std:engineering-development-activity"></div>
+                                                </span>
+                                            </span>;
+                                        </li>
                                     </ul>
                                 </li>
                             </ul>
                             <ul>
                                 <li> проектно-технологическая деятельность:
                                     <ul>
-                                        <li>способностью разрабатывать компоненты аппаратно-программных
-                                            комплексов и баз данных, используя современные
-                                            инструментальные средства и технологии программирования
-                                            (ПК-2);</li>
+                                        <li property="curr:competence" resource="std:competence-PC-2">
+                                            <span resource="std:competence-PC-2" typeof="curr:ProfessionalCompetence">
+                                                <span property="dc:title">способностью разрабатывать компоненты аппаратно-программных
+                                                    комплексов и баз данных, используя современные
+                                                    инструментальные средства и технологии программирования
+                                                    (<span property="dc:title">ПК-2</span>)
+                                                    <div property="std:competence" resource="std:engineering-technological-activity"></div>
+                                                </span>
+                                            </span>;
+                                        </li>
                                     </ul>
                                 </li>
                             </ul>
                             <ul>
                                 <li> научно-исследовательская деятельность:
                                     <ul>
-                                        <li>способностью обосновывать принимаемые проектные решения,
-                                            осуществлять постановку и выполнять эксперименты по проверке
-                                            их корректности и эффективности (ПК-3);</li>
+                                        <li property="curr:competence" resource="std:competence-PC-3">
+                                            <span resource="std:competence-PC-3" typeof="curr:ProfessionalCompetence">
+                                                <span property="dc:title">способностью обосновывать принимаемые проектные решения,
+                                                    осуществлять постановку и выполнять эксперименты по проверке
+                                                    их корректности и эффективности (<span property="dc:title">ПК-3</span>)
+                                                    <div property="std:competence" resource="std:scientific-investigation-activity"></div>
+                                                </span>
+                                            </span>;
+                                        </li>
                                     </ul>
                                 </li>
                             </ul>
                             <ul>
                                 <li> научно-педагогическая деятельность:
                                     <ul>
-                                        <li> способностью готовить конспекты и проводить занятия по
-                                            обучению работников применению программно-методических
-                                            комплексов, используемых на предприятии (ПК-4);</li>
+                                        <li property="curr:competence" resource="std:competence-PC-4">
+                                            <span resource="std:competence-PC-4" typeof="curr:ProfessionalCompetence">
+                                                <span property="dc:title">способностью готовить конспекты и проводить занятия по
+                                                    обучению работников применению программно-методических
+                                                    комплексов, используемых на предприятии (<span property="dc:title">ПК-4</span>)
+                                                    <div property="std:competence" resource="std:scientific-pedagogical-activity"></div>
+                                                </span>
+                                            </span>
+                                            ;
+                                        </li>
                                     </ul>
                                 </li>
                             </ul>
                             <ul>
                                 <li>монтажно-наладочная деятельность:
                                     <ul>
-                                        <li>способностью сопрягать аппаратные и программные средства в
-                                            составе информационных и автоматизированных систем (ПК-5);</li>
-                                        <li>способностью подключать и настраивать модули ЭВМ и
-                                            периферийного оборудования (ПК-6); </li>
-                                        <li>сервисно-эксплуатационная деятельность: способностью
-                                            проверять техническое состояние вычислительного оборудования и
-                                            осуществлять необходимые профилактические процедуры (ПК-7); </li>
-                                        <li> способностью составлять инструкции по эксплуатации
-                                            оборудования (ПК-8). </li>
+                                        <li property="curr:competence" resource="std:competence-PC-5">
+                                            <span resource="std:competence-PC-5" typeof="curr:ProfessionalCompetence">
+                                                <span property="dc:title">способностью сопрягать аппаратные и программные средства в
+                                                    составе информационных и автоматизированных систем (<span property="dc:title">ПК-5</span>)
+                                                    <div property="std:competence" resource="std:assembling-tuning-activity"></div>
+                                                </span>
+                                            </span>
+                                            ;
+                                        </li>
+                                        <li property="curr:competence" resource="std:competence-PC-6">
+                                            <span resource="std:competence-PC-6" typeof="curr:ProfessionalCompetence">
+                                                <span property="dc:title">способностью подключать и настраивать модули ЭВМ и
+                                                    периферийного оборудования (<span property="dc:title">ПК-6</span>)
+                                                    <div property="std:competence" resource="std:assembling-tuning-activity"></div>
+                                                </span>
+                                            </span>
+                                            ;
+                                        </li>
+                                        <li property="curr:competence" resource="std:competence-PC-7">
+                                            <span resource="std:competence-PC-7" typeof="curr:ProfessionalCompetence">
+                                                <span property="dc:title">сервисно-эксплуатационная деятельность: способностью
+                                                    проверять техническое состояние вычислительного оборудования и
+                                                    осуществлять необходимые профилактические процедуры (<span property="dc:title">ПК-7</span>)
+                                                    <div property="std:competence" resource="std:assembling-tuning-activity"></div>
+                                                </span>
+                                            </span>
+                                            ;
+                                        </li>
+                                        <li property="curr:competence" resource="std:competence-PC-8">
+                                            <span resource="std:competence-PC-8" typeof="curr:ProfessionalCompetence">
+                                                <span property="dc:title">способностью составлять инструкции по эксплуатации
+                                                    оборудования (<span property="dc:title">ПК-8</span>)
+                                                    <div property="std:competence" resource="std:assembling-tuning-activity"></div>
+                                                </span>
+                                            </span>
+                                            .
+                                        </li>
                                     </ul>
                                 </li>
                             </ul>
