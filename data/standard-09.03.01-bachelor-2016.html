@@ -88,13 +88,13 @@
         <script src="https://dokie.li/scripts/medium-editor-tables.min.js"></script>
         <script src="https://dokie.li/scripts/do.js"></script>
     </head>
-    <body prefix="rdf: http://www.w3.org/1999/02/22-rdf-syntax-ns# rdfs: http://www.w3.org/2000/01/rdf-schema# owl: http://www.w3.org/2002/07/owl# xsd: http://www.w3.org/2001/XMLSchema# dcterms: http://purl.org/dc/terms/ dctypes: http://purl.org/dc/dcmitype/ foaf: http://xmlns.com/foaf/0.1/ vcard: http://www.w3.org/2006/vcard/ns# pimspace: http://www.w3.org/ns/pim/space# ccns: https://creativecommons.org/ns# skos: http://www.w3.org/2004/02/skos/core# prov: http://www.w3.org/ns/prov# qb: http://purl.org/linked-data/cube# schema: http://schema.org/ void: http://rdfs.org/ns/void# rsa: http://www.w3.org/ns/auth/rsa# cert: http://www.w3.org/ns/auth/cert# cal: http://www.w3.org/2002/12/cal/ical# wgs: http://www.w3.org/2003/01/geo/wgs84_pos# org: http://www.w3.org/ns/org# biblio: http://purl.org/net/biblio# bibo: http://purl.org/ontology/bibo/ book: http://purl.org/NET/book/vocab# ov: http://open.vocab.org/terms/ sioc: http://rdfs.org/sioc/ns# doap: http://usefulinc.com/ns/doap# dbr: http://dbpedia.org/resource/ dbp: http://dbpedia.org/property/ sio: http://semanticscience.org/resource/ opmw: http://www.opmw.org/ontology/ deo: http://purl.org/spar/deo/ doco: http://purl.org/spar/doco/ cito: http://purl.org/spar/cito/ fabio: http://purl.org/spar/fabio/ oa: http://www.w3.org/ns/oa# as: https://www.w3.org/ns/activitystreams# ldp: http://www.w3.org/ns/ldp# solid: http://www.w3.org/ns/solid/terms# acl: http://www.w3.org/ns/auth/acl# dio: https://w3id.org/dio# cnt: http://www.w3.org/2011/content# curr: http://irnok.net/ontologies/curriculum/ns/ std: http://edu.gov.ru/ontology/standards/09.03.01#"
-          about=""
+    <body prefix="rdf: http://www.w3.org/1999/02/22-rdf-syntax-ns# rdfs: http://www.w3.org/2000/01/rdf-schema# owl: http://www.w3.org/2002/07/owl# xsd: http://www.w3.org/2001/XMLSchema# dcterms: http://purl.org/dc/terms/ dctypes: http://purl.org/dc/dcmitype/ foaf: http://xmlns.com/foaf/0.1/ vcard: http://www.w3.org/2006/vcard/ns# pimspace: http://www.w3.org/ns/pim/space# ccns: https://creativecommons.org/ns# skos: http://www.w3.org/2004/02/skos/core# prov: http://www.w3.org/ns/prov# qb: http://purl.org/linked-data/cube# schema: http://schema.org/ void: http://rdfs.org/ns/void# rsa: http://www.w3.org/ns/auth/rsa# cert: http://www.w3.org/ns/auth/cert# cal: http://www.w3.org/2002/12/cal/ical# wgs: http://www.w3.org/2003/01/geo/wgs84_pos# org: http://www.w3.org/ns/org# biblio: http://purl.org/net/biblio# bibo: http://purl.org/ontology/bibo/ book: http://purl.org/NET/book/vocab# ov: http://open.vocab.org/terms/ sioc: http://rdfs.org/sioc/ns# doap: http://usefulinc.com/ns/doap# dbr: http://dbpedia.org/resource/ dbp: http://dbpedia.org/property/ sio: http://semanticscience.org/resource/ opmw: http://www.opmw.org/ontology/ deo: http://purl.org/spar/deo/ doco: http://purl.org/spar/doco/ cito: http://purl.org/spar/cito/ fabio: http://purl.org/spar/fabio/ oa: http://www.w3.org/ns/oa# as: https://www.w3.org/ns/activitystreams# ldp: http://www.w3.org/ns/ldp# solid: http://www.w3.org/ns/solid/terms# acl: http://www.w3.org/ns/auth/acl# dio: https://w3id.org/dio# cnt: http://www.w3.org/2011/content# curr: http://irnok.net/ontologies/curriculum/ns/ std: http://edu.gov.ru/ontology/standards/09.03.01# govru: http://edu.gov.ru/people#"
+          resource="#post"
           typeof="schema:CreativeWork sioc:Post prov:Entity"
     >
         <main lang="ru" resource="#annotation" typeof="oa:Annotation">
             <article typeof="schema:Article foaf:Document curr:EducationalStandart"
-                     about="http://минобрнауки.рф/%D0%B4%D0%BE%D0%BA%D1%83%D0%BC%D0%B5%D0%BD%D1%82%D1%8B/7980"
+                     resource="http://минобрнауки.рф/%D0%B4%D0%BE%D0%BA%D1%83%D0%BC%D0%B5%D0%BD%D1%82%D1%8B/7980"
             >
                 <section id="consultantplus">
                     <p class="ni">Приказ Минобрнауки России от <span property="dc:created" datatype="xsd:date" content="2016-01-12">12.01.2016</span> N 5 "<span property="dc:title">Об
@@ -152,9 +152,12 @@
                             Министерством юстиции Российской Федерации 28 июня 2011 г.,
                             регистрационный N 21200).</li>
                     </ul>
-                    <p class="r" property="dc:creator" resource="#livanov">Министр
-                        <div about="#livanov" typeof="foaf:Person">
+                    <p class="r" property="dc:creator" resource="govru:livanov">Министр
+                        <div resource="govru:livanov" typeof="foaf:Person">
                             <div property="foaf:name">Д.В.ЛИВАНОВ</div>
+                            <div property="foaf:givenName" content="Дмитрий"></div>
+                            <div property="foaf:familyName" content="Ливанов"></div>
+                            <div property="foaf:middleName" content="Викторович"></div>
                         </div>
                     </p>
                     <p class="r"> Приложение</p>
@@ -1217,17 +1220,17 @@
             <a property="oa:hasTarget" href="http://минобрнауки.рф/%D0%B4%D0%BE%D0%BA%D1%83%D0%BC%D0%B5%D0%BD%D1%82%D1%8B/7980/%D1%84%D0%B0%D0%B9%D0%BB/7211/Prikaz_%C2%A6_5_ot_12.01.2016.pdf"></a>
         </main>
         <footer>
-            <div about="https://dokie.li/" >
+            <div resource="https://dokie.li/" >
                 <h2 property="schema:name">Help and shape dokieli</h2>
                 <div property="schema:description" datatype="rdf:HTML">
-                    <p><a rel="doap:repository" href="https://github.com/linkeddata/dokieli"
-                          about="https://dokie.li/">dokieli</a>
-                        (<a rel="doap:bug-database" href="https://github.com/linkeddata/dokieli/issues"
-                            about="https://dokie.li/">issues</a>, <a href="https://gitter.im/linkeddata/dokieli">chat</a>),
-                        <a rel="rdfs:seeAlso" href="https://linkedresearch.org/" about="https://dokie.li/">Linked
-                            Research</a> (<a href="https://gitter.im/linkedresearch/chat">chat</a>),
-                        <a href="https://solid.mit.edu/">Solid</a> (<a href="https://github.com/solid/solid/issues">issues</a>,
-                        <a href="https://gitter.im/solid/chat">chat</a>). Supported by <a href="http://crosscloud.org/">Crosscloud</a>
+                    <p><a property="doap:repository" href="https://github.com/linkeddata/dokieli"
+                        >dokieli</a>
+                        (<a property="doap:bug-database" href="https://github.com/linkeddata/dokieli/issues"
+                         >issues</a>, <a href="https://gitter.im/linkeddata/dokieli">chat</a>),
+                        <a property="rdfs:seeAlso" href="https://linkedresearch.org/">Linked
+                            Research</a> (<a property="rdfs:seeAlso" href="https://gitter.im/linkedresearch/chat">chat</a>),
+                        <a property="rdfs:seeAlso" href="https://solid.mit.edu/">Solid</a> (<a property="rdfs:seeAlso" href="https://github.com/solid/solid/issues">issues</a>,
+                        <a property="rdfs:seeAlso" href="https://gitter.im/solid/chat">chat</a>). Supported by <a property="rdfs:seeAlso" href="http://crosscloud.org/">Crosscloud</a>
                         (2015-10 — 2016-09).</p>
                 </div>
             </div>
