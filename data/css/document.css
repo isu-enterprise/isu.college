@@ -84,7 +84,7 @@ h1 {
 table {
     border-collapse: collapse; /* Отображать только одинарные линии */
     width: 100%;
-    border: 2px solid black;
+    border: 1px solid black;
 }
 
 table.small {
@@ -94,7 +94,7 @@ table.small {
 th {
     text-align: left; /* Выравнивание по левому краю */
     padding: 5px; /* Поля вокруг содержимого ячеек */
-    border: 2px solid black; /* Граница вокруг ячеек */
+    border: 1px solid black; /* Граница вокруг ячеек */
     font-size: 90%;
 }
 
@@ -104,11 +104,11 @@ table.small th {
 
 td {
     padding: 5px; /* Поля вокруг содержимого ячеек */
-    border: 2px solid black; /* Граница вокруг ячеек */
+    border: 1px solid black; /* Граница вокруг ячеек */
 }
 
 tr {
-    border: 2px solid black;
+    border: 1px solid black;
 }
 
 .threethird {
@@ -195,8 +195,8 @@ body {
     padding-left:1em;
     padding-right:1em;
     padding-bottom:1px;
-    /* border-radius: 2px; */
-    border-bottom: 2px solid black;
+    /* border-radius: 1px; */
+    border-bottom: 1px solid black;
     background-color: #EEE;
 }
 
@@ -204,11 +204,11 @@ body {
     padding-left:1em;
     padding-right:1em;
     padding-bottom:1px;
-    /* border-radius: 2px; */
-    border-bottom: 2px solid black;
+    /* border-radius: 1px; */
+    border-bottom: 1px solid black;
     background-color: #EEE;
 }
 
 .under {
-    border-bottom: 2px solid black;
+    border-bottom: 1px solid black;
 }
