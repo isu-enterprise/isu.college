@@ -7,8 +7,8 @@
         <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
         <meta name="viewport" content="width=device-width, initial-scale=2" />
         <title></title>
-        <style type="text/css">code{white-space: pre;}</style>
         <!-- Begin shared CSS values -->
+        <!--
         <style type="text/css">
          .t {
              -webkit-transform-origin: top left;
@@ -24,15 +24,36 @@
              white-space: pre;
              overflow: visible;
          }
-        </style><!-- End shared CSS values -->
+        </style>
+        -->
+        <!-- End shared CSS values -->
         <style>
+
          body {
-             font-family: "Fira Sans", "Tahoma", "Verdana", sens-serif;
+             /* *zoom:2; */
+             font-family: "Times New Roman", "Fira Sans", "Tahoma", "Verdana", sans-serif;
+             font-size: 140%;
              counter-reset: h2counter;
          }
+
+         #main-content {
+             width:50em;
+             max-width:42em;/**/
+             margin: 3em auto;
+             background-color: #FFF;
+             border-radius: 15px;
+             background: linear-gradient(to right, #dff, #ffd);
+             position: relative;
+             padding: 1em;
+         }
          p {
-             text-indent: 1.5em; /* Отступ первой строки */
+             text-indent: 2.3em; /* Отступ первой строки */
              text-align: justify; /* Выравнивание по ширине */
+             /* font-size: 120%; */
+         }
+
+         li p {
+             text-indent: 0em;
          }
          .c {
              text-align: center;
@@ -53,20 +74,21 @@
          .ni {
              text-indent: 0pt;
          }
-         .header {
+         .header th {
              font-weight: bold;
              text-align: center;
+             background-color: #CCC;
          }
 
          .centertable {
              margin: 0px auto;
          }
 
-         body {counter-reset: h2}
-         h2 {counter-reset: h3}
-         h3 {counter-reset: h4}
-         h4 {counter-reset: h5}
-         h5 {counter-reset: h6}
+         body {counter-reset: h2;}
+         h2 {counter-reset: h3; font-size:110%;}
+         h3 {counter-reset: h4; font-size:100%;}
+         h4 {counter-reset: h5;}
+         h5 {counter-reset: h6;}
 
          h2:before {counter-increment: h2; content: counter(h2) ".\0000a0\0000a0"}
          h3:before {counter-increment: h3; content: counter(h2) "." counter(h3) ".\0000a0\0000a0"}
@@ -76,6 +98,13 @@
 
          h2.nocount:before, h3.nocount:before, h4.nocount:before, h5.nocount:before, h6.nocount:before { content: ""; counter-increment: none }
 
+         strong {
+             font-size:100%;
+         }
+
+         .hidden {
+             display: none;
+         }
 
          h1 {
              text-align: center;
@@ -86,30 +115,47 @@
          table {
              border-collapse: collapse; /* Отображать только одинарные линии */
              width: 100%;
-             /* border: 1px solid black; */
+             border: 2px solid black;
          }
 
-         table.noborders th,
-         table.noborders td {
-             border: 0px solid black;
+         table.small {
+             font-size: 80%;
          }
 
          th {
              text-align: left; /* Выравнивание по левому краю */
              padding: 5px; /* Поля вокруг содержимого ячеек */
-             border: 1px solid black; /* Граница вокруг ячеек */
+             border: 2px solid black; /* Граница вокруг ячеек */
+             font-size: 90%;
          }
+
+         table.small th {
+             font-size: 100%;
+         }
+
          td {
              padding: 5px; /* Поля вокруг содержимого ячеек */
-             border: 1px solid black; /* Граница вокруг ячеек */
+             border: 2px solid black; /* Граница вокруг ячеек */
+         }
+
+         tr {
+             border: 2px solid black;
          }
 
          .threethird {
              width: 75%;
          }
 
+         table.noborders,
+         table.noborders th,
+         table.noborders table,
+         table.noborders tr,
+         table.noborders td {
+             border: 0px solid black;
+         }
+
          .dirstate {
-             width: 20%;
+             width: 12em;
              text-align: left;
              float: right;
              /* background: blue; */
@@ -128,8 +174,8 @@
              overflow: auto;
          }
 
-         section {
-             padding:1em;
+         .right {
+             float: right;
          }
 
          .stronger {
@@ -144,29 +190,40 @@
              background-color:#FEA;
              color:#000;
          }
-         #main-content {
-             width:65em;
-             max-width:65em;
-             margin: 3em auto;
-             background-color: #FFF;
-             border-radius: 15px;
-         }
          body {
              background-color: #AAA;
          }
          #dokieli {
              background-color: #EEA;
          }
+         .odd {
+             background-color: #EEC;
+         }
+         .even {
+             background-color: #CEC;
+         }
+
+         .c-td td {
+             text-align: center;
+         }
+
+         .rel-parent {
+         }
+         .rel-child {
+         }
+
         </style>
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <!-- <link href="https://dokie.li/media/css/basic.css" media="all" rel="stylesheet" title="Basic" />
              <link href="https://dokie.li/media/css/lncs.css" media="all" rel="stylesheet alternate" title="LNCS" />             <link href="https://dokie.li/media/css/acm.css" media="all" rel="stylesheet alternate" title="ACM" />           -->
+        <!--
         <link rel="stylesheet" media="all" href="https://dokie.li/media/css/do.css" />
         <link rel="stylesheet" media="all" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" />
         <script src="https://dokie.li/scripts/simplerdf.js"></script>
         <script src="https://dokie.li/scripts/medium-editor.min.js"></script>
         <script src="https://dokie.li/scripts/medium-editor-tables.min.js"></script>
         <script src="https://dokie.li/scripts/do.js"></script>
+        -->
     </head>
     <body prefix="rdf: http://www.w3.org/1999/02/22-rdf-syntax-ns# rdfs: http://www.w3.org/2000/01/rdf-schema# owl: http://www.w3.org/2002/07/owl# xsd: http://www.w3.org/2001/XMLSchema# dcterms: http://purl.org/dc/terms/ dctypes: http://purl.org/dc/dcmitype/ foaf: http://xmlns.com/foaf/0.1/ vcard: http://www.w3.org/2006/vcard/ns# pimspace: http://www.w3.org/ns/pim/space# ccns: https://creativecommons.org/ns# skos: http://www.w3.org/2004/02/skos/core# prov: http://www.w3.org/ns/prov# qb: http://purl.org/linked-data/cube# schema: http://schema.org/ void: http://rdfs.org/ns/void# rsa: http://www.w3.org/ns/auth/rsa# cert: http://www.w3.org/ns/auth/cert# cal: http://www.w3.org/2002/12/cal/ical# wgs: http://www.w3.org/2003/01/geo/wgs84_pos# org: http://www.w3.org/ns/org# biblio: http://purl.org/net/biblio# bibo: http://purl.org/ontology/bibo/ book: http://purl.org/NET/book/vocab# ov: http://open.vocab.org/terms/ sioc: http://rdfs.org/sioc/ns# doap: http://usefulinc.com/ns/doap# dbr: http://dbpedia.org/resource/ dbp: http://dbpedia.org/property/ sio: http://semanticscience.org/resource/ opmw: http://www.opmw.org/ontology/ deo: http://purl.org/spar/deo/ doco: http://purl.org/spar/doco/ cito: http://purl.org/spar/cito/ fabio: http://purl.org/spar/fabio/ oa: http://www.w3.org/ns/oa# as: https://www.w3.org/ns/activitystreams# ldp: http://www.w3.org/ns/ldp# solid: http://www.w3.org/ns/solid/terms# acl: http://www.w3.org/ns/auth/acl# dio: https://w3id.org/dio# cnt: http://www.w3.org/2011/content# curr: http://irnok.net/ontologies/curriculum/ns/ std: http://edu.gov.ru/ontology/standards/09.03.01# govru: http://edu.gov.ru/people# istu: http://www.istu.edu/ vt: http://www.istu.edu/structure/57/1976/1977/ cyber: http://www.istu.edu/structure/57/9518/1801/ teach: http://linkedscience.org/teach/ns#"
           resource="#post"
@@ -187,13 +244,16 @@
                         «Иркутский национальный исследовательский технический университет»<br />
                         Институт кибернетики</h1>
                     <h1>Кафедра вычислительной техники</h1>
-                    <div class="hfill">
-                        <p class="dirstate">УТВЕРЖДАЮ<br />
-                            Директор института<br />
-                            __________ /<span resource="cyber:dudareva" typeof="foaf:Person"><span property="foaf:name" content="Оксана Витальевна Дударева">О.В.ДУДАРЕВА</span></span>/<br />
-                            &quot;____&quot;____________2016 г.</p>
-                    </div>
-                    <p class="c" ><strong>Рабочая программа дисциплины</strong></p>
+
+                    <table class="noborders odd">
+                        <tr><td>
+                    <p class="dirstate">УТВЕРЖДАЮ<br />
+                        Директор института<br />
+                        __________ /<span resource="cyber:dudareva" typeof="foaf:Person"><span property="foaf:name" content="Оксана Витальевна Дударева">О.В.ДУДАРЕВА</span></span>/<br />
+                        "____"____________2016 г.</p>
+                        </td></tr>
+                    </table>
+                    <p class="c"><strong>Рабочая программа дисциплины</strong></p>
                     <p class="c" id="intelligent-information-systems" resource="vt:intelligent-information-systems" typeof="teach:Course">
                         <span property="oa:id">Б1.В.ОД.12</span>. <span property="dc:title">ИНТЕЛЛЕКТНЫЕ ИНФОРМАЦИОННЫЕ СИСТЕМЫ</span>
                     </p>
@@ -222,24 +282,24 @@
                             </tr>
                         </tbody>
                     </table>
-                    <table>
+                    <br/>
+                    <table class="c">
                         <thead>
-                            <tr class="header c">
-                                <th rowspan="2" class="c">На учебный год</th>
-                                <th colspan="2" class="c">ОДОБРЕНО<br />
+                            <tr class="header">
+                                <th rowspan="2">На учебный год</th>
+                                <th colspan="2">ОДОБРЕНО<br />
                                     на заседании кафедры</th>
-                                <th colspan="2" class="c">УТВЕРЖДАЮ<br />
+                                <th colspan="2">УТВЕРЖДАЮ<br />
                                     заведующий кафедрой</th>
+                            </tr>
+                            <tr class="header">
+                                <th>Протокол</th>
+                                <th>Дата</th>
+                                <th>Подпись</th>
+                                <th>Дата</th>
                             </tr>
                         </thead>
                         <tbody>
-                            <tr class="odd c">
-                                <td></td>
-                                <td><strong>Протокол</strong></td>
-                                <td><strong>Дата</strong></td>
-                                <td><strong>Подпись</strong></td>
-                                <td><strong>Дата</strong></td>
-                            </tr>
                             <tr class="even">
                                 <td>2015 – 2016</td>
                                 <td>№____</td>
@@ -277,7 +337,7 @@
                             </tr>
                         </tbody>
                     </table>
-                    <p class="c">Иркутск 2016 г</p>
+                    <p class="c">Иркутск 2016 г.</p>
                 </section>
                 <section id="general-course-description" property="schema:hasPart"
                          typeof="schema:CreativeWork"
@@ -337,19 +397,19 @@
                     <h2 id="структура-дисциплины">Структура дисциплины</h2>
                     <p>Общая трудоёмкость дисциплины составляет 3 ЗЕТ (108 часов). Видами промежуточной аттестации (итогового контроля по дисциплине) являются зачет. Структура дисциплины представлена в таблице 1.</p>
                     <p class="r"><strong>Таблица 1</strong> – Количество академических часов, выделенных на дисциплину</p>
-                    <table style="width:50em;" align="center">
+                    <table style="max-width:50em;" class="small" align="center">
                         <thead>
-                            <tr class="odd">
-                                <th rowspan="3" class="c" style="width:60%">Вид учебной работы</th>
-                                <th class="c" colspan="3">Трудоемкость, часов</th>
+                            <tr class="header">
+                                <th rowspan="3" style="width:60%">Вид учебной работы</th>
+                                <th colspan="3">Трудоемкость, часов</th>
                             </tr>
-                            <tr class="even">
-                                <th class="c" rowspan="2">Всего</th>
-                                <th class="c" colspan="2">Семестр</th>
+                            <tr class="header">
+                                <th rowspan="2">Всего</th>
+                                <th colspan="2">Семестр</th>
                             </tr>
-                            <tr class="odd">
-                                <th class="c">№ 7</th>
-                                <th class="c">№ 8</th>
+                            <tr class="header">
+                                <th>№ 7</th>
+                                <th>№ 8</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -404,30 +464,30 @@
                     <h2 id="содержание-дисциплины">Содержание дисциплины</h2>
                     <p>Содержание дисциплины «Базы данных» представлено в таблице 2.</p>
                     <p class="r"><strong>Таблица 3</strong> – Перечень лабораторных работ</p>
-                    <table class="c">
-                        <thead class="c">
-                            <tr class="header c">
-                                <th rowspan="3" class="c" style="width:5em;">№<br />
+                    <table class="small">
+                        <thead >
+                            <tr class="header">
+                                <th rowspan="3" style="width:5em;">№<br />
                                     п/п</th>
-                                <th rowspan="3" class="c" style="width:50%;">Наименование раздела и темы дисциплины</th>
-                                <th colspan="9" class="c">Вид учебной работы</th>
+                                <th rowspan="3" style="width:50%;">Наименование раздела и темы дисциплины</th>
+                                <th colspan="9" >Вид учебной работы</th>
                             </tr>
-                            <tr class="odd">
-                                <th rowspan="2" class="c"><strong>Лекции, час.</th>
-                                    <th class="c" colspan="2">ЛР</th>
-                                    <th class="c" colspan="2">ПЗ (СЕМ)</th>
-                                    <th class="c" colspan="2">СРС</th>
-                                    <th class="c" colspan="2">КП (КР)</th>
+                            <tr class="header">
+                                <th rowspan="2" ><strong>Лекции, час.</th>
+                                    <th colspan="2">ЛР</th>
+                                    <th colspan="2">ПЗ (СЕМ)</th>
+                                    <th colspan="2">СРС</th>
+                                    <th colspan="2">КП (КР)</th>
                             </tr>
-                            <tr class="even">
-                                <th class="c">№</th>
-                                <th class="c">Кол.<br/>час.</th>
-                                <th class="c">№</th>
-                                <th class="c">Кол.<br/>час.</th>
-                                <th class="c">№</th>
-                                <th class="c">Кол.<br/>час.</th>
-                                <th class="c">№</th>
-                                <th class="c">Кол.<br/>час.</th>
+                            <tr class="header">
+                                <th >№</th>
+                                <th >Кол.<br/>час.</th>
+                                <th >№</th>
+                                <th >Кол.<br/>час.</th>
+                                <th >№</th>
+                                <th >Кол.<br/>час.</th>
+                                <th >№</th>
+                                <th >Кол.<br/>час.</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -559,7 +619,7 @@
                          resource="#student-works"
                 >
                     <p class="r"><strong>Таблица 3</strong> – Перечень лабораторных работ</p>
-                    <table>
+                    <table class="small">
                         <thead>
                             <tr class="odd">
                                 <th class="c"><strong>№</strong></th>
@@ -727,19 +787,19 @@
                 >
                     <p><strong>Интерактивные формы обучения</strong></p>
                     <p class="r"><strong>Таблица 8</strong> – Интерактивные формы обучения</p>
-                    <table class="c">
+                    <table class="small">
                         <thead>
-                            <tr>
-                                <th rowspan="2" class="c" style="width:4em;">№ п/п</th>
-                                <th rowspan="2" class="c" style="width:50%;">Технологии</th>
-                                <th colspan="5" class="c">Количество часов по учебному плану<br/>(по видам занятий)</th>
+                            <tr class="header">
+                                <th rowspan="2" style="width:4em;">№ п/п</th>
+                                <th rowspan="2" style="width:50%;">Технологии</th>
+                                <th colspan="5">Количество часов по учебному плану<br/>(по видам занятий)</th>
                             </tr>
-                            <tr>
-                                <th class="c">Лекции</th>
-                                <th class="c">ЛР</th>
-                                <th class="c">ПЗ (СЕМ)</th>
-                                <th class="c">СРС</th>
-                                <th class="c">КП (КР)</th>
+                            <tr class="header">
+                                <th >Лекции</th>
+                                <th >ЛР</th>
+                                <th >ПЗ (СЕМ)</th>
+                                <th >СРС</th>
+                                <th >КП (КР)</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -861,28 +921,28 @@
                     <h3 id="контролируемые-элементы-содержания-дисциплины-и-виды-учебных-работ">Контролируемые элементы содержания дисциплины и виды учебных работ</h3>
                     <p>По результатам выполнения лабораторных работ и их защиты осуществляется текущий контроль, представленный в фонде оценочных средств по дисциплине и в таблице 9.</p>
                     <p class="r"><strong>Таблица 9</strong> – Контролируемые элементы содержания дисциплины и виды учебных работ, по результатам выполнения которых и отчета по ним осуществляется текущий контроль</p>
-                    <table class="c">
+                    <table class="small">
                         <thead>
                             <tr class="header">
-                                <th class="c" rowspan="3">№<br/>
+                                <th rowspan="3">№<br/>
                                     п/п</th>
-                                <th class="c" rowspan="3">Контролируемые элементы содержания дисциплины</th>
-                                <th class="c" rowspan="3">Компетенции</th>
-                                <th  class="c" rowspan="3">№ раздела, темы<br/>
+                                <th rowspan="3">Контролируемые элементы содержания дисциплины</th>
+                                <th rowspan="3">Компетенции</th>
+                                <th rowspan="3">№ раздела, темы<br/>
                                     по табл. 2</th>
-                                <th colspan="4" class="c">Текущий контроль успеваемости (ТК)</th>
+                                <th colspan="4">Текущий контроль успеваемости (ТК)</th>
                             </tr>
-                            <tr class="odd">
-                                <th class="c">ЛР № по табл. 3</th>
-                                <th class="c">ПЗ/СЕМ № по табл.4</th>
-                                <th class="c">СРС № по табл.5</th>
-                                <th class="c">КП (КР) № по табл.7</th>
+                            <tr class="header">
+                                <th >ЛР № по табл. 3</th>
+                                <th >ПЗ/СЕМ № по табл.4</th>
+                                <th >СРС № по табл.5</th>
+                                <th >КП (КР) № по табл.7</th>
                             </tr>
-                            <tr class="even">
-                                <th class="c">ТК № 1</th>
-                                <th class="c">ТК № 2</th>
-                                <th class="c">ТК № 3</th>
-                                <th class="c">ТК № 1</th>
+                            <tr class="header">
+                                <th >ТК № 1</th>
+                                <th >ТК № 2</th>
+                                <th >ТК № 3</th>
+                                <th >ТК № 1</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -1010,7 +1070,7 @@
                     </ul>
                     <p>Оценка по 4-х балльной системе производится по шкале, приведенной в таблице 10.</p>
                     <p class="r"><strong>Таблица 10</strong> – Шкалы оценивания</p>
-                    <table>
+                    <table id="table10">
                         <thead>
                             <tr class="header">
                                 <th><strong>Рейтинг, %</strong></th>
@@ -1046,56 +1106,76 @@
                     <table>
                         <thead>
                             <tr class="header">
-                                <th><strong>Этапы текущего контроля*</strong></th>
-                                <th><strong>Итого</strong></th>
+                                <th colspan="12">Этапы текущего контроля*</th>
+                                <th rowspan="3">Итого</th>
                             </tr>
+                            </tr>
+                            <tr class="header">
+                                <th colspan="4">№1 (1 - 9 нед.)</th>
+                                <th colspan="4">№2 (10 - 13 нед.)</th>
+                                <th colspan="4">№3 (14 - 17 нед.)</th>
+                            </tr>
+                            <tr class="header">
+                                <th>ЛР №</th>
+                                <th>ПЗ №</th>
+                                <th>СРС №</th>
+                                <th>Рейт.</th>
+                                <th>ЛР №</th>
+                                <th>ПЗ №</th>
+                                <th>СРС №</th>
+                                <th>Рейт.</th>
+                                <th>ЛР №</th>
+                                <th>ПЗ №</th>
+                                <th>СРС №</th>
+                                <th>Рейт.</th>
                         </thead>
                         <tbody>
                             <tr class="odd">
-                                <td><strong>№1 (1 - 9 нед.)</strong></td>
-                                <td><strong>№2 (10 - 13 нед.)</strong></td>
-                                <td><strong>№3 (14 - 17 нед.)</strong></td>
-                                <td></td>
+                                <td colspan="13" ><strong>Семестр 5</strong></td>
                             </tr>
-                            <tr class="even">
-                                <td><strong>ЛР №</strong></td>
-                                <td><strong>ПЗ №</strong></td>
-                                <td><strong>СРС №</strong></td>
-                                <td><strong>Рейт.</strong></td>
-                            </tr>
-                            <tr class="odd">
-                                <td><strong>Семестр 5</strong></td>
-                            </tr>
-                            <tr class="even">
+                            <tr class="even c-td">
                                 <td>1,2</td>
                                 <td>-</td>
                                 <td>1,2</td>
                                 <td>30%</td>
+                                <td>3,4</td>
+                                <td>-</td>
+                                <td>3,4</td>
+                                <td>50%</td>
+                                <td>5</td>
+                                <td>-</td>
+                                <td>5</td>
+                                <td>20%</td>
+                                <td>100%</td>
                             </tr>
                         </tbody>
                     </table>
                     <p class="r"><strong>Таблица 12</strong> – График текущего контроля выполнения курсового проекта</p>
-                    <table>
+                    <table id="table12">
                         <thead>
                             <tr class="header">
-                                <th><strong>Этапы текущего контроля*</strong></th>
-                                <th><strong>Итого</strong></th>
+                                <th colspan="6">Этапы текущего контроля*</th>
+                                <th rowspan="3">Итого</th>
+                            </tr>
+                            <tr class="header">
+                                <th colspan="2">№1 (1 – 4 нед.)</th>
+                                <th colspan="2">№2 (5 – 13 нед.)</th>
+                                <th colspan="2">№3 (14 – 18 нед.)</th>
+                            </tr>
+                            <tr class="header">
+                                <th>Задание (этап)</th>
+                                <th>Рейтинг</th>
+                                <th>Задание (этап)</th>
+                                <th>Рейтинг</th>
+                                <th>Задание (этап)</th>
+                                <th>Рейтинг</th>
                             </tr>
                         </thead>
                         <tbody>
                             <tr class="odd">
-                                <td><strong>№1 (1 – 4 нед.)</strong></td>
-                                <td><strong>№2 (5 – 13 нед.)</strong></td>
-                                <td><strong>№3 (14 – 18 нед.)</strong></td>
-                                <td></td>
-                            </tr>
-                            <tr class="even">
-                                <td><strong>Задание (этап)</strong></td>
-                                <td><strong>Рейтинг</strong></td>
-                                <td><strong>Задание (этап)</strong></td>
-                                <td><strong>Рейтинг</strong></td>
-                            </tr>
-                            <tr class="odd">
+                                <td>-</td>
+                                <td>-</td>
+                                <td>-</td>
                                 <td>-</td>
                                 <td>-</td>
                                 <td>-</td>
@@ -1381,7 +1461,7 @@
             </article>
         </main>
         <footer>
-            <div resource="https://dokie.li/" id="dokieli">
+            <div resource="https://dokie.li/" id="dokieli" class="hidden">
                 <h2 class="nocount" property="schema:name">Help and shape dokieli</h2>
                 <div property="schema:description" datatype="rdf:HTML">
                     <p><a property="doap:repository" href="https://github.com/linkeddata/dokieli"
