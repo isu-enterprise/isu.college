@@ -212,6 +212,14 @@
          .rel-child {
          }
 
+         .break-before {
+             page-break-before: always;
+         }
+
+         .break-after {
+             page-break-after: always;
+         }
+
         </style>
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <!-- <link href="https://dokie.li/media/css/basic.css" media="all" rel="stylesheet" title="Basic" />
@@ -237,7 +245,7 @@
             <article property="oa:hasBody" typeof="schema:Article foaf:Document curr:WorkingProgram"
                      resource="http://irnok.net/pages/Work-Program-AIIS-Academic-Bachelor.html"
             >
-                <section id="title-cover" property="schema:hasPart" resource="#title-cover">
+                <section id="title-cover" property="schema:hasPart" resource="#title-cover" class="break-after">
                     <h1>Министерство образования и науки Российской Федерации</h1>
                     <h1 resource="istu:">Федеральное государственное бюджетное образовательное<br />
                         учреждение высшего образования<br />
@@ -1261,7 +1269,7 @@
                 <section id="provenance-description" property="schema:hasPart" typeof="schema:CreativeWork"
                          resource="#provenance"
                 >
-                    <p><strong>Программа составлена</strong> в соответствии с образовательным стандартом высшего образования</p>
+                    <p class="ni break-before"><strong>Программа составлена</strong> в соответствии с образовательным стандартом высшего образования</p>
                     <table>
                         <thead>
                             <tr class="header">
