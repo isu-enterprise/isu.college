@@ -144,6 +144,19 @@
              background-color:#FEA;
              color:#000;
          }
+         #main-content {
+             width:65em;
+             max-width:65em;
+             margin: 3em auto;
+             background-color: #FFF;
+             border-radius: 15px;
+         }
+         body {
+             background-color: #AAA;
+         }
+         #dokieli {
+             background-color: #EEA;
+         }
         </style>
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <!-- <link href="https://dokie.li/media/css/basic.css" media="all" rel="stylesheet" title="Basic" />
@@ -159,7 +172,10 @@
           resource="#post"
           typeof="schema:CreativeWork sioc:Post prov:Entity"
     >
-        <main lang="ru" resource="#annotation" typeof="oa:Annotation">
+        <main lang="ru"
+              resource="#annotation"
+              typeof="oa:Annotation"
+              id="main-content">
             <div property="oa:hasTarget" resource="vt:intelligent-information-systems"/>
             <article property="oa:hasBody" typeof="schema:Article foaf:Document curr:WorkingProgram"
                      resource="http://irnok.net/pages/Work-Program-AIIS-Academic-Bachelor.html"
@@ -1365,8 +1381,8 @@
             </article>
         </main>
         <footer>
-            <div resource="https://dokie.li/" >
-                <h2 property="schema:name">Help and shape dokieli</h2>
+            <div resource="https://dokie.li/" id="dokieli">
+                <h2 class="nocount" property="schema:name">Help and shape dokieli</h2>
                 <div property="schema:description" datatype="rdf:HTML">
                     <p><a property="doap:repository" href="https://github.com/linkeddata/dokieli"
                        >dokieli</a>
