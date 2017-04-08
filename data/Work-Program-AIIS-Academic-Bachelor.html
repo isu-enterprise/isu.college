@@ -220,6 +220,30 @@
              page-break-after: always;
          }
 
+         .marginal {
+             margin-left:1em;
+             margin-right:1em;
+             padding-left:1em;
+             padding-right:1em;
+             padding-bottom:1px;
+             /* border-radius: 2px; */
+             border-bottom: 2px solid black;
+             background-color: #EEE;
+         }
+
+         .nmarginal{
+             padding-left:1em;
+             padding-right:1em;
+             padding-bottom:1px;
+             /* border-radius: 2px; */
+             border-bottom: 2px solid black;
+             background-color: #EEE;
+         }
+
+         .under {
+             border-bottom: 2px solid black;
+         }
+
         </style>
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <!-- <link href="https://dokie.li/media/css/basic.css" media="all" rel="stylesheet" title="Basic" />
@@ -255,10 +279,10 @@
 
                     <table class="noborders odd">
                         <tr><td>
-                    <p class="dirstate">УТВЕРЖДАЮ<br />
-                        Директор института<br />
-                        __________ /<span resource="cyber:dudareva" typeof="foaf:Person"><span property="foaf:name" content="Оксана Витальевна Дударева">О.В.ДУДАРЕВА</span></span>/<br />
-                        "____"____________2016 г.</p>
+                            <p class="dirstate">УТВЕРЖДАЮ<br />
+                                Директор института<br />
+                                __________ /<span resource="cyber:dudareva" typeof="foaf:Person"><span property="foaf:name" content="Оксана Витальевна Дударева">О.В.ДУДАРЕВА</span></span>/<br />
+                                "____"____________2016 г.</p>
                         </td></tr>
                     </table>
                     <p class="c"><strong>Рабочая программа дисциплины</strong></p>
@@ -1117,25 +1141,25 @@
                                 <th colspan="12">Этапы текущего контроля*</th>
                                 <th rowspan="3">Итого</th>
                             </tr>
-                            </tr>
-                            <tr class="header">
-                                <th colspan="4">№1 (1 - 9 нед.)</th>
-                                <th colspan="4">№2 (10 - 13 нед.)</th>
-                                <th colspan="4">№3 (14 - 17 нед.)</th>
-                            </tr>
-                            <tr class="header">
-                                <th>ЛР №</th>
-                                <th>ПЗ №</th>
-                                <th>СРС №</th>
-                                <th>Рейт.</th>
-                                <th>ЛР №</th>
-                                <th>ПЗ №</th>
-                                <th>СРС №</th>
-                                <th>Рейт.</th>
-                                <th>ЛР №</th>
-                                <th>ПЗ №</th>
-                                <th>СРС №</th>
-                                <th>Рейт.</th>
+                        </tr>
+                        <tr class="header">
+                            <th colspan="4">№1 (1 - 9 нед.)</th>
+                            <th colspan="4">№2 (10 - 13 нед.)</th>
+                            <th colspan="4">№3 (14 - 17 нед.)</th>
+                        </tr>
+                        <tr class="header">
+                            <th>ЛР №</th>
+                            <th>ПЗ №</th>
+                            <th>СРС №</th>
+                            <th>Рейт.</th>
+                            <th>ЛР №</th>
+                            <th>ПЗ №</th>
+                            <th>СРС №</th>
+                            <th>Рейт.</th>
+                            <th>ЛР №</th>
+                            <th>ПЗ №</th>
+                            <th>СРС №</th>
+                            <th>Рейт.</th>
                         </thead>
                         <tbody>
                             <tr class="odd">
@@ -1268,162 +1292,124 @@
                 </section>
                 <section id="provenance-description" property="schema:hasPart" typeof="schema:CreativeWork"
                          resource="#provenance"
+                         class="break-before"
                 >
-                    <p class="ni break-before"><strong>Программа составлена</strong> в соответствии с образовательным стандартом высшего образования</p>
-                    <table>
+                    <p class="ni"><strong>Программа составлена</strong> в соответствии с образовательным стандартом высшего образования</p>
+                    <table class="noborders">
                         <thead>
-                            <tr class="header">
-                                <th>09.03.01 Информатика и вычислительная техника</th>
+                            <tr class="header under">
+                                <th class="under">09.03.01 Информатика и вычислительная техника</th>
                             </tr>
                         </thead>
                         <tbody>
-                            <tr class="odd">
-                                <td><sup>(код и наименование направления подготовки/специальности)</sup></td>
-                            </tr>
+                            <tr><td>&nbsp;</td></tr>
                             <tr class="even">
-                                <td>Приказ Минобрнауки России от</td>
+                                <td>Приказ Минобрнауки России от <span class="marginal">12.01.2016 г.</span> № <span class="marginal">5</span>
+                                </td>
                             </tr>
+                            <tr><td>&nbsp;</td></tr>
                         </tbody>
                     </table>
-                    <table>
+                    <table class="noborders">
                         <thead>
                             <tr class="header">
                                 <th>Программу составил:</th>
                             </tr>
                         </thead>
                         <tbody>
+                            <tr class="odd ">
+                                <td class="under">Черкашин Евгений Александрович, доцент кафедры ВТ, к.т.н., доцент</td>
+                            </tr>
+                            <tr>
+                                <td>&nbsp;</td>
+                            </tr>
                             <tr class="odd">
-                                <td>Черкашин Евгений Александрович, доцент кафедры ВТ, к.т.н., доцент</td>
+                                <td>
+                                    <span class="nmarginal">
+                                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                    </span>
+                                    <span class="right">
+                                    "<span class="nmarginal">
+                                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                    </span>"
+                                    <span class="nmarginal">
+                                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                    </span>
+                                    20<span class="nmarginal"></span> г.
+                                    </span>
+                                </td>
                             </tr>
                             <tr class="even">
-                                <td><sup>(ФИО, должность, ученая степень, ученое звание)</sup></td>
+                                <td>&nbsp;</td>
                             </tr>
-                            <tr class="odd">
-                                <td></td>
+                            <tr>
+                                <td>Программа согласована
+                                </td>
                             </tr>
-                            <tr class="even">
-                                <td><sup>(подпись)</sup></td>
+                            <tr>
+                                <td>с кафедрой
+                                    <span class="marginal">Автоматизированные системы</span>
+                                </td>
+                            </tr>
+                            <tr><td></td></tr>
+                            <tr>
+                                <td>Зав. кафедрой
+                                    <span class="marginal">
+                                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                    </span>
+                                    С.В. Бахвалов
+                                    <span class="right">
+                                    "<span class="nmarginal">
+                                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                    </span>"
+                                    <span class="nmarginal">
+                                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                    </span>
+                                    20<span class="nmarginal"></span> г.
+                                    </span>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>Программа одобрена на заседании кафедры вычислительной техники</td>
+                            </tr>
+                            <tr>
+                                <td>Протокол № <span class="marginal">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
+                                    от &nbsp;&nbsp;&nbsp; "<span class="nmarginal">
+                                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                    </span>"
+                                    <span class="nmarginal">
+                                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                    </span>
+                                    20<span class="nmarginal"></span> г.
+                                </td>
+                            </tr>
+
+                            <tr><td></td></tr>
+                            <tr>
+                                <td>Зав. кафедрой
+                                    <span class="marginal">
+                                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                    </span>
+                                    А.С. Дорофеев
+                                    <span class="right">
+                                        "<span class="nmarginal">
+                                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                        </span>"
+                                        <span class="nmarginal">
+                                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                        </span>
+                                        20<span class="nmarginal"></span> г.
+                                    </span>
+                                </td>
                             </tr>
                         </tbody>
                     </table>
-                    <table>
-                        <thead>
-                            <tr class="header">
-                                <th>Программа согласована</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr class="odd">
-                                <td>с кафедрой</td>
-                                <td>Автоматизированные системы</td>
-                            </tr>
-                            <tr class="even">
-                                <td></td>
-                            </tr>
-                            <tr class="odd">
-                                <td>Зав. кафедрой</td>
-                                <td></td>
-                            </tr>
-                            <tr class="even">
-                                <td></td>
-                                <td><sup>(подпись)</sup></td>
-                            </tr>
-                        </tbody>
-                    </table>
-                    <table>
-                        <thead>
-                            <tr class="header">
-                                <th>Программа одобрена на заседании кафедры вычислительной техники</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr class="odd">
-                                <td>Протокол №</td>
-                                <td></td>
-                                <td>от «</td>
-                                <td></td>
-                                <td>»</td>
-                                <td></td>
-                                <td>2016 г.</td>
-                                <td></td>
-                            </tr>
-                            <tr class="even">
-                                <td></td>
-                            </tr>
-                            <tr class="odd">
-                                <td>Зав. кафедрой</td>
-                                <td></td>
-                                <td>/</td>
-                                <td>А.С. Дорофеев</td>
-                                <td>/«</td>
-                                <td></td>
-                                <td>»</td>
-                                <td></td>
-                            </tr>
-                            <tr class="even">
-                                <td></td>
-                                <td><sup>(подпись)</sup></td>
-                                <td></td>
-                                <td><sup>(ФИО)</sup></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                            </tr>
-                            <tr class="odd">
-                                <td></td>
-                            </tr>
-                            <tr class="even">
-                                <td></td>
-                            </tr>
-                            <tr class="odd">
-                                <td>Руководитель ООП (ЭВМ)</td>
-                                <td></td>
-                                <td>/</td>
-                                <td>А.С. Дорофеев</td>
-                                <td>/«</td>
-                                <td></td>
-                                <td>»</td>
-                                <td></td>
-                            </tr>
-                            <tr class="even">
-                                <td></td>
-                                <td><sup>(подпись)</sup></td>
-                                <td></td>
-                                <td><sup>(ФИО)</sup></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                            </tr>
-                        </tbody>
-                    </table>
-                    <table>
-                        <thead>
-                            <tr class="header">
-                                <th>Руководитель ООП (АСУ)</th>
-                                <th></th>
-                                <th>/</th>
-                                <th>С.В. Бахвалов</th>
-                                <th>/«</th>
-                                <th></th>
-                                <th>»</th>
-                                <th></th>
-                                <th>2016 г.</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr class="odd">
-                                <td></td>
-                                <td><sup>(подпись)</sup></td>
-                                <td></td>
-                                <td><sup>(ФИО)</sup></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                            </tr>
                             <tr class="even">
                                 <td><p>Программа одобрена на заседании Методической комиссии</p>
                                     <p>института кибернетики им. Е.И. Попова ИРНИТУ</p></td>
