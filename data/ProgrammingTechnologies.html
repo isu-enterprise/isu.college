@@ -12,28 +12,286 @@
         <title></title>
         <!-- Begin shared CSS values -->
         <!--
-             <style type="text/css">
-             .t {
-           -webkit-transform-origin: top left;
-           -moz-transform-origin: top left;
-           -o-transform-origin: top left;
-           -ms-transform-origin: top left;
-           -webkit-transform: scale(0.25);
-           -moz-transform: scale(0.25);
-           -o-transform: scale(0.25);
-           -ms-transform: scale(0.25);
+        <style type="text/css">
+         .t {
+             -webkit-transform-origin: top left;
+             -moz-transform-origin: top left;
+             -o-transform-origin: top left;
+             -ms-transform-origin: top left;
+             -webkit-transform: scale(0.25);
+             -moz-transform: scale(0.25);
+             -o-transform: scale(0.25);
+             -ms-transform: scale(0.25);
              z-index: 2;
              position: absolute;
              white-space: pre;
              overflow: visible;
-             }
-             </style>
-           -->
-        <link rel="stylesheet" media="all" href="css/document.css" type="text/css"></style>
+         }
+        </style>
+        <link rel="stylesheet" media="all" href="css/document.css" type="text/css" async></style>
+        -->
+        <style>
+
+         body {
+             /* *zoom:2; */
+             font-family: "Times New Roman", "Fira Sans", "Tahoma", "Verdana", sans-serif;
+             font-size: 140%;
+             counter-reset: h2counter;
+             background-color: green;
+         }
+
+         .t14pt {
+             margin: 3em auto;
+             width: 35em;
+             max-width:35em;
+             position: relative;
+             padding: 1em;
+             background-color: #FFF;
+             background: linear-gradient(to right, #dff, #dfd);
+         }
+
+         .t12pt {
+             margin: 3em auto;
+             width: 43em;
+             max-width: 43em;
+             position: relative;
+             padding: 1em;
+             background-color: #FFF;
+             background: linear-gradient(to right, #dff, #dfd);
+         }
+
+         p {
+             text-indent: 2.3em; /* Отступ первой строки */
+             text-align: justify; /* Выравнивание по ширине */
+             /* font-size: 120%; */
+         }
+
+         p.bold {
+             font-weight:bold;
+         }
+
+         .strong,
+         p.strong {
+             font-size: 110%;
+             font-weight: bold;
+         }
+
+         li p {
+             text-indent: 0em;
+         }
+         .c {
+             text-align: center;
+             text-indent: 0px;
+         }
+
+         .middle {
+             vertical-align: middle;
+         }
+
+         .center {
+             display: block;
+             margin: 0 auto;
+         }
+
+         .r {
+             text-align: right;
+         }
+         .l {
+             text-align: left;
+         }
+         .j {
+             text-align: justify;
+         }
+
+         .m {
+         }
+
+         .ni {
+             text-indent: 0pt;
+         }
+         .header th {
+             font-weight: bold;
+             text-align: center;
+             background-color: #CCC;
+         }
+
+         .centertable {
+             margin: 0px auto;
+         }
+
+         body {counter-reset: h2;}
+         h2 {counter-reset: h3; font-size:110%;}
+         h3 {counter-reset: h4; font-size:100%;}
+         h4 {counter-reset: h5;}
+         h5 {counter-reset: h6;}
+
+         h2:before {counter-increment: h2; content: counter(h2) ".\0000a0\0000a0"}
+         h3:before {counter-increment: h3; content: counter(h2) "." counter(h3) ".\0000a0\0000a0"}
+         h4:before {counter-increment: h4; content: counter(h2) "." counter(h3) "." counter(h4) ".\0000a0\0000a0"}
+         h5:before {counter-increment: h5; content: counter(h2) "." counter(h3) "." counter(h4) "." counter(h5) ".\0000a0\0000a0"}
+         h6:before {counter-increment: h6; content: counter(h2) "." counter(h3) "." counter(h4) "." counter(h5) "." counter(h6) ".\0000a0\0000a0"}
+
+         h2.nocount:before, h3.nocount:before, h4.nocount:before, h5.nocount:before, h6.nocount:before { content: ""; counter-increment: none }
+
+         strong {
+             font-size:100%;
+         }
+
+         .hidden {
+             display: none;
+         }
+
+         h1 {
+             text-align: center;
+             counter-reset: h2;
+         }
+
+
+         table {
+             border-collapse: collapse; /* Отображать только одинарные линии */
+             width: 100%;
+             border: 1px solid black;
+             margin: 0 auto;
+         }
+         }
+
+         table.small {
+             font-size: 80%;
+         }
+
+         th {
+             text-align: left; /* Выравнивание по левому краю */
+             padding: 5px; /* Поля вокруг содержимого ячеек */
+             border: 1px solid black; /* Граница вокруг ячеек */
+             font-size: 90%;
+         }
+
+         table.small th {
+             font-size: 100%;
+         }
+
+         td {
+             padding: 5px; /* Поля вокруг содержимого ячеек */
+             border: 1px solid black; /* Граница вокруг ячеек */
+         }
+
+         tr {
+             border: 1px solid black;
+         }
+
+         .threethird {
+             width: 75%;
+         }
+
+         table.noborders,
+         table.noborders th,
+         table.noborders table,
+         table.noborders tr,
+         table.noborders td {
+             border: 0px solid black;
+         }
+
+         .dirstate {
+             width: 12em;
+             text-align: left;
+             float: right;
+             /* background: blue; */
+         }
+
+         .namestate {
+             width: 70%;
+             text-align: left;
+             float: left;
+         }
+
+         .hfill {
+             width: 100%;
+             text-align: right;
+             /* background: red; */
+             overflow: auto;
+         }
+
+         .right {
+             float: right;
+         }
+
+         .stronger {
+             font-weight: bold;
+         }
+
+         #consultantplus {
+             background-color:#FAF;
+             color:#000;
+         }
+         #order {
+             background-color:#FEA;
+             color:#000;
+         }
+         body {
+             background-color: #AAA;
+         }
+         #dokieli {
+             background-color: #EEA;
+         }
+         .odd {
+             background-color: #EEC;
+         }
+         .even {
+             background-color: #CEC;
+         }
+
+         .c-td td {
+             text-align: center;
+         }
+
+         .rel-parent {
+         }
+         .rel-child {
+         }
+
+         .break-before {
+             page-break-before: always;
+         }
+
+         .break-after {
+             page-break-after: always;
+         }
+
+         span.marginal {
+             float: none;
+             /*display: block;*/
+             margin-left:1em;
+             margin-right:1em;
+             padding-left:1em;
+             padding-right:1em;
+             padding-bottom:1px;
+             /* border-radius: 1px; */
+             border-bottom: 1px solid black;
+             background-color: #EEE;
+         }
+
+         span.nmarginal{
+             float: none;
+             /* display: block;*/
+             padding-left:1em;
+             padding-right:1em;
+             padding-bottom:1px;
+             /* border-radius: 1px; */
+             border-bottom: 1px solid black;
+             background-color: #EEE;
+         }
+
+         .under {
+             border-bottom: 1px solid black;
+         }
+
+        </style>
         <!-- End shared CSS values -->
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <!-- <link href="https://dokie.li/media/css/basic.css" media="all" rel="stylesheet" title="Basic" />
-             <link href="https://dokie.li/media/css/lncs.css" media="all" rel="stylesheet alternate" title="LNCS" />             <link href="https://dokie.li/media/css/acm.css" media="all" rel="stylesheet alternate" title="ACM" />           -->
+             <link href="https://dokie.li/media/css/lncs.css" media="all" rel="stylesheet alternate" title="LNCS" />
+             <link href="https://dokie.li/media/css/acm.css" media="all" rel="stylesheet alternate" title="ACM" />
+           -->
         <!--
              <link rel="stylesheet" media="all" href="https://dokie.li/media/css/do.css" />
              <link rel="stylesheet" media="all" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" />
@@ -43,11 +301,12 @@
              <script src="https://dokie.li/scripts/do.js"></script>
            -->
         <!--
-             <script src="https://cdn.jsdelivr.net/medium-editor/latest/js/medium-editor.min.js"></script>
-           -->
+        <script src="https://cdn.jsdelivr.net/medium-editor/latest/js/medium-editor.min.js"></script>
+
         <link rel="stylesheet"
               href="https://cdn.jsdelivr.net/medium-editor/latest/css/medium-editor.min.css"
               type="text/css" media="screen" charset="utf-8">
+        -->
     </head>
     <body prefix="rdf: http://www.w3.org/1999/02/22-rdf-syntax-ns# rdfs: http://www.w3.org/2000/01/rdf-schema# owl: http://www.w3.org/2002/07/owl# xsd: http://www.w3.org/2001/XMLSchema# dcterms: http://purl.org/dc/terms/ dctypes: http://purl.org/dc/dcmitype/ foaf: http://xmlns.com/foaf/0.1/ vcard: http://www.w3.org/2006/vcard/ns# pimspace: http://www.w3.org/ns/pim/space# ccns: https://creativecommons.org/ns# skos: http://www.w3.org/2004/02/skos/core# prov: http://www.w3.org/ns/prov# qb: http://purl.org/linked-data/cube# schema: http://schema.org/ void: http://rdfs.org/ns/void# rsa: http://www.w3.org/ns/auth/rsa# cert: http://www.w3.org/ns/auth/cert# cal: http://www.w3.org/2002/12/cal/ical# wgs: http://www.w3.org/2003/01/geo/wgs84_pos# org: http://www.w3.org/ns/org# biblio: http://purl.org/net/biblio# bibo: http://purl.org/ontology/bibo/ book: http://purl.org/NET/book/vocab# ov: http://open.vocab.org/terms/ sioc: http://rdfs.org/sioc/ns# doap: http://usefulinc.com/ns/doap# dbr: http://dbpedia.org/resource/ dbp: http://dbpedia.org/property/ sio: http://semanticscience.org/resource/ opmw: http://www.opmw.org/ontology/ deo: http://purl.org/spar/deo/ doco: http://purl.org/spar/doco/ cito: http://purl.org/spar/cito/ fabio: http://purl.org/spar/fabio/ oa: http://www.w3.org/ns/oa# as: https://www.w3.org/ns/activitystreams# ldp: http://www.w3.org/ns/ldp# solid: http://www.w3.org/ns/solid/terms# acl: http://www.w3.org/ns/auth/acl# dio: https://w3id.org/dio# cnt: http://www.w3.org/2011/content# curr: http://irnok.net/ontologies/curriculum/ns/ std: http://edu.gov.ru/ontology/standards/09.03.01# govru: http://edu.gov.ru/people# istu: http://www.istu.edu/ vt: http://www.istu.edu/structure/57/1976/1977/ cyber: http://www.istu.edu/structure/57/9518/1801/ teach: http://linkedscience.org/teach/ns# manip http://irnok.net/ontologies/rdfa-manipulation/"
           resource="#post"
@@ -56,14 +315,136 @@
         <main lang="ru"
               resource="#annotation"
               typeof="oa:Annotation"
-              id="main-content">
+              class="t12pt"
+              id="main-content"
+        >
             <div property="oa:hasTarget" resource=""/>
             <article property="oa:hasBody" typeof="schema:Article foaf:Document curr:WorkingProgram"
                      resource=""
                      class="editable"
             >
-                <section>
-                    <h1></h1>
+                <section id="preamble" class="break-after"  property="schema:hasPart" resource="#title-cover" >
+                    <img src="http://isu.ru/images/logo.png" class="center" style="width:10%;"/>
+                    <h1>МИНИСТЕРСТВО ОБРАЗОВАНИЯ И НАУКИ РОССИЙСКОЙ ФЕДЕРАЦИИ<br/>
+                        федеральное государственное бюджетное образовательное учреждение<br/>
+                        высшего образования<br/>
+                        «ИРКУТСКИЙ ГОСУДАРСТВЕННЫЙ  УНИВЕРСИТЕТ»<br/>
+                        ФГБОУ ВО «ИГУ»<br/>
+                        <br/>
+                        <span>
+                            Кафедра информационных технологий
+                        </span>
+                    </h1>
+                    <br/>
+                    <br/>
+                    <table class="noborders">
+                        <tr>
+                            <td>
+                                <p class="dirstate">
+                                    УТВЕРЖДАЮ<br/>
+                                    <span class="nmarginal" style="padding-right:10em;"></span><br/>
+                                    <span class="center" class="ni">Директор ИМЭИ</span><br/>
+                                    "<span class="nmarginal"></span>"
+                                    <span><span class="nmarginal" style="padding-right:4em;"></span>
+                                        20<span class="nmarginal" style="padding-right:1em;"></span>г.
+                                    </span>
+                                </p>
+                            </td>
+                        </tr>
+                    </table>
+                    <p class="c strong">Рабочая программа дисциплины (модуля)</p>
+                    <p class="c strong" id="intelligent-information-systems" resource="vt:intelligent-information-systems" typeof="teach:Course">
+                        <span property="oa:id">Б1.В.ДВ.3.1</span>. <span property="dc:title">Технологии программирования</span>
+                    </p>
+                    <table class="noborders">
+                        <tbody>
+                            <tr class="even">
+                                <td style="min-width: 40%;">Направление подготовки:</td>
+                                <td><span class="strong nm">10.03.01</span><span class="strong"> (090900) Информационная безопасность</span></td>
+                            </tr>
+                            <tr class="odd">
+                                <td>Направленность (профиль)</td>
+                                <td>- <span class="strong">общий</span></td>
+                            </tr>
+                            <tr class="even">
+                                <td>Квалификация (степень) выпускника</td>
+                                <td>- <span class="strong">бакалавр</span></td>
+                            </tr>
+                            <tr class="odd">
+                                <td>Форма обучения</td>
+                                <td>- <span class="strong">очная</span></td>
+                            </tr>
+                            <tr class="even" hidden>
+                                <td>Составитель программы:</td>
+                                <td relation="dc:creator" resource="https://eugeneai.databox.me/profile/card#me">Черкашин Евгений Александрович, к.т.н.,<br />
+                                    доцент кафедры вычислительной техники</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <br/>
+                    <br/>
+                      <br/>
+                    <br/>
+                    <p class="c bold">Иркутск   2016 г.</p>
+                </section>
+                <section >
+                    <h2>Цели и задачи дисциплины (модуля)</h2>
+                    <p>Целью преподавания дисциплины «Техническая защита информации» является формирование у обучающихся знаний в области технических средств защиты информации, по основам инженерно-технической защиты информации, развитие в процессе обучения системного мышления, необходимого для решения задач инженерно-технической защиты информации с учетом требований системного подхода, а также навыков и умения в применении знаний для конкретных условий.</p>
+
+                    Основные задачи дисциплины заключаются в изучении:
+
+1. технических каналов утечки информации и возможностей технических разведок;
+2. способов и средств защиты информации от утечки по техническим каналам;
+3. методов и средств контроля эффективности технической защиты информации.
+
+                </section>
+                <section id="provenance-description"
+                         property="schema:hasPart"
+                         typeof="schema:CreativeWork"
+                         resource="#provenance"
+                         class="break-before"
+                >
+                    <p class="ni strong">Разработчики:</p>
+                    <table style="width:90%;" class="noborders1 small">
+                        <thead >
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td style="width:30%"><span class="under c ni" style="padding-left: 85%;"></span></td>
+                                <td style="width:30%"><span class="nmarginal c ni" style="padding-left:85%;"></span></td>
+                                <td style="width:30%"><span class="nmarginal c" style="padding-left:85%;"></span></td>
+                            </tr>
+                            <tr>
+                                <td class="c"><sup>(подпись)</sup></td>
+                                <td class="c"><sup>(занимаемая должность)</sup></td>
+                                <td class="c"><sup>(инициалы, фамилия)</sup></td>
+                            </tr>
+                            <tr>
+                                <td style="width:30%"><span class="under c ni" style="padding-left: 85%;"></span></td>
+                                <td style="width:30%"><span class="nmarginal c ni" style="padding-left:85%;"></span></td>
+                                <td style="width:30%"><span class="nmarginal c" style="padding-left:85%;"></span></td>
+                            </tr>
+                            <tr>
+                                <td class="c"><sup>(подпись)</sup></td>
+                                <td class="c"><sup>(занимаемая должность)</sup></td>
+                                <td class="c"><sup>(инициалы, фамилия)</sup></td>
+                            </tr>
+                            </tr>
+                                <td class="c" colspan="3">
+                                    <p class="ni">Программа рассмотрена на заседании кафедры
+                                        <span class="nmarginal" style="padding-left: 10em;"></span>
+                                    </p>
+                                </td>
+                            </tr>
+                            <tr class="c">
+                                <td style="width:26em;"  class="c">
+                                </td>
+                                <td class="c">
+                                    <p class="c"><sup>(наименование)</sup></p>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
                 </section>
             </article>
         </main>

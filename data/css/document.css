@@ -21,12 +21,33 @@ p {
     /* font-size: 120%; */
 }
 
+p.bold {
+    font-weight:bold;
+}
+
+.strong,
+p.strong {
+    font-size: 110%;
+    font-weight: bold;
+}
+
 li p {
     text-indent: 0em;
 }
 .c {
     text-align: center;
+    text-indent: 0px;
 }
+
+.middle {
+    vertical-align: middle;
+}
+
+.center {
+    display: block;
+    margin: 0 auto;
+}
+
 .r {
     text-align: right;
 }
@@ -189,7 +210,9 @@ body {
     page-break-after: always;
 }
 
-.marginal {
+span.marginal {
+    float: none;
+    /*display: block;*/
     margin-left:1em;
     margin-right:1em;
     padding-left:1em;
@@ -200,7 +223,9 @@ body {
     background-color: #EEE;
 }
 
-.nmarginal{
+span.nmarginal{
+    float: none;
+    /* display: block;*/
     padding-left:1em;
     padding-right:1em;
     padding-bottom:1px;
