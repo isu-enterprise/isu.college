@@ -40,6 +40,10 @@
              background-color: green;
          }
 
+         #main-content {
+             border-radius: 15px;
+         }
+
          .t14pt {
              margin: 3em auto;
              width: 35em;
@@ -285,6 +289,16 @@
              border-bottom: 1px solid black;
          }
 
+         a {
+             text-decoration: none;
+             /* color: #9b7400; */
+             color: #013a25;
+         }
+         a:hover {
+             text-decoration: underline;
+             ebackground-color: black;
+             color: orange;
+         }
         </style>
         <!-- End shared CSS values -->
         <meta name="viewport" content="width=device-width, initial-scale=1" />
@@ -301,12 +315,12 @@
              <script src="https://dokie.li/scripts/do.js"></script>
            -->
         <!--
-        <script src="https://cdn.jsdelivr.net/medium-editor/latest/js/medium-editor.min.js"></script>
+             <script src="https://cdn.jsdelivr.net/medium-editor/latest/js/medium-editor.min.js"></script>
 
-        <link rel="stylesheet"
-              href="https://cdn.jsdelivr.net/medium-editor/latest/css/medium-editor.min.css"
-              type="text/css" media="screen" charset="utf-8">
-        -->
+             <link rel="stylesheet"
+             href="https://cdn.jsdelivr.net/medium-editor/latest/css/medium-editor.min.css"
+             type="text/css" media="screen" charset="utf-8">
+           -->
     </head>
     <body prefix="rdf: http://www.w3.org/1999/02/22-rdf-syntax-ns# rdfs: http://www.w3.org/2000/01/rdf-schema# owl: http://www.w3.org/2002/07/owl# xsd: http://www.w3.org/2001/XMLSchema# dcterms: http://purl.org/dc/terms/ dctypes: http://purl.org/dc/dcmitype/ foaf: http://xmlns.com/foaf/0.1/ vcard: http://www.w3.org/2006/vcard/ns# pimspace: http://www.w3.org/ns/pim/space# ccns: https://creativecommons.org/ns# skos: http://www.w3.org/2004/02/skos/core# prov: http://www.w3.org/ns/prov# qb: http://purl.org/linked-data/cube# schema: http://schema.org/ void: http://rdfs.org/ns/void# rsa: http://www.w3.org/ns/auth/rsa# cert: http://www.w3.org/ns/auth/cert# cal: http://www.w3.org/2002/12/cal/ical# wgs: http://www.w3.org/2003/01/geo/wgs84_pos# org: http://www.w3.org/ns/org# biblio: http://purl.org/net/biblio# bibo: http://purl.org/ontology/bibo/ book: http://purl.org/NET/book/vocab# ov: http://open.vocab.org/terms/ sioc: http://rdfs.org/sioc/ns# doap: http://usefulinc.com/ns/doap# dbr: http://dbpedia.org/resource/ dbp: http://dbpedia.org/property/ sio: http://semanticscience.org/resource/ opmw: http://www.opmw.org/ontology/ deo: http://purl.org/spar/deo/ doco: http://purl.org/spar/doco/ cito: http://purl.org/spar/cito/ fabio: http://purl.org/spar/fabio/ oa: http://www.w3.org/ns/oa# as: https://www.w3.org/ns/activitystreams# ldp: http://www.w3.org/ns/ldp# solid: http://www.w3.org/ns/solid/terms# acl: http://www.w3.org/ns/auth/acl# dio: https://w3id.org/dio# cnt: http://www.w3.org/2011/content# curr: http://irnok.net/ontologies/curriculum/ns/ std: http://edu.gov.ru/ontology/standards/09.03.01# govru: http://edu.gov.ru/people# istu: http://www.istu.edu/ vt: http://www.istu.edu/structure/57/1976/1977/ cyber: http://www.istu.edu/structure/57/9518/1801/ teach: http://linkedscience.org/teach/ns# manip http://irnok.net/ontologies/rdfa-manipulation/"
           resource="#post"
@@ -383,7 +397,7 @@
                     </table>
                     <br/>
                     <br/>
-                      <br/>
+                    <br/>
                     <br/>
                     <p class="c bold">Иркутск   2016 г.</p>
                 </section>
@@ -391,11 +405,11 @@
                     <h2>Цели и задачи дисциплины (модуля)</h2>
                     <p>Целью преподавания дисциплины «Техническая защита информации» является формирование у обучающихся знаний в области технических средств защиты информации, по основам инженерно-технической защиты информации, развитие в процессе обучения системного мышления, необходимого для решения задач инженерно-технической защиты информации с учетом требований системного подхода, а также навыков и умения в применении знаний для конкретных условий.</p>
 
-                    Основные задачи дисциплины заключаются в изучении:
+                    Основные задачи <a href="http://irk.ru/">дисциплины заключаются</a> в изучении:
 
-1. технических каналов утечки информации и возможностей технических разведок;
-2. способов и средств защиты информации от утечки по техническим каналам;
-3. методов и средств контроля эффективности технической защиты информации.
+                    1. технических каналов утечки информации и возможностей технических разведок;
+                    2. способов и средств защиты информации от утечки по техническим каналам;
+                    3. методов и средств контроля эффективности технической защиты информации.
 
                 </section>
                 <section id="provenance-description"
@@ -405,12 +419,12 @@
                          class="break-before"
                 >
                     <p class="ni strong">Разработчики:</p>
-                    <table style="width:90%;" class="noborders1 small">
+                    <table style="width:90%;" class="noborders small">
                         <thead >
                         </thead>
                         <tbody>
                             <tr>
-                                <td style="width:30%"><span class="under c ni" style="padding-left: 85%;"></span></td>
+                                <td style="width:30%"><span class="nmarginal c ni" style="padding-left: 85%;"></span></td>
                                 <td style="width:30%"><span class="nmarginal c ni" style="padding-left:85%;"></span></td>
                                 <td style="width:30%"><span class="nmarginal c" style="padding-left:85%;"></span></td>
                             </tr>
@@ -420,7 +434,7 @@
                                 <td class="c"><sup>(инициалы, фамилия)</sup></td>
                             </tr>
                             <tr>
-                                <td style="width:30%"><span class="under c ni" style="padding-left: 85%;"></span></td>
+                                <td style="width:30%"><span class="nmarginal c ni" style="padding-left: 85%;"></span></td>
                                 <td style="width:30%"><span class="nmarginal c ni" style="padding-left:85%;"></span></td>
                                 <td style="width:30%"><span class="nmarginal c" style="padding-left:85%;"></span></td>
                             </tr>
@@ -429,22 +443,30 @@
                                 <td class="c"><sup>(занимаемая должность)</sup></td>
                                 <td class="c"><sup>(инициалы, фамилия)</sup></td>
                             </tr>
-                            </tr>
+                            <tr>
                                 <td class="c" colspan="3">
                                     <p class="ni">Программа рассмотрена на заседании кафедры
-                                        <span class="nmarginal" style="padding-left: 10em;"></span>
+                                        <span class="marginal" style="padding-left: 38%;"></span>
                                     </p>
                                 </td>
                             </tr>
-                            <tr class="c">
-                                <td style="width:26em;"  class="c">
-                                </td>
-                                <td class="c">
-                                    <p class="c"><sup>(наименование)</sup></p>
+                            <tr>
+                                <td colspan="3">
+                                    <p class="ni">
+                                        "<span class="nmarginal"></span>"
+                                        <span><span class="nmarginal" style="padding-right:4em;"></span>
+                                            20<span class="nmarginal" style="padding-right:1em;"></span>г.
+                                            <br/><br/>
+                                        Протокол № <span class="marginal"></span>
+                                        Зав. кафедрой <span class="marginal" style="padding-left:10em;"></span>
+                                    </p>
                                 </td>
                             </tr>
                         </tbody>
                     </table>
+                </section>
+                <section id="chair-license">
+                    <p class="ni"><i>Настоящая программа, не может быть воспроизведена ни в какой форме без предвари-тельного письменного разрешения кафедры-разработчика программы</i>.</p>
                 </section>
             </article>
         </main>
