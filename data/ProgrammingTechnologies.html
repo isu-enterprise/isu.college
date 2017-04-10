@@ -73,6 +73,7 @@
              /* font-size: 120%; */
              margin-top: 0px;
              margin-bottom: 0px;
+
          }
 
          .bold,
@@ -306,6 +307,11 @@
              border-bottom: 1px solid black;
          }
 
+         h4.laba:before {
+             counter-increment: h4;
+             content: "Лабораторная работа\0000a0" counter(h4) ".\0000a0";
+         }
+
          a {
              text-decoration: none;
              /* color: #9b7400; */
@@ -510,7 +516,7 @@
                          resource="#description"
                 >
                     <div property="schema:hasPart" typeof="dc:Text cnt:ContentAsText" resource="#purpose">
-                        <h2 property="dc:title" datatype="xsd:atring">Цели и задачи дисциплины (модуля)</h2>
+                        <h2 property="dc:title" datatype="xsd:string">Цели и задачи дисциплины (модуля)</h2>
                         <p property="cnt:chars" datatype="xsd:string">
                             Целю преподавания дисциплины "Технологии программирования" является освоение студентами практических навыков в области разработки программного обеспечения на основе современных подходов к проектированию сложных, гетерогенных, распределенных информационных систем. Развитие навыков системного мышления, необходимого для реализации процедур декомпозиции сложных программных систем на функциональные блоки и обеспечения полученных структур процедурами взаимодействия.</p>
                         <p>
@@ -523,7 +529,7 @@
                         </p>
                     </div>
                     <div property="schema:hasPart" typeof="dc:Text cnt:ContentAsText" resource="#location">
-                        <h2 property="dc:title" datatype="xsd:atring">Место дисциплины в структуре ОПОП</h2>
+                        <h2 property="dc:title" datatype="xsd:string">Место дисциплины в структуре ОПОП</h2>
                         <p property="cnt:chars" datatype="xsd:string">
                             Дисциплина  Б1.В.ДВ.3.1. "Технологии программирования" относится к <span class="q1">вариативной</span> части Б1.В профессионального цикла Б1.</p>
                         <p>
@@ -538,7 +544,7 @@
                         </p>
                     </div>
                     <div property="schema:hasPart" typeof="dc:Text cnt:ContentAsText" resource="#requirements">
-                        <h2 property="dc:title" datatype="xsd:atring">Требования к результатам освоения дисциплины (модуля)</h2>
+                        <h2 property="dc:title" datatype="xsd:string">Требования к результатам освоения дисциплины (модуля)</h2>
                         <p property="cnt:chars" datatype="xsd:string">
                             Процесс изучения дисциплины (модуля) направлен на овладение  следующими компетенциями:
                             <ul>
@@ -601,7 +607,7 @@
                         </p>
                     </div>
                     <div property="schema:hasPart" typeof="dc:Text cnt:ContentAsText"  resource="#volume">
-                        <h2 property="dc:title" datatype="xsd:atring">Объем дисциплины (модуля) и виды учебной работы (разделяется по формам обучения)</h2>
+                        <h2 property="dc:title" datatype="xsd:string">Объем дисциплины (модуля) и виды учебной работы (разделяется по формам обучения)</h2>
                         <p property="cnt:chars" datatype="xsd:string">
                             <table class="c">
                                 <thead>
@@ -744,18 +750,13 @@
                             </table>
                         </p>
                     </div>
-                    Парадигма компонентного программирования: основные положения. Обзор популярных сред проектирования.
-                    Проектирование интерфейсов компонент. Языки графического представления проекта.
-                    Шаблоны проектирования. Адаптерориентированнное программирование.
-                    Конфигурирование компонентного программного обеспечения.
-                    Проектирование распределенных вычислтельных систем на основе компонентного подхода.
 
                     <div property="schema:hasPart" typeof="schema:CreativeWork"  resource="#content">
-                        <h2 property="dc:title" datatype="xsd:atring">Содержание дисциплины (модуля)</h2>
+                        <h2 property="dc:title" datatype="xsd:string">Содержание дисциплины (модуля)</h2>
                         <div property="schema:hasPart" typeof="schema:CreativeWork"  resource="#content">
-                            <h3 property="dc:title" datatype="xsd:atring">Содержание разделов и тем дисциплины (модуля, все разделы и темы нумеруются)</h3>
+                            <h3 property="dc:title" datatype="xsd:string">Содержание разделов и тем дисциплины (модуля, все разделы и темы нумеруются)</h3>
                             <div property="schema:hasPart" typeof="dc:Text cnt:ContentAsText"  resource="#content">
-                                <h4 property="dc:title" datatype="xsd:atring">Системный подход к проектированию програмного обеспечения: Введение</h4>
+                                <h4 property="dc:title" datatype="xsd:string">Системный подход к проектированию програмного обеспечения: Введение</h4>
                                 <p property="cnt:chars" datatype="xsd:string">
                                     Основные понятия и определения OSI/ISO: фaункциоанльный блок, интерфейс, протокол.
                                     ...
@@ -763,54 +764,61 @@
                             </div>
 
                             <div property="schema:hasPart" typeof="dc:Text cnt:ContentAsText"  resource="#content">
-                                <h4 property="dc:title" datatype="xsd:atring">Среда программирования Python</h4>
+                                <h4 property="dc:title" datatype="xsd:string">Среда программирования Python</h4>
                                 <p property="cnt:chars" datatype="xsd:string">
+
+                                    Инструментарий тестирования программного кода компонент.
                                 </p>
                             </div>
 
                             <div property="schema:hasPart" typeof="dc:Text cnt:ContentAsText"  resource="#content">
-                                <h4 property="dc:title" datatype="xsd:atring">Деление программы на модули</h4>
+                                <h4 property="dc:title" datatype="xsd:string">Деление программы на модули</h4>
                                 <p property="cnt:chars" datatype="xsd:string">
                                     Способы деления программы на модули. Структуры модулей современных систем программирования.
                                 </p>
                             </div>
                             <div property="schema:hasPart" typeof="dc:Text cnt:ContentAsText"  resource="#content">
-                                <h4 property="dc:title" datatype="xsd:atring">Компонентное проектирование программного обеспечения</h4>
+                                <h4 property="dc:title" datatype="xsd:string">Компонентное проектирование программного обеспечения</h4>
                                 <p property="cnt:chars" datatype="xsd:string">
-                                    Основные понятия: интерфейс, компонента, обслуживание, реализация, утилита, адаптер, шаблон проектирования.
+                                    Парадигма компонентного программирования: основные положения.
+                                    Основные понятия: интерфейс, компонента, обслуживание,
+                                    реализация, утилита, адаптер, шаблон проектирования.
+                                    Обзор популярных сред компонентного проектирования.
+                                    Проектирование интерфейсов компонент.
+                                    Языки графического представления проекта.
                                 </p>
                             </div>
                             <div property="schema:hasPart" typeof="dc:Text cnt:ContentAsText"  resource="#content">
-                                <h4 property="dc:title" datatype="xsd:atring">Компоненты и сервисы</h4>
+                                <h4 property="dc:title" datatype="xsd:string">Компоненты и сервисы</h4>
                                 <p property="cnt:chars" datatype="xsd:string">
                                 </p>
                             </div>
                             <div property="schema:hasPart" typeof="dc:Text cnt:ContentAsText"  resource="#content">
-                                <h4 property="dc:title" datatype="xsd:atring">Конфигурирование программных систем</h4>
-                                <p property="cnt:chars" datatype="xsd:string">
-                                </p>
-                            </div>
-
-                            <div property="schema:hasPart" typeof="dc:Text cnt:ContentAsText"  resource="#content">
-                                <h4 property="dc:title" datatype="xsd:atring">Адаптер-ориентированнное программирование</h4>
-                                <p property="cnt:chars" datatype="xsd:string">
-                                </p>
-                            </div>
-
-                            <div property="schema:hasPart" typeof="dc:Text cnt:ContentAsText"  resource="#content">
-                                <h4 property="dc:title" datatype="xsd:atring">Шаблоны проектирования интерфейсов пользователя</h4>
+                                <h4 property="dc:title" datatype="xsd:string">Конфигурирование программных систем</h4>
                                 <p property="cnt:chars" datatype="xsd:string">
                                 </p>
                             </div>
 
                             <div property="schema:hasPart" typeof="dc:Text cnt:ContentAsText"  resource="#content">
-                                <h4 property="dc:title" datatype="xsd:atring">Аспект-ориентированнное программирование</h4>
+                                <h4 property="dc:title" datatype="xsd:string">Адаптер-ориентированнное программирование</h4>
                                 <p property="cnt:chars" datatype="xsd:string">
                                 </p>
                             </div>
 
                             <div property="schema:hasPart" typeof="dc:Text cnt:ContentAsText"  resource="#content">
-                                <h4 property="dc:title" datatype="xsd:atring">Сервис-ориентированные программные системы</h4>
+                                <h4 property="dc:title" datatype="xsd:string">Шаблоны проектирования интерфейсов пользователя</h4>
+                                <p property="cnt:chars" datatype="xsd:string">
+                                </p>
+                            </div>
+
+                            <div property="schema:hasPart" typeof="dc:Text cnt:ContentAsText"  resource="#content">
+                                <h4 property="dc:title" datatype="xsd:string">Аспект-ориентированнное программирование</h4>
+                                <p property="cnt:chars" datatype="xsd:string">
+                                </p>
+                            </div>
+
+                            <div property="schema:hasPart" typeof="dc:Text cnt:ContentAsText"  resource="#content">
+                                <h4 property="dc:title" datatype="xsd:string">Сервис-ориентированные программные системы</h4>
                                 <p property="cnt:chars" datatype="xsd:string">
                                 </p>
                             </div>
@@ -818,48 +826,63 @@
                     </div>
 
                     <div property="schema:hasPart" typeof="dc:Text cnt:ContentAsText"  resource="#practic-tasks">
-                        <h2 property="dc:title" datatype="xsd:atring">Перечень семинарских, практических занятий и лабораторных работ</h2>
+                        <h2 property="dc:title" datatype="xsd:string">Перечень семинарских, практических занятий и лабораторных работ</h2>
                         <p property="cnt:chars" datatype="xsd:string">
-                            TEXT <!-- TODO: Add text -->
+                            Для успешного усвоения материала курса и сдачи <span class="q3">экзамена</span>
+                            необходимо сдать следующие лабораторные работы:
                         </p>
+                        <h4 class="laba">Реализация модуля на языке Python.</h4>
+                        <p>Цель лабораторной работы - ...
+                        </p>
+                        <h4 class="laba">Разработка модуля на основе внешних пакетов.</h4>
+
+                            <h4 class="laba">Разработка компоненты.</h4>
+                            <h4 class="laba">Создание адаптера интерфейса.</h4>
+                            <h4 class="laba">Разработка интерфейса пользователя для компоненты.</h4>
+                            <h4 class="laba">Создание виртуальной машины Docker/Vagrant.</h4>
+                            <h4 class="laba">Создание распределенной версии компоненты.</h4>
+                            <h4 class="laba">Изучение методов идентификации объектов распределенной среде.</h4>
+                            <h4 class="laba">Моделирование доступа к общим ресурсам.</h4>
+                            <h4 class="laba">Публикация компонента в виде VPS.</h4>
                     </div>
                     <div property="schema:hasPart" typeof="dc:Text cnt:ContentAsText"  resource="#course-works">
-                        <h2 property="dc:title" datatype="xsd:atring">Примерная тематика курсовых работ (проектов) </h2>
+                        <h2 property="dc:title" datatype="xsd:string">Примерная тематика курсовых работ (проектов) </h2>
                         <p property="cnt:chars" datatype="xsd:string">
                             TEXT <!-- TODO: Add text -->
                         </p>
                     </div>
                     <div property="schema:hasPart" typeof="dc:Text cnt:ContentAsText"  resource="#theory-support">
-                        <h2 property="dc:title" datatype="xsd:atring">Учебно-методическое и информационное обеспечение дисциплины (модуля)</h2>
+                        <h2 property="dc:title" datatype="xsd:string">Учебно-методическое и информационное обеспечение дисциплины (модуля)</h2>
                         <p property="cnt:chars" datatype="xsd:string">
                             TEXT <!-- TODO: Add text -->
                         </p>
                     </div>
                     <div property="schema:hasPart" typeof="dc:Text cnt:ContentAsText"  resource="#tech-support">
-                        <h2 property="dc:title" datatype="xsd:atring">Материально-техническое обеспечение дисциплины (модуля)</h2>
+                        <h2 property="dc:title" datatype="xsd:string">Материально-техническое обеспечение дисциплины (модуля)</h2>
                         <p property="cnt:chars" datatype="xsd:string">
                             TEXT <!-- TODO: Add text -->
                         </p>
                     </div>
                     <div property="schema:hasPart" typeof="dc:Text cnt:ContentAsText" resource="#educational-technologies">
-                        <h2 property="dc:title" datatype="xsd:atring">Образовательные технологии</h2>
+                        <h2 property="dc:title" datatype="xsd:string">Образовательные технологии</h2>
                         <p property="cnt:chars" datatype="xsd:string">
                             TEXT <!-- TODO: Add text -->
                         </p>
                     </div>
                     <div property="schema:hasPart" typeof="dc:Text cnt:ContentAsText" resource="#assessment">
-                        <h2 property="dc:title" datatype="xsd:atring">Оценочные средства (ОС)</h2>
+                        <h2 property="dc:title" datatype="xsd:string">Оценочные средства (ОС)</h2>
                         <p property="cnt:chars" datatype="xsd:string">
                             TEXT <!-- TODO: Add text -->
                         </p>
                     </div>
                     <div property="schema:hasPart" typeof="dc:Text cnt:ContentAsText"  resource="#">
-                        <h2 property="dc:title" datatype="xsd:atring"></h2>
+                        <h2 property="dc:title" datatype="xsd:string"></h2>
                         <p property="cnt:chars" datatype="xsd:string">
                             TEXT <!-- TODO: Add text -->
                         </p>
                     </div>
                 </section>
+
                 <section id="provenance-description"
                          property="schema:hasPart"
                          typeof="schema:CreativeWork"
