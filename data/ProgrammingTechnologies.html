@@ -387,98 +387,13 @@
                      resource="#course-work-program"
                      class="editable"
             >
-                <section
-                    id="preamble"
-                    class="break-after"
-                    property="schema:hasPart"
-                    resource="#title-cover" >
-                    <div taa:content="imei.html#imei-it-header" typeof="foaf:Organization" >
-                    </div>
-                    <br/>
-                    <div taa:content="imei.html#director-signature">
-                    </div>
-                    <br/>
-                    <br/>
-                    <p class="c strong">Рабочая программа дисциплины (модуля)</p>
-                    <p class="c strong" id="intelligent-information-systems" resource="vt:intelligent-information-systems" typeof="teach:Course">
-                        <span property="oa:id">Б1.В.ДВ.3.1</span>. <span property="dc:title">Технологии программирования</span>
-                    </p>
-                    <br/>
-                    <table class="noborders">
-                        <tbody>
-                            <tr class="even">
-                                <td style="min-width: 40%;">Направление подготовки:</td>
-                                <td><span class="strong nm">10.03.01</span><span class="strong"> (090900) Информационная безопасность</span></td>
-                            </tr>
-                            <tr class="odd">
-                                <td>Направленность (профиль)</td>
-                                <td>- <span class="strong">общий</span></td>
-                            </tr>
-                            <tr class="even">
-                                <td>Квалификация (степень) выпускника</td>
-                                <td>- <span class="strong">бакалавр</span></td>
-                            </tr>
-                            <tr class="odd">
-                                <td>Форма обучения</td>
-                                <td>- <span class="strong">очная</span></td>
-                            </tr>
-                            <tr class="even hidden">
-                                <td>Составитель программы:</td>
-                                <td class="strong" relation="dc:creator" resource="https://eugeneai.databox.me/profile/card#me">Черкашин Евгений Александрович, к.т.н.,<br />
-                                    доцент кафедры информационных технологий</td>
-                            </tr>
-                        </tbody>
-                    </table>
-                    <br/>
-                    <br/>
-                    <br/>
-                    <br/>
-                    <br/>
-                    <br/>
-                    <br/>
-                    <p class="c bold">Иркутск   2016 г.</p>
-                </section>
-                <section id="negotiation-UMK" class="break-after" property="schema:hasPart" resource="#negotiation-UMK" >
-                    <table style="width:100%;" class="noborders small">
-                        <thead >
-                        </thead>
-                        <tbody>
-                            <tr>
-                                <td style="width:50%">Согласовано с УМК факультета (института)<br/><br/></td>
-                                <td style="width:50%">Рекомендовано кафедрой:<br/><br/></td>
-                            </tr>
-                            <tr>
-                                <td><span class="nmarginal c ni" style="padding-left:93%;"></span></td>
-                                <td><span class="nmarginal c ni" style="padding-left:93%;"></span></td>
-                            </tr>
-                            <tr>
-                                <td ><br/>Протокол № <span class="nmarginal"></span><span>от</span> "<span class="nmarginal"></span>"
-                                    <span><span class="nmarginal" style="padding-right:4em;"></span>
-                                        20<span class="nmarginal" style="padding-right:1em;"></span>г.
-                                        <br/><br/>
-                                </td>
-                                <td ><br/>Протокол № <span class="nmarginal"></span><span>от</span> "<span class="nmarginal"></span>"
-                                    <span><span class="nmarginal" style="padding-right:4em;"></span>
-                                        20<span class="nmarginal" style="padding-right:1em;"></span>г.
-                                        <br/><br/>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td >Председатель <span class="nmarginal c ni" style="padding-left:60%;"></span></td>
-                                <td >Зав. кафедрой <span class="nmarginal c ni" style="padding-left:64%;"></span></td>
-                            </tr>
-                            <tr>
-                                <td class="c"><sup>(подпись)</sup></td>
-                                <td class="c"><sup>(Ф.И.О.)</sup></td>
-                            </tr>
-
-                        </tbody>
-                    </table>
-                </section>
-                <section id="content" class="break-after">
+                <div taa:content="imei.html#title-page">
+                </div>
+                <div taa:content="imei.html#negotiation-UMK">
+                </div>
+                <section id="contents" class="break-after">
                     <h2 class="nocount c">Содержание</h2>
-                    <p class="c strong">Generated fontent follows....</>
-                    </p>
+                    <div id="tableOfContents"/>
                 </section>
                 <section id="general-course-description" property="schema:hasPart"
                          typeof="schema:CreativeWork"
@@ -1030,12 +945,6 @@
                                 TEXT <!-- TODO: Add text -->
                             </p>
                         </div>
-                        <div property="schema:hasPart" typeof="dc:Text cnt:ContentAsText"  resource="#">
-                            <h2 property="dc:title" datatype="xsd:string"></h2>
-                            <p property="cnt:chars" datatype="xsd:string">
-                                TEXT <!-- TODO: Add text -->
-                            </p>
-                        </div>
                 </section>
 
                 <div taa:content="imei.html#provenance-description"/>
@@ -1053,148 +962,17 @@
         <!-- <script src="https://dokie.li/scripts/simplerdf.js" type="text/javascript"></script> -->
         <script src="https://cdn.jsdelivr.net/medium-editor/latest/js/medium-editor.min.js"  type="text/javascript"></script>
         <script src="https://dokie.li/scripts/medium-editor-tables.min.js"  type="text/javascript"></script>
+        <script src="js/contents.js"  type="text/javascript"></script>
+        <script src="js/LODdoc.js" type="text/javascript"></script>
+
+
+
+
+
         <script>
-         function supportsImports() {
-             return 'import' in document.createElement('link');
-         }
-         (function() {
-             if ('registerElement' in document
-                 && 'import' in document.createElement('link')
-                 && 'content' in document.createElement('template')) {
-                 // platform is good!
-             } else {
-                 // polyfill the platform!
-                 var e = document.createElement('script');
-                 e.src = 'https://cdnjs.cloudflare.com/ajax/libs/webcomponentsjs/0.7.24/webcomponents-lite.min.js';
-                 document.body.appendChild(e);
-             }
-         })();
-
-
-         var importQueue = {};
-
-         function interpTaa(root, macroContext) {
-             $(root).find("[taa\\:content]").each(function(){
-                 var commandTag = $(this);
-                 var val = commandTag.attr("taa:content");
-                 var url
-                 var resource;
-
-                 if (val.indexOf("#")>-1) {
-                     var res = val.split("#");
-                     url=res[0];
-                     resource=res[1];
-                 } else {
-                     url=val;
-                     resource="";
-                 }
-
-                 function commandFunction() {
-                     var imp = this;
-                     var import_ = imp.import;
-                     var contents;
-                     if (import_ != undefined) {
-                         contents = $(import_);
-                     } else {
-                         contents = macroContext;
-                     }
-
-                     var rc = contents.find(`#${resource}`);
-
-                     commandTag.append(rc);
-                     /*
-                        commandTag.append(rc.children());
-
-                        // Copy attributes except macro resource name
-                        $.each(rc.get(0).attributes, function(i, attrib){
-                        var name = attrib.name;
-                        var value = attrib.value;
-                        if (name=="resource") {
-                        commandTag.attr("data-local-resource", value);
-                        } else if (name=="id") {
-                        commandTag.attr("data-local-id", value);
-                        } else if (name=="name") {
-                        commandTag.attr("data-local-name", value);
-                        } else {
-                        commandTag.attr(name, value);
-                        };
-                        });
-                      */
-
-                     if (rc.length>0) {
-                         commandTag.removeAttr("taa:content");
-                         commandTag.attr("taa:content-expanded", val);
-                         interpTaa(commandTag, macroContext); // Try to find in calling context
-                         interpTaa(commandTag, contents);     // Try to find local
-                     } else {
-                         console.log("Not Found" + macroContext + resource);
-                     }
-                 }
-
-                 if (url=="") {
-                     macroContext.each(commandFunction);
-                 } else {
-                     var eximports=$(`link[rel="import"][href="${url}"]`);
-
-                     if (eximports.length==0) {
-
-                         $("head").append(`
-                    <link rel="import" href="${url}" async></link>
-                 `);
-                         var imports=$(`link[rel="import"]`);
-
-                         importQueue[url] = {imp:imports, queue:[function(imp) {
-                             imp.each(commandFunction);
-                         }]};
-
-                         imports.on("load", function(){
-                             var imp=$(this);
-                             var qe = importQueue[url];
-                             qe.queue.forEach(function(item){
-                                 item(qe.imp);
-                             });
-                             delete importQueue[url];
-                         });
-
-                         imports.on("error", function(event){
-                             console.log('Error loading import: ' + e.target.href);
-                         });
-
-                     } else {
-                         if (importQueue[url] != undefined) {
-                             var qe = importQueue[url];
-                             qe.queue.push(function(imp) {
-                                 eximports.each(commandFunction);
-                             })
-                         } else {
-                             eximports.each(commandFunction);
-                         };
-                     }
-                 }
-             });
-         };
-         function main() {
-             $("body").append(`
-                <button class="noprint" id="button-medium-editor-switch"><span class="fa fa-editor">Edit</class></button>
-                <button class="noprint" id="button-macro-switch"><span class="fa fa-editor">Macro</class></button>
-             `);
-             $("#button-medium-editor-switch").click(function(){
-                 $("head").append(`
-             <link rel="stylesheet" media="all" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" />
-             <link rel="stylesheet"
-             href="https://cdn.jsdelivr.net/medium-editor/latest/css/medium-editor.min.css"
-             type="text/css" media="screen" charset="utf-8">
-             <!-- FIXME: Add theme reference. -->
-                 `);
-                 var editor = new MediumEditor('.editable');
-             });
-             $("#button-macro-switch").click(function(){
-                 root = $("html");
-                 interpTaa(root, root);
-                 // FIXME: Should I mark non-expanded macros
-             });
-         };
-         $(main);
+            $(function () {
+            LODmain(false); // Do not use macro button.
+            });
         </script>
     </body>
 </html>

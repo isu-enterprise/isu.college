@@ -111,7 +111,7 @@
                          resource="#provenance"
                          class="break-before"
                 >
-                    <p class="ni strong">Разработчики:</p>
+                    <p class="ni strong">Разработчики</p>
                     <table style="width:90%;" class="noborders small">
                         <thead >
                         </thead>
@@ -147,11 +147,13 @@
                                 <td colspan="3">
                                     <p class="ni">
                                         "<span class="nmarginal"></span>"
-                                        <span><span class="nmarginal" style="padding-right:4em;"></span>
-                                            20<span class="nmarginal" style="padding-right:1em;"></span>г.
-                                            <br/><br/>
-                                            Протокол № <span class="marginal"></span>
-                                            Зав. кафедрой <span class="marginal" style="padding-left:10em;"></span>
+                                        <span class="nmarginal" style="padding-right:4em;"></span>
+                                        20<span class="nmarginal" style="padding-right:1em;"></span>г.
+                                        <br/><br/>
+                                        Протокол № <span class="marginal"></span>
+                                        Зав. кафедрой <span
+                                                          class="marginal"
+                                                          style="padding-left:10em;"></span>
                                     </p>
                                 </td>
                             </tr>
@@ -160,6 +162,94 @@
                 </section>
                 <section>
                     <p class="ni" id="default-license"><i>Настоящая программа, не может быть воспроизведена ни в какой форме без предвари-тельного письменного разрешения кафедры-разработчика программы</i>.</p>
+                </section>
+                <section
+                    id="title-page"
+                    class="break-after"
+                    property="schema:hasPart"
+                    resource="#title-cover" >
+                    <div taa:content="#imei-it-header" typeof="foaf:Organization" >
+                    </div>
+                    <br/>
+                    <div taa:content="#director-signature">
+                    </div>
+                    <br/>
+                    <br/>
+                    <p class="c strong">Рабочая программа дисциплины (модуля)</p>
+                    <p class="c strong" resource="is:discipline-title" typeof="teach:Course">
+                        <span property="oa:id" taa:content="#discipline-id">Б1.В.ДВ.3.1</span>. <span taa:content="#discipline-title" property="dc:title">Технологии программирования</span>
+                    </p>
+                    <br/>
+                    <table class="noborders">
+                        <tbody>
+                            <tr class="even">
+                                <td style="min-width: 40%;">Направление подготовки:</td>
+                                <td><span class="strong nm">10.03.01</span><span class="strong"> (090900) Информационная безопасность</span></td>
+                            </tr>
+                            <tr class="odd">
+                                <td>Направленность (профиль)</td>
+                                <td>- <span class="strong">общий</span></td>
+                            </tr>
+                            <tr class="even">
+                                <td>Квалификация (степень) выпускника</td>
+                                <td>- <span class="strong">бакалавр</span></td>
+                            </tr>
+                            <tr class="odd">
+                                <td>Форма обучения</td>
+                                <td>- <span class="strong">очная</span></td>
+                            </tr>
+                            <tr class="even hidden">
+                                <td>Составитель программы:</td>
+                                <td class="strong" relation="dc:creator" resource="https://eugeneai.databox.me/profile/card#me">Черкашин Евгений Александрович, к.т.н.,<br />
+                                    доцент кафедры информационных технологий</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <br/>
+                    <br/>
+                    <br/>
+                    <br/>
+                    <br/>
+                    <br/>
+                    <br/>
+                    <p class="c bold">Иркутск   2016 г.</p>
+                </section>
+                <section id="negotiation-UMK" class="break-after" property="schema:hasPart" resource="#negotiation-UMK" >
+                    <table style="width:100%;" class="noborders small">
+                        <thead >
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td style="width:50%">Согласовано с УМК факультета (института)<br/><br/></td>
+                                <td style="width:50%">Рекомендовано кафедрой:<br/><br/></td>
+                            </tr>
+                            <tr>
+                                <td><span class="nmarginal c ni" style="padding-left:93%;"></span></td>
+                                <td><span class="nmarginal c ni" style="padding-left:93%;"></span></td>
+                            </tr>
+                            <tr>
+                                <td ><br/>Протокол № <span class="nmarginal"></span><span>от</span> "<span class="nmarginal"></span>"
+                                    <span class="nmarginal" style="padding-right:4em;"></span>
+                                        20<span class="nmarginal" style="padding-right:1em;"></span>г.
+                                        <br/><br/>
+                                </td>
+                                <td ><br/>Протокол № <span class="nmarginal"></span><span>от</span> "<span class="nmarginal"></span>"
+                                    <span class="nmarginal" style="padding-right:4em;"></span>
+                                        20<span class="nmarginal" style="padding-right:1em;"></span>г.
+                                        <br/><br/>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td >Председатель <span class="nmarginal c ni" style="padding-left:60%;"></span></td>
+                                <td >Зав. кафедрой <span class="nmarginal c ni" style="padding-left:64%;"></span></td>
+                            </tr>
+                            <tr>
+                                <td class="c"><sup>(подпись)</sup></td>
+                                <td class="c"><sup>(Ф.И.О.)</sup></td>
+                            </tr>
+
+                        </tbody>
+                    </table>
                 </section>
             </article>
         </main>
