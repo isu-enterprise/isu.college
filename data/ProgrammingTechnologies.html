@@ -1174,9 +1174,6 @@
                       */
 
                      if (rc.length>0) {
-                         console.log("Found");
-                         console.log(macroContext);
-                         console.log(resource);
                          commandTag.removeAttr("taa:content");
                          commandTag.attr("taa:content-expanded", val);
                          interpTaa(commandTag, macroContext); // Try to find in calling context
@@ -1192,7 +1189,6 @@
                      var eximports=$(`link[rel="import"][href="${url}"]`);
 
                      if (eximports.length==0) {
-                         console.log(`Loading ${url}`);
 
                          $("head").append(`
                     <link rel="import" href="${url}" async></link>
@@ -1206,7 +1202,6 @@
                          imports.on("load", function(){
                              var imp=$(this);
                              var qe = importQueue[url];
-                             console.log(qe);
                              qe.queue.forEach(function(item){
                                  item(qe.imp);
                              });
@@ -1216,8 +1211,8 @@
                          imports.on("error", function(event){
                              console.log('Error loading import: ' + e.target.href);
                          });
+
                      } else {
-                         console.log(`Using cached ${url}`);
                          if (importQueue[url] != undefined) {
                              var qe = importQueue[url];
                              qe.queue.push(function(imp) {
