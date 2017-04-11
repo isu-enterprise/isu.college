@@ -362,26 +362,8 @@
          }
 
         </style>
-        <!-- End shared CSS values -->
         <meta name="viewport" content="width=device-width, initial-scale=1" />
-        <!-- <link href="https://dokie.li/media/css/basic.css" media="all" rel="stylesheet" title="Basic" />
-             <link href="https://dokie.li/media/css/lncs.css" media="all" rel="stylesheet alternate" title="LNCS" />
-             <link href="https://dokie.li/media/css/acm.css" media="all" rel="stylesheet alternate" title="ACM" />
-           -->
         <!--
-             <link rel="stylesheet" media="all" href="https://dokie.li/media/css/do.css" />
-             <link rel="stylesheet" media="all" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" />
-             <script src="https://dokie.li/scripts/simplerdf.js"></script>
-             <script src="https://dokie.li/scripts/medium-editor.min.js"></script>
-             <script src="https://dokie.li/scripts/medium-editor-tables.min.js"></script>
-             <script src="https://dokie.li/scripts/do.js"></script>
-           -->
-        <!--
-             <script src="https://cdn.jsdelivr.net/medium-editor/latest/js/medium-editor.min.js"></script>
-
-             <link rel="stylesheet"
-             href="https://cdn.jsdelivr.net/medium-editor/latest/css/medium-editor.min.css"
-             type="text/css" media="screen" charset="utf-8">
            -->
     </head>
     <body prefix="rdf: http://www.w3.org/1999/02/22-rdf-syntax-ns# rdfs: http://www.w3.org/2000/01/rdf-schema# owl: http://www.w3.org/2002/07/owl# xsd: http://www.w3.org/2001/XMLSchema# dcterms: http://purl.org/dc/terms/ dctypes: http://purl.org/dc/dcmitype/ foaf: http://xmlns.com/foaf/0.1/ vcard: http://www.w3.org/2006/vcard/ns# pimspace: http://www.w3.org/ns/pim/space# ccns: https://creativecommons.org/ns# skos: http://www.w3.org/2004/02/skos/core# prov: http://www.w3.org/ns/prov# qb: http://purl.org/linked-data/cube# schema: http://schema.org/ void: http://rdfs.org/ns/void# rsa: http://www.w3.org/ns/auth/rsa# cert: http://www.w3.org/ns/auth/cert# cal: http://www.w3.org/2002/12/cal/ical# wgs: http://www.w3.org/2003/01/geo/wgs84_pos# org: http://www.w3.org/ns/org# biblio: http://purl.org/net/biblio# bibo: http://purl.org/ontology/bibo/ book: http://purl.org/NET/book/vocab# ov: http://open.vocab.org/terms/ sioc: http://rdfs.org/sioc/ns# doap: http://usefulinc.com/ns/doap# dbr: http://dbpedia.org/resource/ dbp: http://dbpedia.org/property/ sio: http://semanticscience.org/resource/ opmw: http://www.opmw.org/ontology/ deo: http://purl.org/spar/deo/ doco: http://purl.org/spar/doco/ cito: http://purl.org/spar/cito/ fabio: http://purl.org/spar/fabio/ oa: http://www.w3.org/ns/oa# as: https://www.w3.org/ns/activitystreams# ldp: http://www.w3.org/ns/ldp# solid: http://www.w3.org/ns/solid/terms# acl: http://www.w3.org/ns/auth/acl# dio: https://w3id.org/dio# cnt: http://www.w3.org/2011/content# curr: http://irnok.net/ontologies/curriculum/ns/ std: http://edu.gov.ru/ontology/standards/09.03.01# govru: http://edu.gov.ru/people# istu: http://www.istu.edu/ vt: http://www.istu.edu/structure/57/1976/1977/ cyber: http://www.istu.edu/structure/57/9518/1801/ teach: http://linkedscience.org/teach/ns# manip http://irnok.net/ontologies/rdfa-manipulation/"
@@ -404,17 +386,8 @@
                     class="break-after"
                     property="schema:hasPart"
                     resource="#title-cover" >
-                    <img src="http://isu.ru/images/logo.png" class="center" style="width:10%;"/>
-                    <h1>МИНИСТЕРСТВО ОБРАЗОВАНИЯ И НАУКИ РОССИЙСКОЙ ФЕДЕРАЦИИ<br/>
-                        федеральное государственное бюджетное образовательное учреждение<br/>
-                        высшего образования<br/>
-                        «ИРКУТСКИЙ ГОСУДАРСТВЕННЫЙ  УНИВЕРСИТЕТ»<br/>
-                        ФГБОУ ВО «ИГУ»<br/>
-                        <br/>
-                        <span>
-                            Кафедра информационных технологий
-                        </span>
-                    </h1>
+                    <div property="">
+                    </div>
                     <br/>
                     <br/>
                     <table class="noborders">
@@ -454,10 +427,10 @@
                                 <td>Форма обучения</td>
                                 <td>- <span class="strong">очная</span></td>
                             </tr>
-                            <tr class="even" hidden>
+                            <tr class="even hidden">
                                 <td>Составитель программы:</td>
-                                <td relation="dc:creator" resource="https://eugeneai.databox.me/profile/card#me">Черкашин Евгений Александрович, к.т.н.,<br />
-                                    доцент кафедры вычислительной техники</td>
+                                <td class="strong" relation="dc:creator" resource="https://eugeneai.databox.me/profile/card#me">Черкашин Евгений Александрович, к.т.н.,<br />
+                                    доцент кафедры информационных технологий</td>
                             </tr>
                         </tbody>
                     </table>
@@ -827,44 +800,44 @@
                         <div property="schema:hasPart" typeof="schema:CreativeWork"  resource="#content">
                             <h3 property="dc:title" datatype="xsd:string">Разделы дисциплины и междисциплинарные связи с обеспечиваемыми (последующими) дисциплинами</h3>
                             <p property="cnt:chars" datatype="xsd:string">
-                            <table class="c">
-                                <thead class="header">
-                                    <th>№ п/п</th>
-                                    <th>Наименование обеспечиваемых  (последующих) дисциплин</th>
-                                    <th colspan="10">№№ разделов и тем  данной дисциплины, необходимых для изучения обеспечиваемых (последующих) дисциплин<br/><sup> (вписываются разработчиком)</sup></th>
-                                </thead>
-                                <tbody>
-                                    <tr>
-                                        <td>1</td>
-                                        <td class="l">Производственная практика (по получению профессиональных умений и опыта профессиональной деятельности)</td>
-                                        <td>1</td>
-                                        <td>2</td>
-                                        <td>3</td>
-                                        <td>4</td>
-                                        <td>5</td>
-                                        <td>6</td>
-                                        <td>7</td>
-                                        <td>8</td>
-                                        <td>9</td>
-                                        <td>10</td>
-                                    </tr>
-                                    <tr>
-                                        <td>2</td>
-                                        <td class="l">Производственная практика (преддипломная)</td>
-                                        <td>1</td>
-                                        <td>2</td>
-                                        <td>3</td>
-                                        <td>4</td>
-                                        <td>5</td>
-                                        <td>6</td>
-                                        <td>7</td>
-                                        <td>8</td>
-                                        <td>9</td>
-                                        <td>10</td>
-                                    </tr>
+                                <table class="c">
+                                    <thead class="header">
+                                        <th>№ п/п</th>
+                                        <th>Наименование обеспечиваемых  (последующих) дисциплин</th>
+                                        <th colspan="10">№№ разделов и тем  данной дисциплины, необходимых для изучения обеспечиваемых (последующих) дисциплин<br/><sup> (вписываются разработчиком)</sup></th>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td>1</td>
+                                            <td class="l">Производственная практика (по получению профессиональных умений и опыта профессиональной деятельности)</td>
+                                            <td>1</td>
+                                            <td>2</td>
+                                            <td>3</td>
+                                            <td>4</td>
+                                            <td>5</td>
+                                            <td>6</td>
+                                            <td>7</td>
+                                            <td>8</td>
+                                            <td>9</td>
+                                            <td>10</td>
+                                        </tr>
+                                        <tr>
+                                            <td>2</td>
+                                            <td class="l">Производственная практика (преддипломная)</td>
+                                            <td>1</td>
+                                            <td>2</td>
+                                            <td>3</td>
+                                            <td>4</td>
+                                            <td>5</td>
+                                            <td>6</td>
+                                            <td>7</td>
+                                            <td>8</td>
+                                            <td>9</td>
+                                            <td>10</td>
+                                        </tr>
 
-                                </tbody>
-                            </table>
+                                    </tbody>
+                                </table>
                             </p>
                         </div>
                         <div property="schema:hasPart" typeof="dc:Text cnt:ContentAsText"  resource="#content">
@@ -1012,16 +985,16 @@
                             </p>
                         </div>
 
-                    <div property="schema:hasPart" typeof="dc:Text cnt:ContentAsText"  resource="#practic-tasks">
-                        <h2 property="dc:title" datatype="xsd:string">Перечень семинарских, практических занятий и лабораторных работ</h2>
-                        <p property="cnt:chars" datatype="xsd:string">
-                            Для успешного усвоения материала курса и сдачи <span class="q3">экзамена</span>
-                            необходимо сдать следующие лабораторные работы:
-                        </p>
-                        <h4 class="laba">Реализация модуля на языке Python.</h4>
-                        <p>Цель лабораторной работы - ...
-                        </p>
-                        <h4 class="laba">Разработка модуля на основе внешних пакетов.</h4>
+                        <div property="schema:hasPart" typeof="dc:Text cnt:ContentAsText"  resource="#practic-tasks">
+                            <h2 property="dc:title" datatype="xsd:string">Перечень семинарских, практических занятий и лабораторных работ</h2>
+                            <p property="cnt:chars" datatype="xsd:string">
+                                Для успешного усвоения материала курса и сдачи <span class="q3">экзамена</span>
+                                необходимо сдать следующие лабораторные работы:
+                            </p>
+                            <h4 class="laba">Реализация модуля на языке Python.</h4>
+                            <p>Цель лабораторной работы - ...
+                            </p>
+                            <h4 class="laba">Разработка модуля на основе внешних пакетов.</h4>
 
                             <h4 class="laba">Разработка компоненты.</h4>
                             <h4 class="laba">Создание адаптера интерфейса.</h4>
@@ -1031,43 +1004,43 @@
                             <h4 class="laba">Изучение методов идентификации объектов распределенной среде.</h4>
                             <h4 class="laba">Моделирование доступа к общим ресурсам.</h4>
                             <h4 class="laba">Публикация компонента в виде VPS.</h4>
-                    </div>
-                    <div property="schema:hasPart" typeof="dc:Text cnt:ContentAsText"  resource="#course-works">
-                        <h2 property="dc:title" datatype="xsd:string">Примерная тематика курсовых работ (проектов) </h2>
-                        <p property="cnt:chars" datatype="xsd:string">
-                            TEXT <!-- TODO: Add text -->
-                        </p>
-                    </div>
-                    <div property="schema:hasPart" typeof="dc:Text cnt:ContentAsText"  resource="#theory-support">
-                        <h2 property="dc:title" datatype="xsd:string">Учебно-методическое и информационное обеспечение дисциплины (модуля)</h2>
-                        <p property="cnt:chars" datatype="xsd:string">
-                            TEXT <!-- TODO: Add text -->
-                        </p>
-                    </div>
-                    <div property="schema:hasPart" typeof="dc:Text cnt:ContentAsText"  resource="#tech-support">
-                        <h2 property="dc:title" datatype="xsd:string">Материально-техническое обеспечение дисциплины (модуля)</h2>
-                        <p property="cnt:chars" datatype="xsd:string">
-                            TEXT <!-- TODO: Add text -->
-                        </p>
-                    </div>
-                    <div property="schema:hasPart" typeof="dc:Text cnt:ContentAsText" resource="#educational-technologies">
-                        <h2 property="dc:title" datatype="xsd:string">Образовательные технологии</h2>
-                        <p property="cnt:chars" datatype="xsd:string">
-                            TEXT <!-- TODO: Add text -->
-                        </p>
-                    </div>
-                    <div property="schema:hasPart" typeof="dc:Text cnt:ContentAsText" resource="#assessment">
-                        <h2 property="dc:title" datatype="xsd:string">Оценочные средства (ОС)</h2>
-                        <p property="cnt:chars" datatype="xsd:string">
-                            TEXT <!-- TODO: Add text -->
-                        </p>
-                    </div>
-                    <div property="schema:hasPart" typeof="dc:Text cnt:ContentAsText"  resource="#">
-                        <h2 property="dc:title" datatype="xsd:string"></h2>
-                        <p property="cnt:chars" datatype="xsd:string">
-                            TEXT <!-- TODO: Add text -->
-                        </p>
-                    </div>
+                        </div>
+                        <div property="schema:hasPart" typeof="dc:Text cnt:ContentAsText"  resource="#course-works">
+                            <h2 property="dc:title" datatype="xsd:string">Примерная тематика курсовых работ (проектов) </h2>
+                            <p property="cnt:chars" datatype="xsd:string">
+                                TEXT <!-- TODO: Add text -->
+                            </p>
+                        </div>
+                        <div property="schema:hasPart" typeof="dc:Text cnt:ContentAsText"  resource="#theory-support">
+                            <h2 property="dc:title" datatype="xsd:string">Учебно-методическое и информационное обеспечение дисциплины (модуля)</h2>
+                            <p property="cnt:chars" datatype="xsd:string">
+                                TEXT <!-- TODO: Add text -->
+                            </p>
+                        </div>
+                        <div property="schema:hasPart" typeof="dc:Text cnt:ContentAsText"  resource="#tech-support">
+                            <h2 property="dc:title" datatype="xsd:string">Материально-техническое обеспечение дисциплины (модуля)</h2>
+                            <p property="cnt:chars" datatype="xsd:string">
+                                TEXT <!-- TODO: Add text -->
+                            </p>
+                        </div>
+                        <div property="schema:hasPart" typeof="dc:Text cnt:ContentAsText" resource="#educational-technologies">
+                            <h2 property="dc:title" datatype="xsd:string">Образовательные технологии</h2>
+                            <p property="cnt:chars" datatype="xsd:string">
+                                TEXT <!-- TODO: Add text -->
+                            </p>
+                        </div>
+                        <div property="schema:hasPart" typeof="dc:Text cnt:ContentAsText" resource="#assessment">
+                            <h2 property="dc:title" datatype="xsd:string">Оценочные средства (ОС)</h2>
+                            <p property="cnt:chars" datatype="xsd:string">
+                                TEXT <!-- TODO: Add text -->
+                            </p>
+                        </div>
+                        <div property="schema:hasPart" typeof="dc:Text cnt:ContentAsText"  resource="#">
+                            <h2 property="dc:title" datatype="xsd:string"></h2>
+                            <p property="cnt:chars" datatype="xsd:string">
+                                TEXT <!-- TODO: Add text -->
+                            </p>
+                        </div>
                 </section>
 
                 <section id="provenance-description"
@@ -1126,6 +1099,9 @@
                 <section id="chair-license">
                     <p class="ni"><i>Настоящая программа, не может быть воспроизведена ни в какой форме без предвари-тельного письменного разрешения кафедры-разработчика программы</i>.</p>
                 </section>
+                <section>
+                    Terms none
+                </section>
             </article>
         </main>
         <footer class="noprint">
@@ -1133,8 +1109,26 @@
                 <a class="" rel="license" href="http://creativecommons.org/licenses/by-sa/4.0/"><img alt="Лицензия Creative Commons" style="border-width:0" src="https://i.creativecommons.org/l/by-sa/4.0/88x31.png"/></a><span hidden="false">Это произведение доступно по <a rel="license" href="http://creativecommons.org/licenses/by-sa/4.0/">лицензии Creative Commons «Attribution-ShareAlike» («Атрибуция — На тех же условиях») 4.0 Всемирная</a>.</span>
             </p>
         </footer>
-        <!--
-             <script>var editor = new MediumEditor('.editable');</script>
-           -->
+        <script src="https://code.jquery.com/jquery-3.2.1.js" type="text/javascript"></script>
+        <script src="https://dokie.li/scripts/simplerdf.js" type="text/javascript"></script>
+        <script src="https://cdn.jsdelivr.net/medium-editor/latest/js/medium-editor.min.js"  type="text/javascript"></script>
+        <script src="https://dokie.li/scripts/medium-editor-tables.min.js"  type="text/javascript"></script>
+        <script>
+         $( document ).ready(function() {
+             $("body").append(`
+                <button class="noprint" id="button-medium-editor-switch"><span class="fa fa-editor">Edit</class></button>
+             `);
+             $("#button-medium-editor-switch").click(function(){
+                 $("head").append(`
+             <link rel="stylesheet" media="all" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" />
+             <link rel="stylesheet"
+             href="https://cdn.jsdelivr.net/medium-editor/latest/css/medium-editor.min.css"
+             type="text/css" media="screen" charset="utf-8">
+             <!-- FIXME: Add theme reference. -->
+                 `);
+                 var editor = new MediumEditor('.editable');
+             });
+         });
+        </script>
     </body>
 </html>
