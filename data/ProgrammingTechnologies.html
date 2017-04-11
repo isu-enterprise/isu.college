@@ -2,6 +2,7 @@
 <html lang="ru" xmlns="http://www.w3.org/1999/xhtml"
       xml:lang="en" id="do-index"
       xmlns:rdfa="http://www.w3.org/ns/rdfa#"
+      xmlns:taa="http://irnok.net/engine/rdfa-manipulation"
 >
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
@@ -386,7 +387,7 @@
                     class="break-after"
                     property="schema:hasPart"
                     resource="#title-cover" >
-                    <div property="">
+                    <div taa:content="imei.html#imei-it-header" typeof="foaf:Organization" >
                     </div>
                     <br/>
                     <br/>
@@ -1099,9 +1100,6 @@
                 <section id="chair-license">
                     <p class="ni"><i>Настоящая программа, не может быть воспроизведена ни в какой форме без предвари-тельного письменного разрешения кафедры-разработчика программы</i>.</p>
                 </section>
-                <section>
-                    Terms none
-                </section>
             </article>
         </main>
         <footer class="noprint">
@@ -1110,13 +1108,81 @@
             </p>
         </footer>
         <script src="https://code.jquery.com/jquery-3.2.1.js" type="text/javascript"></script>
-        <script src="https://dokie.li/scripts/simplerdf.js" type="text/javascript"></script>
+        <!-- <script src="https://dokie.li/scripts/simplerdf.js" type="text/javascript"></script> -->
         <script src="https://cdn.jsdelivr.net/medium-editor/latest/js/medium-editor.min.js"  type="text/javascript"></script>
         <script src="https://dokie.li/scripts/medium-editor-tables.min.js"  type="text/javascript"></script>
         <script>
-         $( document ).ready(function() {
+         function supportsImports() {
+             return 'import' in document.createElement('link');
+         }
+         (function() {
+             if ('registerElement' in document
+                 && 'import' in document.createElement('link')
+                 && 'content' in document.createElement('template')) {
+                 // platform is good!
+             } else {
+                 // polyfill the platform!
+                 var e = document.createElement('script');
+                 e.src = 'https://cdnjs.cloudflare.com/ajax/libs/webcomponentsjs/0.7.24/webcomponents-lite.min.js';
+                 document.body.appendChild(e);
+             }
+         })();
+
+         function interpTaa() {
+             if (supportsImports()) {
+                 // Good to go!
+             } else {
+                 // alert("Imports ain't supported!");
+             }
+             $("[taa\\:content]").each(function(){
+                 var commandTag = $(this);
+                 var command = commandTag.attr("taa:content");
+                 var url
+                 var resource;
+                 if (command.indexOf("#")>-1) {
+                     var res = command.split("#");
+                     url=res[0];
+                     resource="#"+res[1];
+                 } else {
+                     url=command;
+                     resource="";
+                 }
+
+                 function commandFunction() {
+                     var imp = this;
+                     var import_ = imp.import;
+                     var contents = $(import_);
+                     var rc = contents.find(`[resource="${resource}"]`);
+                     commandTag.append(rc);
+                 }
+
+                 var eximports=$(`link[rel="import"][href="${url}"]`);
+                 if (eximports.length==0) {
+                     console.log(`Importing ${url}`);
+
+                     $("head").append(`
+                    <link rel="import" href="${url}" async></link>
+                 `);
+
+                     var imports=$(`link[rel="import"]`);
+
+                     imports.on("load", function(){
+                         var imp=$(this);
+                         imp.each(commandFunction);
+                     });
+
+                     imports.on("error", function(event){
+                         console.log('Error loading import: ' + e.target.href);
+                     });
+                 } else {
+                     eximports.each(commandFunction);
+                 }
+             });
+         };
+         function main() {
              $("body").append(`
                 <button class="noprint" id="button-medium-editor-switch"><span class="fa fa-editor">Edit</class></button>
+                <button class="noprint" id="button-macro-switch"><span class="fa fa-editor">Macro</class></button>
              `);
              $("#button-medium-editor-switch").click(function(){
                  $("head").append(`
@@ -1128,7 +1194,11 @@
                  `);
                  var editor = new MediumEditor('.editable');
              });
-         });
+             $("#button-macro-switch").click(function(){
+                 interpTaa();
+             });
+         };
+         $(main);
         </script>
     </body>
 </html>
