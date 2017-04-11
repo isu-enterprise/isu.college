@@ -2,6 +2,7 @@
 <html lang="ru" xmlns="http://www.w3.org/1999/xhtml"
       xml:lang="en" id="do-index"
       xmlns:rdfa="http://www.w3.org/ns/rdfa#"
+      xmlns:taa="http://irnok.net/engine/rdfa-manipulation"
 >
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
@@ -26,33 +27,85 @@
               class="t12pt"
               id="main-content"
         >
-            <div property="oa:hasTarget" resource="#course-work-program"/>
+            <div property="oa:hasTarget" resource="#imei-description-mecros"/>
             <article property="oa:hasBody" typeof="schema:Article foaf:Document curr:WorkingProgram"
                      resource="#org"
                      class="editable"
             >
                 <div
-                    id="preamble"
-                    class="break-after"
                     property="schema:hasPart"
+                    id="imei-it-header"
                     resource="#imei-it-header"
-                    typeof="cnt:chars"
-                    datatype="xsd:string"
+                    typeof="teach:Organization"
                 >
-
-                    <img src="http://isu.ru/images/logo.png" class="center" style="width:10%;"/>
-                    <h1>МИНИСТЕРСТВО ОБРАЗОВАНИЯ И НАУКИ РОССИЙСКОЙ ФЕДЕРАЦИИ<br/>
-                        федеральное государственное бюджетное образовательное учреждение<br/>
-                        высшего образования<br/>
-                        «ИРКУТСКИЙ ГОСУДАРСТВЕННЫЙ  УНИВЕРСИТЕТ»<br/>
-                        ФГБОУ ВО «ИГУ»<br/>
-                        Институт математики экономики и информатики<br/>
-                        <br/>
-                        <span>
+                    <div
+                        property="schema:hasPart"
+                        id="imei-header"
+                        resource="#imei-header"
+                        typeof="teach:Organization"
+                    >
+                        <img src="http://isu.ru/images/logo.png" class="center" style="width:10%;"/>
+                        <h1>МИНИСТЕРСТВО ОБРАЗОВАНИЯ И НАУКИ РОССИЙСКОЙ ФЕДЕРАЦИИ<br/>
+                            федеральное государственное бюджетное образовательное учреждение<br/>
+                            высшего образования<br/>
+                            «ИРКУТСКИЙ ГОСУДАРСТВЕННЫЙ  УНИВЕРСИТЕТ»<br/>
+                            ФГБОУ ВО «ИГУ»<br/>
+                            Институт математики экономики и информатики<br/>
+                        </h1>
+                    </div>
+                    <div
+                        property="schema:hasPart"
+                        resource="#imei-it-chair"
+                        id="imei-it-chair"
+                        typeof="teach:Organization"
+                    >
+                        <h1 typeof="dc:title"
+                            datatype="xsd:string">
                             Кафедра информационных технологий
-                        </span>
-                    </h1>
+                        </h1>
+
+                    </div>
                 </div>
+                <div
+                    property="schema:hasPart"
+                    resource="#imei-ais-header"
+                    id="imei-ais-header"
+                    typeof="teach:Organization"
+                >
+                    <div taa:content="#imei-header"
+                    ></div>
+                    <div
+                        property="schema:hasPart"
+                        resource="#imei-ais-chair"
+                        id="imei-ais-chair"
+                        typeof="teach:Organization"
+                    >
+                        <h1 typeof="dc:title"
+                            datatype="xsd:string">
+                            Кафедра алгебраических и информационных систем
+                        </h1>
+
+                    </div>
+                </div>
+
+                <table class="noborders" id="director-signature">
+                    <tbody>
+                        <tr>
+                            <td>
+                                <p class="dirstate" property="schema:employee" typeof="foaf:Person dbr:Executive_director">
+                                    УТВЕРЖДАЮ<br/>
+                                    <span class="nmarginal" style="padding-right:10em;"></span><br/>
+                                    <span class="center ni">Директор ИМЭИ</span><br/>
+                                    "<span class="nmarginal"></span>"
+                                    <span><span class="nmarginal" style="padding-right:4em;"></span>
+                                        20<span class="nmarginal" style="padding-right:1em;"></span>г.
+                                    </span>
+                                </p>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+
             </article>
         </main>
         <script src="https://code.jquery.com/jquery-3.2.1.js" type="text/javascript"></script>

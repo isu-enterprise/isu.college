@@ -395,26 +395,15 @@
                     <div taa:content="imei.html#imei-it-header" typeof="foaf:Organization" >
                     </div>
                     <br/>
+                    <div taa:content="imei.html#director-signature">
+                    </div>
                     <br/>
-                    <table class="noborders">
-                        <tr>
-                            <td>
-                                <p class="dirstate">
-                                    УТВЕРЖДАЮ<br/>
-                                    <span class="nmarginal" style="padding-right:10em;"></span><br/>
-                                    <span class="center" class="ni">Директор ИМЭИ</span><br/>
-                                    "<span class="nmarginal"></span>"
-                                    <span><span class="nmarginal" style="padding-right:4em;"></span>
-                                        20<span class="nmarginal" style="padding-right:1em;"></span>г.
-                                    </span>
-                                </p>
-                            </td>
-                        </tr>
-                    </table>
+                    <br/>
                     <p class="c strong">Рабочая программа дисциплины (модуля)</p>
                     <p class="c strong" id="intelligent-information-systems" resource="vt:intelligent-information-systems" typeof="teach:Course">
                         <span property="oa:id">Б1.В.ДВ.3.1</span>. <span property="dc:title">Технологии программирования</span>
                     </p>
+                    <br/>
                     <table class="noborders">
                         <tbody>
                             <tr class="even">
@@ -1133,54 +1122,111 @@
              }
          })();
 
-         function interpTaa() {
-             if (supportsImports()) {
-                 // Good to go!
-             } else {
-                 // alert("Imports ain't supported!");
-             }
-             $("[taa\\:content]").each(function(){
+
+         var importQueue = {};
+
+         function interpTaa(root, macroContext) {
+             $(root).find("[taa\\:content]").each(function(){
                  var commandTag = $(this);
-                 var command = commandTag.attr("taa:content");
+                 var val = commandTag.attr("taa:content");
                  var url
                  var resource;
-                 if (command.indexOf("#")>-1) {
-                     var res = command.split("#");
+
+                 if (val.indexOf("#")>-1) {
+                     var res = val.split("#");
                      url=res[0];
-                     resource="#"+res[1];
+                     resource=res[1];
                  } else {
-                     url=command;
+                     url=val;
                      resource="";
                  }
 
                  function commandFunction() {
                      var imp = this;
                      var import_ = imp.import;
-                     var contents = $(import_);
-                     var rc = contents.find(`[resource="${resource}"]`);
+                     var contents;
+                     if (import_ != undefined) {
+                         contents = $(import_);
+                     } else {
+                         contents = macroContext;
+                     }
+
+                     var rc = contents.find(`#${resource}`);
+
                      commandTag.append(rc);
+                     /*
+                        commandTag.append(rc.children());
+
+                        // Copy attributes except macro resource name
+                        $.each(rc.get(0).attributes, function(i, attrib){
+                        var name = attrib.name;
+                        var value = attrib.value;
+                        if (name=="resource") {
+                        commandTag.attr("data-local-resource", value);
+                        } else if (name=="id") {
+                        commandTag.attr("data-local-id", value);
+                        } else if (name=="name") {
+                        commandTag.attr("data-local-name", value);
+                        } else {
+                        commandTag.attr(name, value);
+                        };
+                        });
+                      */
+
+                     if (rc.length>0) {
+                         console.log("Found");
+                         console.log(macroContext);
+                         console.log(resource);
+                         commandTag.removeAttr("taa:content");
+                         commandTag.attr("taa:content-expanded", val);
+                         interpTaa(commandTag, macroContext); // Try to find in calling context
+                         interpTaa(commandTag, contents);     // Try to find local
+                     } else {
+                         console.log("Not Found" + macroContext + resource);
+                     }
                  }
 
-                 var eximports=$(`link[rel="import"][href="${url}"]`);
-                 if (eximports.length==0) {
-                     console.log(`Importing ${url}`);
+                 if (url=="") {
+                     macroContext.each(commandFunction);
+                 } else {
+                     var eximports=$(`link[rel="import"][href="${url}"]`);
 
-                     $("head").append(`
+                     if (eximports.length==0) {
+                         console.log(`Loading ${url}`);
+
+                         $("head").append(`
                     <link rel="import" href="${url}" async></link>
                  `);
+                         var imports=$(`link[rel="import"]`);
 
-                     var imports=$(`link[rel="import"]`);
+                         importQueue[url] = {imp:imports, queue:[function(imp) {
+                             imp.each(commandFunction);
+                         }]};
 
-                     imports.on("load", function(){
-                         var imp=$(this);
-                         imp.each(commandFunction);
-                     });
+                         imports.on("load", function(){
+                             var imp=$(this);
+                             var qe = importQueue[url];
+                             console.log(qe);
+                             qe.queue.forEach(function(item){
+                                 item(qe.imp);
+                             });
+                             delete importQueue[url];
+                         });
 
-                     imports.on("error", function(event){
-                         console.log('Error loading import: ' + e.target.href);
-                     });
-                 } else {
-                     eximports.each(commandFunction);
+                         imports.on("error", function(event){
+                             console.log('Error loading import: ' + e.target.href);
+                         });
+                     } else {
+                         console.log(`Using cached ${url}`);
+                         if (importQueue[url] != undefined) {
+                             var qe = importQueue[url];
+                             qe.queue.push(function(imp) {
+                                 eximports.each(commandFunction);
+                             })
+                         } else {
+                             eximports.each(commandFunction);
+                         };
+                     }
                  }
              });
          };
@@ -1200,7 +1246,9 @@
                  var editor = new MediumEditor('.editable');
              });
              $("#button-macro-switch").click(function(){
-                 interpTaa();
+                 root = $("html");
+                 interpTaa(root, root);
+                 // FIXME: Should I mark non-expanded macros
              });
          };
          $(main);
