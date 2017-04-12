@@ -278,14 +278,6 @@
          .rel-child {
          }
 
-         .break-before {
-             page-break-before: always;
-         }
-
-         .break-after {
-             page-break-after: always;
-         }
-
          span.marginal {
              float: none;
              /*display: block;*/
@@ -347,6 +339,14 @@
          @media print
          {
 
+             .break-before {
+                 page-break-before: always;
+             }
+
+             .break-after {
+                 page-break-after: always;
+             }
+
              .noprint {display:none;}
 
              #main-content {
@@ -405,14 +405,16 @@
                  display: none;
              }
 
-
-         }
-         @page {
-             @bottom {
-                 content: "Page " counter(page) " of " counter(pages)
-             }
+         .break-before {
+             border-top: 5px dashed red;
          }
 
+         .break-after {
+             border-bottom: 5px dashed red;
+         }
+
+
+         }
         </style>
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <!--
