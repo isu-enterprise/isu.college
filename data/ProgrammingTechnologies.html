@@ -140,233 +140,247 @@
             margin-top:0.1em;
             margin-bottom: 0.05em;
             }
-          h4.laba {counter-reset: h5;
-             text-indent: 2.3em;
-             margin-top:0.1em;
-             margin-bottom: 0.05em;
-         }
-         h5 {counter-reset: h6;}
+            h4.laba {counter-reset: h5;
+            text-indent: 2.3em;
+            margin-top:0.1em;
+            margin-bottom: 0.05em;
+            }
+            h5 {counter-reset: h6;}
 
-         h2:before {counter-increment: h2; content: counter(h2) ".\0000a0\0000a0"}
-         h3:before {counter-increment: h3; content: counter(h2) "." counter(h3) ".\0000a0\0000a0"}
-         h4:before {
-             counter-increment: h4;
-             content: "Тема\0000a0" counter(h4) ".\0000a0";
-         }
-         /* h4:before {counter-increment: h4; content: counter(h2) "." counter(h3) "." counter(h4) ".\0000a0\0000a0"}*/
-         h5:before {counter-increment: h5; content: counter(h2) "." counter(h3) "." counter(h4) "." counter(h5) ".\0000a0\0000a0"}
-         h6:before {counter-increment: h6; content: counter(h2) "." counter(h3) "." counter(h4) "." counter(h5) "." counter(h6) ".\0000a0\0000a0"}
+            h2:before {counter-increment: h2; content: counter(h2) ".\0000a0\0000a0"}
+            h3:before {counter-increment: h3; content: counter(h2) "." counter(h3) ".\0000a0\0000a0"}
+            h4:before {
+            counter-increment: h4;
+            content: "Тема\0000a0" counter(h4) ".\0000a0";
+            }
+            /* h4:before {counter-increment: h4; content: counter(h2) "." counter(h3) "." counter(h4) ".\0000a0\0000a0"}*/
+            h5:before {counter-increment: h5; content: counter(h2) "." counter(h3) "." counter(h4) "." counter(h5) ".\0000a0\0000a0"}
+            h6:before {counter-increment: h6; content: counter(h2) "." counter(h3) "." counter(h4) "." counter(h5) "." counter(h6) ".\0000a0\0000a0"}
 
-         h2.nocount:before, h3.nocount:before, h4.nocount:before, h5.nocount:before, h6.nocount:before { content: ""; counter-increment: none }
+            h2.nocount:before, h3.nocount:before, h4.nocount:before, h5.nocount:before, h6.nocount:before { content: ""; counter-increment: none }
 
-         strong {
-             font-size:100%;
-         }
+            strong {
+            font-size:100%;
+            }
 
-         .hidden {
-             display: none;
-         }
+            .hidden {
+            display: none;
+            }
 
-         h1 {
-             text-align: center;
-             counter-reset: h2;
-         }
+            h1 {
+            text-align: center;
+            counter-reset: h2;
+            }
 
 
-         table {
-             border-collapse: collapse; /* Отображать только одинарные линии */
-             width: 100%;
-             border: 1px solid black;
-             margin: 0 auto;
-         }
-         }
+            table {
+            border-collapse: collapse; /* Отображать только одинарные линии */
+            width: 100%;
+            border: 1px solid black;
+            margin: 0 auto;
+            }
+            }
 
-         table.small {
-             font-size: 80%;
-         }
+            table.small {
+            font-size: 80%;
+            }
 
-         th {
-             text-align: left; /* Выравнивание по левому краю */
-             padding: 5px; /* Поля вокруг содержимого ячеек */
-             border: 1px solid black; /* Граница вокруг ячеек */
-             font-size: 90%;
-         }
+            th {
+            text-align: left; /* Выравнивание по левому краю */
+            padding: 5px; /* Поля вокруг содержимого ячеек */
+            border: 1px solid black; /* Граница вокруг ячеек */
+            font-size: 90%;
+            }
 
-         table.small th {
-             font-size: 100%;
-         }
+            table.small th {
+            font-size: 100%;
+            }
 
-         td {
-             padding: 5px; /* Поля вокруг содержимого ячеек */
-             border: 1px solid black; /* Граница вокруг ячеек */
-         }
+            td {
+            padding: 5px; /* Поля вокруг содержимого ячеек */
+            border: 1px solid black; /* Граница вокруг ячеек */
+            }
 
-         tr {
-             border: 1px solid black;
-         }
+            tr {
+            border: 1px solid black;
+            }
 
-         .threethird {
-             width: 75%;
-         }
+            .threethird {
+            width: 75%;
+            }
 
-         table.noborders,
-         table.noborders th,
-         table.noborders table,
-         table.noborders tr,
-         table.noborders td {
-             border: 0px solid black;
-         }
+            table.noborders,
+            table.noborders th,
+            table.noborders table,
+            table.noborders tr,
+            table.noborders td {
+            border: 0px solid black;
+            }
 
-         .dirstate {
-             width: 12em;
-             text-align: left;
-             float: right;
-             /* background: blue; */
-         }
+            .dirstate {
+            width: 12em;
+            text-align: left;
+            float: right;
+            /* background: blue; */
+            }
 
-         .namestate {
-             width: 70%;
-             text-align: left;
-             float: left;
-         }
+            .namestate {
+            width: 70%;
+            text-align: left;
+            float: left;
+            }
 
-         .hfill {
-             width: 100%;
-             text-align: right;
-             /* background: red; */
-             overflow: auto;
-         }
+            .hfill {
+            width: 100%;
+            text-align: right;
+            /* background: red; */
+            overflow: auto;
+            }
 
-         .right {
-             float: right;
-         }
+            .right {
+            float: right;
+            }
 
-         .stronger {
-             font-weight: bold;
-         }
+            .stronger {
+            font-weight: bold;
+            }
 
-         #consultantplus {
-             background-color:#FAF;
-             color:#000;
-         }
-         #order {
-             background-color:#FEA;
-             color:#000;
-         }
-         body {
-             background-color: #AAA;
-         }
-         #dokieli {
-             background-color: #EEA;
-         }
-         .odd {
-             background-color: #EEC;
-         }
-         .even {
-             background-color: #CEC;
-         }
-         .emph {
-             background-color: #BBB;
-         }
+            #consultantplus {
+            background-color:#FAF;
+            color:#000;
+            }
+            #order {
+            background-color:#FEA;
+            color:#000;
+            }
+            body {
+            background-color: #AAA;
+            }
+            #dokieli {
+            background-color: #EEA;
+            }
+            .odd {
+            background-color: #EEC;
+            }
+            .even {
+            background-color: #CEC;
+            }
+            .emph {
+            background-color: #BBB;
+            }
 
-         .c-td td {
-             text-align: center;
-         }
+            .c-td td {
+            text-align: center;
+            }
 
-         .rel-parent {
-         }
-         .rel-child {
-         }
+            .rel-parent {
+            }
+            .rel-child {
+            }
 
-         .break-before {
-             page-break-before: always;
-         }
+            .break-before {
+            page-break-before: always;
+            }
 
-         .break-after {
-             page-break-after: always;
-         }
+            .break-after {
+            page-break-after: always;
+            }
 
-         span.marginal {
-             float: none;
-             /*display: block;*/
-             margin-left:1em;
-             margin-right:1em;
-             padding-left:1em;
-             padding-right:1em;
-             padding-bottom:1px;
-             /* border-radius: 1px; */
-             border-bottom: 1px solid black;
-             background-color: #EEE;
-         }
+            span.marginal {
+            float: none;
+            /*display: block;*/
+            margin-left:1em;
+            margin-right:1em;
+            padding-left:1em;
+            padding-right:1em;
+            padding-bottom:1px;
+            /* border-radius: 1px; */
+            border-bottom: 1px solid black;
+            background-color: #EEE;
+            }
 
-         span.nmarginal{
-             float: none;
-             /* display: block;*/
-             padding-left:1em;
-             padding-right:1em;
-             padding-bottom:1px;
-             /* border-radius: 1px; */
-             border-bottom: 1px solid black;
-             background-color: #EEE;
-         }
+            span.nmarginal{
+            float: none;
+            /* display: block;*/
+            padding-left:1em;
+            padding-right:1em;
+            padding-bottom:1px;
+            /* border-radius: 1px; */
+            border-bottom: 1px solid black;
+            background-color: #EEE;
+            }
 
-         .under {
-             border-bottom: 1px solid black;
-         }
+            .under {
+            border-bottom: 1px solid black;
+            }
 
-         h4.laba:before {
-             counter-increment: h4;
-             content: "Лабораторная работа\0000a0" counter(h4) ".\0000a0";
-         }
+            h4.laba:before {
+            counter-increment: h4;
+            content: "Лабораторная работа\0000a0" counter(h4) ".\0000a0";
+            }
 
-         a {
-             text-decoration: none;
-             /* color: #9b7400; */
-             color: #013a25;
-         }
-         a:hover {
-             text-decoration: underline;
-             ebackground-color: black;
-             color: orange;
-         }
-         .q,
-         .q1 {
-             background-color: yellow;
-         }
-         .q2 {
-             background-color: pink;
-         }
-         .q3 {
-             background-color: red;
-         }
-         .q4 {
-             background-color: green;
-         }
-         @media print
-         {
+            a {
+            text-decoration: none;
+            /* color: #9b7400; */
+            color: #013a25;
+            }
+            a:hover {
+            text-decoration: underline;
+            ebackground-color: black;
+            color: orange;
+            }
+            .q,
+            .q1 {
+            background-color: yellow;
+            }
+            .q2 {
+            background-color: pink;
+            }
+            .q3 {
+            background-color: red;
+            }
+            .q4 {
+            background-color: green;
+            }
 
-             .noprint {display:none;}
 
-             #main-content {
-                 border: none;
-             }
+            @media print
+            {
 
-             .t14pt {
-                 background: transparent;
-             }
+            .noprint {display:none;}
 
-             .t12pt {
-                 background: transparent;
-             }
+            #main-content {
+            border: none;
+            }
 
-         }
+            .t14pt {
+            background: transparent;
+            }
 
-         @media screen
-         {
-             .noprint {};
-             .print {};
-         }
+            .t12pt {
+            background: transparent;
+            }
 
+            div.bottompage {
+            display:block;
+            position:absolute;
+            bottom:0;
+            width:100%;
+            }
+            div.bottompage div{
+            width:50%;
+            margin: 0 auto;
+            }
+
+ }
+
+
+ @media screen
+ {
+     .noprint {};
+     .print {};
+
+ }
         </style>
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <!--

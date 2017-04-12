@@ -302,6 +302,8 @@ table {
  .q4 {
      background-color: green;
  }
+
+
  @media print
  {
 
@@ -319,10 +321,24 @@ table {
          background: transparent;
      }
 
+     .bottompage {
+         display:block;
+         position:fixed;
+         bottom:0;
+     }
+
  }
+
+     .bottompage {
+         display:block;
+         position:fixed;
+         bottom:0;
+     }
+
 
  @media screen
  {
      .noprint {};
      .print {};
+
  }
