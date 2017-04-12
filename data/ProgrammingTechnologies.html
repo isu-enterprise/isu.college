@@ -371,14 +371,31 @@
             width:50%;
             margin: 0 auto;
             }
+            #pageFooter {
+            display: table-footer-group;
+            }
 
- }
+            #pageFooter:after {
+            counter-increment: page;
+            content: counter(page);
+            }
+
+                body {
+                    display:table;
+                }
 
 
- @media screen
- {
-     .noprint {};
-     .print {};
+            }
+
+
+            @media screen
+            {
+            .noprint {};
+            .print {};
+            #pageFooter {
+            display: none;
+            }
+
 
  }
         </style>
