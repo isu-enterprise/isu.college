@@ -86,10 +86,14 @@ setup(
           'dev': dev_requires,
     },
     test_suite='tests',
-    entry_points={
-        'console_scripts':
-            ['isu.college=isu.college:main']
-    },
+    #entry_points={
+    #    'console_scripts':
+    #        ['isu.college=isu.college:main']
+    #},
+    #entry_points="""\
+    #    [paste.app_factory]
+    #    main=isu.webapp.webui:
+    #""",
     #ext_modules = cythonize(ext_modules),
     #test_suite = 'nose.collector',
     #setup_requires=['nose>=1.0','Cython','coverage']
