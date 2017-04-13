@@ -1,7 +1,7 @@
 .PHONY: env dev develop install test edit \
 	py pot init-ru update-ru comp-cat \
 	upd-cat setup test setup-requs tests \
-	run-tests gdb-test clean
+	run-tests gdb-test clean serve
 
 #A source dir of a local C/C++ library to link with
 #TOP_DIR=
@@ -74,3 +74,7 @@ upd-cat: pot update-ru comp-cat
 
 clean:
 	$(PYTHON) setup.py clean
+
+serve:
+	pserve development.ini --reload
+	
