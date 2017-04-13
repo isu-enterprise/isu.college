@@ -1,3 +1,7 @@
 #zope.component[zcml]
 #secretary
--e git+https://github.com/isu-enterprise/isu.webapp#egg=isu.webapp
+
+#-e git+https://github.com/isu-enterprise/isu.webapp#egg=isu.webapp
+lxml
+xlrd
+pandas
