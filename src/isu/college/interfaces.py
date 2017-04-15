@@ -145,3 +145,10 @@ class IEducationalSpecification(ISpecification):
 class IWorkingProgram(IEducationalSpecification):
     """The working program of discipline
     """
+
+
+class IAcaddemicPlan(Interface):
+    """Marker interface IAcaddemicPlan
+    defines components denoting academic
+    plans.
+    """
