@@ -14,7 +14,3 @@ class AcademicPlan(object):
 
     def __init__(self):
         pass
-
-    @property
-    def profession(self):
-        return Vocab("09.03.03", "Прикладная информатика")

@@ -38,7 +38,9 @@ class TestBasic(object):
 
 class TestLoad(object):
     def setUp(self):
-        self.plan = Plan(ALLIN[0])
+        FN = ALLIN[0]
+        print(FN)
+        self.plan = Plan(FN)
 
     def test_init(self):
-        assert self.plan.profession.code
+        assert self.plan.program.direction.code
