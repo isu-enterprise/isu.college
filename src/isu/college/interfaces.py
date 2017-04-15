@@ -147,7 +147,7 @@ class IWorkingProgram(IEducationalSpecification):
     """
 
 
-class IAcaddemicPlan(Interface):
+class IAcademicPlan(Interface):
     """Marker interface IAcaddemicPlan
     defines components denoting academic
     plans.

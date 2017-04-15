@@ -1,7 +1,7 @@
 from zope.interface import implementer
 from icc.mvw.interfaces import IView
 from collections import namedtuple
-from appy.pod.renderer import Renderer
+# from appy.pod.renderer import Renderer
 from pkg_resources import resource_filename
 
 Stub = namedtuple('Stub', ["id", "name"])
@@ -33,13 +33,13 @@ class FOSSpecificationView(object):
         return {'view': self, 'context': self.context}
 
 
-def study_work_program(view, filename):
-    infilename = resource_filename(
-        'isu.college.app',
-        'fos/templates/StudyWorkProgram.odt')
+# def study_work_program(view, filename):
+#     infilename = resource_filename(
+#         'isu.college.app',
+#         'fos/templates/StudyWorkProgram.odt')
 
-    renderer = Renderer(infilename,
-                        view(),
-                        filename,
-                        overwriteExisting=True)
-    renderer.run()
+#     renderer = Renderer(infilename,
+#                         view(),
+#                         filename,
+#                         overwriteExisting=True)
+#     renderer.run()
