@@ -6,7 +6,7 @@ from isu.college import enums
 import re
 import marisa_trie
 import pymorphy2
-from pprint import pprint
+from pprint import pprint, pformat
 
 morph = pymorphy2.MorphAnalyzer()
 
@@ -74,7 +74,7 @@ class Plan(AcademicPlan):
         for k in self.attrs.keys():
             if not k.startswith("_"):
                 val = self.attrs[k]
-                s += "{}={}\n".format(k, repr(val))
+                s += "{}={}\n".format(k, pformat(val))
         s += "\n"
         return s
 

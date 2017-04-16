@@ -9,6 +9,7 @@ from pkg_resources import resource_filename
 from icc.mvw.interfaces import IView, IViewRegistry
 import os
 import os.path
+from .interfaces import IAcademicPlan
 from .miis import Plan
 
 GSM = getGlobalSiteManager()
@@ -26,17 +27,25 @@ class View(views.DefaultView):
     auth_user = None
 
 
+@adapter(IAcademicPlan)
 class StudyPlanVew(View):
-    title = "Study Plan"
 
     def __init__(self, obj=None, filename=None):
-        if self.obj is not None:
+        if obj is not None:
             self.plan = obj
         elif filename is not None:
             filename = os.path.join(DATADIR, filename)
             self.plan = Plan(filename)
         else:
             raise RuntimeError("either object or filename must be supplied")
+
+    @property
+    def title(self):
+        print(self.plan)
+        return self.plan.program.direction
+
+
+GSM.registerAdapter(StudyPlanVew)
 
 
 class SPListView(View):
@@ -52,11 +61,12 @@ class SPListView(View):
         print("List of plans found.")
         pprint(self.items)
 
-    def __getitem__(self, name):
+    def getplan(self, name):
         if name not in self.plans:
 
             print("Loading plan:{}".format(name))
-            self.plans[name] = Plan(name)
+            fullpath = os.path.join(DATADIR, name)
+            self.plans[name] = IView(Plan(fullpath))
 
         return self.plans[name]
 
@@ -79,7 +89,7 @@ def work_plan(request):
     plan_name = request.matchdict["name"]
     print(plan_name)
     view = getUtility(IView, name="study-plans")
-    view = view[plan_name]
+    view = view.getplan(plan_name)
     return {
         "view": view,
     }
