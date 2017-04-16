@@ -5,6 +5,9 @@ import xlrd
 from isu.college import enums
 import re
 import marisa_trie
+import pymorphy2
+
+morph = pymorphy2.MorphAnalyzer()
 
 # Movement commands (dx,dy)
 L, R, D, U = (-1, 0), (1, 0), (0, 1), (0, -1)
@@ -17,13 +20,27 @@ MOVES = {
 }
 
 
+class CellNotFoundError(Exception):
+    pass
+
+
+class NormalizationError(Exception):
+    pass
+
+
+def normal(word, *tags):
+    tags = set(tags)
+    print(tags)
+    for p in morph.parse(word):
+        if tags in p.tag:
+            return p.normal_form
+    raise NormalizationError(
+        "cannot normaize '{}' within {}".format(word, tags))
+
+
 def move(row, col, direction):
     dx, dy = MOVES[direction]
     yield row + dy, col + dx
-
-
-class CellNotFoundError(Exception):
-    pass
 
 
 class Object(object):
@@ -53,7 +70,7 @@ class Plan(AcademicPlan):
         for k in self.attrs.keys():
             if not k.startswith("_"):
                 val = self.attrs[k]
-                s += "{}={}\n".format(k, val)
+                s += "{}={}\n".format(k, repr(val))
         s += "\n"
         return s
 
@@ -72,8 +89,35 @@ class Plan(AcademicPlan):
     def is_loaded(self):
         return self.book is not None
 
-    def degree_proc(self, x):
-        return x.replace("подготовки ", "")
+    def check(self, cell):
+        if cell is None:
+            return False
+        if hasattr(cell, "ctype"):
+            if cell.ctype == 0:
+                return False
+        return True
+
+    def path(self, cell, sheet, row, col, direction, first=True):
+        dx, dy = direction  # MOVES[direction]
+        nrows, ncols = sheet.nrows, sheet.ncols
+        while True:
+            if not first:
+                if self.check(cell):
+                    yield cell, sheet, row, col
+            row, col = row + dy, col + dx
+            if row < 0 or col < 0 or row >= nrows or col >= ncols:
+                return
+            cell = sheet.cell(rowx=row, colx=col)
+            if self.check(cell):
+                yield cell.value, sheet, row, col
+
+    def degree_proc(self, val, sheet, row, col):
+        sb = "подготовки"
+        for val, sheet, row, col in self.path(val, sheet, row, col, D):
+            val = val.strip()
+            if val.startswith(sb):
+                yield (normal(val.replace(sb, ""), "NOUN"), sheet, row, col)
+                break
 
     def debug_print(self):
         book = self.book
@@ -90,10 +134,10 @@ class Plan(AcademicPlan):
     def _setup_rules(self):
         self.RULES = {
             "Титул": {
-                "ministry": ((7, 2), self.identity),
-                "institution": ((9, 0), self.identity),
-                "managers.rector": ("Ректор", self.slash_clean_proc),
-                # "program.degree": ("^УЧЕБНЫЙ ПЛАН", "DD", self.degree_proc),
+                #"ministry": ((7, 2), self.identity),
+                #"institution": ((9, 0), self.identity),
+                #"managers.rector": ("Ректор", self.slash_clean_proc),
+                "program.degree": ("УЧЕБНЫЙ ПЛАН", self.degree_proc),
                 #- "program.direction": ("^направление ", self.direction_proc),
                 #- "program.profile": ("^направление ", "D", self.profile_proc),
                 #- "start_year": ("^Год начала подготовки$", "R"),
@@ -148,27 +192,32 @@ class Plan(AcademicPlan):
 
             for var, prog in matchs.items():
                 templ, body = prog
-                #body = getattr(self, body)
+                # body = getattr(self, body)
 
                 for cell, row, col in find_match(sheet, templ):
-                    assert cell is not None
-                    for _ in body(cell, sheet, row, col):
+                    assert cell is not None and cell.ctype != 0
+                    for _ in body(cell.value, sheet, row, col):
                         if _[0] is None:
                             continue
                         cell = _[0]
                         break
-                    if cell is not None and cell.ctype != 0:
-                        self.assign(*_, name=var)
+                    else:
+                        continue
+                    if cell is not None:
+                        if hasattr(cell, "ctype"):
+                            if cell.ctype == 0:
+                                continue
+                            self.assign(cell.value, name=var)
+                        else:
+                            self.assign(cell, name=var)
                         break
 
         print(self)
 
-    def assign(self, cell, *args, **kwargs):
-        assert "name" in kwargs, "'name' denotes the name of field, but absent"
-        assert cell is not None
-        assert cell.ctype != 0
-        self.attrs[kwargs["name"]] = cell.value
-        # yield (cell,) + args
+    def assign(self, value, name):
+        assert value is not None
+        value = value.strip()
+        self.attrs[name] = value
 
     def identity(self, cell, *args):
         yield (cell,) + args

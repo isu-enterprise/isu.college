@@ -6,3 +6,4 @@ lxml
 xlrd
 pandas
 marisa-trie
+pymorphy2
