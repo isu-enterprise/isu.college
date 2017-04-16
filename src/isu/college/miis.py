@@ -6,6 +6,7 @@ from isu.college import enums
 import re
 import marisa_trie
 import pymorphy2
+from pprint import pprint
 
 morph = pymorphy2.MorphAnalyzer()
 
@@ -53,6 +54,10 @@ class Object(object):
         return s
 
 
+class String(str, Object):
+    pass
+
+
 class Plan(AcademicPlan):
     """Represents MIIS.ru Plan XLS export files as
     IAcademicPlan component.
@@ -83,6 +88,9 @@ class Plan(AcademicPlan):
         self.book = xlrd.open_workbook(self.URL)
         self._setup_rules()
         self._run_recognition()
+        pprint(self.attrs)
+        self._represent()
+        print(self.program.direction)
         # self.debug_print()
 
     def is_loaded(self):
@@ -133,10 +141,10 @@ class Plan(AcademicPlan):
     def _setup_rules(self):
         self.RULES = {
             "Титул": {
-                #"ministry": ((7, 2), self.identity),
-                #"institution": ((9, 0), self.identity),
-                #"managers.rector": ("Ректор", self.slash_clean_proc),
-                #"program.degree": ("УЧЕБНЫЙ ПЛАН", self.degree_proc),
+                "ministry": ((7, 2), self.identity),
+                "institution": ((9, 0), self.identity),
+                "managers.rector": ("Ректор", self.slash_clean_proc),
+                "program.degree": ("УЧЕБНЫЙ ПЛАН", self.degree_proc),
                 "program.direction": ("^[нН]аправление", self.direction_proc),
                 #- "program.profile": ("^направление ", "D", self.profile_proc),
                 #- "start_year": ("^Год начала подготовки$", "R"),
@@ -161,6 +169,24 @@ class Plan(AcademicPlan):
                 #"profession.activities": ("^Виды деят", self.activities_proc),
             }
         }
+
+    def _represent(self, d=None, o=None):
+        if d is None:
+            d = self.attrs
+            o = self
+        assert "_value" not in d or o != self, "wrong structure"
+        for k, v in d.items():
+            if k == "_value":
+                continue
+
+            if isinstance(v, dict):
+                if "_value" in v:
+                    n = String(v["_value"])
+                else:
+                    n = Object()
+                self._represent(v, n)
+                v = n
+            setattr(o, k, v)
 
     def _run_recognition(self):
 
@@ -217,11 +243,23 @@ class Plan(AcademicPlan):
         assert value is not None
         if isinstance(value, dict):
             for k, v in value.items():
-                nname = name.rstrip(".") + "." + k
-                self.assign(v, nname)
+                nname = name.rstrip(".")
+                if k == "_value":
+                    self.assign(v, nname)
+                else:
+                    nname += "." + k
+                    self.assign(v, nname)
         else:
             value = value.strip()
-            self.attrs[name] = value
+            path = name.split(".")
+            last = path[-1]
+            attrs = self.attrs
+            for name in path[:-1]:
+                attrs = attrs.setdefault(name, {})
+            if last in attrs:
+                attrs["_value"] = value
+            else:
+                attrs[last] = {"_value": value}
 
     def identity(self, cell, *args):
         yield (cell,) + args
@@ -232,7 +270,7 @@ class Plan(AcademicPlan):
         """/XXXX/ -> XXX """
         return s.replace("/", "").replace("\\", "").strip()
 
-    DRE = re.compile(".*\s(\d+\.\d+\.\d+)\.?\s*(.*)")
+    DRE = re.compile(".*(\s(\d+\.\d+\.\d+)\.?\s*(.*))")
 
     def direction_proc(self, val, sheet, row, col):
         val = val.strip()
@@ -241,8 +279,9 @@ class Plan(AcademicPlan):
             return
         assert m is not None, "cannot match {} with {}".format(val, self.DRE)
         val = {
-            "code": m.group(1),
-            "title": m.group(2)
+            "code": m.group(2),
+            "title": m.group(3),
+            "_value": m.group(1)
         }
         yield val, sheet, row, col
 
