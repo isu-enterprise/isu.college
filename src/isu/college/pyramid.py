@@ -1,4 +1,3 @@
-
 from isu.webapp.interfaces import IConfigurationEvent
 
 from pyramid.view import view_config
