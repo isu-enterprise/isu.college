@@ -90,7 +90,7 @@ class Plan(AcademicPlan):
         self._run_recognition()
         pprint(self.attrs)
         self._represent()
-        print(self.program.direction)
+        # print(self.program.direction)
         # self.debug_print()
 
     def is_loaded(self):
@@ -104,19 +104,33 @@ class Plan(AcademicPlan):
                 return False
         return True
 
-    def path(self, cell, sheet, row, col, direction, first=True):
+    def path(self, cell, sheet, row, col,
+             direction,
+             skip_first=True,
+             max_steps=-1,
+             steps=-1
+             ):
+
         dx, dy = direction  # MOVES[direction]
         nrows, ncols = sheet.nrows, sheet.ncols
+        if not skip_first:
+            if self.check(cell):
+                yield cell, sheet, row, col
         while True:
-            if not first:
-                if self.check(cell):
-                    yield cell, sheet, row, col
+            if steps == 0 or max_steps == 0:
+                return
+
             row, col = row + dy, col + dx
+            max_steps -= 1
+            steps -= 1
+
             if row < 0 or col < 0 or row >= nrows or col >= ncols:
                 return
+
             cell = sheet.cell(rowx=row, colx=col)
             if self.check(cell):
-                yield cell.value, sheet, row, col
+                if steps < 0 or steps == 0:
+                    yield cell.value, sheet, row, col
 
     def degree_proc(self, val, sheet, row, col):
         sb = "подготовки"
@@ -146,8 +160,8 @@ class Plan(AcademicPlan):
                 "managers.rector": ("Ректор", self.slash_clean_proc),
                 "program.degree": ("УЧЕБНЫЙ ПЛАН", self.degree_proc),
                 "program.direction": ("^[нН]аправление", self.direction_proc),
-                #- "program.profile": ("^направление ", "D", self.profile_proc),
-                #- "start_year": ("^Год начала подготовки$", "R"),
+                "program.profile": ("^[нН]аправление ", self.profile_proc),
+                "program.start_year": ("^[Гг]од начала подготовки$", self.to_right_proc),
                 #-"edu_standard.code": ("^Образовательный стандарт$", "R"),
                 #-"edu_standard.title": ("^Образовательный стандарт$", "RD"),
                 #"managers.EW_prorector": ("^Проректор по учебной работе$",
@@ -252,14 +266,10 @@ class Plan(AcademicPlan):
         else:
             value = value.strip()
             path = name.split(".")
-            last = path[-1]
             attrs = self.attrs
-            for name in path[:-1]:
+            for name in path:
                 attrs = attrs.setdefault(name, {})
-            if last in attrs:
-                attrs["_value"] = value
-            else:
-                attrs[last] = {"_value": value}
+            attrs.update({"_value": value})
 
     def identity(self, cell, *args):
         yield (cell,) + args
@@ -285,9 +295,35 @@ class Plan(AcademicPlan):
         }
         yield val, sheet, row, col
 
-    def profile_proc(self, s):
-        s = s.split('"')[2]
-        return s
+    def profile_proc(self, val, sheet, row, col):
+        for val, sheet, row, col in self.path(val,
+                                              sheet,
+                                              row,
+                                              col,
+                                              direction=D, steps=1):
+            val = val.replace("'", "\"").split('"')[1]
+            yield val, sheet, row, col
+            break
+
+    def right_one_proc(self, val, sheet, row, col):
+        for val, sheet, row, col in self.path(val,
+                                              sheet,
+                                              row,
+                                              col,
+                                              direction=R, steps=1):
+            yield val, sheet, row, col
+            break
+
+    def to_right_proc(self, val, sheet, row, col):
+        #        import pudb
+        #        pu.db
+        for val, sheet, row, col in self.path(val,
+                                              sheet,
+                                              row,
+                                              col,
+                                              direction=R):
+            yield val, sheet, row, col
+            break
 
     def appov_plan_proc(self, s):
         return s.replace("План одобрен ", "").strip()

@@ -44,3 +44,5 @@ class TestLoad(object):
 
     def test_init(self):
         assert self.plan.program.direction.code
+        assert self.plan.program.direction
+        assert self.plan.program.profile
