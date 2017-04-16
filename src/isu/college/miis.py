@@ -30,7 +30,6 @@ class NormalizationError(Exception):
 
 def normal(word, *tags):
     tags = set(tags)
-    print(tags)
     for p in morph.parse(word):
         if tags in p.tag:
             return p.normal_form
@@ -137,8 +136,8 @@ class Plan(AcademicPlan):
                 #"ministry": ((7, 2), self.identity),
                 #"institution": ((9, 0), self.identity),
                 #"managers.rector": ("Ректор", self.slash_clean_proc),
-                "program.degree": ("УЧЕБНЫЙ ПЛАН", self.degree_proc),
-                #- "program.direction": ("^направление ", self.direction_proc),
+                #"program.degree": ("УЧЕБНЫЙ ПЛАН", self.degree_proc),
+                "program.direction": ("^[нН]аправление", self.direction_proc),
                 #- "program.profile": ("^направление ", "D", self.profile_proc),
                 #- "start_year": ("^Год начала подготовки$", "R"),
                 #-"edu_standard.code": ("^Образовательный стандарт$", "R"),
@@ -216,8 +215,13 @@ class Plan(AcademicPlan):
 
     def assign(self, value, name):
         assert value is not None
-        value = value.strip()
-        self.attrs[name] = value
+        if isinstance(value, dict):
+            for k, v in value.items():
+                nname = name.rstrip(".") + "." + k
+                self.assign(v, nname)
+        else:
+            value = value.strip()
+            self.attrs[name] = value
 
     def identity(self, cell, *args):
         yield (cell,) + args
@@ -228,16 +232,19 @@ class Plan(AcademicPlan):
         """/XXXX/ -> XXX """
         return s.replace("/", "").replace("\\", "").strip()
 
-    DRE = re.compile("((\d\.)+\d).\s*(.*)")
+    DRE = re.compile(".*\s(\d+\.\d+\.\d+)\.?\s*(.*)")
 
-    def direction_proc(self, s):
-        s = s.replace("направление ", "").strip()
-        m = self.DRE.match(s)
-        assert m is not None, "cannot match"
-        return {
+    def direction_proc(self, val, sheet, row, col):
+        val = val.strip()
+        m = self.DRE.match(val)
+        if m is None:
+            return
+        assert m is not None, "cannot match {} with {}".format(val, self.DRE)
+        val = {
             "code": m.group(1),
-            "title": m.group(3)
+            "title": m.group(2)
         }
+        yield val, sheet, row, col
 
     def profile_proc(self, s):
         s = s.split('"')[2]
