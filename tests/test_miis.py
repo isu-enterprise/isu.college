@@ -1,4 +1,4 @@
-from nose.tools import raises
+from nose.tools import raises, nottest
 from isu.college.miis import Plan
 from pkg_resources import resource_filename
 import os.path
@@ -38,11 +38,32 @@ class TestBasic(object):
 
 class TestLoad(object):
     def setUp(self):
-        FN = ALLIN[0]
-        print(FN)
+        i = 4
+        FN = ALLIN[i]
+        print(i, FN)
         self.plan = Plan(FN)
 
+    #@nottest
     def test_init(self):
         assert self.plan.program.direction.code
         assert self.plan.program.direction
         assert self.plan.program.profile
+
+
+class TestAllKnown:
+    def setUp(self):
+        self.files = ALLIN
+
+    @nottest
+    def test_allin(self):
+        for i, f in enumerate(self.files):
+            print("{}-th plan:{}".format(i, f))
+            plan = Plan(f)
+            self.check(plan)
+
+    @nottest
+    def check(self, p):
+        assert p.program.direction.code
+        assert p.program.direction
+        assert p.program.profile
+        assert p.profession

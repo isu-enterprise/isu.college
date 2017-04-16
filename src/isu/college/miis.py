@@ -104,7 +104,10 @@ class Plan(AcademicPlan):
         if hasattr(cell, "ctype"):
             if cell.ctype == 0:
                 return False
-        if self.VALSTRRE.search(cell.value) is None:
+        val = cell.value
+        if self.VALSTRRE.search(val) is None:
+            return False
+        if "_" in val:
             return False
         return True
 
@@ -161,22 +164,22 @@ class Plan(AcademicPlan):
                 "institution": ((9, 0), self.identity),
                 "managers.rector": ("Ректор", self.slash_clean_proc),
                 "program.degree": ("УЧЕБНЫЙ ПЛАН", self.degree_proc),
-                "program.direction": ("^[нН]аправление", self.direction_proc),
-                "program.profile": ("^[нН]аправление ", self.profile_proc),
+                "program.direction": (".*[нН]аправлен", self.direction_proc),
+                "program.profile": (".*[нН]аправлен", self.profile_proc),
                 "program.start_year": ("^[Гг]од начала подготовки$", self.right_proc),
                 "edu_standard": ("^[Оо]бразовательный стандарт$", self.edu_standard_proc),
                 "managers.EW_prorector": ("^[Пп]роректор.*учеб.*работе$", self.slash_clean_proc),
                 "managers.UMU_head": ("^[Нн]ачальник УМУ$", self.slash_clean_proc),
                 "managers.director": ("^[Дд]иректор$", self.slash_clean_proc),
                 "approval": ("^[Пп]лан одобрен", self.appov_plan_proc),
-                "chair.title": ("^Кафедра:$", self.right_proc),
-                "chair.faculty": ("^Факультет:$", self.right_proc),
-                "profession.degree": ("^Квалификация:", self.colon_split_proc),
-                "profession.program": ("^Программа подготовки:", self.colon_split_proc),
-                "profession.mural": ("^Форма обучения:", self.colon_split_proc),
-                "program.duration": ("^Срок обучения:", self.g_removal_proc),
-                "program.laboriousness": ("^Трудоемкость ОПОП:", self.colon_split_proc),
-                "profession.activities": ("^Виды деят", self.activities_proc),
+                "chair.title": ("^[Кк]афедра:$", self.right_proc),
+                "chair.faculty": ("^[Фф]акультет:$", self.right_proc),
+                "profession.degree": ("^[Кк]валификация:", self.colon_split_proc),
+                "profession.program": ("^[Пп]рограмма подготовки:", self.colon_split_proc),
+                "profession.mural": ("^[Фф]орма обучения:", self.colon_split_proc),
+                "program.duration": ("^[Сс]рок обучения:", self.g_removal_proc),
+                "program.laboriousness": ("^[Тт]рудоемкость ОПОП:", self.colon_split_proc),
+                "profession.activities": ("^[Фф]акультет", self.activities_proc),
             }
         }
 
@@ -281,6 +284,7 @@ class Plan(AcademicPlan):
     DRE = re.compile(".*(\s(\d+\.\d+\.\d+)\.?\s*(.*))")
 
     def direction_proc(self, val, sheet, row, col):
+
         val = val.strip()
         m = self.DRE.match(val)
         if m is None:
@@ -299,7 +303,11 @@ class Plan(AcademicPlan):
                                               row,
                                               col,
                                               direction=D, steps=1):
-            val = val.replace("'", "\"").split('"')[1]
+            val = val.replace("'", "\"").split('"')
+            if len(val) == 1:
+                val = val[0]
+            else:
+                val = val[1]
             yield val, sheet, row, col
             break
 
@@ -371,6 +379,8 @@ class Plan(AcademicPlan):
                     "signature.date": date
                 }, s, r, c
                 return
+        else:
+            yield {"division": division}, s, r, c
 
     def proto_number_proc(self, s):
         return s
@@ -387,8 +397,9 @@ class Plan(AcademicPlan):
 
     def activities_proc(self, v, s, r, c):
         for v, s, r, c in self.right_proc(v, s, r, c):
-            l = self.WORDDASHRE.findall(v)
-            l = [a.strip().replace(" ", "") for a in l]
-            l = [a for a in l if a]
-            yield l, s, r, c
-            break
+            for v, s, r, c in self.down_one_proc(v, s, r, c):
+                l = self.WORDDASHRE.findall(v)
+                l = [a.strip().replace(" ", "") for a in l]
+                l = [a for a in l if a]
+                yield l, s, r, c
+                return
