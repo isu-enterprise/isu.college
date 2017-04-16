@@ -96,12 +96,16 @@ class Plan(AcademicPlan):
     def is_loaded(self):
         return self.book is not None
 
+    VALSTRRE = re.compile("(\w+|\d+)")
+
     def check(self, cell):
         if cell is None:
             return False
         if hasattr(cell, "ctype"):
             if cell.ctype == 0:
                 return False
+        if self.VALSTRRE.search(cell.value) is None:
+            return False
         return True
 
     def path(self, cell, sheet, row, col,
@@ -150,8 +154,6 @@ class Plan(AcademicPlan):
         for rx in range(sh.nrows):
             print(sh.row(rx))
 
-    VALSTRRE = re.compile("(\w+|\d+)")
-
     def _setup_rules(self):
         self.RULES = {
             "Титул": {
@@ -161,26 +163,20 @@ class Plan(AcademicPlan):
                 "program.degree": ("УЧЕБНЫЙ ПЛАН", self.degree_proc),
                 "program.direction": ("^[нН]аправление", self.direction_proc),
                 "program.profile": ("^[нН]аправление ", self.profile_proc),
-                "program.start_year": ("^[Гг]од начала подготовки$", self.to_right_proc),
-                "edu_standard.code": ("^[Оо]бразовательный стандарт$", self.to_right_proc),
-                #-"edu_standard.title": ("^Образовательный стандарт$", "RD"),
-                #"managers.EW_prorector": ("^Проректор по учебной работе$",
-                #                          "R+", self.slash_clean_proc),
-                #"managers.UMU_head": ("^Начальник УМУ$", "R+",
-                #                      self.slash_clean_proc),
-                # "managers.director": ("^Директор$", "R+", self.slash_clean_proc),
-                # "approval.organization": ("^План одобрен", self.appov_plan_proc),
-                #-"approval.number": ("^План одобрен",
-                #                    "DR", self.proto_number_proc),
-                "chair.title": ("^Кафедра:$", self.to_right_proc),
-                "chair.faculty": ("^Факультет:$", self.to_right_proc),
-                # "profession.degree": ("^Квалификация:", self.colon_split_proc),
-                # "profession.program": ("^Программа подготовки:", self.colon_split_proc),
-                # "profession.mural": ("^Форма обучения:", self.colon_split_proc),
-                # "program.duration": ("^Срок обучения:", self.g_removal_proc),
-                # "program.laboriousness": ("^Трудоемкость ОПОП:", self.colon_split_proc),
-                # "profession.activities": ("^Виды деят", "R", self.activities_proc),
-                #"profession.activities": ("^Виды деят", self.activities_proc),
+                "program.start_year": ("^[Гг]од начала подготовки$", self.right_proc),
+                "edu_standard": ("^[Оо]бразовательный стандарт$", self.edu_standard_proc),
+                "managers.EW_prorector": ("^[Пп]роректор.*учеб.*работе$", self.slash_clean_proc),
+                "managers.UMU_head": ("^[Нн]ачальник УМУ$", self.slash_clean_proc),
+                "managers.director": ("^[Дд]иректор$", self.slash_clean_proc),
+                "approval": ("^[Пп]лан одобрен", self.appov_plan_proc),
+                "chair.title": ("^Кафедра:$", self.right_proc),
+                "chair.faculty": ("^Факультет:$", self.right_proc),
+                "profession.degree": ("^Квалификация:", self.colon_split_proc),
+                "profession.program": ("^Программа подготовки:", self.colon_split_proc),
+                "profession.mural": ("^Форма обучения:", self.colon_split_proc),
+                "program.duration": ("^Срок обучения:", self.g_removal_proc),
+                "program.laboriousness": ("^Трудоемкость ОПОП:", self.colon_split_proc),
+                "profession.activities": ("^Виды деят", self.activities_proc),
             }
         }
 
@@ -236,6 +232,7 @@ class Plan(AcademicPlan):
                 for cell, row, col in find_match(sheet, templ):
                     assert cell is not None and cell.ctype != 0
                     for _ in body(cell.value, sheet, row, col):
+                        assert len(_) >= 4, "must yield (val, sheet, row, col)"
                         if _[0] is None:
                             continue
                         cell = _[0]
@@ -264,7 +261,8 @@ class Plan(AcademicPlan):
                     nname += "." + k
                     self.assign(v, nname)
         else:
-            value = value.strip()
+            if isinstance(value, str):
+                value = value.strip()
             path = name.split(".")
             attrs = self.attrs
             for name in path:
@@ -276,9 +274,11 @@ class Plan(AcademicPlan):
 
     SLRE = re.compile("[\\/]?(.*)[\\/]?")  # Not used
 
-    def slash_clean_proc(self, s):
+    def slash_clean_proc(self, val, sheet, row, col):
         """/XXXX/ -> XXX """
-        return s.replace("/", "").replace("\\", "").strip()
+        for val, _, r, c in self.right_proc(val, sheet, row, col):
+            yield val.replace("/", "").replace("\\", "").strip(), sheet, r, c
+            break
 
     DRE = re.compile(".*(\s(\d+\.\d+\.\d+)\.?\s*(.*))")
 
@@ -314,31 +314,83 @@ class Plan(AcademicPlan):
             yield val, sheet, row, col
             break
 
-    def to_right_proc(self, val, sheet, row, col):
-        #        import pudb
-        #        pu.db
+    def right_proc(self, val, sheet, row, col, max_steps=-1, steps=-1):
         for val, sheet, row, col in self.path(val,
                                               sheet,
                                               row,
                                               col,
-                                              direction=R):
+                                              direction=R,
+                                              steps=steps,
+                                              max_steps=max_steps
+                                              ):
             yield val, sheet, row, col
             break
 
-    def appov_plan_proc(self, s):
-        return s.replace("План одобрен ", "").strip()
+    def down_proc(self, val, sheet, row, col, max_steps=-1, steps=-1):
+        for val, sheet, row, col in self.path(val,
+                                              sheet,
+                                              row,
+                                              col,
+                                              direction=D,
+                                              steps=steps,
+                                              max_steps=max_steps
+                                              ):
+            yield val, sheet, row, col
+            break
+
+    def down_one_proc(self, val, sheet, row, col, steps=1):
+        for val, sheet, row, col in self.path(val,
+                                              sheet,
+                                              row,
+                                              col,
+                                              direction=D, steps=1):
+            yield val, sheet, row, col
+            break
+
+    def edu_standard_proc(self, val, sheet, row, col):
+        for code, _, r, c in self.right_proc(val, sheet, row, col):
+            break
+        else:
+            return
+        for date, _, r, c in self.down_one_proc(val, sheet, r, c, steps=1):
+            break
+        else:
+            return
+
+        yield {
+            "code": code,
+            "date": date
+        }, sheet, r, c
+
+    def appov_plan_proc(self, v, s, r, c):
+        division = v.split("одобрен ")[1].strip()
+        for v, s, r, c in self.down_one_proc(v, s, r, c):
+            for v, s, r, c in self.right_proc(v, s, r, c):
+                number, date = v.split(" от ")
+                yield {
+                    "division": division,
+                    "signature.number": number,
+                    "signature.date": date
+                }, s, r, c
+                return
 
     def proto_number_proc(self, s):
         return s
 
-    def colon_split_proc(self, s):
-        return s.split(":")[1].strip()
+    def colon_split_proc(self, v, s, r, c):
+        yield v.split(":")[1].strip(), s, r, c
 
-    def g_removal_proc(self, s):
-        return self.colon_split_proc(s).replace("г", "")
+    def g_removal_proc(self, v, s, r, c):
+        for v, s, r, c in self.colon_split_proc(v, s, r, c):
+            yield v.replace("г", ""), s, r, c
+            break
 
-    def activities_proc(self, s):
-        return (s)
-        l = s.split("\n")
-        l = [a.strip("- ") for a in l]
-        return l
+    WORDDASHRE = re.compile("(\w+\s?-?\s?\w+)")
+
+    def activities_proc(self, v, s, r, c):
+        for v, s, r, c in self.right_proc(v, s, r, c):
+            l = self.WORDDASHRE.findall(v)
+            l = [a.strip().replace(" ", "") for a in l]
+            l = [a for a in l if a]
+            yield l, s, r, c
+            break
