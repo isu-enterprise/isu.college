@@ -4,32 +4,7 @@ from isu.college.components import AcademicPlan
 import xlrd
 from isu.college import enums
 import re
-
-"""
-This is a simple interpreter of page processor
-that helps to find values among excel sheet
-
-FIXME: Write good documentation.!!!
-
-Structure has a form:
-  {"<sheet name>":{
-    <definitions>
-  }}
-
-where <definitions> are dicts of a form:
-  {
-     "<variable name>":(<commands>)
-  }
-
-<commands> ::= ( <start definition> [, <move or check>] [, proc func(x)])
-<start definitions> ::= <cell addres, eg. A0> | <regexp>
-<move or check> :: (dx,dy)* | "+" | (<rgexp>, <move>)
-"+" as in regexps, one or many steps of the prev movement.
-Move or check repeats till non-empty ...
-  I.e. containing numbers or characters, nor spaces, /'s, _'s, etc.
-... value found or
-table border exit. In the last case the search failed.
-"""
+import marisa_trie
 
 # Movement commands (dx,dy)
 L, R, D, U = (-1, 0), (1, 0), (0, 1), (0, -1)
@@ -40,6 +15,11 @@ MOVES = {
     "D": D,
     "U": U
 }
+
+
+def move(row, col, direction):
+    dx, dy = MOVES[direction]
+    yield row + dy, col + dx
 
 
 class CellNotFoundError(Exception):
@@ -57,7 +37,7 @@ class Object(object):
         return s
 
 
-class Plan(AcademicPlan, Object):
+class Plan(AcademicPlan):
     """Represents MIIS.ru Plan XLS export files as
     IAcademicPlan component.
     """
@@ -65,7 +45,17 @@ class Plan(AcademicPlan, Object):
     def __init__(self, URL):
         self.URL = URL
         self.book = None
+        self.attrs = {}
         self.load()
+
+    def __str__(self):
+        s = "{}<{}>:\n".format(self.__class__.__name__, hex(id(self)))
+        for k in self.attrs.keys():
+            if not k.startswith("_"):
+                val = self.attrs[k]
+                s += "{}={}\n".format(k, val)
+        s += "\n"
+        return s
 
     def load(self):
         """Loads spreadsheet on demand
@@ -75,6 +65,7 @@ class Plan(AcademicPlan, Object):
             return
 
         self.book = xlrd.open_workbook(self.URL)
+        self._setup_rules()
         self._run_recognition()
         # self.debug_print()
 
@@ -96,12 +87,12 @@ class Plan(AcademicPlan, Object):
 
     VALSTRRE = re.compile("(\w+|\d+)")
 
-    def _run_recognition(self):
-        SCRIPTS = {
+    def _setup_rules(self):
+        self.RULES = {
             "Титул": {
-                #"ministry": ((7, 2),),
-                #"institution": ((9, 0),),
-                # "managers.rector": ("^Ректор$", "R+", self.slash_clean_proc),
+                "ministry": ((7, 2), self.identity),
+                "institution": ((9, 0), self.identity),
+                "managers.rector": ("Ректор", self.slash_clean_proc),
                 # "program.degree": ("^УЧЕБНЫЙ ПЛАН", "DD", self.degree_proc),
                 #- "program.direction": ("^направление ", self.direction_proc),
                 #- "program.profile": ("^направление ", "D", self.profile_proc),
@@ -123,10 +114,12 @@ class Plan(AcademicPlan, Object):
                 # "profession.mural": ("^Форма обучения:", self.colon_split_proc),
                 # "program.duration": ("^Срок обучения:", self.g_removal_proc),
                 # "program.laboriousness": ("^Трудоемкость ОПОП:", self.colon_split_proc),
-                "profession.activities": ("^Виды деят", "R", self.activities_proc),
+                # "profession.activities": ("^Виды деят", "R", self.activities_proc),
                 #"profession.activities": ("^Виды деят", self.activities_proc),
             }
         }
+
+    def _run_recognition(self):
 
         # ADDRRE = re.compile("\w+\d+")  # A0 C10
 
@@ -150,106 +143,35 @@ class Plan(AcademicPlan, Object):
                         if m is not None:
                             yield cell, row, col
 
-        def process_body(sheet, cell, body, row, col):
-            def mv(c, x, y):
-                dx, dy = MOVES[c]
-                return (x + dx, y + dy)
-
-            def interp(row, col):
-                col, row = mv(r, col, row)
-                if row < 0 or col < 0 or \
-                   row >= sheet.nrows or \
-                   col > sheet.ncols:
-                    raise CellNotFoundError("gone beyond the sheet")
-
-                cell = sheet.cell(rowx=row, colx=col)
-                if cell.ctype == 0:
-                    return True, cell, row, col
-
-                val = cell.value
-                if self.VALSTRRE.search(val) is not None:
-                    return False, cell, row, col
-                return True, cell, row, col
-
-            for i, cmd in enumerate(body):
-                if isinstance(cmd, str):
-                    pc = None
-                    r = None
-                    for c in cmd:
-                        r = c
-                        if c == "+":
-                            r = pc
-                            next_ = True
-                            while next_:
-                                next_, cell, row, col = interp(row, col)
-                            pc = None
-
-                        else:
-                            _, cell, row, col = interp(row, col)
-                            pc = c
-
-                elif isinstance(cmd, type(self.g_removal_proc)):
-                    if cell.ctype == 0:
-                        return None
-                    val = cmd(cell.value)
-                    return val
-
-            if cell is None or cell.ctype == 0:
-                return None
-
-            return cell.value
-
-        def assign_val(o, val):
-            if isinstance(val, dict):
-                if not isinstance(o, Object):
-                    n = Object()
-                    if o is not None:
-                        setattr(n, "value", o)
-                    o = n
-
-                for k, v in val.items():
-                    setattr(o, k, v)
-                return o
-            return val
-
-        for page, matchs in SCRIPTS.items():
+        for page, matchs in self.RULES.items():
             sheet = self.book.sheet_by_name(page)
 
             for var, prog in matchs.items():
-                templ = prog[0]
-                rest = prog[1:]
-                cell = None
+                templ, body = prog
+                #body = getattr(self, body)
 
                 for cell, row, col in find_match(sheet, templ):
-                    cell = process_body(sheet, cell, rest, row, col)
-                    if cell is None:
-                        continue
+                    assert cell is not None
+                    for _ in body(cell, sheet, row, col):
+                        if _[0] is None:
+                            continue
+                        cell = _[0]
+                        break
+                    if cell is not None and cell.ctype != 0:
+                        self.assign(*_, name=var)
+                        break
 
-                l = var.split(".")
-                if hasattr(self, var):
-                    oval = getattr(self, var)
-                else:
-                    oval = None
-                if len(l) == 1:
-                    setattr(self, var, assign_val(oval, cell))
-                else:
-                    field, subf = l
-                    if hasattr(self, field):
-                        o = getattr(self, field)
-                        print("O:", o)
-                        assert isinstance(o,
-                                          Object), \
-                            "field '{}' is not an " \
-                            "Object instance!".format(field)
-                    else:
-                        o = Object()
-                        setattr(self, field, o)
-                    if hasattr(o, subf):
-                        oval = getattr(o, subf)
-                    else:
-                        oval = None
-                    setattr(o, subf, assign_val(oval, cell))
         print(self)
+
+    def assign(self, cell, *args, **kwargs):
+        assert "name" in kwargs, "'name' denotes the name of field, but absent"
+        assert cell is not None
+        assert cell.ctype != 0
+        self.attrs[kwargs["name"]] = cell.value
+        # yield (cell,) + args
+
+    def identity(self, cell, *args):
+        yield (cell,) + args
 
     SLRE = re.compile("[\\/]?(.*)[\\/]?")  # Not used
 
