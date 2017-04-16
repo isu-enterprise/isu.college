@@ -88,7 +88,7 @@ class Plan(AcademicPlan):
         self.book = xlrd.open_workbook(self.URL)
         self._setup_rules()
         self._run_recognition()
-        pprint(self.attrs)
+        # pprint(self.attrs)
         self._represent()
         # print(self.program.direction)
         # self.debug_print()
@@ -247,8 +247,6 @@ class Plan(AcademicPlan):
                         else:
                             self.assign(cell, name=var)
                         break
-
-        print(self)
 
     def assign(self, value, name):
         assert value is not None
