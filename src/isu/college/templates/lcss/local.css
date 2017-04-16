@@ -1,0 +1,46 @@
+/* Font Definitions */
+/*
+            table {
+            border-collapse: collapse;
+            }
+
+            table, th, td {
+            border: 1px solid black;
+            }
+*/
+.simple_table {
+    /* margin: 1em; */
+    width: 100%;
+    border: 1px solid black;
+    border-collapse: collapse;
+}
+
+.hidden {
+    display: none;
+}
+
+.vocabpanel {
+    width: 40%;
+    max-width: 40%;
+}
+
+.vocabtable {
+    width: 60%;
+}
+
+.left {
+    float: left;
+    /* background-color: yellow; */
+}
+.right {
+    float: right;
+    /* background-color: green; */
+}
+tr.selected_row {
+    background-color: cyan;
+}
+.gi-75m{font-size: 0.75em;}
+.gi-2x{font-size: 2em;}
+.gi-3x{font-size: 3em;}
+.gi-4x{font-size: 4em;}
+.gi-5x{font-size: 5em;}

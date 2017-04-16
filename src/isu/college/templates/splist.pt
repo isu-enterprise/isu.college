@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:tal="http://xml.zope.org/namespaces/tal"
+      xmlns:metal="http://xml.zope.org/namespaces/metal"
+      metal:use-macro="main.macros['page']">
+    <tal:block metal:fill-slot="header-meta">
+        <link href="/lcss/local.css" rel="stylesheet"/>
+        <style>
+        </style>
+    </tal:block>
+    <tal:block metal:fill-slot="content">
+        <div class="panel panel-primary left vocabtable">
+            <div class="panel-heading" tal:content="view.title | nothing">
+            </div>
+            <div class="panel-body">
+                <table class="table table-striped simple_table"
+                       id="sp-table"
+                >
+                    <thead >
+                        <tr>
+                            <th style="width:5em;">#</th>
+                            <th style="width:auto;">name</th>
+                        </tr>
+                    </thead>
+                    <tbody id="insertion-point">
+                        <tr tal:repeat="item view.items"
+
+                        >
+                            <td tal:content="repeat['item'].number" class="hidden"
+                                data-field-id="_number"
+                            >N</td>
+
+                            <td
+                                data-field-id="name"
+                            ><a href="#"
+                                tal:attributes="href string:${item}.html"
+                                tal:content="item"
+                             ></a></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+
+    </tal:block>
+    <tal:block metal:fill-slot="script-src">
+
+
+    </tal:block>
+</html>

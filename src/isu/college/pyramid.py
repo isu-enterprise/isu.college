@@ -2,7 +2,7 @@
 from isu.webapp.interfaces import IConfigurationEvent
 
 from pyramid.view import view_config
-from zope.component import getGlobalSiteManager, adapter
+from zope.component import getGlobalSiteManager, adapter, getUtility
 from isu.webapp import views
 from glob import glob
 from pprint import pprint
@@ -30,8 +30,8 @@ wplistview = WPListView(resource_filename(
 GSM.registerUtility(wplistview, name="study-plans")
 
 
-@view_config(route_name="work-programs", renderer="isu.webapp:templates/index.pt")
-def work_programs(request):
+@view_config(route_name="plan-list", renderer="isu.college:templates/splist.pt")
+def work_plans(request):
     view = getUtility(IView, name="study-plans")
     return {
         "view": view,
@@ -42,9 +42,23 @@ def work_programs(request):
     }
 
 
+@view_config(route_name="plan", renderer="isu.college:templates/plan.pt")
+def work_plan(request):
+    plan_name = request.multidict["name"]
+    print(plan_name)
+    view = getUtility(IView, name="study-plans")
+    view = view[name]
+    return {
+        "view": view,
+
+    }
+
+
 @adapter(IConfigurationEvent)
 def configurator(config):
-    config.add_route("work-programs", "/wp/")
+    config.add_route("plan", "/plans/${name}.html")
+    config.add_route("plan-list", "/plans/")
+    config.add_static_view(name='/lcss', path='isu.college:templates/lcss')
     config.scan()
 
 

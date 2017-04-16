@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:tal="http://xml.zope.org/namespaces/tal"
+      xmlns:metal="http://xml.zope.org/namespaces/metal"
+      metal:use-macro="main.macros['page']">
+    <tal:block metal:fill-slot="header-meta">
+        <link href="/lcss/local.css" rel="stylesheet"/>
+    </tal:block>
+    <tal:block metal:fill-slot="content">
+        GGGG
+    </tal:block>
+    <tal:block metal:fill-slot="script-src">
+        <script type="text/javascript" src="js/vocabedit.js">
+        </script>
+
+    </tal:block>
+</html>
