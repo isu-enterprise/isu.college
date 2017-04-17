@@ -168,9 +168,6 @@
         </section>
     </tal:block>
     <tal:block metal:fill-slot="script-src">
-        <script type="text/javascript" src="js/vocabedit.js">
-        </script>
-
     </tal:block>
 
 </html>
