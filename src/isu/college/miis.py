@@ -409,6 +409,14 @@ class Plan(AcademicPlan):
                 return
 
     def load_lists(self):
+        def empty(cell):
+            if cell.ctype == 0:
+                return None
+            val = cell.value.strip()
+            if val:
+                return val
+            return None
+
         if self.compl is not None:
             return
         sheet = self.book.sheet_by_name("Компетенции")
@@ -426,28 +434,32 @@ class Plan(AcademicPlan):
                     int(A.value)
                 except ValueError:
                     return
-                cid = D.value
+                cid = empty(D)
                 courid = None
             else:
-                courid = D.value
-            if courid is not None:
-                courl.setdefault(courid, (G, set()))
-            elif cid is not None:
-                compl.setdefault(cid, (G, set()))
-            else:
-                continue
-            if courid is not None and cid is not None:
-                _, s1 = courl.setdefault(courid, (G, set()))
-                _, s2 = compl.setdefault(cid, (G, set()))
-                s1.add(cid)
-                s2.add(courid)
+                courid = empty(D)
+            val = empty(G)
+            if val is not None:
+                if courid is not None:
+                    print("course:", courid, val)
+                    courl.setdefault(courid, (val, set()))
+                elif cid is not None:
+                    print("comp:", courid, val)
+                    compl.setdefault(cid, (val, set()))
+                else:
+                    continue
+                if courid is not None and cid is not None:
+                    _, s1 = courl[courid]
+                    _, s2 = compl[cid]
+                    s1.add(cid)
+                    s2.add(courid)
 
     @property
     def competence_list(self, courid=None):
+        self.load_lists()
         yield from self._show_list(self.compl, courid, "{title} ({code})")
 
     def _show_list(self, l, filterid, form):
-        self.load_lists()
         for k, v in l.items():
             v, s = v
             if filterid is not None and filterid not in s:
@@ -460,4 +472,5 @@ class Plan(AcademicPlan):
 
     @property
     def course_list(self, compid=None):
+        self.load_lists()
         yield from self._show_list(self.courl, compid, "{code}. {title}")

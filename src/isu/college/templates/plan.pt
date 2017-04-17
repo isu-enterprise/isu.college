@@ -8,9 +8,9 @@
     </tal:block>
     <tal:block metal:fill-slot="content">
         <section id="title-section" property="schema:hasPart"
-            typeof="schema:CreativeWork"
+                 typeof="schema:CreativeWork"
                  resource="#title"
-            >
+        >
             <h1 property="dc:title" datatype="xsd:string">
                 Учебный план специальности <br/>
                 <span id="direction-id"
@@ -81,7 +81,7 @@
                  typeof="schema:CreativeWork"
                  resource="#list-of-competence"
         >
-            <div property="schema:hasPart" typeof="dc:Text cnt:ContentAsText" resource="#purpose">
+            <div property="schema:hasPart" typeof="dc:Text cnt:ContentAsText" resource="#competence-descriptions">
                 <h2 property="dc:title" datatype="xsd:string">Список компетенций специальности</h2>
                 <ul property="curr:competence-list" typeof="rdf:List" resource="#competence-list">
                     <li
@@ -91,7 +91,7 @@
                             property="curr:competence"
                             resource="#"
                             tal:attributes="
-                                            resource string:#competence-description-${comp.code};
+                                            resource string:#competence-${comp.code};
                                             id comp.code
                                             "
                         >
@@ -104,11 +104,66 @@
                                  tal:content="comp.code"
                                  property="oa:id"
                                  datatype="xsd:ID"
-                             >
+                             >Код компетенции
                             </span>)
                         </div>
                     </li>
                 </ul>
+            </div>
+            <div property="schema:hasPart" typeof="dc:Text cnt:ContentAsText" resource="#course-descriptions">
+                <h2 property="dc:title" datatype="xsd:string">Список курсов специальности</h2>
+                <ul property="curr:course-list" typeof="rdf:List" resource="#course-list">
+                    <li
+                        tal:repeat="cour plan.course_list"
+                    >
+                        <div
+                            property="curr:course"
+                            resource="#"
+                            tal:attributes="
+                                            resource string:#course-${cour.code};
+                                            id cour.code
+                                            "
+                        >
+                            <span
+                                tal:content="cour.code"
+                                property="oa:id"
+                                datatype="xsd:ID"
+                            >Код сурса
+                            </span>
+                            <span tal:content="cour.title"
+                                  property="dc:title"
+                                  datatype="xsd:string"
+                            >Название курса
+                            </span>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+        </section>
+        <section id="technical-details" property="schema:hasPart"
+                 typeof="schema:CreativeWork"
+                 resource="#technical-details"
+        >
+            <div property="schema:hasPart" typeof="dc:Text cnt:ContentAsText" resource="#technical-details-description">
+                <h2 property="dc:title" datatype="xsd:string">Технические детали</h2>
+                Файл:
+                <span
+                    property="nfo:filename"
+                    datatype="xsd:string"
+                    resource="#filename"
+                    tal:content="view.filename"
+                >Файл
+                </span>
+                <br/>
+                Полное имя файла:
+                <span
+                    property="nfo:filename"
+                    datatype="xsd:string"
+                    resource="#filepathname"
+                    tal:content="view.filepathname"
+                >Файл
+                </span>
+                <br/>
             </div>
         </section>
     </tal:block>
@@ -121,11 +176,11 @@
 </html>
 
 <!--
-<section id="general-course-description" property="schema:hasPart"
-         typeof="schema:CreativeWork"
-         resource="#description"
->
-    <div property="schema:hasPart" typeof="dc:Text cnt:ContentAsText" resource="#purpose">
-        <h2 property="dc:title" datatype="xsd:string">Цели и задачи дисциплины (модуля)</h2>
-        <p property="cnt:chars" datatype="xsd:string">
-            -->
+     <section id="general-course-description" property="schema:hasPart"
+     typeof="schema:CreativeWork"
+     resource="#description"
+     >
+     <div property="schema:hasPart" typeof="dc:Text cnt:ContentAsText" resource="#purpose">
+     <h2 property="dc:title" datatype="xsd:string">Цели и задачи дисциплины (модуля)</h2>
+     <p property="cnt:chars" datatype="xsd:string">
+   -->

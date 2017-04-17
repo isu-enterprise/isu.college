@@ -56,24 +56,23 @@ class SPListView(View):
         template = os.path.join(location + "/*.xls")
         self.files = glob(template)
         self.items = set([os.path.split(fn)[-1] for fn in self.files])
-        self.plans = {}
+        self.plan_views = {}
         print("Location: {}".format(location))
         print("List of plans found.")
         pprint(self.items)
 
-    def getplan(self, name, course=None, form=None):
-        if name not in self.plans:
+    def getplan(self, name):
+        if name not in self.plan_views:
 
             print("Loading plan:{}".format(name))
             fullpath = os.path.join(DATADIR, name)
-            self.plans[name] = IView(Plan(fullpath))
+            plan_view = IView(Plan(fullpath))
+            plan_view.filename = name
+            plan_view.filepathname = fullpath
+            self.plan_views[name] = plan_view
 
-        plan = self.plans[name]
-        plan._filter = {
-            "format": form,
-            "course": course
-        }
-        return plan
+        plan_view = self.plan_views[name]
+        return plan_view
 
 
 splistview = SPListView(DATADIR)
@@ -101,7 +100,8 @@ def work_plan(request):
         "form": md.get("format", None)
     }
 
-    view = view.getplan(plan_name, **kwargs)
+    view = view.getplan(plan_name)
+    view.filter = kwargs
     return {
         "view": view,
         "plan": view.plan
