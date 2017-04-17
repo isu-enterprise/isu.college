@@ -29,13 +29,27 @@ class NormalizationError(Exception):
     pass
 
 
-def normal(word, *tags):
+def normal(phrase, *tags, **kw):
     tags = set(tags)
-    for p in morph.parse(word):
-        if tags in p.tag:
-            return p.normal_form
-    raise NormalizationError(
-        "cannot normaize '{}' within {}".format(word, tags))
+
+    def norm(word):
+        for p in morph.parse(word):
+            if tags in p.tag:
+                return p.normal_form
+        raise NormalizationError(
+            "cannot normaize '{}' within {}".format(word, tags))
+
+    phrase = phrase.strip()
+    if phrase.find(" ") >= 0:
+        assert "n" in kw is not None, "add number of word to normaize in the sentence"
+        n = kw["n"]
+        words = phrase.split()
+        f, word, l = words[:n], words[n],  words[n + 1:]
+        word = norm(word)
+        phrase = " ".join(f + [word] + l)
+        return phrase
+    else:
+        return norm(phrase)
 
 
 def move(row, col, direction):
@@ -446,6 +460,7 @@ class Plan(AcademicPlan):
                 if courid is not None:
                     courl.setdefault(courid, (val, set()))
                 elif cid is not None:
+                    val = normal(val, n=0)
                     compl.setdefault(cid, (val, set()))
                 else:
                     continue
