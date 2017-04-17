@@ -13,10 +13,10 @@
             >
             <h1 property="dc:title" datatype="xsd:string">
                 Учебный план
-                <span id="#direction-id"
+                <span id="direction-id"
                       property="oa:id"
                       tal:content="plan.program.direction.code">Код специальности</span>
-                <span id="#direction-title"
+                <span id="direction-title"
                       property="dc:title"
                       tal:content="plan.program.direction.title">Название специальности</span>
             </h1>
@@ -31,7 +31,7 @@
                 <div>
                     <span class="strong">Сведения по Учебному плану</span><br/>
                     Профиль подготовки:
-                    <span id="#direction-profile"
+                    <span id="direction-profile"
                           property="oa:title"
                           tal:content="plan.program.profile"
                     >Профиль подготовки</span>
@@ -39,38 +39,38 @@
                 <div>
                     <span class="strong">Сведения о кафедре, разработавшей Учебный план</span><br/>
                     Кафедра <span
-                                id="#dev-chair-id"
+                                id="dev-chair-id"
                                 tal:content="plan.chair.title" property="dc:title">Кафедра</span>,<br/>
-                    Факультет <span id="#faculty"
+                    Факультет <span id="faculty"
                                     property="dc:title"
                                     tal:content="plan.chair.faculty">Факультет</span>
                 </div>
                 <div>
                     <span class="strong">Сведения о специальности</span><br/>
-                    Квалификация: <span id="#prof-degree"
+                    Квалификация: <span id="prof-degree"
                                         property="dc:title"
                                         tal:content="plan.profession.degree">Квалификация</span>
                     <br/>
-                    Форма обучения: <span id="#mural"
+                    Форма обучения: <span id="mural"
                                           property="dc:title"
                                           tal:content="plan.profession.mural">Очная</span>
                     <BR/>
-                    Программа подготовки: <span id="#prof-academicity"
+                    Программа подготовки: <span id="prof-academicity"
                                                 property="dc:title"
                                                 tal:content="plan.profession.academicity">Квалификация</span>
                     <br/>
                 </div>
-                <div>
+                <div tal:condition="plan.managers | nothing">
                     <span class="strong">Руководители</span><br/>
-                    Проректор по учебной работе: <span id="#eц-prorector"
+                    Проректор по учебной работе: <span id="EW-prorector"
                                                        property="dc:title"
                                                        tal:content="plan.managers.EW_prorector | default ">Не распознан</span>
                     <br/>
-                    Начальник УМУ: <span id="#unu-head"
+                    Начальник УМУ: <span id="unu-head"
                                          property="dc:title"
                                          tal:content="plan.managers.UMU_head | default ">Не распознан</span>
                     <br/>
-                    Директор: <span id="#direcor"
+                    Директор: <span id="direcor"
                                     property="dc:title"
                                     tal:content="plan.managers.director">Директор</span>
                     <br/>
@@ -83,9 +83,32 @@
         >
             <div property="schema:hasPart" typeof="dc:Text cnt:ContentAsText" resource="#purpose">
                 <h2 property="dc:title" datatype="xsd:string">Список компетенций</h2>
-                <p property="cnt:chars" datatype="xsd:string">
-                    Компетенции
-                </p>
+                <ul property="curr:competence-list" typeof="rdf:List" resource="#competence-list">
+                    <li
+                        tal:repeat="comp plan.competence_list"
+                    >
+                        <div
+                            property="curr:competence"
+                            resource="#"
+                            tal:attributes="
+                                            resource string:#competence-description-${comp.code};
+                                            id comp.code
+                                            "
+                        >
+                            <span tal:content="comp.title"
+                                  property="dc:title"
+                                  datatype="xsd:string"
+                            >Название компетенции
+                            </span>
+                            (<span
+                                 tal:content="comp.code"
+                                 property="oa:id"
+                                 datatype="xsd:ID"
+                             >
+                            </span>)
+                        </div>
+                    </li>
+                </ul>
             </div>
         </section>
     </tal:block>

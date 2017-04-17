@@ -24,7 +24,7 @@
                         <tr tal:repeat="item view.items"
 
                         >
-                            <td tal:content="repeat['item'].number" class="hidden"
+                            <td tal:content="repeat['item'].number"
                                 data-field-id="_number"
                             >N</td>
 

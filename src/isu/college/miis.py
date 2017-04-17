@@ -201,7 +201,7 @@ class Plan(AcademicPlan):
                 v = n
             setattr(o, k, v)
 
-    def _run_recognition(self):
+    def _run_recognition(self, pages=None):
 
         # ADDRRE = re.compile("\w+\d+")  # A0 C10
 
@@ -226,6 +226,9 @@ class Plan(AcademicPlan):
                             yield cell, row, col
 
         for page, matchs in self.RULES.items():
+            if pages is not None:
+                if page not in pages:
+                    continue
             sheet = self.book.sheet_by_name(page)
 
             for var, prog in matchs.items():
@@ -403,3 +406,26 @@ class Plan(AcademicPlan):
                 l = [a for a in l if a]
                 yield l, s, r, c
                 return
+
+    @property
+    def competence_list(self, code):
+        sheet = self.book.sheet_by_name("Компетенции")
+        cid = code = title = None
+        for row in range(sheet.nrows):
+            A = sheet.cell(rowx=row, colx=0)
+            D = sheet.cell(rowx=row, colx=3)
+            G = sheet.cell(rowx=row, colx=6)
+            if A.ctype != 0:
+                cid = A.value
+                try:
+                    cid = int(cid)
+                except ValueError:
+                    return
+                code = D.value
+                title = G.value
+                name = "{} ({})".format(title, code)
+                o = String(name)
+                o.title = title
+                o.code = code
+                o.id = cid
+                yield o
