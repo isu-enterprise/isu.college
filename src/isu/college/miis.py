@@ -458,9 +458,9 @@ class Plan(AcademicPlan):
     @property
     def competence_list(self, courid=None):
         self.load_lists()
-        yield from self._show_list(self.compl, courid, "{title} ({code})")
+        yield from self.show_list(self.compl, courid, "{title} ({code})")
 
-    def _show_list(self, l, filterid, form):
+    def show_list(self, l, filterid, form):
         for k, v in l.items():
             v, s = v
             if filterid is not None and filterid not in s:
@@ -474,4 +474,12 @@ class Plan(AcademicPlan):
     @property
     def course_list(self, compid=None):
         self.load_lists()
-        yield from self._show_list(self.courl, compid, "{code}. {title}")
+        yield from self.show_list(self.courl, compid, "{code}. {title}")
+
+    def course(self, courid):
+        self.load_lists()
+        v, _ = self.courl[courid]
+        o = String("{code}. {title}".format(code=courid, title=v))
+        o.title = v
+        o.code = v
+        return o

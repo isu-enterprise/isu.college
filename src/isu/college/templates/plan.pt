@@ -82,10 +82,11 @@
                  resource="#list-of-competence"
         >
             <div property="schema:hasPart" typeof="dc:Text cnt:ContentAsText" resource="#competence-descriptions">
-                <h2 property="dc:title" datatype="xsd:string">Список компетенций специальности</h2>
+                <h2 property="dc:title" datatype="xsd:string">Список компетенций <span tal:condition="not: view.filter">специальности</span></h2>
+                <h3 tal:condition="view.filter" class="nocount">Дисциплина: <span tal:content="plan.course(view.filter['course'])"></span></h3>
                 <ul property="curr:competence-list" typeof="rdf:List" resource="#competence-list">
                     <li
-                        tal:repeat="comp plan.competence_list"
+                        tal:repeat="comp view.loc"
                     >
                         <div
                             property="curr:competence"
@@ -128,13 +129,14 @@
                                 tal:content="cour.code"
                                 property="oa:id"
                                 datatype="xsd:ID"
-                            >Код сурса
+                            >Код курса
                             </span>
-                            <span tal:content="cour.title"
-                                  property="dc:title"
-                                  datatype="xsd:string"
+                            <a tal:content="cour.title"
+                               property="dc:title"
+                               datatype="xsd:string"
+                               tal:attributes="href string:${view.filename}-${cour.code}.html"
                             >Название курса
-                            </span>
+                            </a>
                         </div>
                     </li>
                 </ul>
@@ -164,6 +166,17 @@
                 >Файл
                 </span>
                 <br/>
+                <span tal:condition="view.filter">
+                    Параметры запроса:
+                    <span
+                        property="dc:description"
+                        datatype="xsd:string"
+                        resource="#request-parameters"
+                        tal:content="string: ${view.filter['course']}-${view.filter['format']}"
+                    >Файл
+                    </span>
+                    <br/>
+                </span>
             </div>
         </section>
     </tal:block>

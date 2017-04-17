@@ -44,6 +44,20 @@ class StudyPlanVew(View):
         print(self.plan)
         return self.plan.program.direction
 
+    @property
+    def loc(self):
+        """Return list of competence filtered.
+        """
+        filter = self.filter
+        if filter is not None:
+            yield from self.plan.show_list(
+                self.plan.compl,
+                filterid=filter["course"],
+                form="{title} ({code})"
+            )
+        else:
+            yield from self.plan.competence_list
+
 
 GSM.registerAdapter(StudyPlanVew)
 
@@ -97,7 +111,7 @@ def work_plan(request):
 
     if plan_name.endswith(".xls"):
         view = view.getplan(plan_name)
-        pass
+        view.filter = None
     else:
         parts = plan_name.split(".xls")
         plan_name = parts[0] + ".xls"
@@ -108,7 +122,7 @@ def work_plan(request):
 
         kwargs = {
             "course": course,
-            "form": form
+            "format": form
         }
         view.filter = kwargs
 
