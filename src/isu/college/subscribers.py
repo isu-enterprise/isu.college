@@ -1,0 +1,9 @@
+from pyramid.renderers import get_renderer
+
+
+def add_base_template(event):
+    """Add base templates.
+    """
+    main = get_renderer('templates/work-program.pt').implementation()
+    event.update({'work_program_template': main,
+                  })

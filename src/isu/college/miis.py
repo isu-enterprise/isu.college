@@ -175,7 +175,7 @@ class Plan(AcademicPlan):
                 "chair.title": ("^[Кк]афедра:$", self.right_proc),
                 "chair.faculty": ("^[Фф]акультет:$", self.right_proc),
                 "profession.degree": ("^[Кк]валификация:", self.colon_split_proc),
-                "profession.program": ("^[Пп]рограмма подготовки:", self.colon_split_proc),
+                "profession.academicity": ("^[Пп]рограмма подготовки:", self.colon_split_proc),
                 "profession.mural": ("^[Фф]орма обучения:", self.colon_split_proc),
                 "program.duration": ("^[Сс]рок обучения:", self.g_removal_proc),
                 "program.laboriousness": ("^[Тт]рудоемкость ОПОП:", self.colon_split_proc),

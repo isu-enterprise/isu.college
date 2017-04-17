@@ -2,16 +2,107 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:tal="http://xml.zope.org/namespaces/tal"
       xmlns:metal="http://xml.zope.org/namespaces/metal"
-      metal:use-macro="main.macros['page']">
+      metal:use-macro="work_program_template.macros['page']">
     <tal:block metal:fill-slot="header-meta">
         <link href="/lcss/local.css" rel="stylesheet"/>
     </tal:block>
     <tal:block metal:fill-slot="content">
-        GGGG
+        <section id="title-section" property="schema:hasPart"
+            typeof="schema:CreativeWork"
+                 resource="#title"
+            >
+            <h1 property="dc:title" datatype="xsd:string">
+                Учебный план
+                <span id="#direction-id"
+                      property="oa:id"
+                      tal:content="plan.program.direction.code">Код специальности</span>
+                <span id="#direction-title"
+                      property="dc:title"
+                      tal:content="plan.program.direction.title">Название специальности</span>
+            </h1>
+        </section>
+
+        <section id="work-program-passport" property="schema:hasPart"
+                 typeof="schema:CreativeWork"
+                 resource="#description"
+        >
+            <h2 property="dc:title" datatype="xsd:string">Общие сведения учебного плана</h2>
+            <div property="schema:hasPart" typeof="dc:Text cnt:ContentAsText" resource="#passport">
+                <div>
+                    <span class="strong">Сведения по Учебному плану</span><br/>
+                    Профиль подготовки:
+                    <span id="#direction-profile"
+                          property="oa:title"
+                          tal:content="plan.program.profile"
+                    >Профиль подготовки</span>
+                </div>
+                <div>
+                    <span class="strong">Сведения о кафедре, разработавшей Учебный план</span><br/>
+                    Кафедра <span
+                                id="#dev-chair-id"
+                                tal:content="plan.chair.title" property="dc:title">Кафедра</span>,<br/>
+                    Факультет <span id="#faculty"
+                                    property="dc:title"
+                                    tal:content="plan.chair.faculty">Факультет</span>
+                </div>
+                <div>
+                    <span class="strong">Сведения о специальности</span><br/>
+                    Квалификация: <span id="#prof-degree"
+                                        property="dc:title"
+                                        tal:content="plan.profession.degree">Квалификация</span>
+                    <br/>
+                    Форма обучения: <span id="#mural"
+                                          property="dc:title"
+                                          tal:content="plan.profession.mural">Очная</span>
+                    <BR/>
+                    Программа подготовки: <span id="#prof-academicity"
+                                                property="dc:title"
+                                                tal:content="plan.profession.academicity">Квалификация</span>
+                    <br/>
+                </div>
+                <div>
+                    <span class="strong">Руководители</span><br/>
+                    Проректор по учебной работе: <span id="#eц-prorector"
+                                                       property="dc:title"
+                                                       tal:content="plan.managers.EW_prorector | default ">Не распознан</span>
+                    <br/>
+                    Начальник УМУ: <span id="#unu-head"
+                                         property="dc:title"
+                                         tal:content="plan.managers.UMU_head | default ">Не распознан</span>
+                    <br/>
+                    Директор: <span id="#direcor"
+                                    property="dc:title"
+                                    tal:content="plan.managers.director">Директор</span>
+                    <br/>
+
+                </div>
+        </section>
+        <section id="list-of-competence" property="schema:hasPart"
+                 typeof="schema:CreativeWork"
+                 resource="#list-of-competence"
+        >
+            <div property="schema:hasPart" typeof="dc:Text cnt:ContentAsText" resource="#purpose">
+                <h2 property="dc:title" datatype="xsd:string">Список компетенций</h2>
+                <p property="cnt:chars" datatype="xsd:string">
+                    Компетенции
+                </p>
+            </div>
+        </section>
     </tal:block>
     <tal:block metal:fill-slot="script-src">
         <script type="text/javascript" src="js/vocabedit.js">
         </script>
 
     </tal:block>
+
 </html>
+
+<!--
+<section id="general-course-description" property="schema:hasPart"
+         typeof="schema:CreativeWork"
+         resource="#description"
+>
+    <div property="schema:hasPart" typeof="dc:Text cnt:ContentAsText" resource="#purpose">
+        <h2 property="dc:title" datatype="xsd:string">Цели и задачи дисциплины (модуля)</h2>
+        <p property="cnt:chars" datatype="xsd:string">
+            -->

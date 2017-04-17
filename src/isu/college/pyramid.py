@@ -92,6 +92,7 @@ def work_plan(request):
     view = view.getplan(plan_name)
     return {
         "view": view,
+        "plan": view.plan
     }
 
 
@@ -100,6 +101,8 @@ def configurator(config):
     config.add_route("plan", "/plans/{name}.html")
     config.add_route("plan-list", "/plans/")
     config.add_static_view(name='/lcss', path='isu.college:templates/lcss')
+    config.add_subscriber('isu.college.subscribers.add_base_template',
+                          'pyramid.events.BeforeRender')
     config.scan()
 
 
