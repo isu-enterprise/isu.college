@@ -91,17 +91,27 @@ def work_plans(request):
 @view_config(route_name="plan", renderer="isu.college:templates/plan.pt")
 def work_plan(request):
     md = request.matchdict
-    plan_name = md["name"]  # + ".xls"
+    plan_name = md["name"]
     print(plan_name)
     view = getUtility(IView, name="study-plans")
 
-    kwargs = {
-        "course": md.get("course", None),
-        "form": md.get("format", None)
-    }
+    if plan_name.endswith(".xls"):
+        view = view.getplan(plan_name)
+        pass
+    else:
+        parts = plan_name.split(".xls")
+        plan_name = parts[0] + ".xls"
+        view = view.getplan(plan_name)
 
-    view = view.getplan(plan_name)
-    view.filter = kwargs
+        course, form = (parts[1].split("-") + [None, None])[1:3]
+        print(course, form)
+
+        kwargs = {
+            "course": course,
+            "form": form
+        }
+        view.filter = kwargs
+
     return {
         "view": view,
         "plan": view.plan
