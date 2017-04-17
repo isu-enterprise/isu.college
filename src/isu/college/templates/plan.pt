@@ -12,7 +12,7 @@
                  resource="#title"
             >
             <h1 property="dc:title" datatype="xsd:string">
-                Учебный план
+                Учебный план специальности <br/>
                 <span id="direction-id"
                       property="oa:id"
                       tal:content="plan.program.direction.code">Код специальности</span>
@@ -82,10 +82,10 @@
                  resource="#list-of-competence"
         >
             <div property="schema:hasPart" typeof="dc:Text cnt:ContentAsText" resource="#purpose">
-                <h2 property="dc:title" datatype="xsd:string">Список компетенций</h2>
+                <h2 property="dc:title" datatype="xsd:string">Список компетенций специальности</h2>
                 <ul property="curr:competence-list" typeof="rdf:List" resource="#competence-list">
                     <li
-                        tal:repeat="comp plan.competence_list"
+                        tal:repeat="comp plan.competence_list()"
                     >
                         <div
                             property="curr:competence"

@@ -408,9 +408,14 @@ class Plan(AcademicPlan):
                 return
 
     @property
-    def competence_list(self, code):
+    def competence_list(self):
         sheet = self.book.sheet_by_name("Компетенции")
         cid = code = title = None
+        if hasattr(self, "_filter"):
+            filter = self._filter
+        else:
+            filter = None
+
         for row in range(sheet.nrows):
             A = sheet.cell(rowx=row, colx=0)
             D = sheet.cell(rowx=row, colx=3)
@@ -428,4 +433,5 @@ class Plan(AcademicPlan):
                 o.title = title
                 o.code = code
                 o.id = cid
-                yield o
+                if filter is None:
+                    yield o

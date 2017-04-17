@@ -61,14 +61,19 @@ class SPListView(View):
         print("List of plans found.")
         pprint(self.items)
 
-    def getplan(self, name):
+    def getplan(self, name, course=None, form=None):
         if name not in self.plans:
 
             print("Loading plan:{}".format(name))
             fullpath = os.path.join(DATADIR, name)
             self.plans[name] = IView(Plan(fullpath))
 
-        return self.plans[name]
+        plan = self.plans[name]
+        plan._filter = {
+            "format": form,
+            "course": course
+        }
+        return plan
 
 
 splistview = SPListView(DATADIR)
@@ -86,10 +91,17 @@ def work_plans(request):
 
 @view_config(route_name="plan", renderer="isu.college:templates/plan.pt")
 def work_plan(request):
-    plan_name = request.matchdict["name"]
+    md = request.matchdict
+    plan_name = md["name"]  # + ".xls"
     print(plan_name)
     view = getUtility(IView, name="study-plans")
-    view = view.getplan(plan_name)
+
+    kwargs = {
+        "course": md.get("course", None),
+        "form": md.get("format", None)
+    }
+
+    view = view.getplan(plan_name, **kwargs)
     return {
         "view": view,
         "plan": view.plan
@@ -98,8 +110,8 @@ def work_plan(request):
 
 @adapter(IConfigurationEvent)
 def configurator(config):
-    config.add_route("plan", "/plans/{name}.html")
-    config.add_route("plan-list", "/plans/")
+    config.add_route("plan", "/plan/{name}.html")
+    config.add_route("plan-list", "/plan/")
     config.add_static_view(name='/lcss', path='isu.college:templates/lcss')
     config.add_subscriber('isu.college.subscribers.add_base_template',
                           'pyramid.events.BeforeRender')

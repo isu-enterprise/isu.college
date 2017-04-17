@@ -359,6 +359,14 @@ table {
          content: counter(page);
      }
 
+     #pDebug {
+         display:none;
+     }
+
+     .appctrl {
+         display:none;
+     }
+
 
  }
 

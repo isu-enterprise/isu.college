@@ -22,6 +22,11 @@
           resource="#post"
           typeof="schema:CreativeWork sioc:Post prov:Entity"
     >
+        <header class="appctrl" hidden>
+            <div class="btn-">
+                <button class="btn btn-alert">=</button>
+            </div>
+        </header>
         <main lang="ru"
               resource="#annotation"
               typeof="oa:Annotation"
