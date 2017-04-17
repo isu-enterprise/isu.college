@@ -67,6 +67,7 @@ class Plan(AcademicPlan):
         self.URL = URL
         self.book = None
         self.attrs = {}
+        self.compl = None
         self.load()
 
     def __str__(self):
@@ -407,31 +408,56 @@ class Plan(AcademicPlan):
                 yield l, s, r, c
                 return
 
-    @property
-    def competence_list(self):
+    def load_lists(self):
+        if self.compl is not None:
+            return
         sheet = self.book.sheet_by_name("Компетенции")
-        cid = code = title = None
-        if hasattr(self, "_filter"):
-            filter = self._filter
-        else:
-            filter = None
+        self.compl = compl = {}
+        self.courl = courl = {}
 
+        cid = None
+        courid = None
         for row in range(sheet.nrows):
             A = sheet.cell(rowx=row, colx=0)
             D = sheet.cell(rowx=row, colx=3)
             G = sheet.cell(rowx=row, colx=6)
             if A.ctype != 0:
-                cid = A.value
                 try:
-                    cid = int(cid)
+                    int(A.value)
                 except ValueError:
                     return
-                code = D.value
-                title = G.value
-                name = "{} ({})".format(title, code)
-                o = String(name)
-                o.title = title
-                o.code = code
-                o.id = cid
-                if filter is None:
-                    yield o
+                cid = D.value
+                courid = None
+            else:
+                courid = D.value
+            if courid is not None:
+                courl.setdefault(courid, (G, set()))
+            elif cid is not None:
+                compl.setdefault(cid, (G, set()))
+            else:
+                continue
+            if courid is not None and cid is not None:
+                _, s1 = courl.setdefault(courid, (G, set()))
+                _, s2 = compl.setdefault(cid, (G, set()))
+                s1.add(cid)
+                s2.add(courid)
+
+    @property
+    def competence_list(self, courid=None):
+        yield from self._show_list(self.compl, courid, "{title} ({code})")
+
+    def _show_list(self, l, filterid, form):
+        self.load_lists()
+        for k, v in l.items():
+            v, s = v
+            if filterid is not None and filterid not in s:
+                continue
+            name = form.format(code=k, title=v)
+            o = String(name)
+            o.title = v
+            o.code = k
+            yield o
+
+    @property
+    def course_list(self, compid=None):
+        yield from self._show_list(self.courl, compid, "{code}. {title}")
