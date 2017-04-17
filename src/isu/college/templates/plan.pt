@@ -72,7 +72,7 @@
                     <br/>
                     Директор: <span id="direcor"
                                     property="dc:title"
-                                    tal:content="plan.managers.director">Директор</span>
+                                    tal:content="plan.managers.director | default">Не распознан</span>
                     <br/>
 
                 </div>

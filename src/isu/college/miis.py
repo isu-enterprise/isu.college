@@ -296,7 +296,7 @@ class Plan(AcademicPlan):
         assert m is not None, "cannot match {} with {}".format(val, self.DRE)
         val = {
             "code": m.group(2),
-            "title": m.group(3),
+            "title": m.group(3).replace("'", '').replace('"', ''),
             "_value": m.group(1)
         }
         yield val, sheet, row, col
@@ -307,11 +307,14 @@ class Plan(AcademicPlan):
                                               row,
                                               col,
                                               direction=D, steps=1):
-            val = val.replace("'", "\"").split('"')
+            val = val.replace("'", '"').split('"')
+            # assert val.find('"') < 0, "Removing parents failed"
             if len(val) == 1:
                 val = val[0]
             else:
                 val = val[1]
+            print(val)
+            assert val.find('"') < 0, "Removing parents failed"
             yield val, sheet, row, col
             break
 
@@ -441,10 +444,8 @@ class Plan(AcademicPlan):
             val = empty(G)
             if val is not None:
                 if courid is not None:
-                    print("course:", courid, val)
                     courl.setdefault(courid, (val, set()))
                 elif cid is not None:
-                    print("comp:", courid, val)
                     compl.setdefault(cid, (val, set()))
                 else:
                     continue
