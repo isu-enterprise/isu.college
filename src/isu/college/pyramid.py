@@ -35,7 +35,7 @@ class StudyPlanVew(View):
 
     @property
     def title(self):
-        print(self.plan)
+        # print(self.plan)
         return self.plan.program.direction
 
     @property
@@ -67,9 +67,9 @@ class SPListView(View):
         self.files = glob(template)
         self.items = set([os.path.split(fn)[-1] for fn in self.files])
         self.plan_views = {}
-        print("Location: {}".format(location))
-        print("List of plans found.")
-        pprint(self.items)
+        #print("Location: {}".format(location))
+        #print("List of plans found.")
+        # pprint(self.items)
 
     def getplan(self, name):
         if name not in self.plan_views:
@@ -101,7 +101,6 @@ def work_plans(request):
 def work_plan(request):
     md = request.matchdict
     plan_name = md["name"]
-    print(plan_name)
     view = request.registry.getUtility(IView, name="study-plans")
 
     if plan_name.endswith(".xls"):
@@ -113,7 +112,6 @@ def work_plan(request):
         view = view.getplan(plan_name)
 
         course, form = (parts[1].split("-") + [None, None])[1:3]
-        print(course, form)
 
         kwargs = {
             "course": course,
@@ -143,6 +141,6 @@ def zcml(config):
     config object.
     FIXME: Get rid of this (zcml(..)) shame stauff. ;-)
     """
-    print("REG---------------")
-    print(list(config.registry.registeredSubscriptionAdapters()))
+    # print("REG---------------")
+    # print(list(config.registry.registeredSubscriptionAdapters()))
     config.add_subscriber(configurator, IConfigurationEvent)
