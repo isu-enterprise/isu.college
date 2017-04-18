@@ -1,7 +1,7 @@
 from isu.webapp.interfaces import IConfigurationEvent
+from zope.component import adapter
 
 from pyramid.view import view_config
-from zope.component import getGlobalSiteManager, adapter, getUtility
 from isu.webapp.views import View
 from glob import glob
 from pprint import pprint
@@ -11,8 +11,6 @@ import os
 import os.path
 from .interfaces import IAcademicPlan
 from .miis import Plan
-
-GSM = getGlobalSiteManager()
 
 DATADIR = os.path.abspath(
     os.path.join(
@@ -90,12 +88,10 @@ class SPListView(View):
 
 splistview = SPListView(DATADIR)
 
-GSM.registerUtility(splistview, name="study-plans")
-
 
 @view_config(route_name="plan-list", renderer="isu.college:templates/splist.pt")
 def work_plans(request):
-    view = getUtility(IView, name="study-plans")
+    view = request.registry.getUtility(IView, name="study-plans")
     return {
         "view": view,
     }
@@ -106,7 +102,7 @@ def work_plan(request):
     md = request.matchdict
     plan_name = md["name"]
     print(plan_name)
-    view = getUtility(IView, name="study-plans")
+    view = request.registry.getUtility(IView, name="study-plans")
 
     if plan_name.endswith(".xls"):
         view = view.getplan(plan_name)
@@ -131,15 +127,22 @@ def work_plan(request):
     }
 
 
-@adapter(IConfigurationEvent)
+#@adapter(IConfigurationEvent)
 def configurator(config):
+    config.load_zcml("isu.college:configure.zcml")
     config.add_route("plan", "/plan/{name}.html")
     config.add_route("plan-list", "/plan/")
     config.add_static_view(name='/lcss', path='isu.college:templates/lcss')
-    config.load_zcml("isu.college:configure.zcml")
     config.add_subscriber('isu.college.subscribers.add_base_template',
                           'pyramid.events.BeforeRender')
     config.scan()
 
 
-GSM.registerHandler(configurator)
+def zcml(config):
+    """Runs zcml configuration on the
+    config object.
+    FIXME: Get rid of this (zcml(..)) shame stauff. ;-)
+    """
+    print("REG---------------")
+    print(list(config.registry.registeredSubscriptionAdapters()))
+    config.add_subscriber(configurator, IConfigurationEvent)

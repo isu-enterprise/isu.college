@@ -3,4 +3,13 @@
    <adapter
       factory="isu.college.pyramid.StudyPlanVew"
       />
+   <utility
+       component="isu.college.pyramid.splistview"
+       name="study-plans"
+       />
+   <subscriber
+       handler="isu.college.pyramid.configurator"
+       for="isu.webapp.interfaces.IConfigurationEvent"
+       />
+
 </configure>
