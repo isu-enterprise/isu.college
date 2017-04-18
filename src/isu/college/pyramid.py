@@ -62,6 +62,8 @@ class SPListView(View):
     title = "Test"
 
     def __init__(self, location):
+        # FIXME: Add standard arguments
+        super(SPListView, self).__init__()
         self.location = os.path.abspath(location)
         template = os.path.join(location + "/*.xls")
         self.files = glob(template)
@@ -76,7 +78,8 @@ class SPListView(View):
 
             print("Loading plan:{}".format(name))
             fullpath = os.path.join(DATADIR, name)
-            plan_view = IView(Plan(fullpath))
+            plan_view = self.registry.getAdapter(
+                Plan(fullpath), interface=IView)
             plan_view.filename = name
             plan_view.filepathname = fullpath
             self.plan_views[name] = plan_view
