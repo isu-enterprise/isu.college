@@ -43,28 +43,14 @@ function interpTaa(root, macroContext) {
         contents = macroContext;
       }
 
+      if (resource=="competence-list") {
+        console.log("Here");
+
+      };
       var rc = contents.find(`#${resource}`).clone();
 
-      /*
-        commandTag.append(rc.children());
-
-        // Copy attributes except macro resource name
-        $.each(rc.get(0).attributes, function(i, attrib){
-        var name = attrib.name;
-        var value = attrib.value;
-        if (name=="resource") {
-        commandTag.attr("data-local-resource", value);
-        } else if (name=="id") {
-        commandTag.attr("data-local-id", value);
-        } else if (name=="name") {
-        commandTag.attr("data-local-name", value);
-        } else {
-        commandTag.attr(name, value);
-        };
-        });
-      */
-
       if (rc.length>0) {
+        console.log("Importing " + resource);
         commandTag.empty();
         console.log(rc);
         commandTag.append(rc);
@@ -73,47 +59,59 @@ function interpTaa(root, macroContext) {
         interpTaa(commandTag, macroContext); // Try to find in calling context
         interpTaa(commandTag, contents);     // Try to find local
       } else {
-        console.log("Not Found" + macroContext + resource);
+        console.log("Not Found in import ", resource, url);
       }
     }
 
     if (url=="") {
       macroContext.each(commandFunction);
     } else {
-      var eximports=$(`link[rel="import"][href="${url}"]`);
+      var _imp = importQueue[url];
 
-      if (eximports.length==0) {
+      if (_imp == undefined) {
 
-        $("head").append(`
-            <link rel="import" href="${url}" async></link>
-            `);
-        var imports=$(`link[rel="import"]`);
+        console.log("Loading "+ url);
 
-        importQueue[url] = {imp:imports, queue:[function(imp) {
-          imp.each(commandFunction);
+        var link = document.createElement('link');
+        link.rel = 'import';
+        link.href = url;
+        link.setAttribute('async', ''); // make it async!
+        document.head.appendChild(link);
+
+        var import_link = link;
+
+        importQueue[url] = {imp:import_link, queue:[function(imp) {
+          console.log("Continuation main ", val, imp);
+          $(imp).each(commandFunction);
         }]};
 
-        imports.on("load", function(){
+        import_link.onload=(function(){
           var imp=$(this);
           var qe = importQueue[url];
-          qe.queue.forEach(function(item){
-            item(qe.imp);
-          });
-          delete importQueue[url];
+          if (qe != undefined) {
+            qe.queue.forEach(function(item){
+              console.log("Imp-watch", item, this);
+              item(this);
+            }, qe.imp);
+            qe.queue=[];
+          };
         });
 
-        imports.on("error", function(event){
+        import_link.onerror=(function(event){
           console.log('Error loading import: ' + event.target.href);
         });
 
       } else {
-        if (importQueue[url] != undefined) {
-          var qe = importQueue[url];
-          qe.queue.push(function(imp) {
-            eximports.each(commandFunction);
+        var import_old = _imp.imp;
+        var q = _imp.queue;
+        if (q.length>0 ) { // Still loading
+          q.push(function(imp) {
+            console.log("Continuation waiting "+ val);
+            $(import_old).each(commandFunction);
           });
-        } else {
-          eximports.each(commandFunction);
+        } else { // Already loaded
+          console.log("Immediate "+ val);
+          $(import_old).each(commandFunction);
         };
       }
     }
