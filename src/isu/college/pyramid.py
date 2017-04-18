@@ -2,7 +2,7 @@ from isu.webapp.interfaces import IConfigurationEvent
 
 from pyramid.view import view_config
 from zope.component import getGlobalSiteManager, adapter, getUtility
-from isu.webapp import views
+from isu.webapp.views import View
 from glob import glob
 from pprint import pprint
 from pkg_resources import resource_filename
@@ -21,10 +21,6 @@ DATADIR = os.path.abspath(
             "../../../"),
         "data/study-plans/plans/")
 )
-
-
-class View(views.DefaultView):
-    auth_user = None
 
 
 @adapter(IAcademicPlan)
@@ -59,7 +55,7 @@ class StudyPlanVew(View):
             yield from self.plan.competence_list
 
 
-GSM.registerAdapter(StudyPlanVew)
+# GSM.registerAdapter(StudyPlanVew)
 
 
 class SPListView(View):
@@ -137,6 +133,7 @@ def configurator(config):
     config.add_route("plan", "/plan/{name}.html")
     config.add_route("plan-list", "/plan/")
     config.add_static_view(name='/lcss', path='isu.college:templates/lcss')
+    config.load_zcml("isu.college:configure.zcml")
     config.add_subscriber('isu.college.subscribers.add_base_template',
                           'pyramid.events.BeforeRender')
     config.scan()

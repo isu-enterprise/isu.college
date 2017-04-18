@@ -41,7 +41,9 @@ def normal(phrase, *tags, **kw):
 
     phrase = phrase.strip()
     if phrase.find(" ") >= 0:
-        assert "n" in kw is not None, "add number of word to normaize in the sentence"
+        assert "n" in kw is not None, \
+            "no number of word in " \
+            "the sentence to be normaized"
         n = kw["n"]
         words = phrase.split()
         f, word, l = words[:n], words[n],  words[n + 1:]

@@ -38,10 +38,10 @@
                 </div>
                 <div>
                     <span class="strong">Сведения о кафедре, разработавшей Учебный план</span><br/>
-                    Кафедра <span
+                    Кафедра: <span
                                 id="dev-chair-id"
                                 tal:content="plan.chair.title" property="dc:title">Кафедра</span>,<br/>
-                    Факультет <span id="faculty"
+                    Факультет: <span id="faculty"
                                     property="dc:title"
                                     tal:content="plan.chair.faculty">Факультет</span>
                 </div>
