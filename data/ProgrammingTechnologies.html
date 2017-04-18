@@ -430,7 +430,7 @@
               class="t12pt"
               id="main-content"
         >
-            <div property="oa:hasTarget" resource="#course-work-program"/>
+            <div property="oa:hasTarget" resource="#course-work-program"></div>
             <article property="oa:hasBody" typeof="schema:Article foaf:Document curr:WorkingProgram"
                      resource="#course-work-program"
                      class="editable"
@@ -441,7 +441,7 @@
                 </div>
                 <section id="contents" class="break-after">
                     <h2 class="nocount c">Содержание</h2>
-                    <div id="tableOfContents"/>
+                    <div id="tableOfContents"></div>
                 </section>
                 <section id="general-course-description" property="schema:hasPart"
                          typeof="schema:CreativeWork"
@@ -476,20 +476,14 @@
                         </p>
                     </div>
                     <div property="schema:hasPart" typeof="dc:Text cnt:ContentAsText" resource="#requirements">
-                        <div taa:content="https://irnok.net/college/plan/01.03.02-16-1234-2461_1%D0%BA_PB-SM.plm.xml.xls-%D0%911.%D0%92.%D0%94%D0%92.3.1.html#competence-list">
-                        </div>
                         <h2 property="dc:title" datatype="xsd:string">Требования к результатам освоения дисциплины (модуля)</h2>
                         <p property="cnt:chars" datatype="xsd:string">
                             Процесс изучения дисциплины (модуля) направлен на овладение  следующими компетенциями:
-                            <ul>
-                                <li> способностью приобретать новые научные и профессиональные знания, используя современные образовательные и информационные технологии (ОПК-2).
-                                </li>
-                                <li>способностью критически переосмысливать накопленный опыт, изменять при необходимости вид и характер своей профессиональной деятельности (ПК-3);
-                                </li>
-                            </ul>
+                            <div taa:content="https://irnok.net/college/plan/01.03.02-16-1234-2461_1%D0%BA_PB-SM.plm.xml.xls-%D0%911.%D0%92.%D0%94%D0%92.3.1.html#competence-list">
+                            </div>
                         </p>
                         <p>
-                            В результате изучения дисциплины студент должен:</br>
+                            В результате изучения дисциплины студент должен:<br/>
                             <em>Знать</em>:
                             <ul>
                                 <li>
@@ -995,11 +989,12 @@
                                 TEXT <!-- TODO: Add text -->
                             </p>
                         </div>
+                    </div>
                 </section>
 
-                <div taa:content="imei.html#provenance-description"/>
+                <div taa:content="imei.html#provenance-description"></div>
                 <section id="chair-license">
-                    <div taa:content="imei.html#default-license"/>
+                    <div taa:content="imei.html#default-license"></div>
                 </section>
             </article>
         </main>
