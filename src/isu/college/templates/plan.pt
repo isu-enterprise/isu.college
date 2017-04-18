@@ -39,11 +39,11 @@
                 <div>
                     <span class="strong">Сведения о кафедре, разработавшей Учебный план</span><br/>
                     Кафедра: <span
-                                id="dev-chair-id"
-                                tal:content="plan.chair.title" property="dc:title">Кафедра</span>,<br/>
+                                 id="dev-chair-id"
+                                 tal:content="plan.chair.title" property="dc:title">Кафедра</span>,<br/>
                     Факультет: <span id="faculty"
-                                    property="dc:title"
-                                    tal:content="plan.chair.faculty">Факультет</span>
+                                     property="dc:title"
+                                     tal:content="plan.chair.faculty">Факультет</span>
                 </div>
                 <div>
                     <span class="strong">Сведения о специальности</span><br/>
@@ -76,15 +76,20 @@
                     <br/>
 
                 </div>
+            </div>
         </section>
         <section id="list-of-competence" property="schema:hasPart"
                  typeof="schema:CreativeWork"
                  resource="#list-of-competence"
         >
-            <div property="schema:hasPart" typeof="dc:Text cnt:ContentAsText" resource="#competence-descriptions">
+            <div property="schema:hasPart" typeof="dc:Text cnt:ContentAsText"
+                 resource="#competence-description"
+                 id="competence-description">
                 <h2 property="dc:title" datatype="xsd:string">Список компетенций <span tal:condition="not: view.filter">специальности</span></h2>
                 <h3 tal:condition="view.filter" class="nocount">Дисциплина: <span tal:content="plan.course(view.filter['course'])"></span></h3>
-                <ul property="curr:competence-list" typeof="rdf:List" resource="#competence-list">
+                <ul property="curr:competence-list" typeof="rdf:List"
+                    resource="#competence-list"
+                    id="competence-list">
                     <li
                         tal:repeat="comp view.loc"
                     >
