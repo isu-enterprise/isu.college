@@ -6,6 +6,7 @@ import glob
 from pprint import pprint
 from nose.plugins.skip import SkipTest
 import openpyxl
+from isu.college.miis import Index
 
 DATADIR = os.path.abspath(
     os.path.join(
@@ -55,7 +56,7 @@ class TestLoad(object):
     def test_plan_load(self):
         plan = self.plan
         plan.load_plan()
-        assert plan.indexes
+        assert plan.colidx.Наименование
 
 
 @SkipTest
@@ -78,6 +79,7 @@ class TestAllKnown:
         assert p.profession
 
 
+@SkipTest
 class TestOpenPYXL(object):
     """Tests basics of openpyxl
 
@@ -92,3 +94,9 @@ class TestOpenPYXL(object):
     def test_select(self):
         b = self.book
         b['План']
+
+    def test_index(self):
+        i = Index(1)
+        i.a = Index(20)
+        i.a.b = Index(40)
+        assert i.a == 20

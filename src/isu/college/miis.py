@@ -75,6 +75,12 @@ class String(str, Object):
     pass
 
 
+class Index(int):
+    """A class of hierarchical index.
+    """
+    pass
+
+
 class Plan(AcademicPlan):
     """Represents MIIS.ru Plan XLSX export files as
     IAcademicPlan component.
@@ -502,10 +508,13 @@ class Plan(AcademicPlan):
         o.code = v
         return o
 
+    IDNUMRE = re.compile("((\w|_)+)_(\d+)")
+
     def scan_row(self, row, sheet, cton):
         cells = sheet.row(row)
-        for c, cell in enumerate(cells):
-            if c == 0:
+        nameset = set()
+        for col, cell in enumerate(cells):
+            if col == 0:
                 continue  # ignore first cell as it is techincal
             #print(cell, end=" ")
             if cell.ctype == 0:
@@ -516,11 +525,56 @@ class Plan(AcademicPlan):
             if "%" in val:
                 continue
             val = val.split("(")[0].strip()
+            val = val.split("[")[0].strip()
             val = val.replace(" ", "_")
             val = val.replace("/", "_")
             val = val.replace("\n", "")
             val = val.replace(".", "")
-            print(val, c)
+            m = self.__class__.IDNUMRE.match(val)
+            if m is not None:
+                val = m.group(1), m.group(3)
+            name_point = (row, col)
+            nameset.add(val)
+
+            # search parent
+            parent_cton = None
+            r = row - 1
+            c = col
+            while True:
+                if r < 1:
+                    cton[name_point] = (val, None, None, Index(col))
+                    break
+                if (r, c) in cton:
+                    parent_cton = cton[(r, c)]
+                    cton[name_point] = (val, (r, c), parent_cton, Index(col))
+                    break
+                r -= 1
+            if parent_cton is not None:
+                continue
+            c = col - 1
+            r = row
+            while True:
+                if c < 2:
+                    cton[name_point] = (val, None, None, Index(col))
+                    print(name_point, val)
+                    break
+
+                if (r, c) in cton:
+                    sibling_cton = cton[(r, c)]
+                    cton[name_point] = (
+                        val, (r, c), sibling_cton[2], Index(col))
+                    break
+                c -= 1
+        print(nameset)
+
+    def _build_index_tree(self, cton, row):
+        self.colidx = Index(2)
+        for myloc, _ in cton.items():
+            name, loc, parent, index = _
+            r, c = myloc
+            if parent is None:
+                parent = self.colidx
+            setattr(parent, name, index)
 
     def load_plan(self):
         """Loads main time table.
@@ -531,7 +585,9 @@ class Plan(AcademicPlan):
         layout = sheet.cell(0, 0).value.split(";")
         layout = [int(l.strip()) - 1 for l in layout]
         print("Layout", layout)
-        # for row in range(layout[0]):
-        #    self.scan_row(row + 1, sheet, cton)
+        for row in range(layout[0]):
+            self.scan_row(row + 1, sheet, cton)
+        self._build_index_tree(cton, row=layout[0] + 1)
+        # pprint(cton)
 
-        self.scan_row(3, sheet, cton)
+        #self.scan_row(3, sheet, cton)
