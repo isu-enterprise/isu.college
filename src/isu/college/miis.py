@@ -7,6 +7,7 @@ import re
 import marisa_trie
 import pymorphy2
 from pprint import pprint, pformat
+import numpy as np
 
 morph = pymorphy2.MorphAnalyzer()
 
@@ -75,7 +76,7 @@ class String(str, Object):
 
 
 class Plan(AcademicPlan):
-    """Represents MIIS.ru Plan XLS export files as
+    """Represents MIIS.ru Plan XLSX export files as
     IAcademicPlan component.
     """
 
@@ -500,3 +501,37 @@ class Plan(AcademicPlan):
         o.title = v
         o.code = v
         return o
+
+    def scan_row(self, row, sheet, cton):
+        cells = sheet.row(row)
+        for c, cell in enumerate(cells):
+            if c == 0:
+                continue  # ignore first cell as it is techincal
+            #print(cell, end=" ")
+            if cell.ctype == 0:
+                continue
+            val = cell.value.strip()
+            if not val:
+                continue
+            if "%" in val:
+                continue
+            val = val.split("(")[0].strip()
+            val = val.replace(" ", "_")
+            val = val.replace("/", "_")
+            val = val.replace("\n", "")
+            val = val.replace(".", "")
+            print(val, c)
+
+    def load_plan(self):
+        """Loads main time table.
+        """
+        cton = {}  # (c,r) to (name, parent_cton) index
+        self.indexes = indexes = {}
+        sheet = self.book.sheet_by_name("План")
+        layout = sheet.cell(0, 0).value.split(";")
+        layout = [int(l.strip()) - 1 for l in layout]
+        print("Layout", layout)
+        # for row in range(layout[0]):
+        #    self.scan_row(row + 1, sheet, cton)
+
+        self.scan_row(3, sheet, cton)

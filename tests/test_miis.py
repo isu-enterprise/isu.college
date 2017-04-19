@@ -4,6 +4,8 @@ from pkg_resources import resource_filename
 import os.path
 import glob
 from pprint import pprint
+from nose.plugins.skip import SkipTest
+import openpyxl
 
 DATADIR = os.path.abspath(
     os.path.join(
@@ -13,8 +15,8 @@ DATADIR = os.path.abspath(
         "data/study-plans/plans/")
 )
 
-# TMPL = "*.pl*.xml.xls"
-TMPL = "*.xls"
+# TMPL = "*.pl*.xml.xlsx"
+TMPL = "*.xlsx"
 
 template = DATADIR + "/" + TMPL
 
@@ -36,6 +38,7 @@ class TestBasic(object):
         assert len(ALLIN) > 0
 
 
+#@SkipTest
 class TestLoad(object):
     def setUp(self):
         i = 4
@@ -49,7 +52,13 @@ class TestLoad(object):
         assert self.plan.program.direction
         assert self.plan.program.profile
 
+    def test_plan_load(self):
+        plan = self.plan
+        plan.load_plan()
+        assert plan.indexes
 
+
+@SkipTest
 class TestAllKnown:
     def setUp(self):
         self.files = ALLIN
@@ -67,3 +76,19 @@ class TestAllKnown:
         assert p.program.direction
         assert p.program.profile
         assert p.profession
+
+
+class TestOpenPYXL(object):
+    """Tests basics of openpyxl
+
+    """
+
+    def setUp(self):
+        i = 4
+        FN = ALLIN[i]
+        print(i, FN)
+        self.book = openpyxl.load_workbook(filename=FN)
+
+    def test_select(self):
+        b = self.book
+        b['План']

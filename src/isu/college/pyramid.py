@@ -63,7 +63,7 @@ class SPListView(View):
         # FIXME: Add standard arguments
         super(SPListView, self).__init__()
         self.location = os.path.abspath(location)
-        template = os.path.join(location + "/*.xls")
+        template = os.path.join(location + "/*.xlsx")
         self.files = glob(template)
         self.items = set([os.path.split(fn)[-1] for fn in self.files])
         self.plan_views = {}
@@ -103,12 +103,12 @@ def work_plan(request):
     plan_name = md["name"]
     view = request.registry.getUtility(IView, name="study-plans")
 
-    if plan_name.endswith(".xls"):
+    if plan_name.endswith(".xlsx"):
         view = view.getplan(plan_name)
         view.filter = None
     else:
-        parts = plan_name.split(".xls")
-        plan_name = parts[0] + ".xls"
+        parts = plan_name.split(".xlsx")
+        plan_name = parts[0] + ".xlsx"
         view = view.getplan(plan_name)
 
         course, form = (parts[1].split("-") + [None, None])[1:3]
