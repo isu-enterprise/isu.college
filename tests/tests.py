@@ -7,6 +7,7 @@ from zope.schema.interfaces import ITokenizedTerm
 from zope.schema.vocabulary import getVocabularyRegistry
 
 
+@SkipTest
 class TestBasic:
 
     def setUp(self):
@@ -19,6 +20,7 @@ class TestBasic:
         assert IProfessor
 
 
+@SkipTest
 class TestEnums:
 
     def setUp(self):
@@ -52,6 +54,7 @@ class TestEnums:
 # Do the same checking vocabulary availability.
 
 
+@SkipTest
 class TestEnums2(TestEnums):
 
     def setUp(self):

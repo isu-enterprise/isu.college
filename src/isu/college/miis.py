@@ -569,6 +569,8 @@ class Plan(AcademicPlan):
 
     def _build_index_tree(self, cton, row):
         self.colidx = Index(2)
+        # TODO: Remove redundant indices and pack couse_X
+        # into arrays
         for myloc, _ in cton.items():
             name, loc, parent, index = _
             r, c = myloc

@@ -12,6 +12,7 @@ OUTDIR = os.path.abspath(OUTDIR)
 INDIR = os.path.abspath(INDIR)
 
 
+@SkipTest
 class TestImport:
 
     def test_import(self):

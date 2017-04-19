@@ -1,9 +1,11 @@
+from nose.plugins.skip import SkipTest
 from secretary import Renderer
 from .test_fos_apps import OUTDIR, INDIR
 import os.path
 from isu.college import enums
 
 
+@SkipTest
 class TestSecretary:
 
     def setUp(self):
