@@ -621,9 +621,9 @@ class Plan(AcademicPlan):
         for myloc, _ in cton.items():
             vdef, loc, parent, index = _
             r, c = myloc
-            if parent is None:
-                parent = self.colidx
             vname, vopt = vdef
+            if parent is None or vname is None:
+                parent = self.colidx
             setattr(parent, vname, index)
 
     def load_plan(self):
