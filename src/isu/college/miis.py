@@ -533,9 +533,11 @@ class Plan(AcademicPlan):
             val = val.lower()
             m = self.__class__.IDNUMRE.match(val)
             if m is not None:
-                val = m.group(1), m.group(3)
+                val = m.group(1), int(m.group(3))
+                o = {val[1]: Index(col)}
             else:
                 val = (val, None)
+                o = Index(col)
             vname, vopt = val
 
             vname = self.__class__.RENAME.get(vname, vname)
@@ -549,11 +551,11 @@ class Plan(AcademicPlan):
             c = col
             while True:
                 if r < 1:
-                    cton[name_point] = (val, None, None, Index(col))
+                    cton[name_point] = (val, None, None, o)
                     break
                 if (r, c) in cton:
                     parent_cton = cton[(r, c)]
-                    cton[name_point] = (val, (r, c), parent_cton, Index(col))
+                    cton[name_point] = (val, (r, c), parent_cton, o)
                     break
                 r -= 1
             if parent_cton is not None:
@@ -562,14 +564,14 @@ class Plan(AcademicPlan):
             r = row
             while True:
                 if c < 2:
-                    cton[name_point] = (val, None, None, Index(col))
+                    cton[name_point] = (val, None, None, o)
                     print(name_point, val)
                     break
 
                 if (r, c) in cton:
                     sibling_cton = cton[(r, c)]
                     cton[name_point] = (
-                        val, (r, c), sibling_cton[2], Index(col))
+                        val, (r, c), sibling_cton[2], o)
                     break
                 c -= 1
         print(nameset)
@@ -598,7 +600,7 @@ class Plan(AcademicPlan):
         "наименование": "title",
         "из_них": "inc",  # Including
         "экзамены": "exams",  # Examinations
-        "экспертное": "export",
+        "экспертное": "expert",
         "курс": "course",
         "в_том_числе": "inc",
         "факт": "realcu",
@@ -618,22 +620,43 @@ class Plan(AcademicPlan):
         self.colidx = Index(2)
         # TODO: Remove redundant indices and pack couse_X
         # into arrays
+
+        def seta(obj, name, o, idx):
+            if isinstance(o, dict):
+                if hasattr(obj, name):
+                    obj = getattr(obj, name)
+
+                    if idx is not None:
+                        obj = obj[idx]
+
+                    obj.update(o)
+                    return
+                setattr(obj, name, o)
+                return
+            if idx is not None:
+                obj = obj[idx]
+            setattr(obj, name, o)
+
         for myloc, _ in cton.items():
             vdef, loc, parent, myindex = _
             r, c = myloc
             vname, vopt = vdef
+
             if vname is None:
                 continue
             if parent is None:
-                setattr(self.colidx, vname, myindex)
+                seta(self.colidx, vname, myindex, vopt)
+                continue
 
             while parent is not None:
                 vdef, loc, parent, pindex = parent
                 nname, nopt = vdef
                 if nname is None:
                     continue
-                setattr(pindex, vname, myindex)
+                seta(pindex, vname, myindex, nopt)
                 break
+            if parent is None:
+                seta(self.colidx, vname, myindex, vopt)
 
     def load_plan(self):
         """Loads main time table.
@@ -646,7 +669,7 @@ class Plan(AcademicPlan):
         print("Layout", layout)
         for row in range(layout[0]):
             self.scan_row(row + 1, sheet, cton)
-        pprint(cton)
+        # pprint(cton)
         self._build_index_tree(cton, row=layout[0] + 1)
 
         # self.scan_row(3, sheet, cton)
