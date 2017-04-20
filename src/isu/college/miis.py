@@ -601,7 +601,7 @@ class Plan(AcademicPlan):
         "экспертное": "export",
         "курс": "course",
         "в_том_числе": "inc",
-        "факт": "real",
+        "факт": "realcu",
         "по_зет": "cu",
         "по_плану": "plan",
         "закрепленная_кафедра": "chair",
@@ -619,12 +619,21 @@ class Plan(AcademicPlan):
         # TODO: Remove redundant indices and pack couse_X
         # into arrays
         for myloc, _ in cton.items():
-            vdef, loc, parent, index = _
+            vdef, loc, parent, myindex = _
             r, c = myloc
             vname, vopt = vdef
-            if parent is None or vname is None:
-                parent = self.colidx
-            setattr(parent, vname, index)
+            if vname is None:
+                continue
+            if parent is None:
+                setattr(self.colidx, vname, myindex)
+
+            while parent is not None:
+                vdef, loc, parent, pindex = parent
+                nname, nopt = vdef
+                if nname is None:
+                    continue
+                setattr(pindex, vname, myindex)
+                break
 
     def load_plan(self):
         """Loads main time table.
@@ -637,7 +646,7 @@ class Plan(AcademicPlan):
         print("Layout", layout)
         for row in range(layout[0]):
             self.scan_row(row + 1, sheet, cton)
+        pprint(cton)
         self._build_index_tree(cton, row=layout[0] + 1)
-        # pprint(cton)
 
         # self.scan_row(3, sheet, cton)

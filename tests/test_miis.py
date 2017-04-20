@@ -56,7 +56,7 @@ class TestLoad(object):
     def test_plan_load(self):
         plan = self.plan
         plan.load_plan()
-        assert plan.colidx.Наименование
+        assert plan.colidx.title
 
 
 @SkipTest
