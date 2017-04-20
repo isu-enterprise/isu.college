@@ -516,7 +516,7 @@ class Plan(AcademicPlan):
         for col, cell in enumerate(cells):
             if col == 0:
                 continue  # ignore first cell as it is techincal
-            #print(cell, end=" ")
+            # print(cell, end=" ")
             if cell.ctype == 0:
                 continue
             val = cell.value.strip()
@@ -530,9 +530,16 @@ class Plan(AcademicPlan):
             val = val.replace("/", "_")
             val = val.replace("\n", "")
             val = val.replace(".", "")
+            val = val.lower()
             m = self.__class__.IDNUMRE.match(val)
             if m is not None:
                 val = m.group(1), m.group(3)
+            else:
+                val = (val, None)
+            vname, vopt = val
+
+            vname = self.__class__.RENAME.get(vname, vname)
+            val = vname, vopt
             name_point = (row, col)
             nameset.add(val)
 
@@ -567,16 +574,57 @@ class Plan(AcademicPlan):
                 c -= 1
         print(nameset)
 
+    RENAME = {
+        "распределение_по_курсам_и_семестрам": None,  # Remove from hierarchy
+        "всего_часов": "total_h",
+        "индекс": "code",
+        "лаб": "lab",
+        "ауд": "aud",
+        "часов": "h",  # Hours
+        "зет": "cu",   # Credit unit
+        "контроль": "sup",  # Supervision
+        "пр": "pr",
+        "лек": "lec",
+        "семестр": "sem",  # semester
+        "код": "code",
+        "зачеты": "credits",
+        "зачеты_с_оценкой": "grade_credit",
+        "контакт_раб": "contact_work",
+        "срс": "siw",  # Students' independent work
+        "всего": "total",
+        "кср": "iwc",  # Independent Work Control
+        "курсовые_работы": "cworks",  # Course works
+        "курсовые_проекты": "cprojects",  # Course projects
+        "наименование": "title",
+        "из_них": "inc",  # Including
+        "экзамены": "exams",  # Examinations
+        "экспертное": "export",
+        "курс": "course",
+        "в_том_числе": "inc",
+        "факт": "real",
+        "по_зет": "cu",
+        "по_плану": "plan",
+        "закрепленная_кафедра": "chair",
+        "итого_часов_в_электронной_форме": "teh",  # Total electric hours
+        "итого_часов_в_интерактивной_форме": "tih",  # Total intractive hours
+        "формы_контроля": "controls",
+        "зет_в_нед": "cupw",  # Control units per week
+        "часов_в_зет": "hicu",  # Hours in a control unit.
+        "компетенции": "components"
+
+    }
+
     def _build_index_tree(self, cton, row):
         self.colidx = Index(2)
         # TODO: Remove redundant indices and pack couse_X
         # into arrays
         for myloc, _ in cton.items():
-            name, loc, parent, index = _
+            vdef, loc, parent, index = _
             r, c = myloc
             if parent is None:
                 parent = self.colidx
-            setattr(parent, name, index)
+            vname, vopt = vdef
+            setattr(parent, vname, index)
 
     def load_plan(self):
         """Loads main time table.
@@ -592,4 +640,4 @@ class Plan(AcademicPlan):
         self._build_index_tree(cton, row=layout[0] + 1)
         # pprint(cton)
 
-        #self.scan_row(3, sheet, cton)
+        # self.scan_row(3, sheet, cton)
