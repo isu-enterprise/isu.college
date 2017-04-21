@@ -30,6 +30,9 @@ class NormalizationError(Exception):
     pass
 
 
+mark = object()
+
+
 def normal(phrase, *tags, **kw):
     tags = set(tags)
 
@@ -577,7 +580,7 @@ class Plan(AcademicPlan):
         print(nameset)
 
     RENAME = {
-        "распределение_по_курсам_и_семестрам": None,  # Remove from hierarchy
+        "распределение_по_курсам_и_семестрам": mark,  # Remove from hierarchy
         "всего_часов": "total_h",
         "индекс": "code",
         "лаб": "lab",
@@ -617,9 +620,10 @@ class Plan(AcademicPlan):
     }
 
     def _build_index_tree(self, cton, row):
-        self.colidx = Index(2)
-        # TODO: Remove redundant indices and pack couse_X
-        # into arrays
+        """Internal method. It constructs an index
+        hierarchy from the scanned header structure.
+        """
+        self.colidx = Index(2)  # The root index of the hierarchy
 
         def seta(obj, name, o, idx):
             if isinstance(o, dict):
@@ -627,36 +631,37 @@ class Plan(AcademicPlan):
                     obj = getattr(obj, name)
 
                     if idx is not None:
-                        obj = obj[idx]
-
-                    obj.update(o)
-                    return
-                setattr(obj, name, o)
+                        try:
+                            obj = obj[idx]
+                            setattr(obj, name, o)
+                        except KeyError:
+                            obj.update(o)
+                        return
                 return
             if idx is not None:
                 obj = obj[idx]
             setattr(obj, name, o)
 
         for myloc, _ in cton.items():
-            vdef, loc, parent, myindex = _
-            r, c = myloc
-            vname, vopt = vdef
+            mydef, myloc, parent, myindex = _
+            name, idx = mydef   # <name>_<idx>, e.g. course_1
+            while True:
 
-            if vname is None:
-                continue
-            if parent is None:
-                seta(self.colidx, vname, myindex, vopt)
-                continue
+                # This is the highest item (the nearest to root).
+                if parent is None:
+                    if name != mark:
+                        seta(self.colidx, name, myindex, idx)
+                    break
 
-            while parent is not None:
-                vdef, loc, parent, pindex = parent
-                nname, nopt = vdef
-                if nname is None:
-                    continue
-                seta(pindex, vname, myindex, nopt)
-                break
-            if parent is None:
-                seta(self.colidx, vname, myindex, vopt)
+                pdef, ploc, pparent, pindex = parent
+                pname, pidx = pdef
+                if name != mark:  # ... is not ignored
+                    if idx is None:
+                        idx = pidx
+                    seta(pindex, name, myindex, idx)
+                    break
+
+                parent = pparent
 
     def load_plan(self):
         """Loads main time table.
