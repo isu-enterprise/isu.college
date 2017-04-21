@@ -139,11 +139,27 @@ function generateTableOfContents() {
   contents.eventEmitter().trigger('resize');
 };
 
+function downloadInnerHtml(filename, selector, mimeType) {
+  // var elHtml = $(selector)[0].innerHTML;
+  var elHtml = document.documentElement.innerHTML;
+  var link = document.createElement('a');
+  mimeType = mimeType || 'text/html';
+
+  link.setAttribute('download', filename);
+  link.setAttribute('href', 'data:' + mimeType + ';charset=utf-8,' + encodeURIComponent(elHtml));
+  document.body.appendChild(link);
+  link.click();
+  document.body.removeChild(link);
+}
+
+var fileName =  'Export.html'; // You can use the .txt extension if you want
+
 // ------------------------  Main function -------
 function LODmain(macroButton) {
   $("body").append(`
             <button class="noprint" id="button-medium-editor-switch"><span class="fa fa-editor">Edit</class></button>
                 <button class="noprint" id="button-macro-switch"><span class="fa fa-editor">Macro</class></button>
+                <button class="noprint" id="button-export-page"><span class="fa fa-editor">Export</class></button>
                     `);
   $("#button-medium-editor-switch").click(function(){
     $("head").append(`
@@ -154,6 +170,9 @@ function LODmain(macroButton) {
                     <!-- FIXME: Add theme reference. -->
                     `);
     var editor = new MediumEditor('.editable');
+  });
+  $("#button-export-page").on("click", function() {
+    downloadInnerHtml(fileName, '.exportable', 'text/html');
   });
   var root = $("html");
   function runMacros() {
