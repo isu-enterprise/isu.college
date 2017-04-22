@@ -60,6 +60,7 @@ class TestLoad(object):
         # pprint(dir(plan.colidx.dif))
         # pprint(dir(plan.colidx.dif.course[1]))
         assert plan.colidx.dif.course[1].sem[2].h
+        # pprint(plan.courses)
 
 
 @SkipTest

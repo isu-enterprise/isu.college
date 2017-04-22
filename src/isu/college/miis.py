@@ -339,7 +339,7 @@ class Plan(AcademicPlan):
                 val = val[0]
             else:
                 val = val[1]
-            print(val)
+            # print(val)
             assert val.find('"') < 0, "Removing parents failed"
             yield val, sheet, row, col
             break
@@ -577,7 +577,7 @@ class Plan(AcademicPlan):
                         val, (r, c), sibling_cton[2], o)
                     break
                 c -= 1
-        print(nameset)
+        # print(nameset)
 
     RENAME = {
         "ауд": "aud",
@@ -624,9 +624,6 @@ class Plan(AcademicPlan):
         """
         self.colidx = Index(2)  # The root index of the hierarchy
 
-        # import pudb
-        # pu.db
-
         def seta(index, pdef,  o, odef):
             pname, pidx = pdef
             name, oi = odef
@@ -653,6 +650,27 @@ class Plan(AcademicPlan):
     def load_plan(self):
         """Loads main time table.
         """
+        def conv(cell):
+            if cell.ctype == 0:
+                return None
+            val = cell.value
+            try:
+                val = val.strip()
+            except AttributeError:
+                ival = int(val)
+                if abs(float(ival) - val) < 0.001:
+                    return int(val)
+                return val
+            try:
+                return int(val)
+            except ValueError:
+                pass
+            try:
+                return float(val)
+            except ValueError:
+                pass
+            return val
+
         cton = {}  # (c,r) to (name, parent_cton) index
         self.indexes = indexes = {}
         sheet = self.book.sheet_by_name("План")
@@ -661,7 +679,34 @@ class Plan(AcademicPlan):
         print("Layout", layout)
         for row in range(layout[0]):
             self.scan_row(row + 1, sheet, cton)
-        # pprint(cton)
+
         self._build_index_tree(cton, row=layout[0] + 1)
+
+        ci = self.colidx
+        pcode = None
+        self.courses = courses = {}
+        for rown in range(sheet.nrows):
+            if rown <= layout[0]:
+                continue
+            row = sheet.row(rown)
+            row = [conv(c) for c in row]
+
+            code = row[ci.code]
+
+            if code == "*":
+                pcode = None
+                continue
+            if isinstance(code, int):
+                assert pcode is not None
+                code = "{}.{}".format(pcode, code)
+            elif code is None:
+                code = pcode
+            else:
+                pcode = code
+
+            if code is None:
+                continue
+
+            courses.setdefault(code, []).append(row)
 
         # self.scan_row(3, sheet, cton)
