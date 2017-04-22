@@ -147,8 +147,19 @@ class IWorkingProgram(IEducationalSpecification):
     """
 
 
-class IAcademicPlan(Interface):
+class IAcademicPlan(IVocabularyItem):
     """Marker interface IAcaddemicPlan
     defines components denoting academic
     plans.
     """
+
+
+class IAcademicCourse(IVocabularyItem):
+    """Represents Academic Course
+    """
+    plan = zope.schema.Object(
+        title=_("Plan"),
+        description=_("The Academic plan belongs to."),
+        schema=IAcademicPlan,
+        required=True
+    )

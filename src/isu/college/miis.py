@@ -1,6 +1,6 @@
 from zope.component import adapter, getGlobalSiteManager
 from isu.college.interfaces import IAcademicPlan
-from isu.college.components import AcademicPlan
+from isu.college.components import AcademicPlan, AcademicCourse
 import xlrd
 from isu.college import enums
 import re
@@ -710,3 +710,13 @@ class Plan(AcademicPlan):
             courses.setdefault(code, []).append(row)
 
         # self.scan_row(3, sheet, cton)
+
+
+class Course(.Course):
+    """Expresses course data
+
+    """
+
+    def __init__(self, name=None, title=None):
+        super(Course, self).__init__(name, title)
+        self.args = args

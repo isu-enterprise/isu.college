@@ -1,4 +1,4 @@
-from .interfaces import IAcademicPlan
+from .interfaces import IAcademicPlan, IAcademicCourse
 from zope.interface import implementer
 from collections import namedtuple
 
@@ -14,3 +14,13 @@ class AcademicPlan(object):
 
     def __init__(self):
         pass
+
+
+@implementer(IAcademicCourse)
+class AcademicCourse(object):
+    """Represents an academic course
+    """
+
+    def __init__(self, name=None, title=None):
+        self.name = name
+        self.title = title
