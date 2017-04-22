@@ -150,10 +150,11 @@
         <section id="course-time-differentiation" property="schema:hasPart"
                  typeof="schema:CreativeWork"
                  resource="#description"
+                 tal:condition="course"
         >
             <div property="schema:hasPart" typeof="dc:Text cnt:ContentAsText" resource="#purpose">
                 <h2 property="dc:title" datatype="xsd:string">Распределение времени по видам образовательной активности (Заглушка)</h2>
-                <table class="c" property="cnt:chars" datatype="xsd:string" id="time-differentiation">
+                <table class="c" property="cnt:chars" datatype="xsd:string" id="time-differentiation" tal:define="c course.dif.course">
                     <thead>
                         <tr class="header">
                             <th rowspan="2" style="min-width:50%;">Вид учебной работы</th>
@@ -170,7 +171,7 @@
                     <tbody>
                         <tr class="bold emph">
                             <td class="bold l">Аудиторные занятия (всего)</td>
-                            <td>108</td>
+                            <td tal:content="c[1].sem[1].h.v">-108-</td>
                             <td>33</td>
                             <td>75</td>
                             <td></td>

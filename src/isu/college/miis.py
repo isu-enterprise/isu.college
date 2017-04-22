@@ -738,7 +738,7 @@ class CourseDescriptor(object):
 
     def _interprete(self, i):
         if isinstance(i, Index) and i._leaf:
-            return Column._make(self.data[:, i])
+            return Column._make((list(self.data[:, i]) + [None, None, None])[:3])
         return self.__class__(i, self.data)
 
     def __getitem__(self, index):

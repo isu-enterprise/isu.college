@@ -106,6 +106,7 @@ def work_plan(request):
     if plan_name.endswith(".xlsx"):
         view = view.getplan(plan_name)
         view.filter = None
+        course = None
     else:
         parts = plan_name.split(".xlsx")
         plan_name = parts[0] + ".xlsx"
@@ -118,10 +119,12 @@ def work_plan(request):
             "format": form
         }
         view.filter = kwargs
+        course = view.plan.course(course)
 
     return {
         "view": view,
-        "plan": view.plan
+        "plan": view.plan,
+        "course": course
     }
 
 
