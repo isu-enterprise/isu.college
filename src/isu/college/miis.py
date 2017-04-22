@@ -8,6 +8,7 @@ import marisa_trie
 import pymorphy2
 from pprint import pprint, pformat
 import numpy as np
+from collections import namedtuple
 
 morph = pymorphy2.MorphAnalyzer()
 
@@ -714,6 +715,9 @@ class Plan(AcademicPlan):
         return c
 
 
+Column = namedtuple("Column", ["v", "i", "e"])
+
+
 class CourseDescriptor(object):
     """Helping class allowing interpret
     column indices with tabular data they refer to"""
@@ -734,7 +738,7 @@ class CourseDescriptor(object):
 
     def _interprete(self, i):
         if isinstance(i, Index) and i._leaf:
-            return self.data[:, i]
+            return Column._make(self.data[:, i])
         return self.__class__(i, self.data)
 
     def __getitem__(self, index):

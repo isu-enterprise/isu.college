@@ -66,6 +66,8 @@ class TestLoad(object):
         course = self.plan.course("Б1.Б.1")
         # pprint(course.data)
         print("Result:", course.dif.course[1].sem[2].h)
+        print("Result:", course.dif.course[1].sem[2].h[0])
+        print("Result:", course.dif.course[1].sem[2].h.v)
 
 
 @SkipTest
