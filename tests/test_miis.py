@@ -58,8 +58,8 @@ class TestLoad(object):
         plan.load_plan()
         # pprint(dir(plan.colidx))
         # pprint(dir(plan.colidx.dif))
-        pprint(dir(plan.colidx.dif.course[1]))
-        assert plan.colidx.dif.course[1].total.h
+        # pprint(dir(plan.colidx.dif.course[1]))
+        assert plan.colidx.dif.course[1].sem[2].h
 
 
 @SkipTest

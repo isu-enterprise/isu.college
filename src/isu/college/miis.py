@@ -624,22 +624,20 @@ class Plan(AcademicPlan):
         """
         self.colidx = Index(2)  # The root index of the hierarchy
 
-        import pudb
-        pu.db
+        # import pudb
+        # pu.db
 
         def seta(index, pdef,  o, odef):
             pname, pidx = pdef
             name, oi = odef
-            if pidx is not None:
-                if isinstance(o, dict):
-                    index.update(o)
-                    return
-                setattr(index[pidx], name, o)
-                return
             if oi is not None:
                 if hasattr(index, name):
                     getattr(index, name).update(o)
                     return
+            if pidx is not None and isinstance(index, dict):
+                index = index[pidx]
+                seta(index, (None, None), o, odef)
+                return
             setattr(index, name, o)
 
         for myloc, _ in cton.items():
