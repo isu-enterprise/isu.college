@@ -21,6 +21,6 @@ class AcademicCourse(object):
     """Represents an academic course
     """
 
-    def __init__(self, name=None, title=None):
-        self.name = name
+    def __init__(self, code=None, title=None):
+        self.code = code
         self.title = title

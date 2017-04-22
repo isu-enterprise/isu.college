@@ -95,6 +95,7 @@ class Plan(AcademicPlan):
         self.attrs = {}
         self.compl = None
         self.load()
+        self.load_plan()
 
     def __str__(self):
         s = "{}<{}>:\n".format(self.__class__.__name__, hex(id(self)))
@@ -503,14 +504,6 @@ class Plan(AcademicPlan):
         self.load_lists()
         yield from self.show_list(self.courl, compid, "{code}. {title}")
 
-    def course(self, courid):
-        self.load_lists()
-        v, _ = self.courl[courid]
-        o = String("{code}. {title}".format(code=courid, title=v))
-        o.title = v
-        o.code = v
-        return o
-
     IDNUMRE = re.compile("((\w|_)+)_(\d+)")
 
     def scan_row(self, row, sheet, cton):
@@ -711,12 +704,23 @@ class Plan(AcademicPlan):
 
         # self.scan_row(3, sheet, cton)
 
+    def course(self, code):
+        self.load_lists()
+        course = self.courses[code]
+        title = course[0][self.colidx.title]
+        c = Course(code=code, title=title)
+        c.data = course
+        c.plan = self
+        return c
 
-class Course(.Course):
+
+class Course(AcademicCourse):
     """Expresses course data
 
     """
 
-    def __init__(self, name=None, title=None):
-        super(Course, self).__init__(name, title)
-        self.args = args
+    def __init__(self, code=None, title=None):
+        super(Course, self).__init__(code, title)
+
+    def __str__(self):
+        return String("{code}. {title}".format(code=self.code, title=self.title))
