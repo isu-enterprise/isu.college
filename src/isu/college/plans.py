@@ -24,3 +24,6 @@ class AcademicCourse(object):
     def __init__(self, code=None, title=None):
         self.code = code
         self.title = title
+
+    def __str__(self):
+        return "{code}. {title}".format(code=self.code, title=self.title)

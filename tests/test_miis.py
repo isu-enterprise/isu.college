@@ -55,12 +55,17 @@ class TestLoad(object):
 
     def test_plan_load(self):
         plan = self.plan
-        plan.load_plan()
         # pprint(dir(plan.colidx))
         # pprint(dir(plan.colidx.dif))
         # pprint(dir(plan.colidx.dif.course[1]))
         assert plan.colidx.dif.course[1].sem[2].h
         # pprint(plan.courses)
+
+    def test_plan_course_access(self):
+        print(self.plan.courses.keys())
+        course = self.plan.course("Б1.Б.1")
+        # pprint(course.data)
+        print("Result:", course.dif.course[1].sem[2].h)
 
 
 @SkipTest

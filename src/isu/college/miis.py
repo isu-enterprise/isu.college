@@ -81,7 +81,6 @@ class String(str, Object):
 class Index(int):
     """A class of hierarchical index.
     """
-    pass
 
 
 class Plan(AcademicPlan):
@@ -528,12 +527,13 @@ class Plan(AcademicPlan):
             val = val.replace(".", "")
             val = val.lower()
             m = self.__class__.IDNUMRE.match(val)
+            o = Index(col)
+            o._leaf = True
             if m is not None:
                 val = m.group(1), int(m.group(3))
-                o = {val[1]: Index(col)}
+                o = {val[1]: o}
             else:
                 val = (val, None)
-                o = Index(col)
             vname, vopt = val
 
             vname = self.__class__.RENAME.get(vname, vname)
@@ -628,6 +628,7 @@ class Plan(AcademicPlan):
                 index = index[pidx]
                 seta(index, (None, None), o, odef)
                 return
+            index._leaf = False
             setattr(index, name, o)
 
         for myloc, _ in cton.items():
@@ -708,19 +709,53 @@ class Plan(AcademicPlan):
         self.load_lists()
         course = self.courses[code]
         title = course[0][self.colidx.title]
-        c = Course(code=code, title=title)
-        c.data = course
-        c.plan = self
+
+        c = Course(code=code, title=title, plan=self, data=course)
         return c
+
+
+class CourseDescriptor(object):
+    """Helping class allowing interpret
+    column indices with tabular data they refer to"""
+
+    def __init__(self, index=None, data=None):
+        self.index = index
+        self.data = data
+
+    def __get__(self, instance, owner):
+        # owner is a Class
+        #print("Got: ", self, instance, owner)
+        plan = instance.plan
+        return self.__class__(plan.colidx, instance.data)
+
+    def __getattr__(self, name):
+        i = getattr(self.index, name)
+        return self._interprete(i)
+
+    def _interprete(self, i):
+        if isinstance(i, Index) and i._leaf:
+            return self.data[:, i]
+        return self.__class__(i, self.data)
+
+    def __getitem__(self, index):
+        i = self.index[index]
+        return self._interprete(i)
+
+    def __int__(self):
+        return self.index
 
 
 class Course(AcademicCourse):
     """Expresses course data
 
     """
+    descriptor = CourseDescriptor()
 
-    def __init__(self, code=None, title=None):
+    def __init__(self, code=None, title=None, plan=None, data=None):
         super(Course, self).__init__(code, title)
+        self.plan = plan
+        self.data = np.array(data, dtype=object)
 
-    def __str__(self):
-        return String("{code}. {title}".format(code=self.code, title=self.title))
+    def __getattr__(self, name):
+        val = getattr(self.descriptor, name)
+        return val
