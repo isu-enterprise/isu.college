@@ -56,8 +56,10 @@ class TestLoad(object):
     def test_plan_load(self):
         plan = self.plan
         plan.load_plan()
-        pprint(dir(plan.colidx))
-        assert plan.colidx.course[1].total.h
+        # pprint(dir(plan.colidx))
+        # pprint(dir(plan.colidx.dif))
+        pprint(dir(plan.colidx.dif.course[1]))
+        assert plan.colidx.dif.course[1].total.h
 
 
 @SkipTest

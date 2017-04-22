@@ -580,43 +580,42 @@ class Plan(AcademicPlan):
         print(nameset)
 
     RENAME = {
-        "распределение_по_курсам_и_семестрам": mark,  # Remove from hierarchy
-        "всего_часов": "total_h",
-        "индекс": "code",
-        "лаб": "lab",
         "ауд": "aud",
-        "часов": "h",  # Hours
-        "зет": "cu",   # Credit unit
-        "контроль": "sup",  # Supervision
-        "пр": "pr",
-        "лек": "lec",
-        "семестр": "sem",  # semester
-        "код": "code",
+        "в_том_числе": "inc",
+        "всего": "total",
+        "всего_часов": "total_h",
+        "закрепленная_кафедра": "chair",
         "зачеты": "credits",
         "зачеты_с_оценкой": "grade_credit",
-        "контакт_раб": "contact_work",
-        "срс": "siw",  # Students' independent work
-        "всего": "total",
-        "кср": "iwc",  # Independent Work Control
-        "курсовые_работы": "cworks",  # Course works
-        "курсовые_проекты": "cprojects",  # Course projects
-        "наименование": "title",
+        "зет": "cu",   # Credit unit
+        "зет_в_нед": "cupw",  # Control units per week
         "из_них": "inc",  # Including
-        "экзамены": "exams",  # Examinations
-        "экспертное": "expert",
+        "индекс": "code",
+        "итого_часов_в_интерактивной_форме": "tih",  # Total intractive hours
+        "итого_часов_в_электронной_форме": "teh",  # Total electric hours
+        "код": "code",
+        "компетенции": "components",
+        "контакт_раб": "contact_work",
+        "контроль": "sup",  # Supervision
+        "кср": "iwc",  # Independent Work Control
         "курс": "course",
-        "в_том_числе": "inc",
-        "факт": "realcu",
+        "курсовые_проекты": "cprojects",  # Course projects
+        "курсовые_работы": "cworks",  # Course works
+        "лаб": "lab",
+        "лек": "lec",
+        "наименование": "title",
         "по_зет": "cu",
         "по_плану": "plan",
-        "закрепленная_кафедра": "chair",
-        "итого_часов_в_электронной_форме": "teh",  # Total electric hours
-        "итого_часов_в_интерактивной_форме": "tih",  # Total intractive hours
+        "пр": "pr",
+        "распределение_по_курсам_и_семестрам": "dif",  # Remove from hierarchy
+        "семестр": "sem",  # semester
+        "срс": "siw",  # Students' independent work
+        "факт": "realcu",
         "формы_контроля": "controls",
-        "зет_в_нед": "cupw",  # Control units per week
+        "часов": "h",  # Hours
         "часов_в_зет": "hicu",  # Hours in a control unit.
-        "компетенции": "components"
-
+        "экзамены": "exams",  # Examinations
+        "экспертное": "expert",
     }
 
     def _build_index_tree(self, cton, row):
@@ -625,43 +624,33 @@ class Plan(AcademicPlan):
         """
         self.colidx = Index(2)  # The root index of the hierarchy
 
-        def seta(obj, name, o, idx):
-            if isinstance(o, dict):
-                if hasattr(obj, name):
-                    obj = getattr(obj, name)
+        import pudb
+        pu.db
 
-                    if idx is not None:
-                        try:
-                            obj = obj[idx]
-                            setattr(obj, name, o)
-                        except KeyError:
-                            obj.update(o)
-                        return
+        def seta(index, pdef,  o, odef):
+            pname, pidx = pdef
+            name, oi = odef
+            if pidx is not None:
+                if isinstance(o, dict):
+                    index.update(o)
+                    return
+                setattr(index[pidx], name, o)
                 return
-            if idx is not None:
-                obj = obj[idx]
-            setattr(obj, name, o)
+            if oi is not None:
+                if hasattr(index, name):
+                    getattr(index, name).update(o)
+                    return
+            setattr(index, name, o)
 
         for myloc, _ in cton.items():
             mydef, myloc, parent, myindex = _
-            name, idx = mydef   # <name>_<idx>, e.g. course_1
-            while True:
 
-                # This is the highest item (the nearest to root).
-                if parent is None:
-                    if name != mark:
-                        seta(self.colidx, name, myindex, idx)
-                    break
-
+            if parent is not None:
                 pdef, ploc, pparent, pindex = parent
-                pname, pidx = pdef
-                if name != mark:  # ... is not ignored
-                    if idx is None:
-                        idx = pidx
-                    seta(pindex, name, myindex, idx)
-                    break
+                seta(pindex, pdef, myindex, mydef)
+                continue
 
-                parent = pparent
+            seta(self.colidx, (None, None), myindex, mydef)
 
     def load_plan(self):
         """Loads main time table.
