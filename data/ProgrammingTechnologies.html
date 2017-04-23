@@ -564,15 +564,43 @@
                             <div property="schema:hasPart" typeof="dc:Text cnt:ContentAsText"  resource="#python">
                                 <h4 property="dc:title" datatype="xsd:string">Среда программирования Python</h4>
                                 <p property="cnt:chars" datatype="xsd:string">
-
-                                    Инструментарий тестирования программного кода компонент.
+                                    Структуры языка программирования Python. Императивная, функциональная, объектно-ориентированная и компонентная парадигмы программирования. Понятие "Чистого" объектно-ориентированного языка программирования. Структуры данных: список, очередь, \(n\)-ка (tuple), множество, словарь, генератор и куча. Определение объектов в языке, множественное наследование, подмешивания (mixin). Метаклассы, эмуляция поведения, свойства (properties), дескрипторы. Замыкания, примеры их применения. Генераторы, библиотека itertools.
+                                </p>
+                                <p>
+                                    Инструментарий тестирования программного кода: библиотека nose.
                                 </p>
                             </div>
 
                             <div property="schema:hasPart" typeof="dc:Text cnt:ContentAsText"  resource="#modularization">
                                 <h4 property="dc:title" datatype="xsd:string">Деление программы на модули</h4>
                                 <p property="cnt:chars" datatype="xsd:string">
-                                    Способы деления программы на модули. Структуры модулей современных систем программирования.
+                                    Способы деления программы на модули. Структуры модулей современных систем программирования. Модульная система среды программирования Python. Понятие "Пакета". Установка пакетов. Структура пакета, сборочный файл, файлы настроек, файлы зависимостей. Публикация (release) пакета. Требования к документации. Виртуальные копии дистрибутива среды программирования Python (virtualenv).</p>
+                                <p>
+                                    Интегрирование среды программирования Python с языками системного программирования и языками компилируемого типа. Инструментарий автоматизации интегрирования: <a href="http://swig.org/">SWIG</a>, <a href="http://cython.org/">Cython</a> и др. Измерение производительности программы (profiling).</p>
+                                <p>Пакеты поддержки разработки научных приложений: numpy, scipy, simpy и др. Особенности установки пакетов в операционной системе Windows.
+                                </p>
+                            </div>
+                            <div property="schema:hasPart" typEof="dc:Text cnt:ContentAsText"  resource="#gui-programming">
+                                <h4 property="dc:title" datatype="xsd:string">Доступ к реляционным базам данных</h4>
+                                <p property="cnt:chars" datatype="xsd:string">
+                                </p>
+                                <p>Отображение структур реляционных баз данных на объектно-ориентированную парадигму Python.
+                                </p>
+                            </div>
+                            <div property="schema:hasPart" typEof="dc:Text cnt:ContentAsText"  resource="#gui-programming">
+                                <h4 property="dc:title" datatype="xsd:string">Трансляторы</h4>
+                                <p property="cnt:chars" datatype="xsd:string">
+                                    Понятие грамматики. Виды формализмов для представления грамматики. Вывод предложений из грамматики, леворекурсивный и праворекурсивный вывод. Иерархия грамматик по Ноаму Хомскому. Автоматные грамматики, представление грамматик в виде конечных автоматов. Контекстно-свободные грамматики, Машина Алана Тьюринга с магазинной памятью. Классификации трансляторов контекстно-свободных грамматик. Технология программирования трансляторов, основанных на рекурсивном спуске. Компиляторы компиляторов и сопутствующий инструментарий: bison, flex, antlr. Синтаксически-управляемый перевод и атрибутивные грамматики Дональда Кнута. Общие характеристики виртуальной машины LLVM. Языки программирования, базирующиеся на LLVM: Julia, D, Rust.
+                                </p>
+                                <p>Библиотеки разработки трансляторов для среды программирования Python. Управление процессом трансляции программ Python. Представление Дерева синтаксического разбора.
+                                </p>
+                            </div>
+                            <div property="schema:hasPart" typEof="dc:Text cnt:ContentAsText"  resource="#gui-programming">
+                                <h4 property="dc:title" datatype="xsd:string">Программирование интерфейсов пользователя</h4>
+                                <p property="cnt:chars" datatype="xsd:string">
+                                    Шаблоны Модель-Вид-Контроллер (Model-View-Controller), Модель-Вид-Презентер (Model-View-Presenter), Модель-Вид-ВидМодель (Model-View-ViewModel), и др. Отображение таблиц баз данных на модели MVW (Model-View-"Whatewer"). Промышленные пакеты для разработки интерфейсов пользователя: QT, GTK+, wxWidgets. Средства визуального дизайна видов (форм) Qt Designer, glade, wxGlade. Реализации шаблонов проектирования интерфейсов пользователя в графических пакетах. Возможности пакетов для разработки автоматизированных рабочих мест (АРМ) и информационных систем.
+                                </p>
+                                <p>Современные подходы к проектированию web-приложений и их реализации в среде Python: flask, pyramid, ZOPE, Django и др. Отображение запросов HTTP на процедуры и методы. Моделирование шаблонов проектирования при реализации web-приложений.
                                 </p>
                             </div>
                             <div property="schema:hasPart" typeof="dc:Text cnt:ContentAsText"  resource="#component-architecture">
@@ -580,44 +608,33 @@
                                 <p property="cnt:chars" datatype="xsd:string">
                                     Парадигма компонентного программирования: основные положения.
                                     Основные понятия: интерфейс, компонента, обслуживание,
-                                    реализация, утилита, адаптер, шаблон проектирования.
+                                    реализация, утилита, адаптер, утилита (сервис), контейнер, фабрика, шаблон проектирования.
                                     Обзор популярных сред компонентного проектирования.
                                     Проектирование интерфейсов компонент.
                                     Языки графического представления проекта.
                                 </p>
-                            </div>
-                            <div property="schema:hasPart" typeof="dc:Text cnt:ContentAsText"  resource="#content">
-                                <h4 property="dc:title" datatype="xsd:string">Компоненты и сервисы</h4>
-                                <p property="cnt:chars" datatype="xsd:string">
+                                <p>Конфигурирование компонентной программной системы. Виды конфигураций, подходы к созданию конфигураций: императивный и декларативный. Язык ZCML (ZOPE Configuration Markup Language). Структура INI-файлов. Применение INI-файлов для конфигурирования индивидуальных утилит.
                                 </p>
-                            </div>
-                            <div property="schema:hasPart" typeof="dc:Text cnt:ContentAsText"  resource="#content">
-                                <h4 property="dc:title" datatype="xsd:string">Конфигурирование программных систем</h4>
-                                <p property="cnt:chars" datatype="xsd:string">
-                                </p>
+                                <p>Адаптер-ориентированное программирование. Динамическая и статическая адаптация. Виды адаптеров: прокси-адаптеры, фасады, MVW и т.п. Приемы проектирования компонентных пакетов (библиотек).
                             </div>
 
                             <div property="schema:hasPart" typeof="dc:Text cnt:ContentAsText"  resource="#content">
-                                <h4 property="dc:title" datatype="xsd:string">Адаптер-ориентированнное программирование</h4>
+                                <h4 property="dc:title" datatype="xsd:string">Основы порождающего программирования</h4>
                                 <p property="cnt:chars" datatype="xsd:string">
+                                    Программирование второго порядка. Язык программирования Scheme. Формы Scheme. Создание новых форм: макросы. Дерево синтаксического разбора и преобразование над ним. Методы рекурсивной обработки синтаксических деревьев.
                                 </p>
-                            </div>
-
-                            <div property="schema:hasPart" typeof="dc:Text cnt:ContentAsText"  resource="#content">
-                                <h4 property="dc:title" datatype="xsd:string">Шаблоны проектирования интерфейсов пользователя</h4>
-                                <p property="cnt:chars" datatype="xsd:string">
+                                <p>Шаблоны языков программирования C++, Java, C#, D, Vala, Julia. Обобщенное программирование и его реализация в перечисленных системах. Методики конфигурирования для систем порождающего программирования данного класса (Чернецки).
                                 </p>
-                            </div>
-
-                            <div property="schema:hasPart" typeof="dc:Text cnt:ContentAsText"  resource="#content">
-                                <h4 property="dc:title" datatype="xsd:string">Аспект-ориентированнное программирование</h4>
-                                <p property="cnt:chars" datatype="xsd:string">
+                                <p>"Внешние" подходы к порождающему программированию. Метод Горбунова-Посадова. "Горизональное" программирование. Слоты, мультислоты. Plugin-программирование. Программирование, ориентированное на разработку языка предметной области (Domain Specific Language, DSL). Современные средства разработки DSL: Agda, Spoofy и др. Аспект-ориентированное программирование. Инверсия зависимостей, обязательства (promises).
                                 </p>
                             </div>
 
                             <div property="schema:hasPart" typeof="dc:Text cnt:ContentAsText"  resource="#content">
                                 <h4 property="dc:title" datatype="xsd:string">Сервис-ориентированные программные системы</h4>
                                 <p property="cnt:chars" datatype="xsd:string">
+                                    Понятие API (Application Programming Interface) сервисов и их отличия от API библиотек и пакетов. Интерфейсы сервисов. RESTful-сервисы. Пакеты реализации RESTful-сервисов в среде программирования Python. Методы кодирования информации уровня представления данных модели OSI/ISO. Форматы XML, JSON, BSON, байтовые потоки и WebSocket-ы. Протоколы RPC и XML-RPC.
+                                </p>
+                                <p>Виртуализация приложений. Понятие о виртуальном частном сервере/сервисе (Virtual Private Server/Service, VPS). Методы и технологии организации VPS. Понятие контейнера. Контейнеры Virtuozzo, LXC, Docker. Форматы файлов конфигурации контейнеров. Понятия PaaS, IaaS и SaaS. Реализация IaaS на основе контейнеров.
                                 </p>
                             </div>
                         </div>
@@ -934,16 +951,15 @@
             </p>
             </a>
         </footer>
+        <script type="text/javascript" async
+                src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.0/MathJax.js?config=TeX-MML-AM_CHTML">
+        </script>
         <script src="https://code.jquery.com/jquery-3.2.1.js" type="text/javascript"></script>
         <!-- <script src="https://dokie.li/scripts/simplerdf.js" type="text/javascript"></script> -->
         <script src="https://cdn.jsdelivr.net/medium-editor/latest/js/medium-editor.min.js"  type="text/javascript"></script>
         <script src="https://dokie.li/scripts/medium-editor-tables.min.js"  type="text/javascript"></script>
         <script src="js/contents.js"  type="text/javascript"></script>
         <script src="js/LODdoc.js" type="text/javascript"></script>
-
-
-
-
 
         <script>
          $(function () {
