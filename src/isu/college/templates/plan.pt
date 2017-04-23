@@ -2,6 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:tal="http://xml.zope.org/namespaces/tal"
       xmlns:metal="http://xml.zope.org/namespaces/metal"
+      xmlns:taa="http://irnok.net/engine/rdfa-manipulation"
       metal:use-macro="work_program_template.macros['page']">
     <tal:block metal:fill-slot="header-meta">
         <link href="/lcss/local.css" rel="stylesheet"/>
@@ -86,7 +87,7 @@
                  resource="#competence-description"
                  id="competence-description">
                 <h2 property="dc:title" datatype="xsd:string">Список компетенций <span tal:condition="not: view.filter">специальности</span></h2>
-                <h3 tal:condition="view.filter" class="nocount">Дисциплина: <span tal:content="plan.course(view.filter['course'])"></span></h3>
+                <h3 tal:condition="view.course" class="nocount">Дисциплина: <span tal:content="view.course"></span></h3>
                 <ul property="curr:competence-list" typeof="rdf:List"
                     resource="#competence-list"
                     id="competence-list">
@@ -150,126 +151,141 @@
         <section id="course-time-differentiation" property="schema:hasPart"
                  typeof="schema:CreativeWork"
                  resource="#description"
-                 tal:condition="course"
+                 tal:condition="vc"
+                 tal:define="vc view.course"
         >
             <div property="schema:hasPart" typeof="dc:Text cnt:ContentAsText" resource="#purpose">
-                <h2 property="dc:title" datatype="xsd:string">Распределение времени по видам образовательной активности (Заглушка)</h2>
-                <table class="c" property="cnt:chars" datatype="xsd:string" id="time-differentiation" tal:define="c course.dif.course">
+                <h2 property="dc:title"
+                    datatype="xsd:string">Распределение времени по видам образовательной активности (Заглушка)</h2>
+                <table class="c" property="cnt:chars"
+                       datatype="xsd:string"
+                       id="time-differentiation"
+                       tal:define="semnum len(vc.semesters);
+                                   ctotal vc.context.total_h;
+                                   sems vc.semesters
+                                   "
+                >
                     <thead>
                         <tr class="header">
                             <th rowspan="2" style="min-width:50%;">Вид учебной работы</th>
                             <th rowspan="2"  style="width:5em;">Всего часов / зачетных единиц</th>
-                            <th colspan="4">Семестры</th>
+                            <th colspan="4"
+                                tal:attributes="colspan semnum"
+                            >Семестры</th>
                         </tr>
                         <tr class="header">
-                            <th style="width:4em;">3</th>
-                            <th style="width:4em;">4</th>
-                            <th style="width:4em;">&nbsp;</th>
-                            <th style="width:4em;">&nbsp;</th>
+                            <th style="width:4em;" tal:repeat="sem sems">
+                                <span tal:content="sem.number"></span>
+                            </th>
                         </tr>
                     </thead>
                     <tbody>
                         <tr class="bold emph">
                             <td class="bold l">Аудиторные занятия (всего)</td>
-                            <td tal:content="c[1].sem[1].h.v">-108-</td>
-                            <td>33</td>
-                            <td>75</td>
-                            <td></td>
-                            <td></td>
+                            <td tal:content="ctotal.inc.contact_work.v">-108-</td>
+                            <td tal:repeat="sem sems">
+                                <span tal:content="sem.aud"></span>
+                            </td>
                         </tr>
                         <tr>
-                            <td class="l" colspan="6">в том числе:</td>
+                            <td class="l" colspan="6"
+                                tal:attributes="colspan semnum+2"
+                            >в том числе:</td>
                         </tr>
                         <tr>
                             <td class="l">Лекции</td>
-                            <td>36</td>
-                            <td></td>
-                            <td>36</td>
-                            <td></td>
-                            <td></td>
+                            <td tal:content="ctotal.inc.inc.lec.v">?</td>
+                            <td tal:repeat="sem sems">
+                                <span tal:content="sem.lec.v | nothing"></span>
+                            </td>
                         </tr>
                         <tr>
                             <td class="l">Практические занятия (ПЗ)</td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
+                            <td tal:content="ctotal.inc.inc.pr.v"
+                                taa:content="#practice-total"
+                            >?</td>
+                            <td tal:repeat="sem sems"
+                                tal:attributes="taa:content string:#practice-${sem.number}">
+                                <span tal:content="sem.pr.v | nothing"></span>
+                            </td>
                         </tr>
                         <tr>
                             <td class="l">Семинары (С)</td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
+                            <td taa:content="#seminar-total"></td>
+                            <td tal:repeat="sem sems"
+                                tal:attributes="taa:content string:#seminar-${sem.number}">
+                                <span tal:content="sem.sem.v | nothing"></span>
+                            </td>
                         </tr>
                         <tr>
                             <td class="l">Лабораторные работы (ЛР)</td>
-                            <td>66</td>
-                            <td>30</td>
-                            <td>36</td>
-                            <td></td>
-                            <td></td>
+                            <td tal:content="ctotal.inc.inc.lab.v">?</td>
+                            <td tal:repeat="sem sems">
+                                <span tal:content="sem.lab.v | nothing"></span>
+                            </td>
                         </tr>
                         <tr>
                             <td class="l">КСР</td>
-                            <td>6</td>
-                            <td>3</td>
-                            <td>3</td>
-                            <td></td>
-                            <td></td>
+                            <td tal:content="ctotal.inc.inc.iwc.v">?</td>
+                            <td tal:repeat="sem sems">
+                                <span tal:content="sem.iwc.v | nothing"></span>
+                            </td>
                         </tr>
                         <tr class="bold emph">
                             <td class="l">Самостоятельная работа (всего)</td>
-                            <td>45</td>
-                            <td>39</td>
-                            <td>6</td>
-                            <td></td>
-                            <td></td>
+                            <td tal:content="ctotal.inc.siw.v">?</td>
+                            <td tal:repeat="sem sems">
+                                <span tal:content="sem.siw.v | nothing"></span>
+                            </td>
                         </tr>
                         <tr>
-                            <td class="l" colspan="6">в том числе:</td>
+                            <td class="l" colspan="6"
+                                tal:attributes="colspan semnum+2"
+                            >в том числе:</td>
                         </tr>
                         <tr>
                             <td class="l">Курсовой проект (работа)</td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
+                            <td taa:content="#course-work-total"></td>
+                            <td tal:repeat="sem sems"
+                                tal:attributes="taa:content string:#course-work-${sem.number}">
+                                <span tal:content="nothing"></span>
+                            </td>
                         </tr>
                         <tr>
                             <td class="l">Расчетно-графические работы</td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
+                            <td taa:content="#graphics-work-total"></td>
+                            <td tal:repeat="sem sems"
+                                tal:attributes="taa:content string:#graphics-work-${sem.number}">
+                                <span tal:content="nothing"></span>
+                            </td>
                         </tr>
                         <tr>
                             <td class="l">Реферат (при наличии)</td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
+                            <td taa:content="#abstract-total"></td>
+                            <td tal:repeat="sem sems"
+                                tal:attributes="taa:content string:#abstract-${sem.number}">
+                                <span tal:content="nothing"></span>
+                            </td>
                         </tr>
                         <tr>
                             <td class="l"><em>Другие виды самостоятельной работы</em></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
+                            <td taa:content="#other-work-total"></td>
+                            <td tal:repeat="sem sems"
+                                tal:attributes="taa:content string:#other-work-${sem.number}">
+                                <span tal:content="nothing"></span>
+                            </td>
                         </tr>
                         <tr>
                             <td class="l"><em>Изучение учебной, научной и методической литературы с привлечением электронных средств информации, подготовка к экзамену</em></td>
-                            <td>45</td>
-                            <td>39</td>
-                            <td>6</td>
-                            <td></td>
-                            <td></td>
+                            <td tal:content="ctotal.inc.siw.v"
+                                taa:content="#lit-study-total"
+                            >?</td>
+                            <td tal:repeat="sem sems"
+                                tal:attributes="taa:content string:#lit-study-${sem.number}">
+                                <span
+                                    tal:content="sem.siw.v | nothing"
+                                ></span>
+                            </td>
                         </tr>
                         <tr class="bold emph">
                             <td rowspan="1"
@@ -277,20 +293,48 @@
                                 class="l"
                             >
                                 Общая трудоемкость, <span class="right">часы,</span></td>
-                            <td>180</td>
-                            <td>72</td>
-                            <td>108, контр 27 </td>
-                            <td></td>
-                            <td></td>
+                            <td tal:content="ctotal.plan.v"></td>
+                            <td tal:repeat="sem sems">
+                                <span tal:content="sem.h.v"></span>
+                            </td>
                         </tr>
                         <tr class="bold emph">
                             <td><span class="right">зачетные единицы</span></td>
-                            <td>5</td>
-                            <td>2</td>
-                            <td>3</td>
-                            <td></td>
-                            <td></td>
+                            <td tal:content="vc.context.cu.fact.v"></td>
+                            <td tal:repeat="sem sems">
+                                <span tal:content="sem.cu.v"></span>
+                            </td>
                         </tr>
+                        <tr class="bold emph"
+                            tal:condition="ctotal.inc.sup.v"
+                        >
+                            <td><span class="right">контроль</span></td>
+                            <td tal:content="ctotal.inc.sup.v"></td>
+                            <td tal:repeat="sem sems">
+                                <span tal:content="sem.sup.v"></span>
+                            </td>
+                        </tr>
+                        <tr class="bold emph"
+                            tal:condition="ctotal.inc.contact_work.i"
+                            hidden
+                        >
+                            <td><span class="right">Интерактивно</span></td>
+                            <td tal:content="ctotal.inc.contact_work.i"></td>
+                            <td tal:repeat="sem sems">
+                                <span tal:content="sem.h.i | nothing"></span>
+                            </td>
+                        </tr>
+                        <tr class="bold emph"
+                            tal:condition="ctotal.inc.contact_work.e"
+                            hidden
+                        >
+                            <td><span class="right">Электронно</span></td>
+                            <td tal:content="ctotal.inc.contact_work.e | nothing"></td>
+                            <td tal:repeat="sem sems">
+                                <span tal:content="sem.h.e | nothing"></span>
+                            </td>
+                        </tr>
+
                     </tbody>
                 </table>
         </section>

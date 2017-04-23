@@ -604,7 +604,7 @@ class Plan(AcademicPlan):
         "распределение_по_курсам_и_семестрам": "dif",  # Remove from hierarchy
         "семестр": "sem",  # semester
         "срс": "siw",  # Students' independent work
-        "факт": "realcu",
+        "факт": "fact",
         "формы_контроля": "controls",
         "часов": "h",  # Hours
         "часов_в_зет": "hicu",  # Hours in a control unit.
@@ -734,19 +734,30 @@ class CourseDescriptor(object):
 
     def __getattr__(self, name):
         i = getattr(self.index, name)
-        return self._interprete(i)
+        return self.interpret(i)
 
-    def _interprete(self, i):
-        if isinstance(i, Index) and i._leaf:
-            return Column._make((list(self.data[:, i]) + [None, None, None])[:3])
-        return self.__class__(i, self.data)
+    def interpret(self, i):
+        isi = isinstance(i, Index)
+        if isi and i._leaf:
+            return self._val(i)
+        if isi or isinstance(i, dict):
+            return self.__class__(i, self.data)
+        else:
+            return i
 
     def __getitem__(self, index):
         i = self.index[index]
-        return self._interprete(i)
+        return self.interpret(i)
 
     def __int__(self):
         return self.index
+
+    def _val(self, i):
+        return Column._make((list(self.data[:, i]) + [None, None, None])[:3])
+
+    @property
+    def val(self):
+        return self._val(self)
 
 
 class Course(AcademicCourse):

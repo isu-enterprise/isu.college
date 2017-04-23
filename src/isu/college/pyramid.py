@@ -24,14 +24,15 @@ DATADIR = os.path.abspath(
 @adapter(IAcademicPlan)
 class StudyPlanVew(View):
 
-    def __init__(self, obj=None, filename=None):
-        if obj is not None:
-            self.plan = obj
+    def __init__(self, context=None, request=None, filename=None):
+        if context is not None:
+            self.plan = context
         elif filename is not None:
             filename = os.path.join(DATADIR, filename)
             self.plan = Plan(filename)
         else:
             raise RuntimeError("either object or filename must be supplied")
+        super(StudyPlanVew, self).__init__(context=self.plan, request=request)
 
     @property
     def title(self):
@@ -52,8 +53,57 @@ class StudyPlanVew(View):
         else:
             yield from self.plan.competence_list
 
+    @property
+    def course(self):
+        if self.filter is None:
+            return None
+        return CourseView(self.plan.course(self.filter["course"]),
+                          self.request)
 
-# GSM.registerAdapter(StudyPlanVew)
+
+class List(list):
+    pass
+
+
+class CourseView(View):
+    """Helps represent course
+
+    """
+
+    def __init__(self, context, request):
+        super(CourseView, self).__init__(context=context, request=request)
+
+    @property
+    def semesters(self):
+        def z(x):
+            if x is None:
+                return 0
+            else:
+                return x
+
+        sem = []
+        # print(self.context.dif.course)
+        tot_aud = 0
+        for ci, c in self.context.dif.course.index.items():
+            c.number = ci
+            for si, s in c.sem.items():
+                semi = self.context.interpret(s)
+                if semi.h.v is not None:
+                    sem.append(semi)
+                    s.number = si
+                    s.course = ci
+                    s.aud = \
+                        z(semi.lec.v) + \
+                        z(semi.pr.v) + \
+                        z(semi.lab.v) + \
+                        z(semi.iwc.v)
+                    tot_aud += s.aud
+        sem = List(sem)
+        sem.aud = tot_aud
+        return sem
+
+    def __str__(self):
+        return str(self.context)
 
 
 class SPListView(View):
@@ -71,7 +121,7 @@ class SPListView(View):
         #print("List of plans found.")
         # pprint(self.items)
 
-    def getplan(self, name):
+    def plan(self, name):
         if name not in self.plan_views:
 
             print("Loading plan:{}".format(name))
@@ -104,13 +154,13 @@ def work_plan(request):
     view = request.registry.getUtility(IView, name="study-plans")
 
     if plan_name.endswith(".xlsx"):
-        view = view.getplan(plan_name)
+        view = view.plan(plan_name)
         view.filter = None
         course = None
     else:
         parts = plan_name.split(".xlsx")
         plan_name = parts[0] + ".xlsx"
-        view = view.getplan(plan_name)
+        view = view.plan(plan_name)
 
         course, form = (parts[1].split("-") + [None, None])[1:3]
 
@@ -124,7 +174,6 @@ def work_plan(request):
     return {
         "view": view,
         "plan": view.plan,
-        "course": course
     }
 
 
