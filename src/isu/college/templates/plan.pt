@@ -135,12 +135,14 @@
                                 tal:content="cour.code"
                                 property="oa:id"
                                 datatype="xsd:ID"
+                                tal:attributes="id string:id-${cour.code}"
                             >Код курса
                             </span>
                             <a tal:content="cour.title"
                                property="dc:title"
                                datatype="xsd:string"
-                               tal:attributes="href string:${view.filename}-${cour.code}.html"
+                               tal:attributes="href string:${view.filename}-${cour.code}.html;
+                                               id   string:title-${cour-code}"
                             >Название курса
                             </a>
                         </div>
