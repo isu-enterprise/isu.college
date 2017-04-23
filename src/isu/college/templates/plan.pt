@@ -224,7 +224,7 @@
                                 <span tal:content="sem.lab.v | nothing"></span>
                             </td>
                         </tr>
-                        <tr>
+                        <tr tal:condition="ctotal.inc.inc.iwc.v | nothing">
                             <td class="l">КСР</td>
                             <td tal:content="ctotal.inc.inc.iwc.v">?</td>
                             <td tal:repeat="sem sems">

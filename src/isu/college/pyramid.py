@@ -73,14 +73,27 @@ class CourseView(View):
     def __init__(self, context, request):
         super(CourseView, self).__init__(context=context, request=request)
 
-    @property
-    def semesters(self):
+    def semaud(self, sem):
         def z(x):
             if x is None:
                 return 0
             else:
                 return x
 
+        keys = ["lec", "pr", "lab", "iwc"]
+        s = 0
+        for k in keys:
+            v = 0
+            try:
+                v = getattr(sem, k)
+            except AttributeError:
+                continue
+            v = z(v.v)
+            s += v
+        return s
+
+    @property
+    def semesters(self):
         sem = []
         # print(self.context.dif.course)
         tot_aud = 0
@@ -92,11 +105,7 @@ class CourseView(View):
                     sem.append(semi)
                     s.number = si
                     s.course = ci
-                    s.aud = \
-                        z(semi.lec.v) + \
-                        z(semi.pr.v) + \
-                        z(semi.lab.v) + \
-                        z(semi.iwc.v)
+                    s.aud = self.semaud(semi)
                     tot_aud += s.aud
         sem = List(sem)
         sem.aud = tot_aud
