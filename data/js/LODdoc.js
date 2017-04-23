@@ -1,3 +1,7 @@
+function jqesc( myid ) {
+  return "#" + myid.replace( /(:|\.|\[|\]|,|=|@)/g, "\\$1" );
+};
+
 function supportsImports() {
   return 'import' in document.createElement('link');
 }
@@ -47,7 +51,8 @@ function interpTaa(root, macroContext) {
         console.log("Here");
 
       };
-      var rc = contents.find(`#${resource}`).clone();
+
+      var rc = contents.find(`${jqesc( resource )}`).clone();
 
       if (rc.length>0) {
         console.log("Importing " + resource);
