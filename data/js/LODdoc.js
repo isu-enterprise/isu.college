@@ -28,6 +28,18 @@ function interpTaa(root, macroContext) {
     var url;
     var resource;
 
+    if (val.indexOf(":")>-1) {
+      if (/^(f|ht)tps?:\/\//i.test(val)) {
+        // Suppose it is whole specification already
+      } else {
+        var pref = val.split(":");
+        // Find prefix attr containing foo: substring.
+        var pref_tag = commandTag.closest(`[prefix*=${pref[0]}:]`);
+        var s = pref_tag.attr("prefix");
+        s = s.split(`${pref[0]}: `)[1].trim().split(" ")[0].trim();
+        val=s+pref[1];
+      }
+    };
     if (val.indexOf("#")>-1) {
       var res = val.split("#");
       url=res[0];
