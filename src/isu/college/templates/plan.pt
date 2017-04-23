@@ -156,7 +156,7 @@
         >
             <div property="schema:hasPart" typeof="dc:Text cnt:ContentAsText" resource="#purpose">
                 <h2 property="dc:title"
-                    datatype="xsd:string">Распределение времени по видам образовательной активности (Заглушка)</h2>
+                    datatype="xsd:string">Распределение времени по видам образовательной активности</h2>
                 <table class="c" property="cnt:chars"
                        datatype="xsd:string"
                        id="time-differentiation"
