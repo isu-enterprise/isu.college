@@ -278,6 +278,7 @@ class Plan(AcademicPlan):
                     #assert cell is not None and cell.ctype != 0
                     if cell is None or cell.ctype == 0:
                         print("WARNING: {} search failed!".format(templ))
+                        continue
                     for _ in body(cell.value, sheet, row, col):
                         assert len(_) >= 4, "must yield (val, sheet, row, col)"
                         if _[0] is None:
