@@ -615,6 +615,7 @@ class Plan(AcademicPlan):
         "по_зет": "cu",
         "по_плану": "plan",
         "пр": "pr",
+        "распределение_по_курсам": "dif",  # Remove from hierarchy
         "распределение_по_курсам_и_семестрам": "dif",  # Remove from hierarchy
         "семестр": "sem",  # semester
         "срс": "siw",  # Students' independent work
