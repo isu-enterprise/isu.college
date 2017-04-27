@@ -11,6 +11,9 @@
         <meta name="generator" content="pandoc" />
         <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
         <meta name="viewport" content="width=device-width, initial-scale=20" />
+
+        <script src="https://use.fontawesome.com/7383076468.js"></script>
+
         <!-- Latest compiled and minified CSS -->
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"  crossorigin="anonymous">
 
@@ -42,7 +45,7 @@
          body {
              /* *zoom:2; */
              font-family: "Times New Roman", "Fira Sans", "Tahoma", "Verdana", sans-serif;
-             font-size: 240%;
+             /*              font-size: 240%; */
              counter-reset: h2counter;
              background-color: green;
          }
@@ -77,7 +80,6 @@
          p {
              text-indent: 2.3em; /* Отступ первой строки */
              text-align: justify; /* Выравнивание по ширине */
-             /* font-size: 120%; */
              margin-top: 0px;
              margin-bottom: 0px;
 
@@ -145,6 +147,7 @@
              text-indent: 2.3em;
              margin-top:0.1em;
              margin-bottom: 0.05em;
+             font-size: 100%;
          }
          h4.laba {counter-reset: h5;
              text-indent: 2.3em;
@@ -164,10 +167,6 @@
          h6:before {counter-increment: h6; content: counter(h2) "." counter(h3) "." counter(h4) "." counter(h5) "." counter(h6) ".\0000a0\0000a0"}
 
          h2.nocount:before, h3.nocount:before, h4.nocount:before, h5.nocount:before, h6.nocount:before { content: ""; counter-increment: none }
-
-         strong {
-             font-size:100%;
-         }
 
          .hidden {
              display: none;
@@ -438,7 +437,7 @@
           typeof="schema:CreativeWork sioc:Post prov:Entity"
     >
         <div id="controls">
-            <button class="btn btn-default">=</button>
+            <button class="btn btn-default"><i class="fa fa-bars"></i></button>
         </div>
         <style>
          #controls {
@@ -452,6 +451,7 @@
              /*              width: 5em; */
              top: inherit;
              left: inherit;
+             padding: 10px;
          }
         </style>
         <main lang="ru"
