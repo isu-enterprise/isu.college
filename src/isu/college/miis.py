@@ -65,6 +65,7 @@ def move(row, col, direction):
 
 
 class Object(object):
+
     def __str__(self):
         s = "{}<{}>:\n".format(self.__class__.__name__, hex(id(self)))
         for k in dir(self):
@@ -194,20 +195,30 @@ class Plan(AcademicPlan):
                 "program.degree": ("УЧЕБНЫЙ ПЛАН", self.degree_proc),
                 "program.direction": (".*[нН]аправлен", self.direction_proc),
                 "program.profile": (".*[нН]аправлен", self.profile_proc),
-                "program.start_year": ("^[Гг]од начала подготовки$", self.right_proc),
-                "edu_standard": ("^[Оо]бразовательный стандарт$", self.edu_standard_proc),
-                "managers.EW_prorector": ("^[Пп]роректор.*учеб.*работе$", self.slash_clean_proc),
-                "managers.UMU_head": ("^[Нн]ачальник УМУ$", self.slash_clean_proc),
+                "program.start_year": ("^[Гг]од начала подготовки$",
+                                       self.right_proc),
+                "edu_standard": ("^[Оо]бразовательный стандарт$",
+                                 self.edu_standard_proc),
+                "managers.EW_prorector": ("^[Пп]роректор.*учеб.*работе$",
+                                          self.slash_clean_proc),
+                "managers.UMU_head": ("^[Нн]ачальник УМУ$",
+                                      self.slash_clean_proc),
                 "managers.director": ("^[Дд]иректор$", self.slash_clean_proc),
                 "approval": ("^[Пп]лан одобрен", self.appov_plan_proc),
                 "chair.title": ("^[Кк]афедра:$", self.right_proc),
                 "chair.faculty": ("^[Фф]акультет:$", self.right_proc),
-                "profession.degree": ("^[Кк]валификация:", self.colon_split_proc),
-                "profession.academicity": ("^[Пп]рограмма подготовки:", self.colon_split_proc),
-                "profession.mural": ("^[Фф]орма обучения:", self.colon_split_proc),
-                "program.duration": ("^[Сс]рок обучения:", self.g_removal_proc),
-                "program.laboriousness": ("^[Тт]рудоемкость ОПОП:", self.colon_split_proc),
-                "profession.activities": ("^[Фф]акультет", self.activities_proc),
+                "profession.degree": ("^[Кк]валификация:",
+                                      self.colon_split_proc),
+                "profession.academicity": ("^[Пп]рограмма подготовки:",
+                                           self.colon_split_proc),
+                "profession.mural": ("^[Фф]орма обучения:",
+                                     self.colon_split_proc),
+                "program.duration": ("^[Сс]рок обучения:",
+                                     self.g_removal_proc),
+                "program.laboriousness": ("^[Тт]рудоемкость ОПОП:",
+                                          self.colon_split_proc),
+                "profession.activities": ("^[Фф]акультет",
+                                          self.activities_proc),
             }
         }
 
@@ -264,7 +275,10 @@ class Plan(AcademicPlan):
                 # body = getattr(self, body)
 
                 for cell, row, col in find_match(sheet, templ):
-                    assert cell is not None and cell.ctype != 0
+                    #assert cell is not None and cell.ctype != 0
+                    if cell is None or cell.ctype == 0:
+                        print("WARNING: {} search failed!".format(templ))
+                        continue
                     for _ in body(cell.value, sheet, row, col):
                         assert len(_) >= 4, "must yield (val, sheet, row, col)"
                         if _[0] is None:
@@ -601,6 +615,7 @@ class Plan(AcademicPlan):
         "по_зет": "cu",
         "по_плану": "plan",
         "пр": "pr",
+        "распределение_по_курсам": "dif",  # Remove from hierarchy
         "распределение_по_курсам_и_семестрам": "dif",  # Remove from hierarchy
         "семестр": "sem",  # semester
         "срс": "siw",  # Students' independent work

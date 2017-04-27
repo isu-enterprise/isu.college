@@ -41,24 +41,24 @@
                     <span class="strong">Сведения о кафедре, разработавшей Учебный план</span><br/>
                     Кафедра: <span
                                  id="dev-chair-id"
-                                 tal:content="plan.chair.title" property="dc:title">Кафедра</span>,<br/>
+                                 tal:content="plan.chair.title | default" property="dc:title">Кафедра (не распознана)</span>,<br/>
                     Факультет: <span id="faculty"
                                      property="dc:title"
-                                     tal:content="plan.chair.faculty">Факультет</span>
+                                     tal:content="plan.chair.faculty | default">Факультет (не распознан)</span>.
                 </div>
                 <div>
                     <span class="strong">Сведения о специальности</span><br/>
                     Квалификация: <span id="prof-degree"
                                         property="dc:title"
-                                        tal:content="plan.profession.degree">Квалификация</span>
+                                        tal:content="plan.profession.degree | default">Квалификация</span>
                     <br/>
                     Форма обучения: <span id="mural"
                                           property="dc:title"
-                                          tal:content="plan.profession.mural">Очная</span>
+                                          tal:content="plan.profession.mural | default">Очная?</span>
                     <BR/>
                     Программа подготовки: <span id="prof-academicity"
                                                 property="dc:title"
-                                                tal:content="plan.profession.academicity">Квалификация</span>
+                                                tal:content="plan.profession.academicity | default">Квалификация</span>
                     <br/>
                 </div>
                 <div tal:condition="plan.managers | nothing">
@@ -153,7 +153,14 @@
         <section id="course-time-differentiation" property="schema:hasPart"
                  typeof="schema:CreativeWork"
                  resource="#description"
-                 tal:condition="vc"
+                 tal:condition="not: vc | nothing"
+        >
+            <p style="color:red;">Распределение по семестрам недоступно.<p>
+        </section>
+        <section id="course-time-differentiation" property="schema:hasPart"
+                 typeof="schema:CreativeWork"
+                 resource="#description"
+                 tal:condition="vc and vc.semesters | nothing"
                  tal:define="vc view.course"
         >
             <div property="schema:hasPart" typeof="dc:Text cnt:ContentAsText" resource="#purpose">
