@@ -38,19 +38,19 @@
              overflow: visible;
              }
              </style> -->
-             <link rel="stylesheet" media="all" href="css/document.css" type="text/css" async></style>
+        <link rel="stylesheet" media="all" href="css/document.css" type="text/css" async></style>
 
         <style>@charset "utf-8"; /* Sync with css/document.css */
 
-         body {
-             /* *zoom:2; */
+         body, html {
              font-family: "Times New Roman", "Fira Sans", "Tahoma", "Verdana", sans-serif;
-             /*              font-size: 240%; */
-             counter-reset: h2counter;
-             background-color: green;
          }
 
          @media screen {
+
+             body, html {
+                 font-size: 2vw;
+             }
 
              #main-content {
                  border-radius: 15px;
@@ -75,8 +75,12 @@
                  background-color: #FFF;
                  background: linear-gradient(to right, #dff, #dfd);
              }
-         }
 
+         }
+         h1 {
+             font-size:120%;
+             font-weight:bold;
+         }
          p {
              text-indent: 2.3em; /* Отступ первой строки */
              text-align: justify; /* Выравнивание по ширине */
@@ -141,20 +145,24 @@
          }
 
          body {counter-reset: h2;}
-         h2 {counter-reset: h3; font-size:110%;}
-         h3 {counter-reset: h4; font-size:100%;}
+         h2 {counter-reset: h3; font-size:110%; font-weight: bold;}
+         h3 {counter-reset: h4; font-size:100%; font-weight: bold;}
          h4 {counter-reset: h5;
              text-indent: 2.3em;
              margin-top:0.1em;
              margin-bottom: 0.05em;
              font-size: 100%;
+             font-weight: bold;
          }
          h4.laba {counter-reset: h5;
              text-indent: 2.3em;
              margin-top:0.1em;
              margin-bottom: 0.05em;
+             font-size: 100%;
+             font-weight: bold;
          }
-         h5 {counter-reset: h6;}
+         h5 {counter-reset: h6; font-weight: bold; font-size: 100%;}
+         h6 { font-weight: bold; font-size: 100%;}
 
          h2:before {counter-increment: h2; content: counter(h2) ".\0000a0\0000a0"}
          h3:before {counter-increment: h3; content: counter(h2) "." counter(h3) ".\0000a0\0000a0"}
@@ -348,6 +356,10 @@
          @media print
          {
 
+             body, html {
+                 font-size: 12pt;
+             }
+
              .break-before {
                  page-break-before: always;
              }
@@ -406,6 +418,9 @@
               */
 
 
+             #controls {
+                 display: none;
+             }
          }
 
 
@@ -425,6 +440,27 @@
                  border-bottom: 5px dashed red;
              }
 
+             #controls {
+                 position: fixed;
+                 /*              height: 5em; */
+                 background: white;
+                 opacity: 0.8;
+                 /*              padding: 10px; */
+                 border-radius: 5px;
+                 z-index: 1;
+                 /*              width: 5em; */
+                 top: inherit;
+                 left: inherit;
+                 padding: 10px;
+             }
+
+             div.bottompage {
+
+             }
+
+             div.bottompage div {
+
+             }
 
          }
         </style>
@@ -441,19 +477,6 @@
             <!-- http://fontawesome.io/icons/ -->
         </div>
         <style>
-         #controls {
-             position: fixed;
-             /*              height: 5em; */
-             background: white;
-             opacity: 0.8;
-             /*              padding: 10px; */
-             border-radius: 5px;
-             z-index: 1;
-             /*              width: 5em; */
-             top: inherit;
-             left: inherit;
-             padding: 10px;
-         }
         </style>
         <main lang="ru"
               resource="#annotation"

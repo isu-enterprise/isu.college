@@ -329,12 +329,6 @@ table {
 
  }
 
-     .bottompage {
-         display:block;
-         position:fixed;
-         bottom:0;
-     }
-
 
  @media screen
  {
