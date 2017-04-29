@@ -134,6 +134,7 @@ function interpTaa(root, macroContext) {
     }
   });
 };
+
 function generateTableOfContents() {
   var Contents,
       contents,
@@ -155,6 +156,15 @@ function generateTableOfContents() {
   // Firing the "resize" event will regenerate the table of contents.
   contents.eventEmitter().trigger('resize');
 };
+
+function toggleControlPanel() {
+  var cbtn=$(this);
+  // cbtn.toggleClass("active");
+  var active=! cbtn.hasClass("active");
+  cbtn.prop("aria-pressed", `${active}`);
+  $("#controls").toggleClass("active", active);
+  $("#controls-buttons").toggleClass("hidden", ! active);
+}
 
 function downloadInnerHtml(filename, selector, mimeType) {
   // var elHtml = $(selector)[0].innerHTML;
@@ -191,6 +201,7 @@ function LODmain(macroButton) {
   $("#button-export-page").on("click", function() {
     downloadInnerHtml(fileName, '.exportable', 'text/html');
   });
+  $("#panel-toggle-button").on("click", toggleControlPanel);
   var root = $("html");
   function runMacros() {
       interpTaa(root, root);
