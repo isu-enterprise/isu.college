@@ -210,11 +210,6 @@ var fileName =  'Export.html'; // You can use the .txt extension if you want
 
 // ------------------------  Main function -------
 function LODmain(macroButton) {
-  $("body").append(`
-            <button class="noprint" id="button-medium-editor-switch"><span class="fa fa-editor">Edit</class></button>
-                <button class="noprint" id="button-macro-switch"><span class="fa fa-editor">Macro</class></button>
-                <button class="noprint" id="button-export-page"><span class="fa fa-editor">Export</class></button>
-                    `);
   $("#button-medium-editor-switch").click(function(){
     $("head").append(`
                     <link rel="stylesheet" media="all" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" />
@@ -230,6 +225,9 @@ function LODmain(macroButton) {
   });
   $("#panel-toggle-button").on("click", toggleControlPanel);
   $("#ctrl-btn-text-size button").on("click", changeTextSize);
+  $("#cmd-print-button").on("click", function (){
+    window.print();
+  });
   var root = $("html");
   function runMacros() {
       interpTaa(root, root);
