@@ -157,6 +157,20 @@ function generateTableOfContents() {
   contents.eventEmitter().trigger('resize');
 };
 
+
+
+function activateToggleButton(btn, active) {
+  if (active == undefined) {
+    active=true;
+  }
+  btn.toggleClass("active", active);
+  btn.prop("aria-pressed", `${active}`);
+}
+
+function deactivateToggleButton(btn) {
+  return activateToggleButton(btn, false);
+}
+
 function toggleControlPanel() {
   var cbtn=$(this);
   // cbtn.toggleClass("active");
@@ -164,6 +178,19 @@ function toggleControlPanel() {
   cbtn.prop("aria-pressed", `${active}`);
   $("#controls").toggleClass("active", active);
   $("#controls-buttons").toggleClass("hidden", ! active);
+}
+
+function changeTextSize() {
+  var cbtn=$(this);
+  var cbtns=cbtn.parent().find("button");
+  var cls=cbtn.data("class");
+  var piter=cbtn.parent();
+  var prevcls=piter.data("class");
+  deactivateToggleButton(cbtns);
+  activateToggleButton(cbtn);
+  var nodes = $("body, html");
+  nodes.removeClass(prevcls).addClass(cls);
+  piter.data("class", cls);
 }
 
 function downloadInnerHtml(filename, selector, mimeType) {
@@ -202,6 +229,7 @@ function LODmain(macroButton) {
     downloadInnerHtml(fileName, '.exportable', 'text/html');
   });
   $("#panel-toggle-button").on("click", toggleControlPanel);
+  $("#ctrl-btn-text-size button").on("click", changeTextSize);
   var root = $("html");
   function runMacros() {
       interpTaa(root, root);

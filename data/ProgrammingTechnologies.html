@@ -50,8 +50,22 @@
 
          @media screen {
 
-             body, html {
+             body.s12pt, html.s12pt {
+                 font-size: 12pt;
+             }
+
+             body, html,
+             body.s100, html.s100
+             {
                  font-size: 2vw;
+             }
+
+             body.s14pt, html.s14pt {
+                 font-size: 14pt;
+             }
+
+             body.s50, html.s50 {
+                 font-size: 1vw;
              }
 
              #main-content {
@@ -475,7 +489,9 @@
 
              }
 
-
+             .btn {
+                 font-family: sans;
+             }
 
          }
         </style>
@@ -496,9 +512,40 @@
             ><i class="fa fa-bars"></i></button>
             <!-- http://fontawesome.io/icons/ -->
             <div class="hidden" id="controls-buttons">
+                <div class="btn-group"
+                     style="margin-bottom:10pt;"
+                     data-class="s100"
+                     id="ctrl-btn-text-size"
+                >
+                    <button class="btn btn-primary"
+                            id="ctrl-btn-12pt"
+                            data-toggle="button"
+                            aria-pressed="false"
+                            data-class="s12pt"
+                    >12pt</button>
+                    <button class="btn btn-primary"
+                            id="ctrl-btn-14pt"
+                            data-toggle="button"
+                            aria-pressed="false"
+                            data-class="s14pt"
+                    >14pt</button>
+                    <button class="btn btn-primary"
+                            id="ctrl-btn50"
+                            data-toggle="button"
+                            aria-pressed="false"
+                            data-class="s50"
+                    >50%</button>
+                    <button class="btn btn-primary active"
+                            id="ctrl-btn-100"
+                            data-toggle="button"
+                            aria-pressed="true"
+                            data-class="s100"
+                    >100%</button>
+                </div><br/>
                 <div class="btn-group">
-                    <button>B1</button>
-                    <button>B2</button>
+                    <button class="btn btn-primary">12pt</button>
+                    <button class="btn btn-primary">50%</button>
+                    <button class="btn btn-primary">100%</button>
                 </div>
             </div>
         </div>
