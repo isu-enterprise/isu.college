@@ -10,7 +10,7 @@
         <meta http-equiv="Content-Style-Type" content="text/css" />
         <meta name="generator" content="pandoc" />
         <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
-        <meta name="viewport" content="width=device-width, initial-scale=20" />
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
 
         <script src="https://use.fontawesome.com/7383076468.js"></script>
 
@@ -18,6 +18,14 @@
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"  crossorigin="anonymous">
         <!-- Optional theme -->
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" crossorigin="anonymous">
+        <link rel="stylesheet"
+              href="https://cdnjs.cloudflare.com/ajax/libs/octicons/4.4.0/font/octicons.min.css"
+              crossorigin="anonymous">
+
+        <link rel="stylesheet"
+              href="http://ionicons.com/css/ionicons.min.css?v=2.0.1"
+              crossorigin="anonymous"
+        >
 
         <!-- <link href="https://gitcdn.github.io/bootstrap-toggle/2.2.2/css/bootstrap-toggle.min.css" rel="stylesheet">
              <script src="https://gitcdn.github.io/bootstrap-toggle/2.2.2/js/bootstrap-toggle.min.js"></script> -->
@@ -42,7 +50,7 @@
              </style> -->
         <link rel="stylesheet" media="all" href="css/document.css" type="text/css" async></style>
 
-        <style>@charset "utf-8"; /* Sync with css/document.css */
+        <style>@charset "UTF-8"; /* Sync with css/document.css */
 
          body, html {
              font-family: "Times New Roman", "Fira Sans", "Tahoma", "Verdana", sans-serif;
@@ -499,7 +507,6 @@
 
          }
         </style>
-        <meta name="viewport" content="width=device-width, initial-scale=1" />
         <!--
            -->
     </head>
@@ -508,12 +515,13 @@
           typeof="schema:CreativeWork sioc:Post prov:Entity"
     >
         <div id="controls">
+            <!-- http://ionicons.com/ -->
             <button class="btn btn-default"
                     data-toggle="button"
                     aria-pressed="false"
                     autocomplete="off"
                     id="panel-toggle-button"
-            ><i class="fa fa-bars"></i></button>
+            ><i class="ion ion-android-menu"></i></button>
             <!-- http://fontawesome.io/icons/ -->
             <div class="hidden" id="controls-buttons">
                 <div class="btn-group"
@@ -547,39 +555,54 @@
                     >100%</button>
                 </div><br/>
                 <div class="btn-group"
-                     id="cmd-gen-buttons"
                      style="margin-bottom:10pt;"
                 >
+                    <button class="btn btn-success"
+                            id="cmd-commit-button"
+                    >
+                        <i class="ion ion-checkmark-round"></i>
+                    </button>
+                    <button class="btn btn-primary"
+                            id="cmd-branch-button"
+                    >
+                        <i class="ion ion-fork-repo"></i>
+                    </button>
+                    <button class="btn btn-default"
+                            id="cmd-merge-button"
+                    >
+                        <i class="ion ion-merge"></i>
+                    </button>
+                </div>
+                <div class="btn-group right"
+                           id="cmd-gen-buttons"
+                           style="margin-bottom:10pt;"
+                      >
                     <button class="btn btn-default"
                             id="cmd-print-button"
                     >
-                        <i class="fa fa-print"></i>
-                    </button>
-                    <button class="btn btn-primary"
-                            id="cmd-commit-button"
-                    >
-                        <i class="fa fa-check"></i>
+                        <i class="ion ion-printer"></i>
                     </button>
                     <button class="btn btn-default"
                             id="button-export-page"
                     >
-                        <i class="fa fa-download"></i>
+                        <i class="ion ion-archive"></i>
                     </button>
                     <button class="btn btn-default"
                             id="button-medium-editor-switch">
-                        <i class="fa fa-pencil"></i>
+                        <i class="ion ion-edit"></i>
                     </button>
-                </div><br/>
+                </div>
+                <br/>
                 <div class="form-group">
                     <input type="text"
                            class="form-control input-sm"
                            id="cmd-data-argument">
                     </input>
                 </div><br/>
-                <div class="btn-group">
+                <div class="btn-group hidden">
                     <button class="btn btn-danger"
                             id="cmd-button-remove">
-                        <i class="fa fa-close"></i>
+                        <i class="ion ion-close-round"></i>
                     </button>
                 </div>
             </div>
