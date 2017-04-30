@@ -474,6 +474,7 @@
                  background: white;
                  max-width: 20%;
                  /*                  width:20%; */
+                 /*                  opacity: 1.0; */
 
              }
              #panel-toggle-button.active {
@@ -489,8 +490,11 @@
 
              }
 
-             .btn {
+             .btn,
+             .form-control
+             {
                  font-family: sans;
+                 opacity: 1.0;
              }
 
          }
@@ -551,10 +555,10 @@
                     >
                         <i class="fa fa-print"></i>
                     </button>
-                    <button class="btn btn-default"
-                            id="cmd-save-button"
+                    <button class="btn btn-primary"
+                            id="cmd-commit-button"
                     >
-                        <i class="fa fa-save"></i>
+                        <i class="fa fa-check"></i>
                     </button>
                     <button class="btn btn-default"
                             id="button-export-page"
@@ -565,6 +569,12 @@
                             id="button-medium-editor-switch">
                         <i class="fa fa-pencil"></i>
                     </button>
+                </div><br/>
+                <div class="form-group">
+                    <input type="text"
+                           class="form-control input-sm"
+                           id="cmd-data-argument">
+                    </input>
                 </div><br/>
                 <div class="btn-group">
                     <button class="btn btn-danger"

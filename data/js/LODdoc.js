@@ -228,6 +228,10 @@ function LODmain(macroButton) {
   $("#cmd-print-button").on("click", function (){
     window.print();
   });
+  $("#controls").on('mouseenter mouseleave', function (event) {
+    var opacity =  event.type=="mouseenter" ? '1.0' : '0.7';
+    $(this).animate({"opacity":opacity}, 100);
+  });
   var root = $("html");
   function runMacros() {
       interpTaa(root, root);
