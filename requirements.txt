@@ -7,3 +7,4 @@ xlrd
 pandas
 marisa-trie
 pymorphy2
+pyramid_storage

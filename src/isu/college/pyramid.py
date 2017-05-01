@@ -1,5 +1,6 @@
 from isu.webapp.interfaces import IConfigurationEvent
 from zope.component import adapter
+from pyramid.httpexceptions import HTTPSeeOther
 
 from pyramid.view import view_config
 from isu.webapp.views import View
@@ -126,8 +127,8 @@ class SPListView(View):
         self.files = glob(template)
         self.items = set([os.path.split(fn)[-1] for fn in self.files])
         self.plan_views = {}
-        #print("Location: {}".format(location))
-        #print("List of plans found.")
+        # print("Location: {}".format(location))
+        # print("List of plans found.")
         # pprint(self.items)
 
     def plan(self, name):
@@ -186,15 +187,94 @@ def work_plan(request):
     }
 
 
+@view_config(route_name='commit',
+             request_method='POST')
+def commit(request):
+    request.storage.save(request.POST['my_file'])
+    return HTTPSeeOther(request.route_url('home'))
+
+
+# @view_config(route_name="doc",
+#              request_method="GET",
+#              renderer="templates/doc.pt"
+#              )
+# def get_document(request):
+#     return {"context": "<h1>Help!</h1>"}
+
+
+class Resource(object):
+    def __init__(self, name=None, parent=None):
+        self.name = name
+        self.parent = parent
+
+    def __getitem__(self, name):
+        if name.startswith("@@"):
+            raise KeyError("wrong name")
+        return Resource(name, self)
+
+    def __str__(self):
+        if self.parent is None:
+            return "<root>"
+        else:
+            return str(self.parent) + "/" + self.name
+
+    @property
+    def path(self):
+        s = self
+        p = []
+        while s is not None:
+            if s.name is not None:
+                p.append(s.name)
+            s = s.parent
+        p.reverse()
+        return os.path.join(*p)
+
+    @staticmethod
+    def factory(request):
+        return Resource()
+
+# @view_config(route_name="doc",
+#              request_method="GET",
+#              renderer="json",
+#              # name="edit"
+#              )
+
+
+def test_view(context, request):
+    #path = request.matchdict.get("traversed", "None")
+    #path = "--traverse--"
+    return {"context": request.subpath, "req": repr(request), "view": context.path}
+
+
+def test_edit(request):
+    #path = request.matchdict["path"]
+    path = "--traverse--"
+    return {"context": request.subpath, "edit": path}
+
+
 #@adapter(IConfigurationEvent)
-def configurator(config):
+def configurator(config, **settings):
     config.load_zcml("isu.college:configure.zcml")
+
     config.add_route("plan", "/plan/{name}.html")
     config.add_route("plan-list", "/plan/")
+    config.add_route("commit",    "/api/v1/commit")
+    config.add_route("branch", "/api/v1/branch")
     config.add_static_view(name='/lcss', path='isu.college:templates/lcss')
+
     config.add_subscriber('isu.college.subscribers.add_base_template',
                           'pyramid.events.BeforeRender')
     config.scan()
+
+    config.add_route("doc", "/*traverse", factory=Resource.factory)
+    config.add_view(view=test_view, route_name="doc",
+                    name="view",
+                    renderer="json",
+                    )
+    # config.add_view(view=test_edit, route_name="doc",
+    #                 name="edit",
+    #                 renderer="json",
+    #                 )
 
 
 def zcml(config):
