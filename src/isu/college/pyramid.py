@@ -15,6 +15,10 @@ from .interfaces import IAcademicPlan
 from .miis import Plan
 
 from pyramid_storage.interfaces import IFileStorage
+from zope.i18nmessageid import MessageFactory
+
+
+_ = MessageFactory("isu.college")
 
 DATADIR = os.path.abspath(
     os.path.join(
@@ -246,11 +250,18 @@ class Resource(object):
 def file_view(context, request):
     filename = context.pathname.strip()
     fn, ext = os.path.splitext(filename)
-    print(repr(fn), repr(ext))
+
     physfilename = request.storage.path(filename)
     if ext.lower() in [".html", ".xhtml"]:
-        content = open(physfilename).read()
-        return {"content": content}
+        try:
+            content = open(physfilename).read()
+            return {"content": content, "result": "OK",
+                    "message": _("Successfully loaded"),
+                    "level": "success"}
+        except Exception as e:
+            return {"content": "", "result": "KO",
+                    "message": _("Cannot load page. It seems it does not exist"), "exception": str(e),
+                    "level": "danger"}
     else:
         return FileResponse(physfilename)
 
