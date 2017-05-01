@@ -1,0 +1,15 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html lang="ru" xmlns="http://www.w3.org/1999/xhtml"
+      xml:lang="en" id="do-index"
+      xmlns:rdfa="http://www.w3.org/ns/rdfa#"
+      xmlns:taa="http://irnok.net/engine/rdfa-manipulation"
+      class="exportable"
+      xmlns:tal="http://xml.zope.org/namespaces/tal"
+      xmlns:metal="http://xml.zope.org/namespaces/metal"
+      xmlns:taa="http://irnok.net/engine/rdfa-manipulation"
+      metal:use-macro="doc_template['page']"
+>
+    <metal:block metal:fill-slot="content">
+        <div tal:replace="structure content"></div>
+    </metal:block>
+</html>

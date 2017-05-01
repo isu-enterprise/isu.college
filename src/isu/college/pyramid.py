@@ -1,6 +1,7 @@
 from isu.webapp.interfaces import IConfigurationEvent
 from zope.component import adapter
 from pyramid.httpexceptions import HTTPSeeOther
+from pyramid.response import FileResponse
 
 from pyramid.view import view_config
 from isu.webapp.views import View
@@ -12,6 +13,8 @@ import os
 import os.path
 from .interfaces import IAcademicPlan
 from .miis import Plan
+
+from pyramid_storage.interfaces import IFileStorage
 
 DATADIR = os.path.abspath(
     os.path.join(
@@ -219,7 +222,7 @@ class Resource(object):
             return str(self.parent) + "/" + self.name
 
     @property
-    def path(self):
+    def pathname(self):
         s = self
         p = []
         while s is not None:
@@ -240,19 +243,28 @@ class Resource(object):
 #              )
 
 
-def test_view(context, request):
-    #path = request.matchdict.get("traversed", "None")
-    #path = "--traverse--"
-    return {"context": request.subpath, "req": repr(request), "view": context.path}
+def file_view(context, request):
+    filename = context.pathname.strip()
+    fn, ext = os.path.splitext(filename)
+    print(repr(fn), repr(ext))
+    physfilename = request.storage.path(filename)
+    if ext.lower() in [".html", ".xhtml"]:
+        content = open(physfilename).read()
+        return {"content": content}
+    else:
+        return FileResponse(physfilename)
 
 
-def test_edit(request):
-    #path = request.matchdict["path"]
-    path = "--traverse--"
+def file_save(context, request):
     return {"context": request.subpath, "edit": path}
 
 
+def file_commit(context, request):
+    return {""}
+
 #@adapter(IConfigurationEvent)
+
+
 def configurator(config, **settings):
     config.load_zcml("isu.college:configure.zcml")
 
@@ -260,17 +272,40 @@ def configurator(config, **settings):
     config.add_route("plan-list", "/plan/")
     config.add_route("commit",    "/api/v1/commit")
     config.add_route("branch", "/api/v1/branch")
-    config.add_static_view(name='/lcss', path='isu.college:templates/lcss')
+
+    #config.add_static_view(name='/lcss', path='isu.college:templates/lcss')
+
+    storage = config.registry.getUtility(IFileStorage)
+    try:
+        static_dir = config.registry.settings["storage.static"]
+    except KeyError:
+        raise RuntimeError("storage.static settings needed")
+
+    static_dir = os.path.join(storage.base_path, static_dir)
+    static_dir = os.path.abspath(static_dir)
+
+    for d in os.listdir(static_dir):
+        config.add_static_view(name='/' + d, path=os.path.join(static_dir, d))
 
     config.add_subscriber('isu.college.subscribers.add_base_template',
                           'pyramid.events.BeforeRender')
     config.scan()
 
     config.add_route("doc", "/*traverse", factory=Resource.factory)
-    config.add_view(view=test_view, route_name="doc",
-                    name="view",
+    config.add_view(view=file_view,
+                    route_name="doc",
+                    renderer="templates/doc.pt",
+                    request_method="GET")
+    config.add_view(view=file_save,
+                    route_name="doc",
                     renderer="json",
-                    )
+                    name="save",
+                    request_method="POST")
+    config.add_view(view=file_commit,
+                    route_name="doc",
+                    renderer="json",
+                    name="commit",
+                    request_method="POST")
     # config.add_view(view=test_edit, route_name="doc",
     #                 name="edit",
     #                 renderer="json",

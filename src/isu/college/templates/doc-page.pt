@@ -1,0 +1,1156 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html lang="ru" xmlns="http://www.w3.org/1999/xhtml"
+      xml:lang="en" id="do-index"
+      xmlns:rdfa="http://www.w3.org/ns/rdfa#"
+      xmlns:taa="http://irnok.net/engine/rdfa-manipulation"
+      class="exportable"
+      xmlns:tal="http://xml.zope.org/namespaces/tal"
+      xmlns:metal="http://xml.zope.org/namespaces/metal"
+      xmlns:taa="http://irnok.net/engine/rdfa-manipulation"
+      metal:define-macro="page"
+>
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+        <meta http-equiv="Content-Style-Type" content="text/css" />
+        <meta name="generator" content="pandoc" />
+        <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+        <script src="https://use.fontawesome.com/7383076468.js"></script>
+
+        <!-- Latest compiled and minified CSS -->
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"  crossorigin="anonymous">
+        <!-- Optional theme -->
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" crossorigin="anonymous">
+        <link rel="stylesheet"
+              href="https://cdnjs.cloudflare.com/ajax/libs/octicons/4.4.0/font/octicons.min.css"
+              crossorigin="anonymous">
+
+        <link rel="stylesheet"
+              href="http://ionicons.com/css/ionicons.min.css?v=2.0.1"
+              crossorigin="anonymous"
+        >
+
+        <!-- <link href="https://gitcdn.github.io/bootstrap-toggle/2.2.2/css/bootstrap-toggle.min.css" rel="stylesheet">
+             <script src="https://gitcdn.github.io/bootstrap-toggle/2.2.2/js/bootstrap-toggle.min.js"></script> -->
+
+        <title></title>
+        <link rel="stylesheet" media="all" href="css/document.css" type="text/css" async></link>
+
+        <style>@charset "UTF-8"; /* Sync with css/document.css */
+
+         body, html {
+             font-family: "Times New Roman", "Fira Sans", "Tahoma", "Verdana", sans-serif;
+         }
+
+         @media screen {
+
+             body.s12pt, html.s12pt {
+                 font-size: 12pt;
+             }
+
+             body, html,
+             body.s100, html.s100
+             {
+                 font-size: 2vw;
+             }
+
+             body.s14pt, html.s14pt {
+                 font-size: 14pt;
+             }
+
+             body.s50, html.s50 {
+                 font-size: 1vw;
+             }
+
+             #main-content {
+                 border-radius: 15px;
+             }
+
+             .t14pt {
+                 margin: 3em auto;
+                 width: 35em;
+                 max-width:35em;
+                 position: relative;
+                 padding: 1em;
+                 background-color: #FFF;
+                 background: linear-gradient(to right, #dff, #dfd);
+             }
+
+             .t12pt {
+                 margin: 1em auto;
+                 width: 43em;
+                 max-width: 43em;
+                 position: relative;
+                 padding: 1em;
+                 background-color: #FFF;
+                 background: linear-gradient(to right, #dff, #dfd);
+             }
+
+         }
+         h1 {
+             font-size:120%;
+             font-weight:bold;
+         }
+         p {
+             text-indent: 2.3em; /* Отступ первой строки */
+             text-align: justify; /* Выравнивание по ширине */
+             margin-top: 0px;
+             margin-bottom: 0px;
+
+         }
+
+         .bold,
+         p.bold {
+             font-weight:bold;
+         }
+
+         .strong,
+         p.strong {
+             font-size: 110%;
+             font-weight: bold;
+         }
+
+         li p {
+             text-indent: 0em;
+         }
+
+         .c {
+             text-align: center;
+             text-indent: 0px;
+         }
+
+         .middle {
+             vertical-align: middle;
+         }
+
+         .center {
+             display: block;
+             margin: 0 auto;
+         }
+
+         .r {
+             text-align: right;
+         }
+         .l {
+             text-align: left;
+         }
+         .j {
+             text-align: justify;
+         }
+
+         .m {
+         }
+
+         .ni {
+             text-indent: 0pt;
+         }
+         .header th {
+             font-weight: bold;
+             text-align: center;
+             background-color: #CCC;
+         }
+
+         .centertable {
+             margin: 0px auto;
+         }
+
+         body {counter-reset: h2;}
+         h2 {counter-reset: h3; font-size:110%; font-weight: bold;}
+         h3 {counter-reset: h4; font-size:100%; font-weight: bold;}
+         h4 {counter-reset: h5;
+             text-indent: 2.3em;
+             margin-top:0.1em;
+             margin-bottom: 0.05em;
+             font-size: 100%;
+             font-weight: bold;
+         }
+         h4.laba {counter-reset: h5;
+             text-indent: 2.3em;
+             margin-top:0.1em;
+             margin-bottom: 0.05em;
+             font-size: 100%;
+             font-weight: bold;
+         }
+         h5 {counter-reset: h6; font-weight: bold; font-size: 100%;}
+         h6 { font-weight: bold; font-size: 100%;}
+
+         h2:before {counter-increment: h2; content: counter(h2) ".\0000a0\0000a0"}
+         h3:before {counter-increment: h3; content: counter(h2) "." counter(h3) ".\0000a0\0000a0"}
+         h4:before {
+             counter-increment: h4;
+             content: "Тема\0000a0" counter(h4) ".\0000a0";
+         }
+         /* h4:before {counter-increment: h4; content: counter(h2) "." counter(h3) "." counter(h4) ".\0000a0\0000a0"}*/
+         h5:before {counter-increment: h5; content: counter(h2) "." counter(h3) "." counter(h4) "." counter(h5) ".\0000a0\0000a0"}
+         h6:before {counter-increment: h6; content: counter(h2) "." counter(h3) "." counter(h4) "." counter(h5) "." counter(h6) ".\0000a0\0000a0"}
+
+         h2.nocount:before, h3.nocount:before, h4.nocount:before, h5.nocount:before, h6.nocount:before { content: ""; counter-increment: none }
+
+         .hidden {
+             display: none;
+         }
+
+         h1 {
+             text-align: center;
+             counter-reset: h2;
+         }
+
+
+         /*
+            http://stackoverflow.com/questions/7517127/borders-not-shown-in-firefox-with-border-collapse-on-table-position-relative-o
+            http://jsfiddle.net/ramiro_conductiva/XgeAS/
+          */
+         table {
+             border-collapse: collapse; /* Отображать только одинарные линии */
+             width: 100%;
+             border: 1px solid black;
+             margin: 0 auto;
+         }
+         }
+
+         table.small {
+             font-size: 80%;
+         }
+
+         th {
+             text-align: left; /* Выравнивание по левому краю */
+             padding: 5px; /* Поля вокруг содержимого ячеек */
+             border: 1px solid black; /* Граница вокруг ячеек */
+             font-size: 90%;
+         }
+
+         table.small th {
+             font-size: 100%;
+         }
+
+         td {
+             padding: 5px; /* Поля вокруг содержимого ячеек */
+             border: 1px solid black; /* Граница вокруг ячеек */
+         }
+
+         tr {
+             border: 1px solid black;
+         }
+
+         .threethird {
+             width: 75%;
+         }
+
+         table.noborders,
+         table.noborders th,
+         table.noborders table,
+         table.noborders tr,
+         table.noborders td {
+             border: 0px solid black;
+         }
+
+         .dirstate {
+             width: 12em;
+             text-align: left;
+             float: right;
+             /* background: blue; */
+         }
+
+         .namestate {
+             width: 70%;
+             text-align: left;
+             float: left;
+         }
+
+         .hfill {
+             width: 100%;
+             text-align: right;
+             /* background: red; */
+             overflow: auto;
+         }
+
+         .right {
+             float: right;
+         }
+
+         .stronger {
+             font-weight: bold;
+         }
+
+         #consultantplus {
+             background-color:#FAF;
+             color:#000;
+         }
+         #order {
+             background-color:#FEA;
+             color:#000;
+         }
+         body {
+             background-color: #AAA;
+         }
+         #dokieli {
+             background-color: #EEA;
+         }
+         .odd {
+             background-color: #EEC;
+         }
+         .even {
+             background-color: #CEC;
+         }
+         .emph {
+             background-color: #BBB;
+         }
+
+         .c-td td {
+             text-align: center;
+         }
+
+         .rel-parent {
+         }
+         .rel-child {
+         }
+
+         span.marginal {
+             float: none;
+             /*display: block;*/
+             margin-left:1em;
+             margin-right:1em;
+             padding-left:1em;
+             padding-right:1em;
+             padding-bottom:1px;
+             /* border-radius: 1px; */
+             border-bottom: 1px solid black;
+             background-color: #EEE;
+         }
+
+         span.nmarginal{
+             float: none;
+             /* display: block;*/
+             padding-left:1em;
+             padding-right:1em;
+             padding-bottom:1px;
+             /* border-radius: 1px; */
+             border-bottom: 1px solid black;
+             background-color: #EEE;
+         }
+
+         .under {
+             border-bottom: 1px solid black;
+         }
+
+         h4.laba:before {
+             counter-increment: h4;
+             content: "Лабораторная работа\0000a0" counter(h4) ".\0000a0";
+         }
+
+         a {
+             text-decoration: none;
+             /* color: #9b7400; */
+             color: #013a25;
+         }
+         a:hover {
+             text-decoration: underline;
+             ebackground-color: black;
+             color: orange;
+         }
+         .q,
+         .q1 {
+             background-color: yellow;
+         }
+         .q2 {
+             background-color: pink;
+         }
+         .q3 {
+             background-color: red;
+         }
+         .q4 {
+             background-color: green;
+         }
+
+
+         @media print
+         {
+
+             body, html {
+                 font-size: 12pt;
+             }
+
+             .break-before {
+                 page-break-before: always;
+             }
+
+             .break-after {
+                 page-break-after: always;
+             }
+
+             .noprint {display:none;}
+
+             #main-content {
+                 border: none;
+             }
+
+             .t14pt {
+                 background: transparent;
+             }
+
+             .t12pt {
+                 background: transparent;
+             }
+
+             div.bottompage {
+                 display:block;
+                 position:absolute;
+                 bottom:0;
+                 width:100%;
+                 background-color: black;
+                 box-shadow: inset 0 0 0 1000px white;
+             }
+             div.bottompage div{
+                 width:50%;
+                 margin: 0 auto;
+             }
+
+             body {
+                 display: block;
+                 page: main;
+                 /* counter-reset: page -1;
+                  */
+             }
+
+             /*
+                #pageFooter {
+                display: block;
+                position: fixed;
+                bottom: 0pt;
+                right: 0pt;
+                widht: 100%;
+                }
+
+                #pageFooter div:after {
+                counter-increment: page;
+                content: counter(page);
+                }
+              */
+
+
+             #controls {
+                 display: none;
+             }
+         }
+
+
+         @media screen
+         {
+             .noprint {};
+             .print {};
+             #pageFooter {
+                 display: none;
+             }
+
+             .break-before {
+                 border-top: 5px dashed red;
+             }
+
+             .break-after {
+                 border-bottom: 5px dashed red;
+             }
+
+             #controls {
+                 position: fixed;
+                 /*              height: 5em; */
+                 background: white;
+                 opacity: 0.7;
+                 /*              padding: 10px; */
+                 border-radius: 5px;
+                 z-index: 1;
+                 /*              width: 5em; */
+                 top: 0px;
+                 left: 0px;
+                 padding: 10px;
+             }
+
+             #controls.active {
+                 background: white;
+                 max-width: 20%;
+                 /*                  width:20%; */
+                 /*                  opacity: 1.0; */
+
+             }
+             #panel-toggle-button.active {
+                 margin-bottom: 10px;
+
+             }
+
+             div.bottompage {
+
+             }
+
+             div.bottompage div {
+
+             }
+
+             .btn,
+             .form-control
+             {
+                 font-family: sans;
+                 opacity: 1.0;
+             }
+
+         }
+        </style>
+        <!--
+           -->
+    </head>
+    <div id="message" style="widht:100%;">
+    </div>
+    <body prefix="rdf: http://www.w3.org/1999/02/22-rdf-syntax-ns# rdfs: http://www.w3.org/2000/01/rdf-schema# owl: http://www.w3.org/2002/07/owl# xsd: http://www.w3.org/2001/XMLSchema# dcterms: http://purl.org/dc/terms/ dctypes: http://purl.org/dc/dcmitype/ foaf: http://xmlns.com/foaf/0.1/ vcard: http://www.w3.org/2006/vcard/ns# pimspace: http://www.w3.org/ns/pim/space# ccns: https://creativecommons.org/ns# skos: http://www.w3.org/2004/02/skos/core# prov: http://www.w3.org/ns/prov# qb: http://purl.org/linked-data/cube# schema: http://schema.org/ void: http://rdfs.org/ns/void# rsa: http://www.w3.org/ns/auth/rsa# cert: http://www.w3.org/ns/auth/cert# cal: http://www.w3.org/2002/12/cal/ical# wgs: http://www.w3.org/2003/01/geo/wgs84_pos# org: http://www.w3.org/ns/org# biblio: http://purl.org/net/biblio# bibo: http://purl.org/ontology/bibo/ book: http://purl.org/NET/book/vocab# ov: http://open.vocab.org/terms/ sioc: http://rdfs.org/sioc/ns# doap: http://usefulinc.com/ns/doap# dbr: http://dbpedia.org/resource/ dbp: http://dbpedia.org/property/ sio: http://semanticscience.org/resource/ opmw: http://www.opmw.org/ontology/ deo: http://purl.org/spar/deo/ doco: http://purl.org/spar/doco/ cito: http://purl.org/spar/cito/ fabio: http://purl.org/spar/fabio/ oa: http://www.w3.org/ns/oa# as: https://www.w3.org/ns/activitystreams# ldp: http://www.w3.org/ns/ldp# solid: http://www.w3.org/ns/solid/terms# acl: http://www.w3.org/ns/auth/acl# dio: https://w3id.org/dio# cnt: http://www.w3.org/2011/content# curr: http://irnok.net/ontologies/curriculum/ns/ std: http://edu.gov.ru/ontology/standards/09.03.01# govru: http://edu.gov.ru/people# istu: http://www.istu.edu/ vt: http://www.istu.edu/structure/57/1976/1977/ cyber: http://www.istu.edu/structure/57/9518/1801/ teach: http://linkedscience.org/teach/ns# manip http://irnok.net/ontologies/rdfa-manipulation/ imei: imei.html# course: https://irnok.net/college/plan/01.03.02-16-1234-2461_1%D0%BA_PB-SM.plm.xml.xlsx-%D0%911.%D0%92.%D0%94%D0%92.3.1.html#"
+          resource="#post"
+          typeof="schema:CreativeWork sioc:Post prov:Entity"
+    >
+        <div id="controls">
+            <!-- http://ionicons.com/ -->
+            <button class="btn btn-default"
+                    data-toggle="button"
+                    aria-pressed="false"
+                    autocomplete="off"
+                    id="panel-toggle-button"
+            ><i class="ion ion-android-menu"></i></button>
+            <!-- http://fontawesome.io/icons/ -->
+            <div class="hidden" id="controls-buttons">
+                <div class="btn-group"
+                     style="margin-bottom:10pt;"
+                     data-class="s100"
+                     id="ctrl-btn-text-size"
+                >
+                    <button class="btn btn-primary"
+                            id="ctrl-btn-12pt"
+                            data-toggle="button"
+                            aria-pressed="false"
+                            data-class="s12pt"
+                    >12pt</button>
+                    <button class="btn btn-primary"
+                            id="ctrl-btn-14pt"
+                            data-toggle="button"
+                            aria-pressed="false"
+                            data-class="s14pt"
+                    >14pt</button>
+                    <button class="btn btn-primary"
+                            id="ctrl-btn50"
+                            data-toggle="button"
+                            aria-pressed="false"
+                            data-class="s50"
+                    >50%</button>
+                    <button class="btn btn-primary active"
+                            id="ctrl-btn-100"
+                            data-toggle="button"
+                            aria-pressed="true"
+                            data-class="s100"
+                    >100%</button>
+                </div><br/>
+                <div class="btn-group"
+                     style="margin-bottom:10pt;"
+                >
+                    <button class="btn btn-success"
+                            id="cmd-commit-button"
+                    >
+                        <i class="ion ion-checkmark-round"></i>
+                    </button>
+                    <button class="btn btn-primary"
+                            id="cmd-branch-button"
+                    >
+                        <i class="ion ion-fork-repo"></i>
+                    </button>
+                    <button class="btn btn-default"
+                            id="cmd-merge-button"
+                    >
+                        <i class="ion ion-merge"></i>
+                    </button>
+                </div>
+                <div class="btn-group right"
+                           id="cmd-gen-buttons"
+                           style="margin-bottom:10pt;"
+                      >
+                    <button class="btn btn-default"
+                            id="cmd-print-button"
+                    >
+                        <i class="ion ion-printer"></i>
+                    </button>
+                    <button class="btn btn-default"
+                            id="button-export-page"
+                    >
+                        <i class="ion ion-archive"></i>
+                    </button>
+                    <button class="btn btn-default"
+                            id="button-medium-editor-switch">
+                        <i class="ion ion-edit"></i>
+                    </button>
+                </div>
+                <br/>
+                <div class="form-group">
+                    <input type="text"
+                           class="form-control input-sm"
+                           id="cmd-data-argument">
+                    </input>
+                </div><br/>
+                <div class="btn-group hidden">
+                    <button class="btn btn-danger"
+                            id="cmd-button-remove">
+                        <i class="ion ion-close-round"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+        <style>
+        </style>
+        <main lang="ru"
+              resource="#annotation"
+              typeof="oa:Annotation"
+              class="t12pt"
+              id="main-document-container"
+        >
+            <metal:block metal:define-slot="content">
+            <div property="oa:hasTarget" resource="#course-work-program"></div>
+            <article property="oa:hasBody"
+                     typeof="schema:Article foaf:Document curr:WorkingProgram"
+                     resource="#course-work-program"
+                     class="editable"
+                     id="main-document"
+            >
+                <div taa:content="imei:title-page">
+                </div>
+                <div taa:content="imei:negotiation-UMK">
+                </div>
+                <section id="contents" class="break-after">
+                    <h2 class="nocount c">Содержание</h2>
+                    <div id="tableOfContents"></div>
+                </section>
+                <section id="general-course-description" property="schema:hasPart"
+                         typeof="schema:CreativeWork"
+                         resource="#description"
+                >
+                    <div property="schema:hasPart" typeof="dc:Text cnt:ContentAsText" resource="#purpose">
+                        <h2 property="dc:title" datatype="xsd:string">Цели и задачи дисциплины (модуля)</h2>
+                        <p property="cnt:chars" datatype="xsd:string">
+                            Целю преподавания дисциплины "Технологии программирования" является освоение студентами практических навыков в области разработки программного обеспечения на основе современных подходов к проектированию сложных, гетерогенных, распределенных информационных систем. Развитие навыков системного мышления, необходимого для реализации процедур декомпозиции сложных программных систем на функциональные блоки и обеспечения полученных структур процедурами взаимодействия.</p>
+                        <p>
+                            Задачи дисциплины:
+                            <ol>
+                                <li>изложение основных положений концепции компонентного проектирования,</li>
+                                <li>экономических аспектов его использования на предприятии,</li>
+                                <li>усвоение приемов программирования, широко используемых в этой области.</li>
+                            </ol>
+                        </p>
+                    </div>
+                    <div property="schema:hasPart" typeof="dc:Text cnt:ContentAsText" resource="#location">
+                        <h2 property="dc:title" datatype="xsd:string">Место дисциплины в структуре ОПОП</h2>
+                        <p property="cnt:chars" datatype="xsd:string">
+                            Дисциплина  Б1.В.ДВ.3.1. "Технологии программирования" относится к <span class="q1">вариативной</span> части Б1.В профессионального цикла Б1.</p>
+                        <p>
+                            Изучение дисциплины опирается на знания, полученные в результате изучения дисциплин:
+                            <ul>
+                                <li><span taa:content="course:Б1.Б.11"></span>;</li>
+                                <li><span taa:content="course:Б1.Б.19"></span>;</li>
+                                <li><span taa:content="course:Б1.В.ОД.7"></span>.</li>
+                            </ul>
+                        </p>
+                        <p>Знания, полученные в результате изучения дисциплины являются важными с точки зрения формирования требуемых компетенций.
+                        </p>
+                    </div>
+                    <div property="schema:hasPart" typeof="dc:Text cnt:ContentAsText" resource="#requirements">
+                        <h2 property="dc:title" datatype="xsd:string">Требования к результатам освоения дисциплины (модуля)</h2>
+                        <p property="cnt:chars" datatype="xsd:string">
+                            Процесс изучения дисциплины (модуля) направлен на овладение  следующими компетенциями:
+                            <div taa:content="course:competence-list">
+                            </div>
+                        </p>
+                        <p>
+                            В результате изучения дисциплины студент должен:<br/>
+                            <em>Знать</em>:
+                            <ul>
+                                <li>
+                                    основные фундаментальные понятия, лежащие в основе компонентного подхода к проектированию программного обеспечения;
+                                </li>
+                                <li>
+                                    методы интерпретации процедур системного анализа в виде этапов проектирования сложных программных систем;
+                                </li>
+                                <li>
+                                    методы моделирования компонентных систем при помощи средств языков UML и BPMN;
+                                </li>
+                                <li>
+                                    методики проектирования интерфейсов компонент;
+                                </li>
+                                <li>
+                                    методики проектирования реализаций компонент;
+                                </li>
+                                <li>
+                                    Технологии и языки задания конфигураций программных модулей.
+                                </li>
+                            </ul>
+                            <em>Уметь</em>:
+                            <ul>
+                                <li>
+                                    проектировать программные системы при помощи современных сред компонентного проектирования;
+                                </li>
+                                <li>создавать программные пакеты, регистрировать их на серверах;
+                                </li>
+                                <li>разрабатывать тестовые компоненты, анализировать результаты тестов;
+                                </li>
+                                <li>анализировать критерии качества проектирования компонент и их интерфейсов.
+                                </li>
+                            </ul>
+                            <em>Владеть</em>:
+                            <ul>
+                                <li>
+                                    средами программирования, поддерживающими компонентный подход;
+                                </li>
+                                <li>
+                                    средствами самостоятельной разработки среды для используемых языков программирования;
+                                </li>
+                                <li>
+                                    программными средствами доступа к хранилищам программных компонент и их загрузке;
+                                </li>
+                                <li>
+                                    методиками экстремального и <em>agile</em>-программирования.
+                                </li>
+                            </ul>
+                        </p>
+                    </div>
+                    <div property="schema:hasPart" typeof="dc:Text cnt:ContentAsText"  resource="#volume">
+                        <h2 property="dc:title" datatype="xsd:string">Объем дисциплины (модуля) и виды учебной работы (разделяется по формам обучения)</h2>
+                        <div
+                            taa:content="course:time-differentiation"
+                        ></div>
+                    </div>
+
+                    <div property="schema:hasPart" typeof="schema:CreativeWork"  resource="#content-description">
+                        <h2 property="dc:title" datatype="xsd:string">Содержание дисциплины (модуля)</h2>
+                        <div property="schema:hasPart" typeof="schema:CreativeWork"  resource="#content">
+                            <h3 property="dc:title" datatype="xsd:string">Содержание разделов и тем дисциплины (модуля, все разделы и темы нумеруются)</h3>
+                            <div property="schema:hasPart" typeof="dc:Text cnt:ContentAsText"  resource="#system-approach">
+                                <h4 property="dc:title" datatype="xsd:string">Системный подход к проектированию програмного обеспечения</h4>
+                                <p property="cnt:chars" datatype="xsd:string">
+                                    Основные понятия и определения OSI/ISO: функциональный блок, интерфейс, протокол.  Взаимодействие функциональных блоков друг с другом через интерфейс. Виды функциональных блоков, в том числе, процедуры, функции, модули, компоненты, сервисы и др.  Способы формальной спецификации интерфейсов и протоколов.  Языки описания интерфейсов.  Способы объединения функциональных блоков в программные системы и приложения.  Динамическая загрузка модулей.  Конфигурации.  Понятие распределенной программной системы.  Платформы разработки программного обеспечения.
+                                </p>
+                            </div>
+
+                            <div property="schema:hasPart" typeof="dc:Text cnt:ContentAsText"  resource="#python">
+                                <h4 property="dc:title" datatype="xsd:string">Среда программирования Python</h4>
+                                <p property="cnt:chars" datatype="xsd:string">
+                                    Структуры языка программирования Python. Императивная, функциональная, объектно-ориентированная и компонентная парадигмы программирования. Понятие "Чистого" объектно-ориентированного языка программирования. Структуры данных: список, очередь, \(n\)-ка (tuple), множество, словарь, генератор и куча. Определение объектов в языке, множественное наследование, подмешивания (mixin). Метаклассы, эмуляция поведения, свойства (properties), дескрипторы. Замыкания, примеры их применения. Генераторы, библиотека itertools.
+                                </p>
+                                <p>
+                                    Инструментарий тестирования программного кода: библиотека nose.
+                                </p>
+                            </div>
+
+                            <div property="schema:hasPart" typeof="dc:Text cnt:ContentAsText"  resource="#modularization">
+                                <h4 property="dc:title" datatype="xsd:string">Деление программы на модули</h4>
+                                <p property="cnt:chars" datatype="xsd:string">
+                                    Способы деления программы на модули. Структуры модулей современных систем программирования. Модульная система среды программирования Python. Понятие "Пакета". Установка пакетов. Структура пакета, сборочный файл, файлы настроек, файлы зависимостей. Публикация (release) пакета. Требования к документации. Виртуальные копии дистрибутива среды программирования Python (virtualenv).</p>
+                                <p>
+                                    Интегрирование среды программирования Python с языками системного программирования и языками компилируемого типа. Инструментарий автоматизации интегрирования: <a href="http://swig.org/">SWIG</a>, <a href="http://cython.org/">Cython</a> и др. Измерение производительности программы (profiling).</p>
+                                <p>Пакеты поддержки разработки научных приложений: numpy, scipy, simpy и др. Особенности установки пакетов в операционной системе Windows.
+                                </p>
+                            </div>
+                            <div property="schema:hasPart" typEof="dc:Text cnt:ContentAsText"  resource="#maht-modelling">
+                                <h4 property="dc:title" datatype="xsd:string">Приемы программирования математических моделей</h4>
+                                <p property="cnt:chars" datatype="xsd:string">
+                                    Пакет матричных операций numpy. Графический пакет mathplotlib.  Принципы использования среды программирования Python/numpy как специализированного языка математических расчетов.
+                                </p>
+                                <p>
+                                    Базовые операции над массивами и матрицами.  Вырезки.  Свойства массивов numpy,  представление информации в оперативной памяти.  Типы элементов numpy, структуры типа "запись".  Надстройки pandas и пакеты символьных вычислений с возможностью компиляции результата в выражения операций numpy.  Пакеты имитационного моделирования.
+                                </p>
+                            </div>
+                            <div property="schema:hasPart" typEof="dc:Text cnt:ContentAsText"  resource="#gui-programming">
+                                <h4 property="dc:title" datatype="xsd:string">Доступ к реляционным базам данных</h4>
+                                <p property="cnt:chars" datatype="xsd:string">
+                                    Стандарт доступа к базам данных Python DBI-2.0.  Методы программирования доступа баз данных при помощи данного стандарта.  Поддерживаемые серверы и библиотеки.  Особенности DBI-2.0-интерфейсов к sqlite, PostgreSQL и MySQL.
+                                </p>
+                                <p>Отображение структур реляционных баз данных на объектно-ориентированную парадигму Python.  Библиотека SQL Alchemy, среда Django.  Представление реляционных отношений в виде структур Python.  Преобразование типов данных.  Нереляционные базы данных.  MongoDB, ZODB, BerkeleyDB, MemcacheDB, Redis и т.д.
+                                </p>
+                            </div>
+                            <div property="schema:hasPart" typEof="dc:Text cnt:ContentAsText"  resource="#gui-programming">
+                                <h4 property="dc:title" datatype="xsd:string">Трансляторы</h4>
+                                <p property="cnt:chars" datatype="xsd:string">
+                                    Понятие грамматики. Виды формализмов для представления грамматики. Вывод предложений из грамматики, леворекурсивный и праворекурсивный вывод. Иерархия грамматик по Ноаму Хомскому. Автоматные грамматики, представление грамматик в виде конечных автоматов. Контекстно-свободные грамматики, Машина Алана Тьюринга с магазинной памятью. Классификации трансляторов контекстно-свободных грамматик. Технология программирования трансляторов, основанных на рекурсивном спуске. Компиляторы компиляторов и сопутствующий инструментарий: bison, flex, antlr. Синтаксически-управляемый перевод и атрибутивные грамматики Дональда Кнута. Общие характеристики виртуальной машины LLVM. Языки программирования, базирующиеся на LLVM: Julia, D, Rust.
+                                </p>
+                                <p>Библиотеки разработки трансляторов для среды программирования Python. Управление процессом трансляции программ Python. Представление Дерева синтаксического разбора.
+                                </p>
+                            </div>
+                            <div property="schema:hasPart" typEof="dc:Text cnt:ContentAsText"  resource="#gui-programming">
+                                <h4 property="dc:title" datatype="xsd:string">Программирование интерфейсов пользователя</h4>
+                                <p property="cnt:chars" datatype="xsd:string">
+                                    Шаблоны Модель-Вид-Контроллер (Model-View-Controller), Модель-Вид-Презентер (Model-View-Presenter), Модель-Вид-ВидМодель (Model-View-ViewModel), и др. Отображение таблиц баз данных на модели MVW (Model-View-"Whatewer"). Промышленные пакеты для разработки интерфейсов пользователя: QT, GTK+, wxWidgets. Средства визуального дизайна видов (форм) Qt Designer, glade, wxGlade. Реализации шаблонов проектирования интерфейсов пользователя в графических пакетах. Возможности пакетов для разработки автоматизированных рабочих мест (АРМ) и информационных систем. Сопряжение библиотек с пакетом mathplotlib в рамках научного приложения.
+                                </p>
+                                <p>Современные подходы к проектированию web-приложений и их реализации в среде Python: flask, pyramid, ZOPE, Django и др. Отображение запросов HTTP на процедуры и методы. Моделирование шаблонов проектирования при реализации web-приложений. Возможности представления графики в web.
+                                </p>
+                            </div>
+                            <div property="schema:hasPart" typeof="dc:Text cnt:ContentAsText"  resource="#component-architecture">
+                                <h4 property="dc:title" datatype="xsd:string">Компонентное проектирование программного обеспечения</h4>
+                                <p property="cnt:chars" datatype="xsd:string">
+                                    Парадигма компонентного программирования: основные положения.
+                                    Основные понятия: интерфейс, компонента, обслуживание,
+                                    реализация, утилита, адаптер, утилита (сервис), контейнер, фабрика, шаблон проектирования.
+                                    Обзор популярных сред компонентного проектирования.
+                                    Проектирование интерфейсов компонент.
+                                    Языки графического представления проекта.
+                                </p>
+                                <p>Конфигурирование компонентной программной системы. Виды конфигураций, подходы к созданию конфигураций: императивный и декларативный. Язык ZCML (ZOPE Configuration Markup Language). Структура INI-файлов. Применение INI-файлов для конфигурирования индивидуальных утилит.
+                                </p>
+                                <p>Адаптер-ориентированное программирование. Динамическая и статическая адаптация. Виды адаптеров: прокси-адаптеры, фасады, MVW и т.п. Приемы проектирования компонентных пакетов (библиотек).
+                            </div>
+
+                            <div property="schema:hasPart" typeof="dc:Text cnt:ContentAsText"  resource="#content">
+                                <h4 property="dc:title" datatype="xsd:string">Основы порождающего программирования</h4>
+                                <p property="cnt:chars" datatype="xsd:string">
+                                    Программирование второго порядка. Язык программирования Scheme. Формы Scheme. Создание новых форм: макросы. Дерево синтаксического разбора и преобразование над ним. Методы рекурсивной обработки синтаксических деревьев.
+                                </p>
+                                <p>Шаблоны языков программирования C++, Java, C#, D, Vala, Julia. Обобщенное программирование и его реализация в перечисленных системах. Методики конфигурирования для систем порождающего программирования данного класса (Чернецки).
+                                </p>
+                                <p>"Внешние" подходы к порождающему программированию. Метод Горбунова-Посадова. "Горизональное" программирование. Слоты, мультислоты. Plugin-программирование. Программирование, ориентированное на разработку языка предметной области (Domain Specific Language, DSL). Современные средства разработки DSL: Agda, Spoofy и др. Аспект-ориентированное программирование. Инверсия зависимостей, обязательства (promises).
+                                </p>
+                                <p>Основы MDE (Model Driven Engineering)-программирования, основанного на преобразовании модели программного обеспечения.  Спецификации программного обеспечения, представляемые в виде моделей.  Виды MDE: DDE (Data Driven Engineering), MDA (Model Driven Engineering), ODE (Ontology Driven Engineering).  MDE как процесс моделирования предметной области.  Фундаментальные проблемы технологий MDE.  Основы теории категорий и категориальное представление процессов преобразования моделей.  Категориальное понятие функтора.  Эндофункторы.  Монады.  Категориальные конструкции: декартов квадрат, кодекартов квадрат, конус/коконус, предел/копредел и т.п.
+                                </p>
+                            </div>
+
+                            <div property="schema:hasPart" typeof="dc:Text cnt:ContentAsText"  resource="#content">
+                                <h4 property="dc:title" datatype="xsd:string">Сервис-ориентированные программные системы</h4>
+                                <p property="cnt:chars" datatype="xsd:string">
+                                    Понятие API (Application Programming Interface) сервисов и их отличия от API библиотек и пакетов. Интерфейсы сервисов. RESTful-сервисы. Пакеты реализации RESTful-сервисов в среде программирования Python. Методы кодирования информации уровня представления данных модели OSI/ISO. Форматы XML, JSON, BSON, байтовые потоки и WebSocket-ы. Протоколы RPC и XML-RPC.
+                                </p>
+                                <p>Виртуализация приложений. Понятие о виртуальном частном сервере/сервисе (Virtual Private Server/Service, VPS). Методы и технологии организации VPS. Понятие контейнера. Контейнеры Virtuozzo, LXC, Docker. Форматы файлов конфигурации контейнеров. Понятия PaaS, IaaS и SaaS. Реализация IaaS на основе контейнеров.
+                                </p>
+                            </div>
+                        </div>
+                        <div property="schema:hasPart" typeof="schema:CreativeWork"  resource="#content">
+                            <h3 property="dc:title" datatype="xsd:string">Разделы дисциплины и междисциплинарные связи с обеспечиваемыми (последующими) дисциплинами</h3>
+                            <p property="cnt:chars" datatype="xsd:string">
+                                <table class="c">
+                                    <thead class="header">
+                                        <th>№ п/п</th>
+                                        <th>Наименование обеспечиваемых  (последующих) дисциплин</th>
+                                        <th colspan="10">№№ разделов и тем  данной дисциплины, необходимых для изучения обеспечиваемых (последующих) дисциплин<br/><sup> (вписываются разработчиком)</sup></th>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td>1</td>
+                                            <td class="l">Производственная практика (по получению профессиональных умений и опыта профессиональной деятельности)</td>
+                                            <td>1</td>
+                                            <td>2</td>
+                                            <td>3</td>
+                                            <td>4</td>
+                                            <td>5</td>
+                                            <td>6</td>
+                                            <td>7</td>
+                                            <td>8</td>
+                                            <td>9</td>
+                                            <td>10</td>
+                                        </tr>
+                                        <tr>
+                                            <td>2</td>
+                                            <td class="l">Производственная практика (преддипломная)</td>
+                                            <td>1</td>
+                                            <td>2</td>
+                                            <td>3</td>
+                                            <td>4</td>
+                                            <td>5</td>
+                                            <td>6</td>
+                                            <td>7</td>
+                                            <td>8</td>
+                                            <td>9</td>
+                                            <td>10</td>
+                                        </tr>
+
+                                    </tbody>
+                                </table>
+                            </p>
+                        </div>
+                        <div property="schema:hasPart" typeof="dc:Text cnt:ContentAsText"  resource="#content">
+                            <h3 property="dc:title" datatype="xsd:string">Разделы и темы дисциплин (модулей) и виды занятий</h3>
+                            <p property="cnt:chars" datatype="xsd:string">
+                                <table class="c">
+                                    <thead>
+                                        <tr class="header">
+                                            <th rowspan="2" style="width:1em;">№ п/п</th>
+                                            <th rowspan="2" style="width:7em;">Наименование раздела</th>
+                                            <th rowspan="2">Наименование темы</th>
+                                            <th colspan="6">Виды занятий в часах</th>
+                                        </tr>
+                                        <tr class="header">
+                                            <th style="width:3em;">Лек.</th>
+                                            <th style="width:3em;">Прак.</th>
+                                            <th style="width:3em;">Сем.</th>
+                                            <th style="width:3em;">Лаб.</th>
+                                            <th style="width:3em;">СРС</th>
+                                            <th style="width:3em;">Всего</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td >1</td>
+                                            <td class="l"></td>
+                                            <td class="l">Тема 1.</td>
+                                            <td></td>
+                                            <td></td>
+                                            <td></td>
+                                            <td></td>
+                                            <td></td>
+                                            <td></td>
+                                        </tr>
+                                        <tr>
+                                            <td>2</td>
+                                            <td class="l"></td>
+                                            <td class="l">Тема 2.</td>
+                                            <td></td>
+                                            <td></td>
+                                            <td></td>
+                                            <td></td>
+                                            <td></td>
+                                            <td></td>
+                                        </tr>
+                                        <tr>
+                                            <td>3</td>
+                                            <td class="l"></td>
+                                            <td class="l">Тема 3.</td>
+                                            <td></td>
+                                            <td></td>
+                                            <td></td>
+                                            <td></td>
+                                            <td></td>
+                                            <td></td>
+                                        </tr>
+                                        <tr>
+                                            <td>4</td>
+                                            <td class="l"></td>
+                                            <td class="l">Тема 4.</td>
+                                            <td></td>
+                                            <td></td>
+                                            <td></td>
+                                            <td></td>
+                                            <td></td>
+                                            <td></td>
+                                        </tr>
+                                        <tr>
+                                            <td>5</td>
+                                            <td class="l"></td>
+                                            <td class="l">Тема 5.</td>
+                                            <td></td>
+                                            <td></td>
+                                            <td></td>
+                                            <td></td>
+                                            <td></td>
+                                            <td></td>
+                                        </tr>
+                                        <tr>
+                                            <td>6</td>
+                                            <td class="l"></td>
+                                            <td class="l">Тема 6.</td>
+                                            <td></td>
+                                            <td></td>
+                                            <td></td>
+                                            <td></td>
+                                            <td></td>
+                                            <td></td>
+                                        </tr>
+                                        <tr>
+                                            <td>7</td>
+                                            <td class="l"></td>
+                                            <td class="l">Тема 7.</td>
+                                            <td></td>
+                                            <td></td>
+                                            <td></td>
+                                            <td></td>
+                                            <td></td>
+                                            <td></td>
+                                        </tr>
+                                        <tr>
+                                            <td>8</td>
+                                            <td class="l"></td>
+                                            <td class="l">Тема 8.</td>
+                                            <td></td>
+                                            <td></td>
+                                            <td></td>
+                                            <td></td>
+                                            <td></td>
+                                            <td></td>
+                                        </tr>
+                                        <tr>
+                                            <td>9</td>
+                                            <td class="l"></td>
+                                            <td class="l">Тема 9.</td>
+                                            <td></td>
+                                            <td></td>
+                                            <td></td>
+                                            <td></td>
+                                            <td></td>
+                                            <td></td>
+                                        </tr>
+                                        <tr>
+                                            <td>10</td>
+                                            <td class="l"></td>
+                                            <td class="l">Тема 10.</td>
+                                            <td></td>
+                                            <td></td>
+                                            <td></td>
+                                            <td></td>
+                                            <td></td>
+                                            <td></td>
+                                        </tr>
+                                        <tr>
+                                            <td colspan="3" class="bold l">Всего</td>
+                                            <td></td>
+                                            <td></td>
+                                            <td></td>
+                                            <td></td>
+                                            <td></td>
+                                            <td></td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </p>
+                        </div>
+
+                        <div property="schema:hasPart" typeof="dc:Text cnt:ContentAsText"  resource="#practic-tasks">
+                            <h2 property="dc:title" datatype="xsd:string">Перечень семинарских, практических занятий и лабораторных работ</h2>
+                            <p property="cnt:chars" datatype="xsd:string">
+                                Для успешного усвоения материала курса и сдачи <span class="q3">экзамена</span>
+                                необходимо сдать следующие лабораторные работы:
+                            </p>
+                            <h4 class="laba">Реализация модуля на языке Python.</h4>
+                            <p>Цель лабораторной работы - ...
+                            </p>
+                            <h4 class="laba">Разработка модуля на основе внешних пакетов.</h4>
+
+                            <h4 class="laba">Разработка компоненты.</h4>
+                            <h4 class="laba">Создание адаптера интерфейса.</h4>
+                            <h4 class="laba">Разработка интерфейса пользователя для компоненты.</h4>
+                            <h4 class="laba">Создание виртуальной машины Docker/Vagrant.</h4>
+                            <h4 class="laba">Создание распределенной версии компоненты.</h4>
+                            <h4 class="laba">Изучение методов идентификации объектов распределенной среде.</h4>
+                            <h4 class="laba">Моделирование доступа к общим ресурсам.</h4>
+                            <h4 class="laba">Публикация компонента в виде VPS.</h4>
+                            <div property="schema:hasPart" typeof="schema:CreativeWork"  resource="#content">
+                                <h3 property="dc:title" datatype="xsd:string">План самостоятельной работы студентов</h3>
+                                <p property="cnt:chars" datatype="xsd:string">
+                                </p>
+                            </div>
+                            <div property="schema:hasPart" typeof="schema:CreativeWork"  resource="#content">
+                                <h3 property="dc:title" datatype="xsd:string">Методические указания по организации самостоятельной работы студентов</h3>
+                                <p property="cnt:chars" datatype="xsd:string">
+                                    Успешное освоение учебного материала базируется на сочетании нескольких видов учебной деятельности, среди которых особое и место занимают интерактивная демонстрация разработки примеров программ (примеров решений заданий лабораторных работ)  и самостоятельная работа обучающегося.
+                                </p>
+                                <p>
+                                    Организация учебной работы по дисциплине предусматривает значительную самостоятельность в выборе методов и форм самостоятельной работы обучающимся. Рекомендуется на основе общих указаний преподавателя независимо определять проблемы и источники для повторения учебного материала и его углубленного изучения. Настоятельно рекомендуется готовиться ко всем видам занятий, в том числе и к лекциям.
+                                </p>
+                                <p>
+                                    Особое место в изучении учебного материала отводится практическим занятиям и лабораторным работам.
+                                </p>
+                                <p>
+                                    Основным требованием к разрабатываемым программам является реализация возможно полного набора тестов для реализуемых функций (функциональные тесты) и структурам программ и данных (тесты корректности). Программную реализацию задания допустимо выполнять в любой системе программирования, соответствующей условиям задачи, если не оговорено особо. Для того, чтобы сдать задание необходимо его опубликовать на одном из серверов хранения исходного кода, например <a href="https://github.com">github.com</a> или <a href="http://gitlab.com">gitlab.com</a>. Некоторые задания допустимо выполнять в команде при предварительном согласовании с преподавателем.
+                                </p>
+                            </div>
+                        </div>
+                        <div property="schema:hasPart" typeof="dc:Text cnt:ContentAsText"  resource="#course-works">
+                            <h2 property="dc:title" datatype="xsd:string">Примерная тематика курсовых работ (проектов) </h2>
+                            <p property="cnt:chars" datatype="xsd:string">
+                                Курсовая работа не предусмотрена.
+                            </p>
+                        </div>
+                        <div property="schema:hasPart" typeof="dc:Text cnt:ContentAsText"  resource="#theory-support">
+                            <h2 property="dc:title" datatype="xsd:string">Учебно-методическое и информационное обеспечение дисциплины (модуля)</h2>
+                            <div property="schema:hasPart" typeof="schema:CreativeWork"  resource="#content">
+                                <h3 property="dc:title" datatype="xsd:string">Основная литература</h3>
+                                <p property="cnt:chars" datatype="xsd:string">
+                                </p>
+                            </div>
+                            <div property="schema:hasPart" typeof="schema:CreativeWork"  resource="#content">
+                                <h3 property="dc:title" datatype="xsd:string">Дополнительная литература</h3>
+                                <p property="cnt:chars" datatype="xsd:string">
+                                </p>
+                            </div>
+                            <div property="schema:hasPart" typeof="schema:CreativeWork"  resource="#content">
+                                <h3 property="dc:title" datatype="xsd:string">Программное обеспечение</h3>
+                                <p property="cnt:chars" datatype="xsd:string">
+                                </p>
+                            </div>
+                            <div property="schema:hasPart" typeof="schema:CreativeWork"  resource="#content">
+                                <h3 property="dc:title" datatype="xsd:string">Базы данных, информационно-справочные и поисковые системы</h3>
+                                <p property="cnt:chars" datatype="xsd:string">
+                                </p>
+                            </div>
+                        </div>
+                        <div property="schema:hasPart" typeof="dc:Text cnt:ContentAsText"  resource="#tech-support">
+                            <h2 property="dc:title" datatype="xsd:string">Материально-техническое обеспечение дисциплины (модуля)</h2>
+                            <p property="cnt:chars" datatype="xsd:string">
+                                Учебные занятия проводятся в учебных лабораториях вычислительной техники.
+                            </p>
+                            <p>
+                                На всех занятиях используется проекционная техника.
+                            </p>
+                        </div>
+                        <div property="schema:hasPart" typeof="dc:Text cnt:ContentAsText" resource="#educational-technologies">
+                            <h2 property="dc:title" datatype="xsd:string">Образовательные технологии</h2>
+                            <p property="cnt:chars" datatype="xsd:string">
+                                Реализация компетентностного подхода предусматривает широкое использование в учебном процессе активных и интерактивных форм проведения занятий (деловых игр в форме отношений "Заказчик" - "Исполнитель", "Начальник" - "Подчиненный", "Программист-дизайнер" - "Программист-имплементер" - "Программист-тестер"). Интерактивные формы широко используются на лекциях и являются основным видом форм проведения лабораторных работ и практических занятий. Большинство лабораторных работ проводятся в форме самостоятельной работы обучающихся в командах (2…4 человека) под руководством преподавателя.  Удельный вес занятий, проводимых в интерактивных формах,  составляет более 60 процентов аудиторных занятий.
+                            </p>
+                        </div>
+                        <div property="schema:hasPart" typeof="dc:Text cnt:ContentAsText" resource="#assessment">
+                            <h2 property="dc:title" datatype="xsd:string">Оценочные средства (ОС)</h2>
+                            <div property="schema:hasPart" typeof="schema:CreativeWork"  resource="#content">
+                                <h3 property="dc:title" datatype="xsd:string">Оценочные средства для входного контроля (могут быть в виде тестов с закрытыми или открытыми вопросами)</h3>
+                                <p property="cnt:chars" datatype="xsd:string">
+                                    Образовательный портал http://<a href="http://educa.isu.ru">educa.isu.ru</a>.
+                                </p>
+                            </div>
+                            <div property="schema:hasPart" typeof="schema:CreativeWork"  resource="#content">
+                                <h3 property="dc:title" datatype="xsd:string">Оценочные средства для промежуточной аттестации (в форме экзамена или зачета)</h3>
+                                <p property="cnt:chars" datatype="xsd:string" class="c">
+                                    <i>Типовые вопросы промежуточной аттестации (экзамен)</i>
+                                </p>
+                                <ol>
+                                    <li>Тесты и т.д.</li>
+                                </ol>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+                <section class="break-before">
+                    <p>Найденные аналоги рабочей программы в других вузах</p>
+                    <ol>
+                        <li><a href="http://www.umk3plus.utmn.ru/files/0000186276.pdf" target="_blank">
+                            Тюменский государственный университет: Основные образовательные программы: Технологии программирования
+                        </a></li>
+                    </ol>
+                </section>
+
+                <div taa:content="imei:provenance-description"></div>
+                <section id="chair-license">
+                    <div taa:content="imei:default-license"></div>
+                </section>
+            </article>
+            <!-- <template> -->
+            <div id="hover-comtrol-panel">
+            </div>
+            <!-- </template> -->
+            </metal:block>
+        </main>
+        <footer class="noprint">
+            <p class="ni c">
+                <a class="" rel="license" href="http://creativecommons.org/licenses/by-sa/4.0/"><img alt="Лицензия Creative Commons" style="border-width:0;margin-bottom:10px;" src="https://i.creativecommons.org/l/by-sa/4.0/88x31.png"/></a><span hidden="false">Это произведение доступно по <a rel="license" href="http://creativecommons.org/licenses/by-sa/4.0/">лицензии Creative Commons «Attribution-ShareAlike» («Атрибуция — На тех же условиях») 4.0 Всемирная</a>.</span>
+            </p>
+        </footer>
+        <script src="https://code.jquery.com/jquery-3.2.1.js" type="text/javascript"></script>
+        <!-- Latest compiled and minified JavaScript -->
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+        <script type="text/javascript" async
+                src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.0/MathJax.js?config=TeX-MML-AM_CHTML">
+        </script>
+        <!-- <script src="https://dokie.li/scripts/simplerdf.js" type="text/javascript"></script> -->
+        <script src="https://cdn.jsdelivr.net/medium-editor/latest/js/medium-editor.min.js"  type="text/javascript"></script>
+        <script src="https://dokie.li/scripts/medium-editor-tables.min.js"  type="text/javascript"></script>
+        <script src="js/contents.js"  type="text/javascript"></script>
+        <script src="js/LODdoc.js" type="text/javascript"></script>
+
+        <script>
+         $(function () {
+             LODmain(false); // Do not use macro button.
+         });
+        </script>
+    </body>
+</html>
