@@ -2,6 +2,18 @@ function jqesc( myid ) {
   return "#" + myid.replace( /(:|\.|\[|\]|,|=|@)/g, "\\$1" );
 };
 
+function generateUUID () { // Public Domain/MIT
+  var d = new Date().getTime();
+  if (typeof performance !== 'undefined' && typeof performance.now === 'function'){
+    d += performance.now(); //use high-precision timer if available
+  }
+  return 'xxxxxxxx-xxxx-8xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function (c) {
+    var r = (d + Math.random() * 16) % 16 | 0;
+    d = Math.floor(d / 16);
+    return (c === 'x' ? r : (r & 0x3 | 0x8)).toString(16);
+  });
+}
+
 function supportsImports() {
   return 'import' in document.createElement('link');
 }
@@ -193,6 +205,41 @@ function changeTextSize() {
   piter.data("class", cls);
 }
 
+function saveDocument(saveas, msg) {
+  var container = $("#main-document-container");
+  var text;
+  var apiUrl, oldUUID;
+  if (saveas) {
+    apiUrl="save-as";
+    var docroot=container.find("#main-document");
+    var newUUID=generateUUID();
+    oldUUID=docroot.data("uuid");
+    docroot.data("uuid", newUUID);
+    // docroot.find("#main-uuid").attr("content", newUUID);
+  } else {
+    apiUrl="save";
+  }
+  text = container.html();
+  $.ajax({
+    type: "POST",
+    url: `/api/v1/${apiUrl}`,
+    data: text,
+    contentType: "application/x-xhtml, charset=utf-8",
+    dataType: "json",
+    success: function(answer){
+      // FIXME: User could not see the message in save-as mode.
+      $("#message").html(alert_widget("success", msg));
+      if (saveas) {
+        location.href = location.href.replace(oldUUID, newUUID);
+      }
+    },
+    failure: function(errMsg) {
+      $("#message").html(alert_widget("alert", errMsg));
+    }
+  });
+};
+
+
 function downloadInnerHtml(filename, selector, mimeType) {
   // var elHtml = $(selector)[0].innerHTML;
   var elHtml = document.documentElement.innerHTML;
@@ -228,6 +275,13 @@ function LODmain(macroButton) {
   $("#cmd-print-button").on("click", function (){
     window.print();
   });
+  $('#cmd-commit-button').click(function(){
+    saveDocument(false, "Документ успешно сохранен!");
+  });
+  $('#cmd-branch-button').click(function(){
+    saveDocument(true, "Теперь вы работаете в новой ветке!");
+  });
+
   $("#controls").on('mouseenter mouseleave', function (event) {
     var opacity =  event.type=="mouseenter" ? '1.0' : '0.7';
     $(this).animate({"opacity":opacity}, 100);
