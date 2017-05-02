@@ -263,7 +263,17 @@ class PageView(View):
             'context': self.context
         }
         resp.update(kwargs)
+        return resp
 
+    def respjson(self, **kwargs):
+        resp = {
+            'message': self.message,
+            'level': self.level,
+            'result': self.result,
+            'exception': self.exception,
+            'content': self.content
+        }
+        resp.update(kwargs)
         return resp
 
     def failed(self, message, exception=None, level='danger'):
@@ -327,13 +337,15 @@ class PageView(View):
         filename, physfn, fn, ext = self.pathname(all=True)
         return FileResponse(physfn)
 
+    def route_save_post(self):
+        filename, physfn, fn, ext = self.pathname(all=True)
+        print(filename, physfn, fn, ext)
+        self.message = "Fake save"
+        body_file = self.request.body_file
+        self.storage.save_file(body_file, filename)
 
-def file_save(context, request):
-    return {"context": request.subpath, "edit": path}
+        return self.respjson()
 
-
-def file_commit(context, request):
-    return {""}
 
 #@adapter(IConfigurationEvent)
 
@@ -374,12 +386,12 @@ def configurator(config, **settings):
                     route_name="doc",
                     name="content",
                     request_method="GET")
-    config.add_view(view=file_save,
+    config.add_view(view=PageView,
                     route_name="doc",
                     renderer="json",
                     name="save",
                     request_method="POST")
-    config.add_view(view=file_commit,
+    config.add_view(view=PageView,
                     route_name="doc",
                     renderer="json",
                     name="commit",
