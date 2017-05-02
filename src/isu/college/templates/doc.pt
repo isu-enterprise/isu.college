@@ -10,6 +10,6 @@
       metal:use-macro="doc_template['page']"
 >
     <metal:block metal:fill-slot="content">
-        <div tal:replace="structure content"></div>
+        <div tal:replace="structure view.content"></div>
     </metal:block>
 </html>

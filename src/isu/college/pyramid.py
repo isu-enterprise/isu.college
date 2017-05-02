@@ -317,11 +317,15 @@ class PageView(View):
                 return self.response()
             except Exception as e:
                 return self.failed(
-                    _("Cannot load page. It seems it does not exist"),
+                    _("Cannot load page. It seems it does not exist."),
                     exception=e
                 )
         else:
             return FileResponse(physfn)
+
+    def route_content_get(self):
+        filename, physfn, fn, ext = self.pathname(all=True)
+        return FileResponse(physfn)
 
 
 def file_save(context, request):
@@ -365,6 +369,10 @@ def configurator(config, **settings):
                     attr="main_loader",
                     route_name="doc",
                     renderer="templates/doc.pt",
+                    request_method="GET")
+    config.add_view(view=PageView,
+                    route_name="doc",
+                    name="content",
                     request_method="GET")
     config.add_view(view=file_save,
                     route_name="doc",

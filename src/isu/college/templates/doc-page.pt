@@ -502,12 +502,12 @@
           typeof="schema:CreativeWork sioc:Post prov:Entity"
     >
         <div id="message" style="widht:100%;">
-            <div tal:condition="message"
-                 tal:attributes="class string:center c alert alert-${level} alert-dismissible"
+            <div tal:condition="view.message"
+                 tal:attributes="class string:center c alert alert-${view.level} alert-dismissible"
                  role="alert"
                  style="width:70%; margin-top:1em;"
             >
-                <span tal:content="structure str(message)">Message</span>
+                <span tal:content="structure str(view.message)">Message</span>
                 <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true" class="ion ion-close"></span></button>
             </div>
         </div>
