@@ -342,7 +342,7 @@ class PageView(View):
         print(filename, physfn, fn, ext)
         self.message = "Fake save"
         body_file = self.request.body_file
-        self.storage.save_file(body_file, filename)
+        self.storage.save_file(body_file, filename, overwrite=True)
 
         return self.respjson()
 
