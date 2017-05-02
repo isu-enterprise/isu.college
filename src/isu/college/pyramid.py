@@ -247,23 +247,81 @@ class Resource(object):
 #              )
 
 
-def file_view(context, request):
-    filename = context.pathname.strip()
-    fn, ext = os.path.splitext(filename)
+class PageView(View):
+    def __init__(self, context, request):
+        super(PageView, self).__init__(context=context,
+                                       request=request)
+        self.message = ""
+        self.result = "OK"
+        self.exception = ""
+        self.level = "success"
+        self.content = ""
 
-    physfilename = request.storage.path(filename)
-    if ext.lower() in [".html", ".xhtml"]:
-        try:
-            content = open(physfilename).read()
-            return {"content": content, "result": "OK",
-                    "message": _("Successfully loaded"),
-                    "level": "success"}
-        except Exception as e:
-            return {"content": "", "result": "KO",
-                    "message": _("Cannot load page. It seems it does not exist"), "exception": str(e),
-                    "level": "danger"}
-    else:
-        return FileResponse(physfilename)
+    def response(self, **kwargs):
+        resp = {
+            'view': self,
+            'context': self.context
+        }
+        resp.update(kwargs)
+
+        return resp
+
+    def failed(self, message, exception=None, level='danger'):
+        self.message = message
+        self.exception = '' if exception is None else str(exception)
+        self.level = level
+        self.result = "KO"
+        return self.response()
+
+    def __call__(self):
+        methodnamebase = "route_" + self.name
+        methodname = methodnamebase + "_" + self.request.method.lower()
+        while True:
+            if hasattr(self, methodname):
+                method = getattr(self, methodname)
+                return method()
+            if methodname == methodnamebase:
+                break
+            methodname = methodnamebase
+
+        raise RuntimeError("Not implemented")
+
+    @property
+    def name(self):
+        return self.request.view_name
+
+    def pathname(self, split=False, all=False):
+        pname = self.context.pathname.strip()
+        if all:
+            split = True
+        if split:
+            fn, ext = os.path.splitext(pname)
+            if not all:
+                return fn, ext
+        if all:
+            return pname, self.storage.path(pname), fn, ext
+
+        return pname
+
+    @property
+    def storage(self):
+        return self.request.storage
+
+    def main_loader(self):
+        filename, physfn, fn, ext = self.pathname(all=True)
+
+        if ext.lower() in [".html", ".xhtml"]:
+            try:
+                self.content = open(physfn).read()
+                self.message = _("Successfully loaded")
+                return self.response()
+            except Exception as e:
+                return self.failed(
+                    _("Cannot load page. It seems it does not exist"),
+                    exception=e
+                )
+        else:
+            return FileResponse(physfn)
 
 
 def file_save(context, request):
@@ -303,7 +361,8 @@ def configurator(config, **settings):
     config.scan()
 
     config.add_route("doc", "/*traverse", factory=Resource.factory)
-    config.add_view(view=file_view,
+    config.add_view(view=PageView,
+                    attr="main_loader",
                     route_name="doc",
                     renderer="templates/doc.pt",
                     request_method="GET")
