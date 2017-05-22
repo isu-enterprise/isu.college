@@ -156,7 +156,6 @@ class SPListView(View):
 splistview = SPListView(DATADIR)
 
 
-@view_config(route_name="plan-list", renderer="isu.college:templates/splist.pt")
 def work_plans(request):
     view = request.registry.getUtility(IView, name="study-plans")
     return {
@@ -164,7 +163,6 @@ def work_plans(request):
     }
 
 
-@view_config(route_name="plan", renderer="isu.college:templates/plan.pt")
 def work_plan(request):
     md = request.matchdict
     plan_name = md["name"]
@@ -194,8 +192,6 @@ def work_plan(request):
     }
 
 
-@view_config(route_name='commit',
-             request_method='POST')
 def commit(request):
     request.storage.save(request.POST['my_file'])
     return HTTPSeeOther(request.route_url('home'))
@@ -236,15 +232,9 @@ class Resource(object):
         p.reverse()
         return os.path.join(*p)
 
-    @staticmethod
-    def factory(request):
-        return Resource()
 
-# @view_config(route_name="doc",
-#              request_method="GET",
-#              renderer="json",
-#              # name="edit"
-#              )
+def resource_factory(request):
+    return Resource()
 
 
 class PageView(View):
@@ -347,18 +337,8 @@ class PageView(View):
         return self.respjson()
 
 
-#@adapter(IConfigurationEvent)
-
-
 def configurator(config, **settings):
     config.load_zcml("isu.college:configure.zcml")
-
-    config.add_route("plan", "/plan/{name}.html")
-    config.add_route("plan-list", "/plan/")
-    config.add_route("commit",    "/api/v1/commit")
-    config.add_route("branch", "/api/v1/branch")
-
-    #config.add_static_view(name='/lcss', path='isu.college:templates/lcss')
 
     storage = config.registry.getUtility(IFileStorage)
     try:
@@ -371,42 +351,3 @@ def configurator(config, **settings):
 
     for d in os.listdir(static_dir):
         config.add_static_view(name='/' + d, path=os.path.join(static_dir, d))
-
-    config.add_subscriber('isu.college.subscribers.add_base_template',
-                          'pyramid.events.BeforeRender')
-    config.scan()
-
-    config.add_route("doc", "/*traverse", factory=Resource.factory)
-    config.add_view(view=PageView,
-                    attr="main_loader",
-                    route_name="doc",
-                    renderer="templates/doc.pt",
-                    request_method="GET")
-    config.add_view(view=PageView,
-                    route_name="doc",
-                    name="content",
-                    request_method="GET")
-    config.add_view(view=PageView,
-                    route_name="doc",
-                    renderer="json",
-                    name="save",
-                    request_method="POST")
-    config.add_view(view=PageView,
-                    route_name="doc",
-                    renderer="json",
-                    name="commit",
-                    request_method="POST")
-    # config.add_view(view=test_edit, route_name="doc",
-    #                 name="edit",
-    #                 renderer="json",
-    #                 )
-
-
-def zcml(config):
-    """Runs zcml configuration on the
-    config object.
-    FIXME: Get rid of this (zcml(..)) shame stauff. ;-)
-    """
-    # print("REG---------------")
-    # print(list(config.registry.registeredSubscriptionAdapters()))
-    config.add_subscriber(configurator, IConfigurationEvent)
