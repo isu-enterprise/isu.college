@@ -1,14 +1,11 @@
-from isu.webapp.interfaces import IConfigurationEvent
 from zope.component import adapter
 from pyramid.httpexceptions import HTTPSeeOther
 from pyramid.response import FileResponse
 
-from pyramid.view import view_config
 from isu.webapp.views import View
 from glob import glob
-from pprint import pprint
 from pkg_resources import resource_filename
-from icc.mvw.interfaces import IView, IViewRegistry
+from icc.mvw.interfaces import IView
 import os
 import os.path
 from .interfaces import IAcademicPlan
@@ -338,7 +335,6 @@ class PageView(View):
 
 
 def configurator(config, **settings):
-    config.load_zcml("isu.college:configure.zcml")
 
     storage = config.registry.getUtility(IFileStorage)
     try:
@@ -349,5 +345,7 @@ def configurator(config, **settings):
     static_dir = os.path.join(storage.base_path, static_dir)
     static_dir = os.path.abspath(static_dir)
 
-    for d in os.listdir(static_dir):
+    for d in os.listdir(static_dir):   # This should be before configure.zcml
         config.add_static_view(name='/' + d, path=os.path.join(static_dir, d))
+
+    config.load_zcml("isu.college:configure.zcml")
