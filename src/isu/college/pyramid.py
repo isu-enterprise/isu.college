@@ -132,7 +132,8 @@ class SPListView(View):
         self.location = os.path.abspath(location)
         template = os.path.join(location + "/*.xlsx")
         self.files = glob(template)
-        self.items = set([os.path.split(fn)[-1] for fn in self.files])
+        self.items = list([os.path.split(fn)[-1] for fn in self.files])
+        self.items.sort()
         self.plan_views = {}
         # print("Location: {}".format(location))
         # print("List of plans found.")
@@ -206,6 +207,7 @@ def commit(request):
 
 
 class Resource(object):
+
     def __init__(self, name=None, parent=None):
         self.name = name
         self.parent = parent
@@ -238,6 +240,7 @@ def resource_factory(request):
 
 
 class PageView(View):
+
     def __init__(self, context, request):
         super(PageView, self).__init__(context=context,
                                        request=request)
