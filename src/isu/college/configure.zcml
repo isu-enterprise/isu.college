@@ -29,7 +29,7 @@
        />
    <route
        name="doc"
-       pattern="/*traverse"
+       pattern="/doc/*traverse"
        factory=".pyramid.resource_factory"
        />
    <view
