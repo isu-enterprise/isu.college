@@ -6,6 +6,6 @@ for f in *.xls
 do
     # echo $f
     echo libreoffice --headless --convert-to xlsx $f
-    libreoffice --headless --convert-to xlsx $f
+    libreoffice --headless --convert-to xlsx --outdir out $f
 done
 IFS=$SAVEIFS

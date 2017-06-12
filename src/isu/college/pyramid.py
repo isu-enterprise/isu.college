@@ -1,14 +1,11 @@
-from isu.webapp.interfaces import IConfigurationEvent
 from zope.component import adapter
 from pyramid.httpexceptions import HTTPSeeOther
 from pyramid.response import FileResponse
 
-from pyramid.view import view_config
 from isu.webapp.views import View
 from glob import glob
-from pprint import pprint
 from pkg_resources import resource_filename
-from icc.mvw.interfaces import IView, IViewRegistry
+from icc.mvw.interfaces import IView
 import os
 import os.path
 from .interfaces import IAcademicPlan
@@ -16,7 +13,9 @@ from .miis import Plan
 
 from pyramid_storage.interfaces import IFileStorage
 from zope.i18nmessageid import MessageFactory
+import logging
 
+logger = logging.getLogger("isu.college")
 
 _ = MessageFactory("isu.college")
 
@@ -132,7 +131,8 @@ class SPListView(View):
         self.location = os.path.abspath(location)
         template = os.path.join(location + "/*.xlsx")
         self.files = glob(template)
-        self.items = set([os.path.split(fn)[-1] for fn in self.files])
+        self.items = list([os.path.split(fn)[-1] for fn in self.files])
+        self.items.sort()
         self.plan_views = {}
         # print("Location: {}".format(location))
         # print("List of plans found.")
@@ -156,7 +156,6 @@ class SPListView(View):
 splistview = SPListView(DATADIR)
 
 
-@view_config(route_name="plan-list", renderer="isu.college:templates/splist.pt")
 def work_plans(request):
     view = request.registry.getUtility(IView, name="study-plans")
     return {
@@ -164,7 +163,6 @@ def work_plans(request):
     }
 
 
-@view_config(route_name="plan", renderer="isu.college:templates/plan.pt")
 def work_plan(request):
     md = request.matchdict
     plan_name = md["name"]
@@ -194,8 +192,6 @@ def work_plan(request):
     }
 
 
-@view_config(route_name='commit',
-             request_method='POST')
 def commit(request):
     request.storage.save(request.POST['my_file'])
     return HTTPSeeOther(request.route_url('home'))
@@ -210,6 +206,7 @@ def commit(request):
 
 
 class Resource(object):
+
     def __init__(self, name=None, parent=None):
         self.name = name
         self.parent = parent
@@ -236,18 +233,13 @@ class Resource(object):
         p.reverse()
         return os.path.join(*p)
 
-    @staticmethod
-    def factory(request):
-        return Resource()
 
-# @view_config(route_name="doc",
-#              request_method="GET",
-#              renderer="json",
-#              # name="edit"
-#              )
+def resource_factory(request):
+    return Resource()
 
 
 class PageView(View):
+
     def __init__(self, context, request):
         super(PageView, self).__init__(context=context,
                                        request=request)
@@ -347,18 +339,7 @@ class PageView(View):
         return self.respjson()
 
 
-#@adapter(IConfigurationEvent)
-
-
 def configurator(config, **settings):
-    config.load_zcml("isu.college:configure.zcml")
-
-    config.add_route("plan", "/plan/{name}.html")
-    config.add_route("plan-list", "/plan/")
-    config.add_route("commit",    "/api/v1/commit")
-    config.add_route("branch", "/api/v1/branch")
-
-    #config.add_static_view(name='/lcss', path='isu.college:templates/lcss')
 
     storage = config.registry.getUtility(IFileStorage)
     try:
@@ -369,44 +350,13 @@ def configurator(config, **settings):
     static_dir = os.path.join(storage.base_path, static_dir)
     static_dir = os.path.abspath(static_dir)
 
-    for d in os.listdir(static_dir):
-        config.add_static_view(name='/' + d, path=os.path.join(static_dir, d))
+    config.load_zcml("isu.college:static-assets.zcml")
+    for d in os.listdir(static_dir):   # This should be before configure.zcml
+        _name = "/APPSD/" + d
+        _path = os.path.join(static_dir, d)
+        config.add_static_view(name=_name, path=_path)
+        logger.debug("Configurator: route='{}' path='{}'".format(
+            _name, _path
+        ))
 
-    config.add_subscriber('isu.college.subscribers.add_base_template',
-                          'pyramid.events.BeforeRender')
-    config.scan()
-
-    config.add_route("doc", "/*traverse", factory=Resource.factory)
-    config.add_view(view=PageView,
-                    attr="main_loader",
-                    route_name="doc",
-                    renderer="templates/doc.pt",
-                    request_method="GET")
-    config.add_view(view=PageView,
-                    route_name="doc",
-                    name="content",
-                    request_method="GET")
-    config.add_view(view=PageView,
-                    route_name="doc",
-                    renderer="json",
-                    name="save",
-                    request_method="POST")
-    config.add_view(view=PageView,
-                    route_name="doc",
-                    renderer="json",
-                    name="commit",
-                    request_method="POST")
-    # config.add_view(view=test_edit, route_name="doc",
-    #                 name="edit",
-    #                 renderer="json",
-    #                 )
-
-
-def zcml(config):
-    """Runs zcml configuration on the
-    config object.
-    FIXME: Get rid of this (zcml(..)) shame stauff. ;-)
-    """
-    # print("REG---------------")
-    # print(list(config.registry.registeredSubscriptionAdapters()))
-    config.add_subscriber(configurator, IConfigurationEvent)
+    config.load_zcml("isu.college:configure.zcml")

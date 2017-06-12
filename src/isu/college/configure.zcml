@@ -8,8 +8,69 @@
        name="study-plans"
        />
    <subscriber
-       handler="isu.college.pyramid.configurator"
-       for="isu.webapp.interfaces.IConfigurationEvent"
+       handler="isu.college.subscribers.add_base_template"
+       for="pyramid.events.BeforeRender"
        />
-
+   <route
+       name="plan"
+       pattern="/plan/{name}.html"
+       />
+   <route
+       name="plan-list"
+       pattern="/plan/"
+       />
+   <route
+       name="commit"
+       pattern="/api/v1/commit"
+       />
+   <route
+       name="branch"
+       pattern="/api/v1/banch"
+       />
+   <route
+       name="doc"
+       pattern="/doc/*traverse"
+       factory=".pyramid.resource_factory"
+       />
+   <view
+       view=".pyramid.work_plans"
+       route_name="plan-list"
+       renderer="templates/splist.pt"
+       />
+   <view
+       view=".pyramid.work_plan"
+       route_name="plan"
+       renderer="templates/plan.pt"
+       />
+   <view
+       view=".pyramid.commit"
+       route_name="commit"
+       />
+   <view
+       view=".pyramid.PageView"
+       route_name="doc"
+       attr="main_loader"
+       renderer="templates/doc.pt"
+       request_method="GET"
+       />
+   <view
+       view=".pyramid.PageView"
+       route_name="doc"
+       name="content"
+       request_method="GET"
+       />
+   <view
+       view=".pyramid.PageView"
+       route_name="doc"
+       renderer="json"
+       request_method="POST"
+       name="save"
+       />
+   <view
+       view=".pyramid.PageView"
+       route_name="doc"
+       renderer="json"
+       name="commit"
+       request_method="POST"
+       />
 </configure>
