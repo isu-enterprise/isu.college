@@ -391,7 +391,7 @@
                  page-break-after: always;
              }
 
-             .noprint {display:none;}
+             .noprint, body div#message, div#pDebug {display:none;}
 
              #main-content {
                  border: none;
