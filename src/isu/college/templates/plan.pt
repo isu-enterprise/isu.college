@@ -5,7 +5,7 @@
       xmlns:taa="http://irnok.net/engine/rdfa-manipulation"
       metal:use-macro="work_program_template.macros['page']">
     <tal:block metal:fill-slot="header-meta">
-        <link href="/lcss/local.css" rel="stylesheet"/>
+        <link href="/isu.college/local.css" rel="stylesheet"/>
     </tal:block>
     <tal:block metal:fill-slot="content">
         <section id="title-section" property="schema:hasPart"

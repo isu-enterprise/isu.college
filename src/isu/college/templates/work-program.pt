@@ -13,7 +13,7 @@
         <meta name="generator" content="pandoc" />
         <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
         <meta name="viewport" content="width=device-width, initial-scale=2" />
-        <link rel="stylesheet" media="all" href="/lcss/document.css" type="text/css" async/>
+        <link rel="stylesheet" media="all" href="/isu.college/document.css" type="text/css" async/>
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <metal:block define-slot="header-meta">
         </metal:block>

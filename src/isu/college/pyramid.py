@@ -13,7 +13,9 @@ from .miis import Plan
 
 from pyramid_storage.interfaces import IFileStorage
 from zope.i18nmessageid import MessageFactory
+import logging
 
+logger = logging.getLogger("isu.college")
 
 _ = MessageFactory("isu.college")
 
@@ -348,7 +350,13 @@ def configurator(config, **settings):
     static_dir = os.path.join(storage.base_path, static_dir)
     static_dir = os.path.abspath(static_dir)
 
+    config.load_zcml("isu.college:static-assets.zcml")
     for d in os.listdir(static_dir):   # This should be before configure.zcml
-        config.add_static_view(name='/' + d, path=os.path.join(static_dir, d))
+        _name = "/APPSD/" + d
+        _path = os.path.join(static_dir, d)
+        config.add_static_view(name=_name, path=_path)
+        logger.debug("Configurator: route='{}' path='{}'".format(
+            _name, _path
+        ))
 
     config.load_zcml("isu.college:configure.zcml")

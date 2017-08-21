@@ -4,7 +4,7 @@
       xmlns:metal="http://xml.zope.org/namespaces/metal"
       metal:use-macro="main.macros['page']">
     <tal:block metal:fill-slot="header-meta">
-        <link href="/lcss/local.css" rel="stylesheet"/>
+        <link href="/isu.college/local.css" rel="stylesheet"/>
     </tal:block>
     <tal:block metal:fill-slot="content">
         <div class="panel panel-primary left vocabtable">
