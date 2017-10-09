@@ -5,7 +5,7 @@ nose
 #pyramid
 #chameleon
 #pyramid_chameleon
--e git+https://github.com/isu-enterprise/isu.enterprise#egg=isu.enterprise
--e git+https://github.com/isu-enterprise/isu.onece#egg=isu.onece
+#-e git+https://github.com/isu-enterprise/isu.enterprise#egg=isu.enterprise
+#-e git+https://github.com/isu-enterprise/isu.onece#egg=isu.onece
 #-e git+https://github.com/eugeneai/icc.mvw#egg=icc.mvw
 #-e git+https://github.com/isu-enterprise/isu.gui.gtk#egg=isu.gui.gtk
