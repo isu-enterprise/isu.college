@@ -1,7 +1,7 @@
 from zope.interface import Interface
 import zope.schema
-from isu.onece.interfaces import IVocabularyItem, IVocabularyItemBase
-from isu.onece.interfaces import IHierarchyBase
+from isu.onece.interfaces import IRecord
+from isu.onece.interfaces import IHierarchicalRecord
 from isu.onece.org.interfaces import IEmployee
 from isu.onece.org.interfaces import IOrganization, ISpecification
 from isu.onece.org.interfaces import IEmployee
@@ -31,7 +31,7 @@ class IProfessor(IEmployee):
     """
 
 
-class IVocabularyItemSID(IVocabularyItem):
+class IVocabularyItemSID(IRecord):
     id = zope.schema.TextLine(
         title=_("Code"),
         description=_(
@@ -42,17 +42,17 @@ class IVocabularyItemSID(IVocabularyItem):
     )
 
 
-class IProfession(IVocabularyItemSID, IHierarchyBase):
+class IProfession(IVocabularyItemSID, IHierarchicalRecord):
     """Teaching profession
     """
 
 
-class IActivityType(IVocabularyItem):
+class IActivityType(IRecord):
     """Type of activity catalog.
     """
 
 
-class IEducationalStandard(IVocabularyItemBase):
+class IEducationalStandard(IRecord):
     """Reference to a educational standard.
     """
     # We suppose, that the view will seek the parents of
@@ -73,7 +73,7 @@ class IEducationalStandard(IVocabularyItemBase):
     )
 
 
-class ICurriculum(IVocabularyItemBase):
+class ICurriculum(IRecord):
     """The curriculum supposed to be referenced from
     an IOrganization subdivision.
     """
@@ -147,14 +147,14 @@ class IWorkingProgram(IEducationalSpecification):
     """
 
 
-class IAcademicPlan(IVocabularyItem):
+class IAcademicPlan(IRecord):
     """Marker interface IAcaddemicPlan
     defines components denoting academic
     plans.
     """
 
 
-class IAcademicCourse(IVocabularyItem):
+class IAcademicCourse(IRecord):
     """Represents Academic Course
     """
     plan = zope.schema.Object(
