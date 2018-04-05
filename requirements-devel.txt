@@ -1,11 +1,5 @@
 nose
-#zope.component[zcml]
-#zope.i18nmessageid
-#psycopg2
-#pyramid
-#chameleon
-#pyramid_chameleon
-#-e git+https://github.com/isu-enterprise/isu.enterprise#egg=isu.enterprise
+#-e  #git+https://github.com/isu-enterprise/isu.enterprise#egg=isu.enterprise
 #-e git+https://github.com/isu-enterprise/isu.onece#egg=isu.onece
 #-e git+https://github.com/eugeneai/icc.mvw#egg=icc.mvw
-#-e git+https://github.com/isu-enterprise/isu.gui.gtk#egg=isu.gui.gtk
+-r requirements.txt
