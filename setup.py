@@ -24,8 +24,8 @@ install_requires = [
     # "<package1>==0.1",
     # "<package2>==0.3.0",
     # "nose", "coverage"   # Put it here.
-    "isu.webapp",
-    "isu.enterprise"
+    # "isu.webapp",
+    # "isu.enterprise"
 ]
 
 tests_requires = [
@@ -38,8 +38,8 @@ dev_requires = [
 
 dependency_links = [
     # Sources for some fixed versions packages
-    #'https://github.com/<user1>/<package1>/archive/master.zip#egg=<package1>-0.1',
-    #'https://github.com/<user2>/<package2>/archive/master.zip#egg=<package2>-0.3.0',
+    # 'https://github.com/<user1>/<package1>/archive/master.zip#egg=<package1>-0.1',
+    # 'https://github.com/<user2>/<package2>/archive/master.zip#egg=<package2>-0.3.0',
 ]
 
 # Cython extension
@@ -92,7 +92,7 @@ setup(
     # entry_points={
     #    'console_scripts':
     #        ['isu.college=isu.college:main']
-    #},
+    # },
     entry_points="""\
         [paste.app_factory]
         main=isu.webapp.app:main
