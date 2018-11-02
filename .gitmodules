@@ -1,3 +1,6 @@
 [submodule "data/ontologies/curriculum"]
 	path = data/ontologies/curriculum
 	url = https://github.com/eugeneai/college-curriculum-ontology.git
+[submodule "src/isu/college/templates"]
+	path = src/isu/college/templates
+	url = https://github.com/eugeneai/isu.college-templates
