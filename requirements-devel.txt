@@ -3,3 +3,4 @@ nose
 #-e git+https://github.com/isu-enterprise/isu.onece#egg=isu.onece
 #-e git+https://github.com/eugeneai/icc.mvw#egg=icc.mvw
 -r requirements.txt
+-r https://github.com/isu-enterprise/isu.enterprise/raw/master/elpy.txt
