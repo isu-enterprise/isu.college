@@ -16,3 +16,4 @@ pyramid_chameleon
 pyramid_zcml
 waitress
 asq
+-e .
