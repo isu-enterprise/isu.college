@@ -79,3 +79,7 @@ serve:
 	pserve development.ini --reload
 
 server serv: serve
+
+update-modules:
+	ln -sf `pyenv prefix`/src modules
+	
